@@ -11,6 +11,7 @@ namespace SocialNetwork.Models
 
         public int CountryId { get; set; }
         public Country Country { get; set; }
+
         public ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
     }
 }

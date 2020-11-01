@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.Models
 {
@@ -10,7 +11,9 @@ namespace SocialNetwork.Models
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
-        public string TownId { get; set; }
+        public int TownId { get; set; }
         public Town Town { get; set; }
+
+        public ICollection<User> Users { get; set; } = new HashSet<User>();
     }
 }
