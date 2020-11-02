@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SocialNetwork.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SocialNetwork.Database.DataConfigurations
 {
@@ -16,6 +13,10 @@ namespace SocialNetwork.Database.DataConfigurations
             builder.HasOne(l => l.Post)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(l => l.PostId);
+
+            builder.HasOne(l => l.User)
+                .WithMany(u => u.Likes)
+                .HasForeignKey(l => l.UserId);
         }
     }
 }
