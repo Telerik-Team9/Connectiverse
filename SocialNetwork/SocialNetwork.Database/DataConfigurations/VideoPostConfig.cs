@@ -8,7 +8,7 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<VideoPost> builder)
         {
-           /* builder.HasKey(v => v.Id);*/
+            /* builder.HasKey(v => v.Id);*/
 
             builder.Property(v => v.VideoUrl)
                 .HasMaxLength(300);
@@ -20,8 +20,9 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.HasOne(v => v.User)
                 .WithMany(u => u.Videos)
-                .HasForeignKey(v => v.UserId);/*
-                .IsRequired(true);*/ //TODO
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            /*  .IsRequired(true);*/ //TODO
         }
     }
 }

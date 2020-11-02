@@ -15,8 +15,10 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.HasOne(t => t.User)
                 .WithMany(u => u.TextPosts)
-                .HasForeignKey(t => t.UserId);/*
-                .IsRequired(true);*/ //TODO
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            /*
+            .IsRequired(true);*/ //TODO
         }
     }
 }

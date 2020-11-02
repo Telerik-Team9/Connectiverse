@@ -24,11 +24,15 @@ namespace SocialNetwork.Models
         public Guid RoleId { get; set; }
         public Role Role { get; set; }
 
-        public ICollection<User> Friends { get; set; } = new HashSet<User>();
-        public ICollection<User> FriendRequests { get; set; } = new HashSet<User>();
+        public ICollection<Friend> Friends { get; set; } = new HashSet<Friend>();
+        public ICollection<Friend> FriendsOf { get; set; } = new HashSet<Friend>();
+        public ICollection<FriendRequest> FriendRequests { get; set; } = new HashSet<FriendRequest>();
+        public ICollection<FriendRequest> FriendRequestsOf { get; set; } = new HashSet<FriendRequest>();
         public ICollection<TextPost> TextPosts { get; set; } = new HashSet<TextPost>();
         public ICollection<ImagePost> Images { get; set; } = new HashSet<ImagePost>();
         public ICollection<VideoPost> Videos { get; set; } = new HashSet<VideoPost>();
         public ICollection<SocialMedia> SocialMedias { get; set; } = new HashSet<SocialMedia>();
+        public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

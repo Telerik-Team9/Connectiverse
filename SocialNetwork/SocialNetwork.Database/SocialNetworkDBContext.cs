@@ -15,6 +15,8 @@ namespace SocialNetwork.Database
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Friend> Friends { get; set; }
         public DbSet<ImagePost> ImagePosts { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }

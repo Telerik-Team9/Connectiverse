@@ -20,8 +20,10 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.HasOne(i => i.User)
                 .WithMany(u => u.Images)
-                .HasForeignKey(i => i.UserId);/*
-                .IsRequired(true);*/ //TODO
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            /*
+            .IsRequired(true);*/ //TODO
         }
     }
 }

@@ -210,9 +210,14 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -237,6 +242,50 @@ namespace SocialNetwork.Database.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("SocialNetwork.Models.Friend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("UserFriendId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserFriendId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Friends");
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.FriendRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("FriendRequests");
+                });
+
             modelBuilder.Entity("SocialNetwork.Models.Like", b =>
                 {
                     b.Property<int>("Id")
@@ -259,9 +308,14 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Likes");
                 });
@@ -441,12 +495,6 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -464,10 +512,6 @@ namespace SocialNetwork.Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -571,7 +615,7 @@ namespace SocialNetwork.Database.Migrations
                     b.HasOne("SocialNetwork.Models.Town", "Town")
                         .WithMany("Addresses")
                         .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -582,6 +626,42 @@ namespace SocialNetwork.Database.Migrations
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.Friend", b =>
+                {
+                    b.HasOne("SocialNetwork.Models.User", "UserFriend")
+                        .WithMany("FriendsOf")
+                        .HasForeignKey("UserFriendId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.User", "User")
+                        .WithMany("Friends")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.FriendRequest", b =>
+                {
+                    b.HasOne("SocialNetwork.Models.User", "Receiver")
+                        .WithMany("FriendRequestsOf")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.User", "Sender")
+                        .WithMany("FriendRequests")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Like", b =>
@@ -589,6 +669,12 @@ namespace SocialNetwork.Database.Migrations
                     b.HasOne("SocialNetwork.Models.Abstracts.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -622,16 +708,8 @@ namespace SocialNetwork.Database.Migrations
                     b.HasOne("SocialNetwork.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.HasOne("SocialNetwork.Models.User", null)
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("SocialNetwork.Models.User", null)
-                        .WithMany("FriendRequests")
-                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.ImagePost", b =>
@@ -639,7 +717,7 @@ namespace SocialNetwork.Database.Migrations
                     b.HasOne("SocialNetwork.Models.User", "User")
                         .WithMany("Images")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -649,7 +727,7 @@ namespace SocialNetwork.Database.Migrations
                         .WithMany("TextPosts")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Post_AspNetUsers_UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -659,7 +737,7 @@ namespace SocialNetwork.Database.Migrations
                         .WithMany("Videos")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Post_AspNetUsers_UserId2")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

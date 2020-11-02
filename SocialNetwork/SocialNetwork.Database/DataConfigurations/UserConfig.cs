@@ -34,11 +34,8 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.HasOne(u => u.Role)
                 .WithMany(a => a.Users)
-                .HasForeignKey(u => u.RoleId);
-
-            builder.HasMany(u => u.Friends);
-
-            builder.HasMany(u => u.FriendRequests);
+                .HasForeignKey(u => u.RoleId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
