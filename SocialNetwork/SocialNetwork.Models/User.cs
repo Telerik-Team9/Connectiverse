@@ -18,8 +18,8 @@ namespace SocialNetwork.Models
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
 
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
+        public int TownId { get; set; }
+        public Town Town { get; set; }
 
         public Guid RoleId { get; set; }
         public Role Role { get; set; }

@@ -28,9 +28,9 @@ namespace SocialNetwork.Database.DataConfigurations
             builder.Property(u => u.ProfilePictureUrl)
                 .HasMaxLength(300);
 
-            builder.HasOne(u => u.Address)
-                .WithMany(a => a.Users)
-                .HasForeignKey(u => u.AddressId);
+            builder.HasOne(u => u.Town)
+                .WithMany(t => t.Users)
+                .HasForeignKey(u => u.TownId);
 
             builder.HasOne(u => u.Role)
                 .WithMany(a => a.Users)

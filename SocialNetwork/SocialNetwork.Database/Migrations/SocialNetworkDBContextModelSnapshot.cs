@@ -160,29 +160,6 @@ namespace SocialNetwork.Database.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
-            modelBuilder.Entity("SocialNetwork.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TownId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TownId");
-
-                    b.HasIndex("CountryId", "TownId")
-                        .IsUnique();
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("SocialNetwork.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -418,9 +395,6 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -492,6 +466,9 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TownId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -500,8 +477,6 @@ namespace SocialNetwork.Database.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -512,6 +487,8 @@ namespace SocialNetwork.Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("TownId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -604,21 +581,6 @@ namespace SocialNetwork.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SocialNetwork.Models.Address", b =>
-                {
-                    b.HasOne("SocialNetwork.Models.Country", "Country")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SocialNetwork.Models.Town", "Town")
-                        .WithMany("Addresses")
-                        .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SocialNetwork.Models.Comment", b =>
                 {
                     b.HasOne("SocialNetwork.Models.Abstracts.Post", "Post")
@@ -699,16 +661,16 @@ namespace SocialNetwork.Database.Migrations
 
             modelBuilder.Entity("SocialNetwork.Models.User", b =>
                 {
-                    b.HasOne("SocialNetwork.Models.Address", "Address")
-                        .WithMany("Users")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SocialNetwork.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.Town", "Town")
+                        .WithMany("Users")
+                        .HasForeignKey("TownId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

@@ -12,7 +12,6 @@ namespace SocialNetwork.Database
             : base(options)
         { }
 
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }

@@ -10,7 +10,6 @@ namespace SocialNetwork.Models
         public string Name { get; set; }
         public string ISO { get; set; }
 
-        public ICollection<Town> Towns { get; set; } = new List<Town>();
-        public ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
+        public ICollection<Town> Towns { get; set; } = new HashSet<Town>();
     }
 }
