@@ -10,7 +10,7 @@ using SocialNetwork.Database;
 namespace SocialNetwork.Database.Migrations
 {
     [DbContext(typeof(SocialNetworkDBContext))]
-    [Migration("20201102193657_InitialMigration")]
+    [Migration("20201103122601_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,23 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            RoleId = new Guid("943b692d-330e-405d-a019-c3d728442143")
+                        },
+                        new
+                        {
+                            UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            RoleId = new Guid("943b692d-330e-405d-a019-c3d728442143")
+                        },
+                        new
+                        {
+                            UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -199,6 +216,17 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "This is Amazing!",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 379, DateTimeKind.Utc).AddTicks(5417),
+                            IsDeleted = false,
+                            PostId = 1,
+                            UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Country", b =>
@@ -219,6 +247,56 @@ namespace SocialNetwork.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ISO = "BG",
+                            Name = "Bulgaria"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ISO = "BE",
+                            Name = "Belgium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ISO = "NL",
+                            Name = "Netherlands"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ISO = "IE",
+                            Name = "Ireland"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ISO = "MX",
+                            Name = "Mexico"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ISO = "UK",
+                            Name = "United Kingdom"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ISO = "RS",
+                            Name = "Serbia"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ISO = "DE",
+                            Name = "Germany"
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Friend", b =>
@@ -241,6 +319,14 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserFriendId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.FriendRequest", b =>
@@ -263,6 +349,14 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("FriendRequests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ReceiverId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
+                            SenderId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Like", b =>
@@ -297,6 +391,16 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Likes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(1790),
+                            IsDeleted = false,
+                            PostId = 1,
+                            UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619")
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Role", b =>
@@ -325,6 +429,22 @@ namespace SocialNetwork.Database.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("943b692d-330e-405d-a019-c3d728442143"),
+                            ConcurrencyStamp = "0815cc56-3a0b-49bb-a011-ee2cdc5508f0",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"),
+                            ConcurrencyStamp = "875dcb2c-c6f9-4eef-9225-04fd51cc7b31",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.SocialMedia", b =>
@@ -365,6 +485,18 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("SocialMedias");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(4465),
+                            IconUrl = "",
+                            IsDeleted = false,
+                            Name = "Instagram",
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            UserLink = "https://www.instagram.com/magisnikolova"
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.Town", b =>
@@ -386,6 +518,14 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Towns");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = 1,
+                            Name = "Sofia"
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.User", b =>
@@ -408,7 +548,7 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -468,7 +608,7 @@ namespace SocialNetwork.Database.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TownId")
+                    b.Property<int?>("TownId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -493,6 +633,65 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("TownId");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "876e2ff0-6b83-4bf7-933f-897934d3e0b1",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 343, DateTimeKind.Utc).AddTicks(4563),
+                            Email = "magi@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MAGI@MAIL.COM",
+                            NormalizedUserName = "MAGI@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELFrfRb2uNphSG1sRag2GY05i3DNrFGrtqXesVFG/NPncG6a901q+8vS/84fe8BlYQ==",
+                            PhoneNumberConfirmed = false,
+                            RoleId = new Guid("943b692d-330e-405d-a019-c3d728442143"),
+                            SecurityStamp = "8faedaf1-476f-4683-b6d4-deb7a6ee0ff5",
+                            TwoFactorEnabled = false,
+                            UserName = "magi@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d362cc11-c9c3-4b21-81cb-b66f35314427",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(516),
+                            Email = "ali@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ALI@MAIL.COM",
+                            NormalizedUserName = "ALI@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAMHI2fai81NoKgQCPFNkEZDMQh8BOvAg5IZJCdMZ8B3O5s7onwcfkpN4TErPO2ZMQ==",
+                            PhoneNumberConfirmed = false,
+                            RoleId = new Guid("943b692d-330e-405d-a019-c3d728442143"),
+                            SecurityStamp = "94240b92-641e-423b-bfe4-b0120493c3fe",
+                            TwoFactorEnabled = false,
+                            UserName = "ali@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9fd116d6-4b02-4aae-8637-39bdbcc661b8",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(568),
+                            Email = "telerik@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TELERIK@MAIL.COM",
+                            NormalizedUserName = "TELERIK@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE5ly95Y1EtQqcdrl/n8dRJ3GTCHoC0mSXohXiGQc7gy8YeX6QzMCIf7rgLHAGHcvQ==",
+                            PhoneNumberConfirmed = false,
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"),
+                            SecurityStamp = "a510333f-90a9-427d-8e31-ab34e832f5dc",
+                            TwoFactorEnabled = false,
+                            UserName = "telerik@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.ImagePost", b =>
@@ -506,6 +705,18 @@ namespace SocialNetwork.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.HasDiscriminator().HasValue("ImagePost");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10,
+                            Content = "A photo of one of my favourite things:",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(7828),
+                            IsDeleted = false,
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            Visibility = 0,
+                            ImageUrl = ""
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.TextPost", b =>
@@ -516,6 +727,17 @@ namespace SocialNetwork.Database.Migrations
                         .HasName("IX_Post_UserId1");
 
                     b.HasDiscriminator().HasValue("TextPost");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Does anyone know any great restaurants near by?",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(4261),
+                            IsDeleted = false,
+                            UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            Visibility = 0
+                        });
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.VideoPost", b =>
@@ -530,6 +752,18 @@ namespace SocialNetwork.Database.Migrations
                         .HasName("IX_Post_UserId2");
 
                     b.HasDiscriminator().HasValue("VideoPost");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 20,
+                            Content = "Really funny video :)",
+                            CreatedOn = new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(28),
+                            IsDeleted = false,
+                            UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
+                            Visibility = 0,
+                            VideoUrl = ""
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -671,9 +905,7 @@ namespace SocialNetwork.Database.Migrations
 
                     b.HasOne("SocialNetwork.Models.Town", "Town")
                         .WithMany("Users")
-                        .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TownId");
                 });
 
             modelBuilder.Entity("SocialNetwork.Models.ImagePost", b =>

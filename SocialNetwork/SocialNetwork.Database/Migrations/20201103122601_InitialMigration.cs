@@ -96,7 +96,7 @@ namespace SocialNetwork.Database.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     DisplayName = table.Column<string>(maxLength: 30, nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
                     ProfilePictureUrl = table.Column<string>(maxLength: 300, nullable: true),
                     CoverPictureUrl = table.Column<string>(maxLength: 300, nullable: true),
                     Education = table.Column<string>(maxLength: 50, nullable: true),
@@ -104,7 +104,7 @@ namespace SocialNetwork.Database.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    TownId = table.Column<int>(nullable: false),
+                    TownId = table.Column<int>(nullable: true),
                     RoleId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -120,7 +120,7 @@ namespace SocialNetwork.Database.Migrations
                         column: x => x.TownId,
                         principalTable: "Towns",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -379,6 +379,95 @@ namespace SocialNetwork.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("943b692d-330e-405d-a019-c3d728442143"), "0815cc56-3a0b-49bb-a011-ee2cdc5508f0", "Admin", "ADMIN" },
+                    { new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "875dcb2c-c6f9-4eef-9225-04fd51cc7b31", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "ISO", "Name" },
+                values: new object[,]
+                {
+                    { 1, "BG", "Bulgaria" },
+                    { 2, "BE", "Belgium" },
+                    { 3, "NL", "Netherlands" },
+                    { 4, "IE", "Ireland" },
+                    { 5, "MX", "Mexico" },
+                    { 6, "UK", "United Kingdom" },
+                    { 7, "RS", "Serbia" },
+                    { 8, "DE", "Germany" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "RoleId", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "876e2ff0-6b83-4bf7-933f-897934d3e0b1", null, new DateTime(2020, 11, 3, 12, 26, 0, 343, DateTimeKind.Utc).AddTicks(4563), null, null, null, null, "magi@mail.com", false, false, false, null, null, "MAGI@MAIL.COM", "MAGI@MAIL.COM", "AQAAAAEAACcQAAAAELFrfRb2uNphSG1sRag2GY05i3DNrFGrtqXesVFG/NPncG6a901q+8vS/84fe8BlYQ==", null, false, null, new Guid("943b692d-330e-405d-a019-c3d728442143"), "8faedaf1-476f-4683-b6d4-deb7a6ee0ff5", null, false, "magi@mail.com" },
+                    { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0, "d362cc11-c9c3-4b21-81cb-b66f35314427", null, new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(516), null, null, null, null, "ali@mail.com", false, false, false, null, null, "ALI@MAIL.COM", "ALI@MAIL.COM", "AQAAAAEAACcQAAAAEAMHI2fai81NoKgQCPFNkEZDMQh8BOvAg5IZJCdMZ8B3O5s7onwcfkpN4TErPO2ZMQ==", null, false, null, new Guid("943b692d-330e-405d-a019-c3d728442143"), "94240b92-641e-423b-bfe4-b0120493c3fe", null, false, "ali@mail.com" },
+                    { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "9fd116d6-4b02-4aae-8637-39bdbcc661b8", null, new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(568), null, null, null, null, "telerik@mail.com", false, false, false, null, null, "TELERIK@MAIL.COM", "TELERIK@MAIL.COM", "AQAAAAEAACcQAAAAEE5ly95Y1EtQqcdrl/n8dRJ3GTCHoC0mSXohXiGQc7gy8YeX6QzMCIf7rgLHAGHcvQ==", null, false, null, new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "a510333f-90a9-427d-8e31-ab34e832f5dc", null, false, "telerik@mail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[] { 1, 1, "Sofia" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[,]
+                {
+                    { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("943b692d-330e-405d-a019-c3d728442143") },
+                    { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("943b692d-330e-405d-a019-c3d728442143") },
+                    { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FriendRequests",
+                columns: new[] { "Id", "ReceiverId", "SenderId" },
+                values: new object[] { 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") });
+
+            migrationBuilder.InsertData(
+                table: "Friends",
+                columns: new[] { "Id", "UserFriendId", "UserId" },
+                values: new object[] { 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") });
+
+            migrationBuilder.InsertData(
+                table: "Post",
+                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility", "ImageUrl" },
+                values: new object[] { 10, "A photo of one of my favourite things:", new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(7828), null, "ImagePost", false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "" });
+
+            migrationBuilder.InsertData(
+                table: "Post",
+                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility" },
+                values: new object[] { 1, "Does anyone know any great restaurants near by?", new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(4261), null, "TextPost", false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0 });
+
+            migrationBuilder.InsertData(
+                table: "Post",
+                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility", "VideoUrl" },
+                values: new object[] { 20, "Really funny video :)", new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(28), null, "VideoPost", false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "" });
+
+            migrationBuilder.InsertData(
+                table: "SocialMedias",
+                columns: new[] { "Id", "CreatedOn", "DeletedOn", "IconUrl", "IsDeleted", "ModifiedOn", "Name", "UserId", "UserLink" },
+                values: new object[] { 1, new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(4465), null, "", false, null, "Instagram", new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), "https://www.instagram.com/magisnikolova" });
+
+            migrationBuilder.InsertData(
+                table: "Comments",
+                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
+                values: new object[] { 1, "This is Amazing!", new DateTime(2020, 11, 3, 12, 26, 0, 379, DateTimeKind.Utc).AddTicks(5417), null, false, null, 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") });
+
+            migrationBuilder.InsertData(
+                table: "Likes",
+                columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
+                values: new object[] { 1, new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(1790), null, false, null, 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

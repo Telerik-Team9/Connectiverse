@@ -14,7 +14,7 @@ namespace SocialNetwork.Database.DataConfigurations
                 .HasMaxLength(30);
 
             builder.Property(u => u.DateOfBirth)
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder.Property(u => u.ProfilePictureUrl)
                 .HasMaxLength(300);

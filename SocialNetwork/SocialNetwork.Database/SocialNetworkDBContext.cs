@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Database.Seeder;
 using SocialNetwork.Models;
 using System;
 using System.Reflection;
@@ -27,7 +28,7 @@ namespace SocialNetwork.Database
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
         }
     }
 }

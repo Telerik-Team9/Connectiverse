@@ -8,7 +8,7 @@ namespace SocialNetwork.Models
     public class User : IdentityUser<Guid>, IEntity
     {
         public string DisplayName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string ProfilePictureUrl { get; set; }
         public string CoverPictureUrl { get; set; }
         public string Education { get; set; }
@@ -18,7 +18,7 @@ namespace SocialNetwork.Models
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
 
-        public int TownId { get; set; }
+        public int? TownId { get; set; }
         public Town Town { get; set; }
 
         public Guid RoleId { get; set; }
