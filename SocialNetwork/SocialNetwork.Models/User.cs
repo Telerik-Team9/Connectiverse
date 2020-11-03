@@ -9,8 +9,8 @@ namespace SocialNetwork.Models
     {
         public string DisplayName { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string ProfilePictureUrl { get; set; }
-        public string CoverPictureUrl { get; set; }
+        public ImagePost ProfilePicture { get; set; }
+        public ImagePost CoverPicture { get; set; }
         public string Education { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

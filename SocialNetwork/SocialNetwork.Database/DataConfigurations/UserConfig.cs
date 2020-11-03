@@ -16,17 +16,17 @@ namespace SocialNetwork.Database.DataConfigurations
             builder.Property(u => u.DateOfBirth)
                 .IsRequired(false);
 
-            builder.Property(u => u.ProfilePictureUrl)
-                .HasMaxLength(300);
-
-            builder.Property(u => u.CoverPictureUrl)
-                .HasMaxLength(300);
-
-            builder.Property(u => u.Education)
-                .HasMaxLength(50);
-
-            builder.Property(u => u.ProfilePictureUrl)
-                .HasMaxLength(300);
+          // builder.Property(u => u.ProfilePictureUrl)
+          //     .HasMaxLength(300);
+          //
+          // builder.Property(u => u.CoverPictureUrl)
+          //     .HasMaxLength(300);
+          //
+          // builder.Property(u => u.Education)
+          //     .HasMaxLength(50);
+          //
+          // builder.Property(u => u.ProfilePictureUrl)
+          //     .HasMaxLength(300);
 
             builder.HasOne(u => u.Town)
                 .WithMany(t => t.Users)
