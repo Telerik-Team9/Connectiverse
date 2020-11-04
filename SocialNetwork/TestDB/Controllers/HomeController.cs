@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SocialNetwork.Services.Services.Contracts;
 using TestDB.Models;
 
 namespace TestDB.Controllers
@@ -12,15 +13,32 @@ namespace TestDB.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICountryService countryService;
+        private readonly IUserService userService;
+        private readonly IPostService postService;
+        private readonly ICommentService commentService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger
+            ,ICountryService countryService
+            ,IUserService userService
+            ,IPostService postService
+            ,ICommentService commentService)
         {
             _logger = logger;
+            this.countryService = countryService;
+            this.userService = userService;
+            this.postService = postService;
+            this.commentService = commentService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            //var result = this.countryService.Get(1);
+            var result = this.userService.GetAll();
+            //var result = this.postService.GetAll();
+            //var result = this.commentService.GetAll();
+            //var result = this.commentService.GetById(1);
+            return View(result);
         }
 
         public IActionResult Privacy()

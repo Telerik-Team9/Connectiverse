@@ -241,7 +241,8 @@ namespace SocialNetwork.Database.Seeder
                 new Photo
                 {
                     Id = 1,
-                    PostId = 10
+                    PostId = 10,
+                    Url = "YEYEYYE"
                 }
             };
             builder.Entity<Photo>().HasData(photos);
@@ -251,7 +252,8 @@ namespace SocialNetwork.Database.Seeder
                 new Video
                 {
                     Id = 1,
-                    PostId = 20
+                    PostId = 20,
+                    Url = "NONONONO"
                 }
             };
             builder.Entity<Video>().HasData(videos);

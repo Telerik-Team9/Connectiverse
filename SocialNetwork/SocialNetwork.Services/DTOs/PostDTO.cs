@@ -1,10 +1,9 @@
 ﻿using SocialNetwork.Models.Common.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace SocialNetwork.Services.DTOs
 {
-    public class ImagePostDTO
+    public class PostDTO
     {
         public int Id { get; set; }
         public string Content { get; set; }
@@ -15,7 +14,13 @@ namespace SocialNetwork.Services.DTOs
         public string UserName { get; set; }
         public string UserProfilePictureUrl { get; set; }
 
-        public ICollection<LikeDTO> Likes { get; set; } = new HashSet<LikeDTO>();
-        public ICollection<CommentDTO> Comments { get; set; } = new HashSet<CommentDTO>();
+         public int? PhotoId { get; set; }
+         public string PhotoUrl { get; set; }
+        
+         public int? VideoId { get; set; }
+         public string VideoUrl { get; set; }
+        //
+        // public ICollection<LikeDTO> Likes { get; set; } = new HashSet<LikeDTO>();
+        // public ICollection<CommentDTO> Comments { get; set; } = new HashSet<CommentDTO>();
     }
 }

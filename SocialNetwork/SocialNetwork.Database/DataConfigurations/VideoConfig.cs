@@ -10,7 +10,7 @@ namespace SocialNetwork.Database.DataConfigurations
         {
         /*    builder.HasKey(v => v.Id);*/
 
-            builder.Property(v => v.videoUrl)
+            builder.Property(v => v.Url)
                 .HasMaxLength(300);
             // TODO: Make videoUrl required
         }
