@@ -46,7 +46,8 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1997,02,12),
                     Education = "Sofia University",
                     TownId = 1,
-                    ProfilePictureId = 1
+                    ProfilePictureId = 1,
+                    ProfilePictureUrl = "ProfilePicUrl//"
                 },
                 new User()  // Admin
                 {

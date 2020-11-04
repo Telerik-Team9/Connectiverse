@@ -17,27 +17,39 @@ namespace TestDB.Controllers
         private readonly IUserService userService;
         private readonly IPostService postService;
         private readonly ICommentService commentService;
+        private readonly IFriendService friendService;
+        private readonly ILIkeService likeService;
 
         public HomeController(ILogger<HomeController> logger
             ,ICountryService countryService
             ,IUserService userService
             ,IPostService postService
-            ,ICommentService commentService)
+            ,ICommentService commentService,
+            IFriendService friendService,
+            ILIkeService likeService)
         {
             _logger = logger;
             this.countryService = countryService;
             this.userService = userService;
             this.postService = postService;
             this.commentService = commentService;
+            this.friendService = friendService;
+            this.likeService = likeService;
         }
 
         public IActionResult Index()
         {
             //var result = this.countryService.Get(1);
-            var result = this.userService.GetAll();
+            //var result = this.userService.GetAll();
             //var result = this.postService.GetAll();
             //var result = this.commentService.GetAll();
             //var result = this.commentService.GetById(1);
+            //var result = this.friendService.GetById(1);
+            //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
+            var result = this.likeService.GetPostLikes(1);
+
+
+
             return View(result);
         }
 

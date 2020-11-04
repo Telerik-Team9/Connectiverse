@@ -36,6 +36,9 @@ namespace TestDB
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IFriendService, FriendService>();    // DELETE
+            services.AddScoped<ILIkeService, LikeService>();
+
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(CountryConfig)));
 

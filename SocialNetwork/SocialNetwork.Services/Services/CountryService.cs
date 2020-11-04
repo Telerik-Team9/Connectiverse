@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SocialNetwork.Services.Services
@@ -25,6 +26,16 @@ namespace SocialNetwork.Services.Services
 
             var dto = this.mapper.Map<CountryDTO>(country);
             return dto;
+        }
+
+        public IEnumerable<CountryDTO> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public CountryDTO GetByName(string name)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

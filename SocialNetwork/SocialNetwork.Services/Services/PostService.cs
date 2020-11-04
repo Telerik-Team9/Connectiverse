@@ -20,6 +20,16 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
+        public PostDTO Create(PostDTO post)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<PostDTO> GetAll()
         {
             var allPosts = this.context.Posts
@@ -36,6 +46,16 @@ namespace SocialNetwork.Services.Services
         }
 
         public PostDTO GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PostDTO> GetUserFriendsPosts(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PostDTO> GetUserPosts(Guid userId)
         {
             throw new NotImplementedException();
         }

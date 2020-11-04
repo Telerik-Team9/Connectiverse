@@ -20,6 +20,16 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
+        public CommentDTO Create(CommentDTO comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<CommentDTO> GetAll()
         {
             var allComments = this.context.Comments
@@ -42,6 +52,11 @@ namespace SocialNetwork.Services.Services
 
             var dto = this.mapper.Map<CommentDTO>(comment);
             return dto;
+        }
+
+        public IEnumerable<CommentDTO> GetPostComments(int postId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

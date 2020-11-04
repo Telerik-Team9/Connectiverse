@@ -10,6 +10,6 @@ namespace SocialNetwork.Services.DTOs
         // public Post Post { get; set; }
 
         public Guid UserId { get; set; }
-        public string UserName { get; set; }
+        public string UserDisplayName { get; set; }
     }
 }
