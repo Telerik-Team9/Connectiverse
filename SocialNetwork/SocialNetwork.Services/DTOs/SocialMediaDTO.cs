@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SocialNetwork.Services.DataTransferObjects
+namespace SocialNetwork.Services.DTOs
 {
     public class SocialMediaDTO
     {

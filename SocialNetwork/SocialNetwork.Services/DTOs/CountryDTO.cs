@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SocialNetwork.Services.DataTransferObjects
+namespace SocialNetwork.Services.DTOs
 {
     public class CountryDTO
     {
