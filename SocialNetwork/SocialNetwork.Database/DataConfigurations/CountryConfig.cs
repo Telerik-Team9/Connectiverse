@@ -8,7 +8,7 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            builder.HasKey(c => c.Id);
+/*            builder.HasKey(c => c.Id);*/
 
             builder.Property(c => c.Name)
                 .HasMaxLength(50);

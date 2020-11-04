@@ -36,6 +36,38 @@ namespace SocialNetwork.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    PhotoAsBytes = table.Column<byte[]>(nullable: true),
+                    PostId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Videos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    videoUrl = table.Column<string>(maxLength: 300, nullable: true),
+                    PostId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Videos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -97,24 +129,20 @@ namespace SocialNetwork.Database.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     DisplayName = table.Column<string>(maxLength: 30, nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
-                    ProfilePictureUrl = table.Column<string>(maxLength: 300, nullable: true),
-                    CoverPictureUrl = table.Column<string>(maxLength: 300, nullable: true),
                     Education = table.Column<string>(maxLength: 50, nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     TownId = table.Column<int>(nullable: true),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    ProfilePictureId = table.Column<int>(nullable: true),
+                    ProfilePictureUrl = table.Column<string>(nullable: true),
+                    CoverPictureId = table.Column<int>(nullable: true),
+                    CoverPictureUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Towns_TownId",
                         column: x => x.TownId,
@@ -257,7 +285,7 @@ namespace SocialNetwork.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Post",
+                name: "Posts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -266,31 +294,33 @@ namespace SocialNetwork.Database.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(maxLength: 500, nullable: true),
+                    Content = table.Column<string>(nullable: true),
                     Visibility = table.Column<int>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    ImageUrl = table.Column<string>(maxLength: 300, nullable: true),
-                    VideoUrl = table.Column<string>(maxLength: 300, nullable: true)
+                    PhotoId = table.Column<int>(nullable: true),
+                    VideoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Post", x => x.Id);
+                    table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Post_AspNetUsers_UserId",
+                        name: "FK_Posts_Photos_PhotoId",
+                        column: x => x.PhotoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Post_AspNetUsers_UserId1",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Post_AspNetUsers_UserId2",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        name: "FK_Posts_Videos_VideoId",
+                        column: x => x.VideoId,
+                        principalTable: "Videos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -337,17 +367,16 @@ namespace SocialNetwork.Database.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Post_PostId",
+                        name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
-                        principalTable: "Post",
+                        principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -367,17 +396,16 @@ namespace SocialNetwork.Database.Migrations
                 {
                     table.PrimaryKey("PK_Likes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Likes_Post_PostId",
+                        name: "FK_Likes_Posts_PostId",
                         column: x => x.PostId,
-                        principalTable: "Post",
+                        principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Likes_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -385,8 +413,8 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("943b692d-330e-405d-a019-c3d728442143"), "0815cc56-3a0b-49bb-a011-ee2cdc5508f0", "Admin", "ADMIN" },
-                    { new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "875dcb2c-c6f9-4eef-9225-04fd51cc7b31", "User", "USER" }
+                    { new Guid("943b692d-330e-405d-a019-c3d728442143"), "33f5ef65-bb6e-4dc5-a2b1-a03e19bd483c", "Admin", "ADMIN" },
+                    { new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "63e6a682-49f2-4322-ae94-c2b741f30474", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -405,19 +433,34 @@ namespace SocialNetwork.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "RoleId", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "876e2ff0-6b83-4bf7-933f-897934d3e0b1", null, new DateTime(2020, 11, 3, 12, 26, 0, 343, DateTimeKind.Utc).AddTicks(4563), null, null, null, null, "magi@mail.com", false, false, false, null, null, "MAGI@MAIL.COM", "MAGI@MAIL.COM", "AQAAAAEAACcQAAAAELFrfRb2uNphSG1sRag2GY05i3DNrFGrtqXesVFG/NPncG6a901q+8vS/84fe8BlYQ==", null, false, null, new Guid("943b692d-330e-405d-a019-c3d728442143"), "8faedaf1-476f-4683-b6d4-deb7a6ee0ff5", null, false, "magi@mail.com" },
-                    { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0, "d362cc11-c9c3-4b21-81cb-b66f35314427", null, new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(516), null, null, null, null, "ali@mail.com", false, false, false, null, null, "ALI@MAIL.COM", "ALI@MAIL.COM", "AQAAAAEAACcQAAAAEAMHI2fai81NoKgQCPFNkEZDMQh8BOvAg5IZJCdMZ8B3O5s7onwcfkpN4TErPO2ZMQ==", null, false, null, new Guid("943b692d-330e-405d-a019-c3d728442143"), "94240b92-641e-423b-bfe4-b0120493c3fe", null, false, "ali@mail.com" },
-                    { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "9fd116d6-4b02-4aae-8637-39bdbcc661b8", null, new DateTime(2020, 11, 3, 12, 26, 0, 344, DateTimeKind.Utc).AddTicks(568), null, null, null, null, "telerik@mail.com", false, false, false, null, null, "TELERIK@MAIL.COM", "TELERIK@MAIL.COM", "AQAAAAEAACcQAAAAEE5ly95Y1EtQqcdrl/n8dRJ3GTCHoC0mSXohXiGQc7gy8YeX6QzMCIf7rgLHAGHcvQ==", null, false, null, new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "a510333f-90a9-427d-8e31-ab34e832f5dc", null, false, "telerik@mail.com" }
-                });
+                table: "Photos",
+                columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PhotoAsBytes", "PostId" },
+                values: new object[] { 1, new DateTime(2020, 11, 4, 12, 44, 26, 167, DateTimeKind.Utc).AddTicks(6569), null, false, null, null, 10 });
+
+            migrationBuilder.InsertData(
+                table: "Videos",
+                columns: new[] { "Id", "PostId", "videoUrl" },
+                values: new object[] { 1, 20, null });
 
             migrationBuilder.InsertData(
                 table: "Towns",
                 columns: new[] { "Id", "CountryId", "Name" },
                 values: new object[] { 1, 1, "Sofia" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureId", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureId", "ProfilePictureUrl", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "9786bc6a-b8c7-421e-9a3e-17d054176666", null, null, new DateTime(2020, 11, 4, 12, 44, 26, 117, DateTimeKind.Utc).AddTicks(1452), new DateTime(1997, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Magi Nikolova", "Sofia University", "magi@mail.com", false, false, false, null, null, "MAGI@MAIL.COM", "MAGI@MAIL.COM", "AQAAAAEAACcQAAAAEC3j1kcjoC/3HYYI/+gxqaA6vIXp67Go5aLr6SNnEz/3ghH97EF1y02u96D5xiPRSA==", null, false, 1, null, "8c0a91c4-625f-4112-bbcf-c8718030f7be", 1, false, "magi@mail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureId", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureId", "ProfilePictureUrl", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0, "780492ea-fc98-4567-8d4f-a24041651ef9", null, null, new DateTime(2020, 11, 4, 12, 44, 26, 118, DateTimeKind.Utc).AddTicks(6393), new DateTime(1999, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Ali Marekov", "Technical University", "ali@mail.com", false, false, false, null, null, "ALI@MAIL.COM", "ALI@MAIL.COM", "AQAAAAEAACcQAAAAEGEZYACzMqYQr64ZIi72xDnrwcKKeGxS+sYygR+surfrnhgYSue0OnekG7m+1YHD2w==", null, false, null, null, "640e81d9-5b31-4cf3-9f70-b209e860ee5c", 1, false, "ali@mail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureId", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureId", "ProfilePictureUrl", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "b549e5ef-6858-4770-8a0a-4cbf1382a68e", null, null, new DateTime(2020, 11, 4, 12, 44, 26, 118, DateTimeKind.Utc).AddTicks(6539), new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Telerik Academy", "", "telerik@mail.com", false, false, false, null, null, "TELERIK@MAIL.COM", "TELERIK@MAIL.COM", "AQAAAAEAACcQAAAAEOn3QGU+L4Ck+dDPyh3QsV3+s2IIQ3j9eclGLwAbyiaU9DQc7Pm0y5BlsIqIzuIusQ==", null, false, null, null, "66108ec2-a45d-48fc-b279-c17c4cad95bd", 1, false, "telerik@mail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -440,34 +483,29 @@ namespace SocialNetwork.Database.Migrations
                 values: new object[] { 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") });
 
             migrationBuilder.InsertData(
-                table: "Post",
-                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility", "ImageUrl" },
-                values: new object[] { 10, "A photo of one of my favourite things:", new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(7828), null, "ImagePost", false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "" });
-
-            migrationBuilder.InsertData(
-                table: "Post",
-                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility" },
-                values: new object[] { 1, "Does anyone know any great restaurants near by?", new DateTime(2020, 11, 3, 12, 26, 0, 381, DateTimeKind.Utc).AddTicks(4261), null, "TextPost", false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0 });
-
-            migrationBuilder.InsertData(
-                table: "Post",
-                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "Discriminator", "IsDeleted", "ModifiedOn", "UserId", "Visibility", "VideoUrl" },
-                values: new object[] { 20, "Really funny video :)", new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(28), null, "VideoPost", false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "" });
+                table: "Posts",
+                columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PhotoId", "UserId", "VideoId", "Visibility" },
+                values: new object[,]
+                {
+                    { 10, "A photo of one of my favourite things:", new DateTime(2020, 11, 4, 12, 44, 26, 167, DateTimeKind.Utc).AddTicks(4005), null, false, null, 1, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), null, 0 },
+                    { 1, "Does anyone know any great restaurants near by?", new DateTime(2020, 11, 4, 12, 44, 26, 167, DateTimeKind.Utc).AddTicks(43), null, false, null, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), null, 0 },
+                    { 20, "Really funny video :)", new DateTime(2020, 11, 4, 12, 44, 26, 167, DateTimeKind.Utc).AddTicks(4713), null, false, null, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 1, 0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "SocialMedias",
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IconUrl", "IsDeleted", "ModifiedOn", "Name", "UserId", "UserLink" },
-                values: new object[] { 1, new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(4465), null, "", false, null, "Instagram", new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), "https://www.instagram.com/magisnikolova" });
+                values: new object[] { 1, new DateTime(2020, 11, 4, 12, 44, 26, 168, DateTimeKind.Utc).AddTicks(5696), null, "", false, null, "Instagram", new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), "https://www.instagram.com/magisnikolova" });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
-                values: new object[] { 1, "This is Amazing!", new DateTime(2020, 11, 3, 12, 26, 0, 379, DateTimeKind.Utc).AddTicks(5417), null, false, null, 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") });
+                values: new object[] { 1, "This is Amazing!", new DateTime(2020, 11, 4, 12, 44, 26, 165, DateTimeKind.Utc).AddTicks(1464), null, false, null, 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") });
 
             migrationBuilder.InsertData(
                 table: "Likes",
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
-                values: new object[] { 1, new DateTime(2020, 11, 3, 12, 26, 0, 382, DateTimeKind.Utc).AddTicks(1790), null, false, null, 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
+                values: new object[] { 1, new DateTime(2020, 11, 4, 12, 44, 26, 168, DateTimeKind.Utc).AddTicks(2654), null, false, null, 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -507,11 +545,6 @@ namespace SocialNetwork.Database.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_RoleId",
-                table: "AspNetUsers",
-                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_TownId",
@@ -559,19 +592,23 @@ namespace SocialNetwork.Database.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_UserId",
-                table: "Post",
+                name: "IX_Posts_PhotoId",
+                table: "Posts",
+                column: "PhotoId",
+                unique: true,
+                filter: "[PhotoId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_UserId",
+                table: "Posts",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_UserId1",
-                table: "Post",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Post_UserId2",
-                table: "Post",
-                column: "UserId");
+                name: "IX_Posts_VideoId",
+                table: "Posts",
+                column: "VideoId",
+                unique: true,
+                filter: "[VideoId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SocialMedias_UserId",
@@ -617,13 +654,19 @@ namespace SocialNetwork.Database.Migrations
                 name: "SocialMedias");
 
             migrationBuilder.DropTable(
-                name: "Post");
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Towns");

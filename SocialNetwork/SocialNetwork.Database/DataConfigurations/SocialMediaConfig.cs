@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SocialNetwork.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SocialNetwork.Database.DataConfigurations
 {
@@ -11,7 +8,7 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<SocialMedia> builder)
         {
-            builder.HasKey(s => s.Id);
+           /* builder.HasKey(s => s.Id);*/
 
             builder.Property(s => s.Name)
                 .HasMaxLength(20);
@@ -22,9 +19,9 @@ namespace SocialNetwork.Database.DataConfigurations
             builder.Property(s => s.IconUrl)
                 .HasMaxLength(100);
 
-            builder.HasOne(s => s.User)
+         /*   builder.HasOne(s => s.User)
                 .WithMany(u => u.SocialMedias)
-                .HasForeignKey(s => s.UserId);
+                .HasForeignKey(s => s.UserId);*/
         }
     }
 }

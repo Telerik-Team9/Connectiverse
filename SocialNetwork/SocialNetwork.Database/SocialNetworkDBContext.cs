@@ -14,15 +14,15 @@ namespace SocialNetwork.Database
         { }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Town> Towns { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<Friend> Friends { get; set; }
-        public DbSet<ImagePost> ImagePosts { get; set; }
-        public DbSet<Like> Likes { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
-        public DbSet<TextPost> TextPosts { get; set; }
-        public DbSet<Town> Towns { get; set; }
-        public DbSet<VideoPost> VideoPosts { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Video> Videos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

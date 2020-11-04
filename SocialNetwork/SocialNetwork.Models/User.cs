@@ -9,8 +9,6 @@ namespace SocialNetwork.Models
     {
         public string DisplayName { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public ImagePost ProfilePicture { get; set; }
-        public ImagePost CoverPicture { get; set; }
         public string Education { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
@@ -21,16 +19,16 @@ namespace SocialNetwork.Models
         public int? TownId { get; set; }
         public Town Town { get; set; }
 
-        public Guid RoleId { get; set; }
-        public Role Role { get; set; }
+        public int? ProfilePictureId { get; set; }
+        public string ProfilePictureUrl { get; set; }
+        public int? CoverPictureId { get; set; }
+        public string CoverPictureUrl { get; set; }
 
         public ICollection<Friend> Friends { get; set; } = new HashSet<Friend>();
         public ICollection<Friend> FriendsOf { get; set; } = new HashSet<Friend>();
         public ICollection<FriendRequest> FriendRequests { get; set; } = new HashSet<FriendRequest>();
         public ICollection<FriendRequest> FriendRequestsOf { get; set; } = new HashSet<FriendRequest>();
-        public ICollection<TextPost> TextPosts { get; set; } = new HashSet<TextPost>();
-        public ICollection<ImagePost> Images { get; set; } = new HashSet<ImagePost>();
-        public ICollection<VideoPost> Videos { get; set; } = new HashSet<VideoPost>();
+        public ICollection<Post> Posts { get; set; } = new HashSet<Post>();
         public ICollection<SocialMedia> SocialMedias { get; set; } = new HashSet<SocialMedia>();
         public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();

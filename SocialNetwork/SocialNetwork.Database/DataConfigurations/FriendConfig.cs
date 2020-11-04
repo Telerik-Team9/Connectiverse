@@ -8,7 +8,7 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<Friend> builder)
         {
-            builder.HasKey(f => f.Id);
+            /*builder.HasKey(f => f.Id);*/
 
             builder.HasOne(f => f.User)
                 .WithMany(u => u.Friends)

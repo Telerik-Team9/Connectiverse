@@ -40,7 +40,13 @@ namespace SocialNetwork.Database.Seeder
                     Email = "magi@mail.com",
                     NormalizedEmail = "MAGI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143")    // Admin
+                    /*RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143"),    // Admin*/
+
+                    DisplayName = "Magi Nikolova",
+                    DateOfBirth = new DateTime(1997,02,12),
+                    Education = "Sofia University",
+                    TownId = 1,
+                    ProfilePictureId = 1
                 },
                 new User()  // Admin
                 {
@@ -50,7 +56,13 @@ namespace SocialNetwork.Database.Seeder
                     Email = "ali@mail.com",
                     NormalizedEmail = "ALI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143")    // Admin
+                    /*RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143"),    // Admin*/
+
+                    DisplayName = "Ali Marekov",
+                    DateOfBirth = new DateTime(1999, 09, 23),
+                    Education = "Technical University",
+                    TownId = 1,
+                    //ProfilePictureId = 1
                 },
                 new User()
                 {
@@ -60,7 +72,13 @@ namespace SocialNetwork.Database.Seeder
                     Email = "telerik@mail.com",
                     NormalizedEmail = "TELERIK@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    RoleId = Guid.Parse("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")     // User
+                   /* RoleId = Guid.Parse("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"),     // User*/
+
+                    DisplayName = "Telerik Academy",
+                    DateOfBirth = new DateTime(2010, 11, 1),
+                    Education = "",
+                    TownId = 1,
+                    //ProfilePictureId = 1
                 },
             };
             var hasher = new PasswordHasher<User>();
@@ -189,43 +207,54 @@ namespace SocialNetwork.Database.Seeder
             };
             builder.Entity<FriendRequest>().HasData(friendRequests);
 
-            var textPosts = new HashSet<TextPost>()
+            var posts = new HashSet<Post>()
             {
-                new TextPost
+                new Post
                 {
                     Id = 1,
                     Content = "Does anyone know any great restaurants near by?",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
-                }
-            };
-            builder.Entity<TextPost>().HasData(textPosts);
 
-            var imagePosts = new HashSet<ImagePost>()
-            {
-                new ImagePost
+                },
+                new Post
                 {
                     Id = 10,
                     Content = "A photo of one of my favourite things:",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                    ImageUrl = ""
-                }
-            };
-            builder.Entity<ImagePost>().HasData(imagePosts);
-
-            var videoPosts = new HashSet<VideoPost>()
-            {
-                new VideoPost
+                    PhotoId = 1
+                },
+                new Post
                 {
                     Id = 20,
                     Content = "Really funny video :)",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
-                    VideoUrl = ""
+                    VideoId = 1
                 }
             };
-            builder.Entity<VideoPost>().HasData(videoPosts);
+            builder.Entity<Post>().HasData(posts);
+
+            var photos = new HashSet<Photo>()
+            {
+                new Photo
+                {
+                    Id = 1,
+                    PostId = 10
+                }
+            };
+            builder.Entity<Photo>().HasData(photos);
+
+            var videos = new HashSet<Video>()
+            {
+                new Video
+                {
+                    Id = 1,
+                    PostId = 20
+                }
+            };
+            builder.Entity<Video>().HasData(videos);
 
             var likes = new HashSet<Like>()
             {
