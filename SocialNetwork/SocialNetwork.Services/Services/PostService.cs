@@ -48,6 +48,22 @@ namespace SocialNetwork.Services.Services
         public PostDTO GetById(int id)
         {
             throw new NotImplementedException();
+            var photos = this.context.Photos
+                             .Where(x => !x.IsDeleted)
+                             .Include(x => x.Post)
+                             .ThenInclude(p => p.User)
+                             .ThenInclude(x => x.Comments);
+
+            var videos = this.context.Videos
+                             .Where(x => !x.IsDeleted)
+                             .Include(x => x.Post)
+                             .ThenInclude(p => p.User)
+                             .ThenInclude(x => x.Comments);
+
+            var map1 = photos.Select(this.mapper.Map<PhotoDTO>);
+            var map2 = videos.Select(this.mapper.Map<VideoDTO>);
+
+            return null;
         }
 
         public IEnumerable<PostDTO> GetUserFriendsPosts(Guid userId)

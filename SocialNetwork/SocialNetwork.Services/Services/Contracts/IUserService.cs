@@ -10,10 +10,10 @@ namespace SocialNetwork.Services.Services.Contracts
         UserDTO GetById(Guid id);
         // Update ?
         // Delete ?
-
+        SocialMediaDTO CreateSocialMedia(SocialMediaDTO model);
+        FriendRequestDTO SendFriendRequest(Guid receiverId);    // API
         bool AddFriend(Guid id);
         bool RemoveFriend(Guid id);
-        FriendRequestDTO SendFriendRequest(Guid receiverId);    // API
         bool DeleteFriendRequest(Guid receiverId);
         bool AcceptFriendRequest(Guid receiverId);
 

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SocialNetwork.Models.Abstracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.Models
 {
-    public class Video
+    public class Video : Entity
     {
         [Key]
         public int Id { get; set; }

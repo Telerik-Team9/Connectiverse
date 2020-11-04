@@ -31,6 +31,17 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
+        public SocialMediaDTO CreateSocialMedia(SocialMediaDTO dto)
+        {
+            var sm = this.context.SocialMedias
+                         .Include(x => x.User)
+                         .First();
+
+            var rslt = this.mapper.Map<SocialMediaDTO>(sm);
+
+            return rslt;
+        }
+
         public bool DeleteFriendRequest(Guid receiverId)
         {
             throw new NotImplementedException();
@@ -61,7 +72,7 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-/*        public IEnumerable<LikeDTO> GetAllFriendRequestsSent(Guid userId)
+        /*        public IEnumerable<LikeDTO> GetAllFriendRequestsSent(Guid userId)
         {
             var friendRequests = this.context.FriendRequests
                                      .Include(fr => fr.Sender)

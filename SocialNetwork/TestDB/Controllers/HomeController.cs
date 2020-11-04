@@ -46,10 +46,9 @@ namespace TestDB.Controllers
             //var result = this.commentService.GetById(1);
             //var result = this.friendService.GetById(1);
             //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
-            var result = this.likeService.GetPostLikes(1);
-
-
-
+            //var result = this.likeService.GetPostLikes(1);
+            //var result = this.userService.CreateSocialMedia(default);
+            var result = this.postService.GetById(default);
             return View(result);
         }
 
