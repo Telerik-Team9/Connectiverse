@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public PhotoConfig()
         {
-            this.CreateMap<Photo, PhotoDTO>();
+            this.CreateMap<Photo, PhotoDTO>().ReverseMap();
         }
     }
 }

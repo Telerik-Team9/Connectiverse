@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public VideoConfig()
         {
-            this.CreateMap<Video, VideoDTO>();
+            this.CreateMap<Video, VideoDTO>().ReverseMap();
         }
     }
 }

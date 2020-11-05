@@ -23,20 +23,51 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<PostDTO> CreateAsync(PostDTO post)
+        public async Task<PostDTO> CreateAsync(PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
         {
+            // Create the post
             var user = await this.context.Users
-                           .FirstOrDefaultAsync(x => x.Id == post.UserId);
+               .FirstOrDefaultAsync(u => u.Id == postDTO.UserId)
+               ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-            var newPost = this.mapper.Map<Post>(post);
-            newPost.User = user;
-            newPost.Video = null;
-            newPost.Photo = null;
+            var post = this.mapper.Map<Post>(postDTO);
+            post.User = user;
 
-            await this.context.Posts.AddAsync(newPost);
+            await this.context.Posts.AddAsync(post);
             await this.context.SaveChangesAsync();
 
-            return post;
+            // Create the media
+            AddMediaToPost(photoDTO, videoDTO, post);
+
+            // Save the changes
+            await this.context.SaveChangesAsync();
+
+            return postDTO;
+        }
+
+        private void AddMediaToPost(PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
+        {
+            if (photoDTO != null)
+            {
+                var photo = this.mapper.Map<Photo>(photoDTO);
+                photo.PostId = post.Id;
+
+                post.Photo = photo;
+                post.Video = null;
+            }
+            else if (videoDTO != null)
+            {
+                var video = this.mapper.Map<Video>(videoDTO);
+                video.PostId = post.Id;
+
+                post.Video = video;
+                post.Photo = null;
+            }
+            else
+            {
+                post.Photo = null;
+                post.Video = null;
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -72,6 +103,7 @@ namespace SocialNetwork.Services.Services
             return this.mapper.Map<PostDTO>(post);
         }
 
+        // TODO:
         public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)
         {
             throw new NotImplementedException();

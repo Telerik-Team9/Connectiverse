@@ -1,12 +1,13 @@
 ﻿using SocialNetwork.Services.DTOs;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services.Contracts
 {
-    public interface ILIkeService
+    public interface ILikeService
     {
-        LikeDTO Create(LikeDTO comment);
-        LikeDTO GetById(int id);
+        Task<LikeDTO> CreateAsync(LikeDTO like);
+        Task<LikeDTO> GetByIdAsync(int id);
         // IEnumerable<LikeDTO> GetPostLikes(int postId);
-        bool Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

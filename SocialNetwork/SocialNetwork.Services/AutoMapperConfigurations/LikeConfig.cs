@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public LikeConfig()
         {
-            this.CreateMap<Like, LikeDTO>();
+            this.CreateMap<Like, LikeDTO>().ReverseMap();
         }
     }
 }

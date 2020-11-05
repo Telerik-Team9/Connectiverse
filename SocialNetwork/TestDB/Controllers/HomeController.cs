@@ -19,7 +19,8 @@ namespace TestDB.Controllers
         private readonly IPostService postService;
         private readonly ICommentService commentService;
         private readonly IFriendService friendService;
-        private readonly ILIkeService likeService;
+        private readonly ILikeService likeService;
+        private readonly ITownService townService;
 
         public HomeController(ILogger<HomeController> logger
             , ICountryService countryService
@@ -27,7 +28,8 @@ namespace TestDB.Controllers
             , IPostService postService
             , ICommentService commentService,
             IFriendService friendService,
-            ILIkeService likeService)
+            ILikeService likeService,
+            ITownService townService)
         {
             _logger = logger;
             this.countryService = countryService;
@@ -36,6 +38,7 @@ namespace TestDB.Controllers
             this.commentService = commentService;
             this.friendService = friendService;
             this.likeService = likeService;
+            this.townService = townService;
         }
 
         public async Task<IActionResult> Index()
@@ -49,15 +52,33 @@ namespace TestDB.Controllers
             //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
             //var result = this.likeService.GetPostLikes(1);
             //var result = this.userService.CreateSocialMedia(default);
-           //var postDTO = new PostDTO
-           //{
-           //    Content = "new frsh content dasdasdas",
-           //    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-           //    UserDisplayName = "Magi Nikolova",
-           //    UserProfilePictureUrl = "dsadasds"
-           //};
-           //
-           //var result = await this.postService.CreateAsync(postDTO);
+            var ImageDTO = new PhotoDTO
+            {
+                Url = "NEWPHOTO2",
+            };
+
+            var postDTO = new PostDTO
+            {
+                Content = "new frsh content 11dasdasdas",
+                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+                UserDisplayName = "Magi Nikolova",
+                UserProfilePictureUrl = "dsadasds"
+            };
+            
+            var result = await this.postService.CreateAsync(postDTO);
+
+/*            var likeDTO = new LikeDTO
+            {
+                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+                UserDisplayName = "Magi Nikolova",
+                PostId = 1
+            };
+            var result = await this.likeService.CreateAsync(likeDTO);*/
+            //var result = await this.townService.GetAllAsync();
+
+
+
+
             return View();
         }
 
