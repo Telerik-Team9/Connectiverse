@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
+using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
 {
@@ -18,24 +21,29 @@ namespace SocialNetwork.Services.Services
             this.context = context;
             this.mapper = mapper;
         }
-        public CountryDTO Get(int id)
-        {
-            var country = this.context.Countries
-                              .Include(c => c.Towns)
-                              .FirstOrDefault(c => c.Id == id);
 
-            var dto = this.mapper.Map<CountryDTO>(country);
-            return dto;
+        public async Task<CountryDTO> GetByNameAsync(string name)
+        {
+            var country = await this.context.Countries
+                             .Include(c => c.Towns)
+                             .FirstOrDefaultAsync(c => c.Name == name)
+                        ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            return this.mapper.Map<CountryDTO>(country);
         }
 
-        public IEnumerable<CountryDTO> GetAll()
+        public async Task<IEnumerable<CountryDTO>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
-        }
+            var countres = await this.context.Countries
+                             .Include(c => c.Towns)
+                             .ToListAsync();
 
-        public CountryDTO GetByName(string name)
-        {
-            throw new System.NotImplementedException();
+            if (!countres.Any())
+            {
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+            }
+
+            return countres.Select(this.mapper.Map<CountryDTO>);
         }
     }
 }

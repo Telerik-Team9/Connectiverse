@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
+using SocialNetwork.Models;
+using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
 {
@@ -19,44 +20,87 @@ namespace SocialNetwork.Services.Services
             this.context = context;
             this.mapper = mapper;
         }
-
-        public CommentDTO Create(CommentDTO comment)
+        public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO)
         {
-            throw new NotImplementedException();
+            var user = await this.context.Users
+                         .FirstOrDefaultAsync(x => x.Id == commentDTO.UserId)
+                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            var post = await this.context.Posts
+                         .FirstOrDefaultAsync(x => x.Id == commentDTO.PostId)
+                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+
+            var newComment = this.mapper.Map<Comment>(commentDTO);
+            newComment.User = user;
+            newComment.Post = post;
+
+            await this.context.Comments.AddAsync(newComment);
+            await this.context.SaveChangesAsync();
+
+            return commentDTO;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await this.context.Comments
+                                 .FirstOrDefaultAsync(c => c.Id == id);
+
+                result.IsDeleted = true;
+                result.DeletedOn = DateTime.UtcNow;
+
+                await this.context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public IEnumerable<CommentDTO> GetAll()
-        {
-            var allComments = this.context.Comments
-                                  .Where(c => !c.IsDeleted)
-                                  .Include(c => c.Post)
-                                  .Include(c => c.User);
-
-            var result = allComments.Select(this.mapper.Map<CommentDTO>);
-
-            return result;
-        }
-
-        public CommentDTO GetById(int id)
+        public async Task<CommentDTO> GetByIdAsync(int id)
         {
             //TODO: SEED USER DISPLAYNAMES
-            var comment = this.context.Comments
+            var comment = await this.context.Comments
                                   .Include(c => c.Post)
                                   .Include(c => c.User)
-                                  .FirstOrDefault(x => x.Id == id);
+                                  .FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == id)
+                        ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
 
             var dto = this.mapper.Map<CommentDTO>(comment);
             return dto;
         }
 
-        public IEnumerable<CommentDTO> GetPostComments(int postId)
-        {
-            throw new NotImplementedException();
-        }
+        // public IEnumerable<CommentDTO> GetAll()
+        // {
+        //     var allComments = this.context.Comments
+        //                           .Where(c => !c.IsDeleted)
+        //                           .Include(c => c.Post)
+        //                           .Include(c => c.User);
+        //
+        //     var result = allComments.Select(this.mapper.Map<CommentDTO>);
+        //
+        //     return result;
+        // }
+
+        // public async Task<IEnumerable<CommentDTO>> GetPostComments(int postId)
+        // {
+        //     var comments = await this.context.Comments
+        //                    .Where(c => !c.IsDeleted && c.Id == postId)
+        //                    .Include(c => c.Post)
+        //                    .ToListAsync();
+        //
+        //     if (!comments.Any())
+        //     {
+        //         throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+        //     }
+        //
+        //     var result = comments.Select(this.mapper.Map<CommentDTO>);
+        //
+        //     return result;
+        // }
     }
 }

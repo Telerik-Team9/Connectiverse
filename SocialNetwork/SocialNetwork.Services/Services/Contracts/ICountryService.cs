@@ -1,12 +1,13 @@
 ﻿using SocialNetwork.Services.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services.Contracts
 {
     public interface ICountryService
     {
-        CountryDTO GetByName(string name);
-        IEnumerable<CountryDTO> GetAll();
+        Task<CountryDTO> GetByNameAsync(string name);
+        Task<IEnumerable<CountryDTO>> GetAllAsync();
         //CountryDTO GetById(int id);
     }
 }

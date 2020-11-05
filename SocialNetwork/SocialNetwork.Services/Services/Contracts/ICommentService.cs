@@ -1,14 +1,14 @@
 ﻿using SocialNetwork.Services.DTOs;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services.Contracts
 {
     public interface ICommentService
     {
-        CommentDTO Create(CommentDTO comment);
-        CommentDTO GetById(int id);
+        Task<CommentDTO> CreateAsync(CommentDTO comment);
+        Task<CommentDTO> GetByIdAsync(int id);
+        Task<bool> DeleteAsync(int id);
         // IEnumerable<CommentDTO> GetPostComments(int postId);
-        bool Delete(int id);
-
         /*IEnumerable<CommentDTO> GetAll();*/
     }
 }
