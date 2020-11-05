@@ -1,27 +1,28 @@
 ﻿using SocialNetwork.Services.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services.Contracts
 {
     public interface IUserService
     {
         // Create ?
-        UserDTO GetById(Guid id);
+        Task<UserDTO> GetByIdAsync(Guid id);
         // Update ?
         // Delete ?
-        SocialMediaDTO CreateSocialMedia(SocialMediaDTO model);
-        FriendRequestDTO SendFriendRequest(Guid receiverId);    // API
-        bool AddFriend(Guid id);
-        bool RemoveFriend(Guid id);
-        bool DeleteFriendRequest(Guid receiverId);
-        bool AcceptFriendRequest(Guid receiverId);
+        Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model);
+        Task<FriendRequestDTO> SendFriendRequestAsync(Guid receiverId);    // API
+        Task<bool> AddFriendAsync(Guid id);
+        Task<bool> RemoveFriendAsync(Guid id);
+        Task<bool> DeleteFriendRequestAsync(Guid receiverId);
+        Task<bool> AcceptFriendRequestAsync(Guid receiverId);
 
-        IEnumerable<UserDTO> GetAll();
-        IEnumerable<FriendDTO> GetFriends(Guid id);
-        IEnumerable<FriendDTO> GetFriendRequests(Guid id);
-        IEnumerable<FriendRequestDTO> GetAllFriendRequestsSent(Guid userId);
-        IEnumerable<FriendRequestDTO> GetAllFriendRequestsReceived(Guid userId);
+        Task<IEnumerable<UserDTO>> GetAllAsync();
+        Task<IEnumerable<FriendDTO>> GetFriendsAsync(Guid id);
+        Task<IEnumerable<FriendDTO>> GetFriendRequestsAsync(Guid id);
+        Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid userId);
+        Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid userId);
         //IEnumerable<FriendDTO> GetFriendRequests(Guid id); TODO: Profile info DTO
     }
 }

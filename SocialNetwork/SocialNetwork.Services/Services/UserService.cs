@@ -6,6 +6,7 @@ using SocialNetwork.Services.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
 {
@@ -21,17 +22,67 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public bool AcceptFriendRequest(Guid receiverId)
+        public Task<bool> AcceptFriendRequestAsync(Guid receiverId)
         {
             throw new NotImplementedException();
         }
 
-        public bool AddFriend(Guid id)
+        public Task<bool> AddFriendAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public SocialMediaDTO CreateSocialMedia(SocialMediaDTO dto)
+        public Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteFriendRequestAsync(Guid receiverId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<UserDTO>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDTO> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<FriendDTO>> GetFriendRequestsAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<FriendDTO>> GetFriendsAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> RemoveFriendAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FriendRequestDTO> SendFriendRequestAsync(Guid receiverId)
+        {
+            throw new NotImplementedException();
+        }
+
+/*        public SocialMediaDTO CreateSocialMedia(SocialMediaDTO dto)
         {
             var sm = this.context.SocialMedias
                          .Include(x => x.User)
@@ -40,17 +91,7 @@ namespace SocialNetwork.Services.Services
             var rslt = this.mapper.Map<SocialMediaDTO>(sm);
 
             return rslt;
-        }
-
-        public bool DeleteFriendRequest(Guid receiverId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<UserDTO> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        }*/
 
         /*        public IEnumerable<UserDTO> GetAll()
                 {
@@ -67,10 +108,6 @@ namespace SocialNetwork.Services.Services
                     return result;
                 }*/
 
-        public IEnumerable<FriendRequestDTO> GetAllFriendRequestsReceived(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
 
         /*        public IEnumerable<LikeDTO> GetAllFriendRequestsSent(Guid userId)
         {
@@ -98,35 +135,5 @@ namespace SocialNetwork.Services.Services
 
                     return DTOs;
                 }*/
-
-        public UserDTO GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<FriendDTO> GetFriendRequests(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<FriendDTO> GetFriends(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveFriend(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public FriendRequestDTO SendFriendRequest(Guid receiverId)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<FriendRequestDTO> IUserService.GetAllFriendRequestsSent(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
