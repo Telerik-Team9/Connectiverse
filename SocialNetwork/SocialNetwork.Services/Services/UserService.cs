@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
+using SocialNetwork.Models;
+using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
@@ -27,9 +29,23 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> AddFriendAsync(Guid id)
+        public async Task<bool> AddFriendAsync(Guid senderId, Guid receiverId)
         {
-            throw new NotImplementedException();
+            var friendship1 = new Friend
+            {
+                UserId = senderId,
+                UserFriendId = receiverId
+            };
+            var friendship2 = new Friend
+            {
+                UserId = receiverId,
+                UserFriendId = senderId
+            };
+
+            await this.context.Friends.AddRangeAsync(friendship1, friendship2);
+            await this.context.SaveChangesAsync();
+
+            return true;
         }
 
         public Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
@@ -42,10 +58,19 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserDTO>> GetAllAsync()
+        public async Task<IEnumerable<UserDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
-        }
+            var users = await this.context.Users
+                                  .Where(u => !u.IsDeleted)
+                                  .ToListAsync();
+
+            if (!users.Any())
+            {
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+            }
+
+            return users.Select(this.mapper.Map<UserDTO>);
+        } // Ready
 
         public Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid userId)
         {
@@ -62,14 +87,23 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<FriendDTO>> GetFriendRequestsAsync(Guid id)
+        public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var friendships = await this.context.Friends
+                .Where(f => f.UserId == id)
+                .ToListAsync();
 
-        public Task<IEnumerable<FriendDTO>> GetFriendsAsync(Guid id)
-        {
-            throw new NotImplementedException();
+            var friends = new List<User>();
+
+            foreach (var fs in friendships)
+            {
+                var friend = await this.context.Users
+                                       .Include(u => u.Town)
+                                       .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == fs.UserFriendId);
+                friends.Add(friend);
+            }
+
+            return friends.Select(this.mapper.Map<UserDTO>);
         }
 
         public Task<bool> RemoveFriendAsync(Guid id)
@@ -81,59 +115,5 @@ namespace SocialNetwork.Services.Services
         {
             throw new NotImplementedException();
         }
-
-/*        public SocialMediaDTO CreateSocialMedia(SocialMediaDTO dto)
-        {
-            var sm = this.context.SocialMedias
-                         .Include(x => x.User)
-                         .First();
-
-            var rslt = this.mapper.Map<SocialMediaDTO>(sm);
-
-            return rslt;
-        }*/
-
-        /*        public IEnumerable<UserDTO> GetAll()
-                {
-                    var users = this.context.Users
-                                    .Include(u => u.Town).ThenInclude(t => t.Country)
-                                    .Include(u => u.Friends)
-                                    .Include(u => u.FriendRequests)
-                                    .Include(u => u.Posts)
-                                    .Include(u => u.SocialMedias)
-                                    .Include(u => u.Likes)
-                                    .Include(u => u.Comments);
-
-                    var result = users.Select(this.mapper.Map<UserDTO>);
-                    return result;
-                }*/
-
-
-        /*        public IEnumerable<LikeDTO> GetAllFriendRequestsSent(Guid userId)
-        {
-            var friendRequests = this.context.FriendRequests
-                                     .Include(fr => fr.Sender)
-                                     .Include(fr => fr.Receiver)
-                                     .Where(fr => fr.SenderId == userId);
-
-            var DTOs = friendRequests.Select(this.mapper.Map<FriendRequestDTO>);
-
-            return DTOs;
-        }*/
-
-
-
-        // READY
-        /*        public IEnumerable<FriendRequestDTO> GetAllFriendRequestsSent(Guid userId)
-                {
-                    var friendRequests = this.context.FriendRequests
-                                             .Include(fr => fr.Sender)
-                                             .Include(fr => fr.Receiver)
-                                             .Where(fr => fr.SenderId == userId);
-
-                    var DTOs = friendRequests.Select(this.mapper.Map<FriendRequestDTO>);
-
-                    return DTOs;
-                }*/
     }
 }

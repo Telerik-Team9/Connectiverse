@@ -18,7 +18,6 @@ namespace TestDB.Controllers
         private readonly IUserService userService;
         private readonly IPostService postService;
         private readonly ICommentService commentService;
-        private readonly IFriendService friendService;
         private readonly ILikeService likeService;
         private readonly ITownService townService;
 
@@ -27,7 +26,6 @@ namespace TestDB.Controllers
             , IUserService userService
             , IPostService postService
             , ICommentService commentService,
-            IFriendService friendService,
             ILikeService likeService,
             ITownService townService)
         {
@@ -36,7 +34,6 @@ namespace TestDB.Controllers
             this.userService = userService;
             this.postService = postService;
             this.commentService = commentService;
-            this.friendService = friendService;
             this.likeService = likeService;
             this.townService = townService;
         }
@@ -67,21 +64,23 @@ namespace TestDB.Controllers
 
                         var result = await this.postService.CreateAsync(postDTO);*/
 
-            var result = await this.postService.GetUserFriendsPostsAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
+            // var result = await this.postService.GetUserFriendsPostsAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
 
 
-/*            var likeDTO = new LikeDTO
-            {
-                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                UserDisplayName = "Magi Nikolova",
-                PostId = 1
-            };
-            var result = await this.likeService.CreateAsync(likeDTO);*/
+            /*            var likeDTO = new LikeDTO
+                        {
+                            UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+                            UserDisplayName = "Magi Nikolova",
+                            PostId = 1
+                        };
+                        var result = await this.likeService.CreateAsync(likeDTO);*/
             //var result = await this.townService.GetAllAsync();
+            //var ali = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5");
+            //var csharp = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845");
+            //var result = await this.userService.AddFriendAsync(ali, csharp);
 
-
-
-
+            //var result = await this.userService
+            //    .GetFriendsAsync(Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"));
             return View();
         }
 

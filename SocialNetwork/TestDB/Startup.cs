@@ -36,7 +36,6 @@ namespace TestDB
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
-            services.AddScoped<IFriendService, FriendService>();    // DELETE
             services.AddScoped<ILikeService, LikeService>();
             services.AddScoped<ITownService, TownService>();
 
