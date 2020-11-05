@@ -46,7 +46,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return true;
-        }
+        } //Ready
 
         public Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
         {
@@ -82,9 +82,14 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO> GetByIdAsync(Guid id)
+        public async Task<UserDTO> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await this.context.Users
+                           .Include(x => x.Town)//.ThenInclude(x=>x.Country)
+                           .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
+                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            return this.mapper.Map<UserDTO>(user);
         }
 
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
@@ -104,7 +109,7 @@ namespace SocialNetwork.Services.Services
             }
 
             return friends.Select(this.mapper.Map<UserDTO>);
-        }
+        } //Ready
 
         public Task<bool> RemoveFriendAsync(Guid id)
         {

@@ -81,6 +81,8 @@ namespace TestDB.Controllers
 
             //var result = await this.userService
             //    .GetFriendsAsync(Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"));
+            //var rslt = await this.userService.
+            //    GetByIdAsync(Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"));
             return View();
         }
 

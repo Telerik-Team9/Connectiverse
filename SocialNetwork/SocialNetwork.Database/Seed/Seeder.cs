@@ -253,6 +253,18 @@ namespace SocialNetwork.Database.Seeder
                     Id = 1,
                     SenderId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
                     ReceiverId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
+                },
+                new FriendRequest
+                {
+                    Id = 2,
+                    SenderId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                    ReceiverId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
+                },
+                new FriendRequest
+                {
+                    Id = 3,
+                    SenderId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                    ReceiverId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),          // CSharp 
                 }
             };
             builder.Entity<FriendRequest>().HasData(friendRequests);
