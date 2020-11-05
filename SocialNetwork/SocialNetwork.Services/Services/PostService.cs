@@ -103,28 +103,24 @@ namespace SocialNetwork.Services.Services
             return this.mapper.Map<PostDTO>(post);
         }
 
-        // TODO:
-        public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)
+        public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)   //TODO: Add algorythm
         {
-            throw new NotImplementedException();
-            var user = this.context.Users
-                           .Include(u => u.Friends)
-                           .Include(u => u.FriendsOf)
-                           .FirstOrDefault(u => u.Id == userId);
+            var friendships = await this.context.Friends
+                .Where(f => f.UserId == userId)
+                .ToListAsync();
 
             var friendsPosts = new List<Post>();
 
-            foreach (var friend in user.Friends)
+            foreach (var fs in friendships)
             {
-                var currFriendsPosts = this.context.Posts
-                           .Where(p => !p.IsDeleted && (p.UserId == friend.UserId) || (p.UserId == friend.UserFriendId))
-                           .Include(p => p.User)
-                           .Include(p => p.Photo)
-                           .Include(p => p.Video)
-                           .Include(p => p.Likes)
-                               .ThenInclude(l => l.User)
-                           .Include(p => p.Comments)
-                               .ThenInclude(c => c.User);
+                var currFriendsPosts = await this.context.Posts
+                    .Where(p => !p.IsDeleted && p.UserId == fs.UserFriendId)
+                    .Include(p => p.User)
+                    .Include(p => p.Photo)
+                    .Include(p => p.Video)
+                    .Include(p => p.Likes).ThenInclude(l => l.User)
+                    .Include(p => p.Comments).ThenInclude(c => c.User)
+                    .ToListAsync();
 
                 friendsPosts.AddRange(currFriendsPosts);
             }
@@ -134,9 +130,7 @@ namespace SocialNetwork.Services.Services
                 throw new ArgumentException(ExceptionMessages.EntitesNotFound);
             }
 
-            var asd = friendsPosts.Select(this.mapper.Map<PostDTO>);
-
-            return default;
+            return friendsPosts.Select(this.mapper.Map<PostDTO>);
         }
 
         public async Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId)

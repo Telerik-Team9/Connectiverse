@@ -40,7 +40,6 @@ namespace SocialNetwork.Database.Seeder
                     Email = "magi@mail.com",
                     NormalizedEmail = "MAGI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    /*RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143"),    // Admin*/
 
                     DisplayName = "Magi Nikolova",
                     DateOfBirth = new DateTime(1997,02,12),
@@ -57,7 +56,6 @@ namespace SocialNetwork.Database.Seeder
                     Email = "ali@mail.com",
                     NormalizedEmail = "ALI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    /*RoleId = Guid.Parse("943b692d-330e-405d-a019-c3d728442143"),    // Admin*/
 
                     DisplayName = "Ali Marekov",
                     DateOfBirth = new DateTime(1999, 09, 23),
@@ -73,12 +71,26 @@ namespace SocialNetwork.Database.Seeder
                     Email = "telerik@mail.com",
                     NormalizedEmail = "TELERIK@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                   /* RoleId = Guid.Parse("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"),     // User*/
 
                     DisplayName = "Telerik Academy",
                     DateOfBirth = new DateTime(2010, 11, 1),
                     Education = "",
                     TownId = 1,
+                    //ProfilePictureId = 1
+                },
+                new User()
+                {
+                    Id = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
+                    UserName = "csharp@mail.com",
+                    NormalizedUserName = "CSHARP@MAIL.COM",
+                    Email = "csharp@mail.com",
+                    NormalizedEmail = "CSHARP@MAIL.COM",
+                    SecurityStamp = Guid.NewGuid().ToString(),
+
+                    DisplayName = "C Sharp",
+                    DateOfBirth = new DateTime(2002, 1, 1),
+                    Education = "None",
+                    //TownId = 1,
                     //ProfilePictureId = 1
                 },
             };
@@ -198,9 +210,39 @@ namespace SocialNetwork.Database.Seeder
                 new Friend
                 {
                     Id = 1,
-                    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                    UserFriendId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),          // Magi
+                    UserFriendId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5")     // Ali
                 },
+                new Friend
+                {
+                    Id = 2,
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),          // Ali
+                    UserFriendId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270")     // Magi
+                },
+                new Friend
+                {
+                    Id = 3,
+                    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),          // Magi
+                    UserFriendId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619")     // Telerik
+                },
+                new Friend
+                {
+                    Id = 4,
+                    UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),          // Ali
+                    UserFriendId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270")     // Magi
+                },
+                new Friend
+                {
+                    Id = 5,
+                    UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),          // Telerik
+                    UserFriendId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845")     // CSharp
+                },
+                new Friend
+                {
+                    Id = 6,
+                    UserId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),          // CSharp
+                    UserFriendId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619")     // Telerik
+                }
             };
             builder.Entity<Friend>().HasData(friends);
 

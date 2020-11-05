@@ -52,20 +52,23 @@ namespace TestDB.Controllers
             //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
             //var result = this.likeService.GetPostLikes(1);
             //var result = this.userService.CreateSocialMedia(default);
-            var ImageDTO = new PhotoDTO
-            {
-                Url = "NEWPHOTO2",
-            };
+            /*            var ImageDTO = new PhotoDTO
+                        {
+                            Url = "NEWPHOTO2",
+                        };
 
-            var postDTO = new PostDTO
-            {
-                Content = "new frsh content 11dasdasdas",
-                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                UserDisplayName = "Magi Nikolova",
-                UserProfilePictureUrl = "dsadasds"
-            };
-            
-            var result = await this.postService.CreateAsync(postDTO);
+                        var postDTO = new PostDTO
+                        {
+                            Content = "new frsh content 11dasdasdas",
+                            UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+                            UserDisplayName = "Magi Nikolova",
+                            UserProfilePictureUrl = "dsadasds"
+                        };
+
+                        var result = await this.postService.CreateAsync(postDTO);*/
+
+            var result = await this.postService.GetUserFriendsPostsAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
+
 
 /*            var likeDTO = new LikeDTO
             {
