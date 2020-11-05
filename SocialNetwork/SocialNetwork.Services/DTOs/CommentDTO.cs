@@ -12,7 +12,7 @@ namespace SocialNetwork.Services.DTOs
         //  public Post Post { get; set; }
 
         public Guid UserId { get; set; }
-        public string UserUserName { get; set; }
+        public string UserDisplayName { get; set; }
         public string UserProfilePictureUrl { get; set; }
     }
 }

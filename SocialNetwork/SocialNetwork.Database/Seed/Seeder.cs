@@ -118,6 +118,13 @@ namespace SocialNetwork.Database.Seeder
                     Content = "This is Amazing!",
                     PostId = 1,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                },
+                new Comment
+                {
+                    Id = 2,
+                    Content = "This is Awful!",
+                    PostId = 20,
+                    UserId= Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619") // Telerik
                 }
             };
             builder.Entity<Comment>().HasData(comments);
@@ -216,7 +223,6 @@ namespace SocialNetwork.Database.Seeder
                     Content = "Does anyone know any great restaurants near by?",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
-
                 },
                 new Post
                 {

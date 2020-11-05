@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public PostConfig()
         {
-            this.CreateMap<Post, PostDTO>();
+            this.CreateMap<Post, PostDTO>().ReverseMap();
         }
     }
 }

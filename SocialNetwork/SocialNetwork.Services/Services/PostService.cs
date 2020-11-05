@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
+using SocialNetwork.Models;
+using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
 {
@@ -20,60 +23,107 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public PostDTO Create(PostDTO post)
+        public async Task<PostDTO> CreateAsync(PostDTO post)
         {
-            throw new NotImplementedException();
+            var user = await this.context.Users
+                           .FirstOrDefaultAsync(x => x.Id == post.UserId);
+
+            var newPost = this.mapper.Map<Post>(post);
+            newPost.User = user;
+            newPost.Video = null;
+            newPost.Photo = null;
+
+            await this.context.Posts.AddAsync(newPost);
+            await this.context.SaveChangesAsync();
+
+            return post;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var post = await this.context.Posts
+                               .FirstOrDefaultAsync(p => p.Id == id);
+
+                post.IsDeleted = true;
+                post.DeletedOn = DateTime.UtcNow;
+                await this.context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public IEnumerable<PostDTO> GetAll()
+        public async Task<PostDTO> GetByIdAsync(int id)
         {
-            var allPosts = this.context.Posts
-                               .Where(p => !p.IsDeleted)
-                               .Include(p => p.User)
-                               .Include(p => p.Photo)
-                               .Include(p => p.Video)
-                               .Include(p => p.Likes)
-                               .Include(p => p.Comments);
+            var post = await this.context.Posts
+                            .Include(p => p.User)
+                            .Include(p => p.Photo)
+                            .Include(p => p.Video)
+                            .Include(p => p.Likes).ThenInclude(l => l.User)
+                            .Include(p => p.Comments).ThenInclude(c => c.User)
+                            .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id)
+                    ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-            var result = allPosts.Select(this.mapper.Map<PostDTO>);
-
-            return result;
+            return this.mapper.Map<PostDTO>(post);
         }
 
-        public PostDTO GetById(int id)
+        public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)
         {
             throw new NotImplementedException();
-            var photos = this.context.Photos
-                             .Where(x => !x.IsDeleted)
-                             .Include(x => x.Post)
-                             .ThenInclude(p => p.User)
-                             .ThenInclude(x => x.Comments);
+            var user = this.context.Users
+                           .Include(u => u.Friends)
+                           .Include(u => u.FriendsOf)
+                           .FirstOrDefault(u => u.Id == userId);
 
-            var videos = this.context.Videos
-                             .Where(x => !x.IsDeleted)
-                             .Include(x => x.Post)
-                             .ThenInclude(p => p.User)
-                             .ThenInclude(x => x.Comments);
+            var friendsPosts = new List<Post>();
 
-            var map1 = photos.Select(this.mapper.Map<PhotoDTO>);
-            var map2 = videos.Select(this.mapper.Map<VideoDTO>);
+            foreach (var friend in user.Friends)
+            {
+                var currFriendsPosts = this.context.Posts
+                           .Where(p => !p.IsDeleted && (p.UserId == friend.UserId) || (p.UserId == friend.UserFriendId))
+                           .Include(p => p.User)
+                           .Include(p => p.Photo)
+                           .Include(p => p.Video)
+                           .Include(p => p.Likes)
+                               .ThenInclude(l => l.User)
+                           .Include(p => p.Comments)
+                               .ThenInclude(c => c.User);
 
-            return null;
+                friendsPosts.AddRange(currFriendsPosts);
+            }
+
+            if (!friendsPosts.Any())
+            {
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+            }
+
+            var asd = friendsPosts.Select(this.mapper.Map<PostDTO>);
+
+            return default;
         }
 
-        public IEnumerable<PostDTO> GetUserFriendsPosts(Guid userId)
+        public async Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId)
         {
-            throw new NotImplementedException();
-        }
+            var posts = await this.context.Posts
+                          .Where(p => !p.IsDeleted && p.UserId == userId)
+                          .Include(p => p.User)
+                          .Include(p => p.Photo)
+                          .Include(p => p.Video)
+                          .Include(p => p.Likes).ThenInclude(l => l.User)
+                          .Include(p => p.Comments).ThenInclude(c => c.User)
+                          .ToListAsync();
 
-        public IEnumerable<PostDTO> GetUserPosts(Guid userId)
-        {
-            throw new NotImplementedException();
+            if (!posts.Any())
+            {
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+            }
+
+            return posts.Select(this.mapper.Map<PostDTO>);
         }
     }
 }

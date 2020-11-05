@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public UserConfig()
         {
-            this.CreateMap<User, UserDTO>();
+            this.CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }
