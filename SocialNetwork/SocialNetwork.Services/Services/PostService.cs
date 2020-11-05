@@ -25,6 +25,11 @@ namespace SocialNetwork.Services.Services
 
         public async Task<PostDTO> CreateAsync(PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
         {
+            if (postDTO == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.InvalidModel);
+            }
+
             // Create the post
             var user = await this.context.Users
                .FirstOrDefaultAsync(u => u.Id == postDTO.UserId)

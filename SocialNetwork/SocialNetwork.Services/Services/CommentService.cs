@@ -22,6 +22,11 @@ namespace SocialNetwork.Services.Services
         }
         public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO)
         {
+            if (commentDTO == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.InvalidModel);
+            }
+
             var user = await this.context.Users
                          .FirstOrDefaultAsync(u => u.Id == commentDTO.UserId)
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);

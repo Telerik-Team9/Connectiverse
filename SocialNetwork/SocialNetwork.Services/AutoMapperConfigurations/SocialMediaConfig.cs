@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public SocialMediaConfig()
         {
-            this.CreateMap<SocialMedia, SocialMediaDTO>();
+            this.CreateMap<SocialMedia, SocialMediaDTO>().ReverseMap();
         }
     }
 }

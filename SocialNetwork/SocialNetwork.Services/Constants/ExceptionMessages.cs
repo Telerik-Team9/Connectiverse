@@ -4,5 +4,7 @@
     {
         public const string EntityNotFound = "Entity not found.";
         public const string EntitesNotFound = "Entities not found.";
+
+        public const string InvalidModel = "Model not valid.";
     }
 }

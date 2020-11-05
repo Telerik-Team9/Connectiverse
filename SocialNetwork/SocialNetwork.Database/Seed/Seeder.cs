@@ -264,7 +264,7 @@ namespace SocialNetwork.Database.Seeder
                 {
                     Id = 3,
                     SenderId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
-                    ReceiverId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),          // CSharp 
+                    ReceiverId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),    // CSharp 
                 }
             };
             builder.Entity<FriendRequest>().HasData(friendRequests);

@@ -6,9 +6,6 @@ using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
@@ -24,24 +21,29 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<LikeDTO> CreateAsync(LikeDTO like)
+        public async Task<LikeDTO> CreateAsync(LikeDTO likeDTO)
         {
+            if (likeDTO == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.InvalidModel);
+            }
+
             var user = await this.context.Users
-                .FirstOrDefaultAsync(u => u.Id == like.UserId)
+                .FirstOrDefaultAsync(u => u.Id == likeDTO.UserId)
                 ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             var post = await this.context.Posts
-                .FirstOrDefaultAsync(p => p.Id == like.PostId)
+                .FirstOrDefaultAsync(p => p.Id == likeDTO.PostId)
                 ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-            var newLike = this.mapper.Map<Like>(like);
+            var newLike = this.mapper.Map<Like>(likeDTO);
             newLike.User = user;
             newLike.Post = post;
 
             await this.context.Likes.AddAsync(newLike);
             await this.context.SaveChangesAsync();
 
-            return like;
+            return likeDTO;
         }
 
         public async Task<bool> DeleteAsync(int id)

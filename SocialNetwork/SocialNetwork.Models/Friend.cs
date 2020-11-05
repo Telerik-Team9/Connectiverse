@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SocialNetwork.Models.Abstracts;
+using System;
 
 namespace SocialNetwork.Models
 {
-    public class Friend
+    public class Friend : Entity
     {
         public int Id { get; set; }
 

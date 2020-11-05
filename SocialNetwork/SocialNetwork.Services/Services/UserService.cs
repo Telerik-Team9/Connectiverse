@@ -29,31 +29,100 @@ namespace SocialNetwork.Services.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> AddFriendAsync(Guid senderId, Guid receiverId)
+        public async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)
         {
-            var friendship1 = new Friend
+            var friendship = await this.context.Friends
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.UserFriendId == userFriendId);
+
+            if (friendship != null && friendship.IsDeleted == false)
             {
-                UserId = senderId,
-                UserFriendId = receiverId
+                return true;
+            }
+
+            if (friendship != null && friendship.IsDeleted == true)
+            {
+                var friendship2 = await this.context.Friends
+                    .FirstOrDefaultAsync(f => f.UserId == userFriendId && f.UserFriendId == userId);
+
+                friendship.IsDeleted = false;
+                friendship.DeletedOn = null;
+                friendship2.IsDeleted = false;
+                friendship2.DeletedOn = null;
+                await this.context.SaveChangesAsync();
+
+                return true;
+            }
+
+            var newFriendship = new Friend
+            {
+                UserId = userId,
+                UserFriendId = userFriendId
             };
-            var friendship2 = new Friend
+            var newFriendship2 = new Friend
             {
-                UserId = receiverId,
-                UserFriendId = senderId
+                UserId = userFriendId,
+                UserFriendId = userId
             };
 
-            await this.context.Friends.AddRangeAsync(friendship1, friendship2);
+            await this.context.Friends.AddRangeAsync(newFriendship, newFriendship2);
             await this.context.SaveChangesAsync();
 
             return true;
         } //Ready
 
-        public Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
+        public async Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.InvalidModel);
+            }
+
+            var socialMedia = this.mapper.Map<SocialMedia>(model);
+
+            await this.context.SocialMedias.AddAsync(socialMedia);
+            await this.context.SaveChangesAsync();
+
+            return model;
+        }   //Ready
+
+        public Task<bool> DeleteFriendRequestAsync(Guid receiverId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteFriendRequestAsync(Guid receiverId)
+        public async Task<UserDTO> GetByIdAsync(Guid id)
+        {
+            var user = await this.context.Users
+                           .Include(u => u.Town).ThenInclude(x=>x.Country)
+                           .Include(u => u.FriendRequests)
+                           .Include(u => u.SocialMedias)
+                           .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
+                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            return this.mapper.Map<UserDTO>(user);
+        }    //Ready
+
+        public async Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId)
+        {
+            var friendship = await this.context.Friends
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.UserFriendId == userFriendId)
+                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            var friendship2 = await this.context.Friends
+                .FirstOrDefaultAsync(f => f.UserId == userFriendId && f.UserFriendId == userId)
+                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            friendship.IsDeleted = true;
+            friendship.DeletedOn = DateTime.UtcNow;
+            friendship2.IsDeleted = true;
+            friendship2.DeletedOn = DateTime.UtcNow;
+
+            await this.context.SaveChangesAsync();
+
+            return true;
+            }   //Ready
+
+        public Task<FriendRequestDTO> SendFriendRequestAsync(Guid receiverId)
         {
             throw new NotImplementedException();
         }
@@ -72,30 +141,10 @@ namespace SocialNetwork.Services.Services
             return users.Select(this.mapper.Map<UserDTO>);
         } // Ready
 
-        public Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<UserDTO> GetByIdAsync(Guid id)
-        {
-            var user = await this.context.Users
-                           .Include(x => x.Town)//.ThenInclude(x=>x.Country)
-                           .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
-                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-
-            return this.mapper.Map<UserDTO>(user);
-        }
-
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {
             var friendships = await this.context.Friends
-                .Where(f => f.UserId == id)
+                .Where(f => !f.IsDeleted && f.UserId == id)
                 .ToListAsync();
 
             var friends = new List<User>();
@@ -111,14 +160,30 @@ namespace SocialNetwork.Services.Services
             return friends.Select(this.mapper.Map<UserDTO>);
         } //Ready
 
-        public Task<bool> RemoveFriendAsync(Guid id)
+        public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var user = await this.context.Users
+                .Include(u => u.FriendRequests).ThenInclude(u => u.Receiver)
+                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
+                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-        public Task<FriendRequestDTO> SendFriendRequestAsync(Guid receiverId)
+            return user.FriendRequests.Select(this.mapper.Map<FriendRequestDTO>);
+        }   // Ready
+
+        public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var friendRequests = await this.context.FriendRequests
+                .Where(f => !f.IsDeleted && f.ReceiverId == id)
+                .Include(f => f.Sender)
+                .Include(f => f.Receiver)
+                .ToListAsync();
+
+            if (!friendRequests.Any())
+            {
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+            }
+
+            return friendRequests.Select(this.mapper.Map<FriendRequestDTO>);
+        }   // Ready
     }
 }

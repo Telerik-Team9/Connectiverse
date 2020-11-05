@@ -83,6 +83,20 @@ namespace TestDB.Controllers
             //    .GetFriendsAsync(Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"));
             //var rslt = await this.userService.
             //    GetByIdAsync(Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"));
+/*
+            var dto = new SocialMediaDTO
+            {
+                Name = "LinkdIn",
+                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                UserLink = "somelinkdin",
+                IconUrl = "v"
+            };
+
+            var result = await this.userService.CreateSocialMediaAsync(dto);*/
+            var result = await this.userService.GetAllFriendRequestsReceivedAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
+
+
+
             return View();
         }
 
