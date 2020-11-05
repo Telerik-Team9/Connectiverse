@@ -23,11 +23,11 @@ namespace SocialNetwork.Services.Services
         public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO)
         {
             var user = await this.context.Users
-                         .FirstOrDefaultAsync(x => x.Id == commentDTO.UserId)
+                         .FirstOrDefaultAsync(u => u.Id == commentDTO.UserId)
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             var post = await this.context.Posts
-                         .FirstOrDefaultAsync(x => x.Id == commentDTO.PostId)
+                         .FirstOrDefaultAsync(u => u.Id == commentDTO.PostId)
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
 
