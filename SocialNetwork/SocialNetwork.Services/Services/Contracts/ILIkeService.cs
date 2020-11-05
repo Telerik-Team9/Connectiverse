@@ -1,7 +1,4 @@
 ﻿using SocialNetwork.Services.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SocialNetwork.Services.Services.Contracts
 {
@@ -9,7 +6,7 @@ namespace SocialNetwork.Services.Services.Contracts
     {
         LikeDTO Create(LikeDTO comment);
         LikeDTO GetById(int id);
-        IEnumerable<LikeDTO> GetPostLikes(int postId);
+        // IEnumerable<LikeDTO> GetPostLikes(int postId);
         bool Delete(int id);
     }
 }

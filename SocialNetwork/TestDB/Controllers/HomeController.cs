@@ -49,16 +49,16 @@ namespace TestDB.Controllers
             //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
             //var result = this.likeService.GetPostLikes(1);
             //var result = this.userService.CreateSocialMedia(default);
-            var postDTO = new PostDTO
-            {
-                Content = "new frsh content dasdasdas",
-                UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                UserDisplayName = "Magi Nikolova",
-                UserProfilePictureUrl = "dsadasds"
-            };
-
-            var result = await this.postService.CreateAsync(postDTO);
-            return View(result);
+           //var postDTO = new PostDTO
+           //{
+           //    Content = "new frsh content dasdasdas",
+           //    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+           //    UserDisplayName = "Magi Nikolova",
+           //    UserProfilePictureUrl = "dsadasds"
+           //};
+           //
+           //var result = await this.postService.CreateAsync(postDTO);
+            return View();
         }
 
         public IActionResult Privacy()
