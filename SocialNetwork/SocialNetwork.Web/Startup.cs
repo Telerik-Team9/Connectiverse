@@ -30,12 +30,12 @@ namespace SocialNetwork.Web
         {
             services.AddControllers();
 
-            services.AddScoped<ICountryService, CountryService>();
+/*            services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikeService, LikeService>();
-            services.AddScoped<ITownService, TownService>();
+            services.AddScoped<ITownService, TownService>();*/
 
             services.AddDbContext<SocialNetworkDBContext>
             (
