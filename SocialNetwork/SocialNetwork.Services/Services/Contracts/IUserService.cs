@@ -12,11 +12,11 @@ namespace SocialNetwork.Services.Services.Contracts
         // Update ?
         // Delete ?
         Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model);
-        Task<FriendRequestDTO> SendFriendRequestAsync(Guid receiverId);    // API
+        Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId);    // API
         Task<bool> AddFriendAsync(Guid userId, Guid userFriendId);
         Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId);
-        Task<bool> DeleteFriendRequestAsync(Guid receiverId);
-        Task<bool> AcceptFriendRequestAsync(Guid receiverId);
+        Task<bool> DeleteFriendRequestAsync(Guid senderId, Guid receiverId);
+        Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId);
 
         Task<IEnumerable<UserDTO>> GetAllAsync();
         Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id);

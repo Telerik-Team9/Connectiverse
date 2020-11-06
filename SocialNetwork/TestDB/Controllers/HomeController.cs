@@ -93,9 +93,10 @@ namespace TestDB.Controllers
             };
 
             var result = await this.userService.CreateSocialMediaAsync(dto);*/
-            var result = await this.userService.GetAllFriendRequestsReceivedAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
-
-
+            var result = await this.userService
+                     .SendFriendRequestAsync(
+                     Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                     Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"));
 
             return View();
         }

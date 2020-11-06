@@ -6,5 +6,6 @@
         public const string EntitesNotFound = "Entities not found.";
 
         public const string InvalidModel = "Model not valid.";
+        public const string SomethingWentWrong = "Something went wrong.";
     }
 }
