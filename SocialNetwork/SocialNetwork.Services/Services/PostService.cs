@@ -110,7 +110,7 @@ namespace SocialNetwork.Services.Services
             return this.mapper.Map<PostDTO>(post);
         }
 
-        public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)   //TODO: Add algorythm
+        public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)   //TODO: Add algorythm, rename
         {
             var friendships = await this.context.Friends
                 .Where(f => f.UserId == userId)
