@@ -4,11 +4,11 @@ using SocialNetwork.Web.Models;
 
 namespace SocialNetwork.Web.AutoMapperConfigurations
 {
-    public class SocialMediaConfig : Profile
+    public class CommentModelConfig : Profile
     {
-        public SocialMediaConfig()
+        public CommentModelConfig()
         {
-            this.CreateMap<SocialMediaDTO, SocialMediaModel>();
+            this.CreateMap<CommentDTO, CommentModel>();
         }
     }
 }

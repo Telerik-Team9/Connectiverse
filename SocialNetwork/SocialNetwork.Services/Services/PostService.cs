@@ -49,7 +49,7 @@ namespace SocialNetwork.Services.Services
             // Save the changes
             await this.context.SaveChangesAsync();
 
-            return postDTO;
+            return this.mapper.Map<PostDTO>(post); // TODO: QUestion
         }
 
         private void AddMediaToPost(PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
