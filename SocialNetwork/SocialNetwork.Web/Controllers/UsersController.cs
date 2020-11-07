@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
+using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 
@@ -31,6 +32,26 @@ namespace SocialNetwork.Web.Controllers
             this.userService = userService;
             this.postService = postService;
             this.mapper = mapper;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePost([FromBody] PostModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest("Invalid post.");
+            }
+            //map user id later...
+            var postDTO = this.mapper.Map<PostDTO>(model);
+            //postDTO.UserId = usermanager.GetUserId();
+            var result = await this.postService.CreateAsync(postDTO);
+
+            if (result == null)
+            {
+                return this.BadRequest("Something went wrong.");
+            }
+
+            return this.Created("post", this.mapper.Map<PostModel>(result));
         }
 
         [HttpGet("{id:Guid}")]
@@ -66,17 +87,18 @@ namespace SocialNetwork.Web.Controllers
         [HttpGet("getnewsfeed/{id}")]
         public async Task<IActionResult> GetNewsfeed(Guid id)
         {
-            throw new NotImplementedException();
-/*            var newsfeed = await this.postService.GetUserFriendsPostsAsync(id);
+            //throw new NotImplementedException();
+
+            var newsfeed = await this.postService.GetUserFriendsPostsAsync(id);
 
             if (!newsfeed.Any())
             {
                 return this.NotFound();
             }
 
-            var friendsModels = friends.Select(this.mapper.Map<UserProfileInfoModel>);
+            var friendsModels = newsfeed.Select(this.mapper.Map<PostModel>);
 
-            return Ok(friendsModels);*/
+            return Ok(friendsModels);
         }
 
 
