@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,9 +16,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SocialNetwork.Database;
+using SocialNetwork.Models;
+using SocialNetwork.Services.AutoMapperConfigurations;
 using SocialNetwork.Services.Services;
 using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.AutoMapperConfigurations;
 using SocialNetwork.Web.Helpers;
+using UserConfig = SocialNetwork.Services.AutoMapperConfigurations.UserConfig;
 
 namespace SocialNetwork.Web
 {
@@ -34,40 +40,67 @@ namespace SocialNetwork.Web
         {
             services.AddControllers();
 
-            // Get "AppSettings" property from the AppSettings.json
-            var appSettingsSection = this.Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            // // Get "AppSettings" property from the AppSettings.json
+            // var appSettingsSection = this.Configuration.GetSection("AppSettings");
+            // services.Configure<AppSettings>(appSettingsSection);
+            //
+            // // Configure jwt authentication
+            // var appSettings = appSettingsSection.Get<AppSettings>();
+            // var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            //
+            // services.AddAuthentication(config =>
+            // {
+            //     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // })
+            //    .AddJwtBearer(config =>
+            //    {
+            //        config.RequireHttpsMetadata = false;
+            //        config.SaveToken = true;
+            //        config.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuerSigningKey = true,
+            //            IssuerSigningKey = new SymmetricSecurityKey(key),
+            //            ValidateIssuer = false,
+            //            ValidateAudience = false
+            //        };
+            //    });
 
-            // Configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
-            services.AddAuthentication(config =>
+            services.AddDefaultIdentity<User>(options =>
             {
-                config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
             })
-               .AddJwtBearer(config =>
-               {
-                   config.RequireHttpsMetadata = false;
-                   config.SaveToken = true;
-                   config.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       IssuerSigningKey = new SymmetricSecurityKey(key),
-                       ValidateIssuer = false,
-                       ValidateAudience = false
-                   };
-               });
+                .AddRoles<Role>()
+                .AddEntityFrameworkStores<SocialNetworkDBContext>();
+
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserConfig))); // Review
+
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserModelConfig)));
 
 
 
-            /*            services.AddScoped<ICountryService, CountryService>();
-                        services.AddScoped<IUserService, UserService>();
-                        services.AddScoped<IPostService, PostService>();
-                        services.AddScoped<ICommentService, CommentService>();
-                        services.AddScoped<ILikeService, LikeService>();
-                        services.AddScoped<ITownService, TownService>();*/
+            //  var mapperConfig = new MapperConfiguration(mc =>
+            //  {
+            //      mc.AddProfile(new UserConfig());
+            //      mc.AddProfile(new UserCfg());
+            //  });
+            //
+            //  IMapper mapper = mapperConfig.CreateMapper();
+            //  services.AddSingleton(mapper);
+
+            // services.AddMvc();
+
+
+
+            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ILikeService, LikeService>();
+            services.AddScoped<ITownService, TownService>();
 
             services.AddDbContext<SocialNetworkDBContext>
             (
@@ -75,6 +108,8 @@ namespace SocialNetwork.Web
                            .UseSqlServer(Configuration
                            .GetConnectionString("DefaultConnection"))
             );
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,7 +121,7 @@ namespace SocialNetwork.Web
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

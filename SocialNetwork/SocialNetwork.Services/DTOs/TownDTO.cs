@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SocialNetwork.Services.DTOs
+﻿namespace SocialNetwork.Services.DTOs
 {
     public class TownDTO
     {

@@ -110,6 +110,7 @@ namespace SocialNetwork.Services.Services
         {
             var user = await this.context.Users
                            .Include(u => u.Town).ThenInclude(x => x.Country)
+                           .Include(u => u.Friends)
                            .Include(u => u.FriendRequests)
                            .Include(u => u.SocialMedias)
                            .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
