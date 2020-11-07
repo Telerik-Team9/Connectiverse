@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.AutoMapperConfigurations
     {
         public CommentConfig()
         {
-            this.CreateMap<Comment, CommentDTO>();
+            this.CreateMap<Comment, CommentDTO>().ReverseMap();
         }
     }
 }

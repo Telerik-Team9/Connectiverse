@@ -49,7 +49,7 @@ namespace TestDB.Controllers
             //var result = this.userService.GetAllFriendRequestsSent(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
             //var result = this.likeService.GetPostLikes(1);
             //var result = this.userService.CreateSocialMedia(default);
-            /*            var ImageDTO = new PhotoDTO
+                        var ImageDTO = new PhotoDTO
                         {
                             Url = "NEWPHOTO2",
                         };
@@ -58,11 +58,10 @@ namespace TestDB.Controllers
                         {
                             Content = "new frsh content 11dasdasdas",
                             UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
-                            UserDisplayName = "Magi Nikolova",
-                            UserProfilePictureUrl = "dsadasds"
+
                         };
 
-                        var result = await this.postService.CreateAsync(postDTO);*/
+                        var result = await this.postService.CreateAsync(postDTO);
 
             // var result = await this.postService.GetUserFriendsPostsAsync(Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"));
 
@@ -93,10 +92,21 @@ namespace TestDB.Controllers
             };
 
             var result = await this.userService.CreateSocialMediaAsync(dto);*/
-            var result = await this.userService
+           /* var result = await this.userService
                      .SendFriendRequestAsync(
                      Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
                      Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"));
+
+
+
+            var cmd = new CommentDTO
+            {
+                Content = "This is Amazinggggggggggggggggggg!",
+                PostId = 1,
+                UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+            };
+
+            var res = await this.commentService.CreateAsync(cmd);*/
 
             return View();
         }

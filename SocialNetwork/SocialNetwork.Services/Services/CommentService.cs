@@ -27,18 +27,7 @@ namespace SocialNetwork.Services.Services
                 throw new ArgumentNullException(ExceptionMessages.InvalidModel);
             }
 
-            var user = await this.context.Users
-                         .FirstOrDefaultAsync(u => u.Id == commentDTO.UserId)
-                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-
-            var post = await this.context.Posts
-                         .FirstOrDefaultAsync(u => u.Id == commentDTO.PostId)
-                     ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-
-
             var newComment = this.mapper.Map<Comment>(commentDTO);
-            newComment.User = user;
-            newComment.Post = post;
 
             await this.context.Comments.AddAsync(newComment);
             await this.context.SaveChangesAsync();

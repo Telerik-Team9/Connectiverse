@@ -36,6 +36,8 @@ namespace SocialNetwork.Services.Services
                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             var post = this.mapper.Map<Post>(postDTO);
+
+            post.UserId = postDTO.UserId;
             post.User = user;
 
             await this.context.Posts.AddAsync(post);

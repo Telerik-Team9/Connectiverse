@@ -40,7 +40,7 @@ namespace TestDB
             services.AddScoped<ITownService, TownService>();
 
 
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(CountryConfig)));
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(CommentConfig)));
 
             services.AddDbContext<SocialNetworkDBContext>
             (
