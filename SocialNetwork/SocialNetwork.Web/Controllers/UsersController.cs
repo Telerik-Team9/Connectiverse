@@ -13,7 +13,7 @@ using SocialNetwork.Web.Models;
 
 namespace SocialNetwork.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/users")]
     public class UsersController : Controller
@@ -22,15 +22,21 @@ namespace SocialNetwork.Web.Controllers
         private readonly UserManager<User> userManager;
         private readonly IUserService userService;
         private readonly IPostService postService;
+        private readonly ITokenService tokenService;
         private readonly IMapper mapper;
 
-        public UsersController(SignInManager<User> signInManager, UserManager<User> userManager, IUserService userService,
-            IPostService postService, IMapper mapper)
+        public UsersController(SignInManager<User> signInManager,
+                                UserManager<User> userManager,
+                                IUserService userService,
+                                IPostService postService,
+                                ITokenService tokenService,
+                                IMapper mapper)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userService = userService;
             this.postService = postService;
+            this.tokenService = tokenService;
             this.mapper = mapper;
         }
 
@@ -53,7 +59,7 @@ namespace SocialNetwork.Web.Controllers
 
             return this.Created("post", this.mapper.Map<PostModel>(result));
         }
-
+      
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetUsersProfileInfo(Guid id)
         {
@@ -101,13 +107,23 @@ namespace SocialNetwork.Web.Controllers
             return Ok(friendsModels);
         }
 
-
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] LoginCredentialsModel model)
+        public async Task<IActionResult> Authenticate([FromBody] LoginDTO model)
         {
-            // TODO : Implement
-            return View();
+            var signInResult = await signInManager
+                   .PasswordSignInAsync(model.UserName, model.Password, true, lockoutOnFailure: false);
+
+            if (!signInResult.Succeeded)
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+
+            //var sdad = await this.userManager.GetUserAsync(User);
+            var user = await this.userManager.FindByNameAsync(model.UserName);
+            model.Token = this.tokenService.CreateToken(user);
+
+            return Ok(model);
         }
     }
 }

@@ -178,7 +178,7 @@ namespace SocialNetwork.Services.Services
             foreach (var fs in friendships)
             {
                 var friend = await this.context.Users
-                                       .Include(u => u.Town)
+                                       .Include(u => u.Town).ThenInclude(t => t.Country)
                                        .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == fs.UserFriendId);
                 friends.Add(friend);
             }
