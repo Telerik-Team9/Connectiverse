@@ -8,14 +8,29 @@
         <li class="nav-item">
             <a class="nav-link" asp-area="" asp-controller="NewsFeed" asp-action="Index">NewsFeed</a>
         </li>
-        <li class="nav-item">
+@*        <li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-        </li>
-        <li class="nav-item">
+        </li>*@
+@*        <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
-        </li>
+        </li>*@
+
+        <div class="nav-item btn-group">
+            <li class="nav-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" asp-area="" asp-controller="NewsFeed" asp-action="Index">@User.Identity.Name.Split('@')[0] </a>
+            </li>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item nav-link text-black-50" asp-controller="Account" asp-action="Profile">Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item nav-link text-black-50" asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
+                <div class="dropdown-divider"></div>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button class="dropdown-item nav-link text-black-50" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
     }
     else
     {
