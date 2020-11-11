@@ -8,9 +8,4 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SocialNetwork.Database\SocialNetwork.Database.csproj" />
-    <ProjectReference Include="..\SocialNetwork.Models\SocialNetwork.Models.csproj" />
-  </ItemGroup>
-
 </Project>
