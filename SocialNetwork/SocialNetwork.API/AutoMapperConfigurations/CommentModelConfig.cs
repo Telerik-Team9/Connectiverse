@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SocialNetwork.API.Models;
+using SocialNetwork.Models;
 using SocialNetwork.Services.DTOs;
 
 namespace SocialNetwork.Web.AutoMapperConfigurations
@@ -8,7 +9,10 @@ namespace SocialNetwork.Web.AutoMapperConfigurations
     {
         public CommentModelConfig()
         {
-            this.CreateMap<CommentDTO, CommentModel>();
+            this.CreateMap<Comment, CommentDTO>()
+                .ReverseMap();
+            this.CreateMap<CommentDTO, CommentModel>()
+                .ReverseMap();
         }
     }
 }

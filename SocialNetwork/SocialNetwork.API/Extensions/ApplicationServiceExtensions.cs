@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.Database;
 using SocialNetwork.Services.Services;
 using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.AutoMapperConfigurations;
 
 namespace SocialNetwork.API.Extensions
 {
@@ -12,8 +13,7 @@ namespace SocialNetwork.API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            //services.AddAutoMapper(typeof(Profile).Assembly);
-
+            services.AddAutoMapper(typeof(UserModelConfig));
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();

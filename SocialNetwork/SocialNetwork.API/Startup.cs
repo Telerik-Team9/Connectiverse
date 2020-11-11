@@ -1,13 +1,9 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialNetwork.API.Extensions;
-using SocialNetwork.Web.AutoMapperConfigurations;
-using System.Reflection;
-using UserConfig = SocialNetwork.Services.AutoMapperConfigurations.UserConfig;
 
 namespace SocialNetwork.API
 {
@@ -24,9 +20,6 @@ namespace SocialNetwork.API
         {
             services.AddControllers();
             services.AddCors();
-
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserConfig))); // Review
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserModelConfig)));
 
             services.AddApplicationServices(this.configuration);
             services.AddIdentityServices(this.configuration);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SocialNetwork.API.Models;
+using SocialNetwork.Models;
 using SocialNetwork.Services.DTOs;
 
 namespace SocialNetwork.Web.AutoMapperConfigurations
@@ -8,7 +9,10 @@ namespace SocialNetwork.Web.AutoMapperConfigurations
     {
         public SocialMediaModelConfig()
         {
-            this.CreateMap<SocialMediaDTO, SocialMediaModel>();
+            this.CreateMap<SocialMedia, SocialMediaDTO>()
+                .ReverseMap();
+            this.CreateMap<SocialMediaDTO, SocialMediaModel>()
+                .ReverseMap();
         }
     }
 }
