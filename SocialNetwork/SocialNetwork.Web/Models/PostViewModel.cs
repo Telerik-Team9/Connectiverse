@@ -20,6 +20,6 @@ namespace SocialNetwork.Web.Models
         public string VideoModelUrl { get; set; }
 
          public ICollection<LikeViewModel> Likes { get; set; } = new HashSet<LikeViewModel>();
-        // public ICollection<CommentModel> Comments { get; set; } = new HashSet<CommentModel>();
+         public ICollection<CommentViewModel> Comments { get; set; } = new HashSet<CommentViewModel>();
     }
 }

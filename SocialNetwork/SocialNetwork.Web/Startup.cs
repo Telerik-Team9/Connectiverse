@@ -1,12 +1,9 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SocialNetwork.Services.AutoMapperConfigurations;
 using SocialNetwork.Web.Extensions;
-using System.Reflection;
 
 namespace SocialNetwork.Web
 {
@@ -25,31 +22,9 @@ namespace SocialNetwork.Web
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
             services.AddApplicationServices(this.configuration);
             services.AddIdentityServices(this.configuration);
-
-            //services.AddAutoMapper(Assembly.GetAssembly(typeof(UserModelConfig)));
-            //services.AddScoped<ICountryService, CountryService>();
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IPostService, PostService>();
-            //services.AddScoped<ICommentService, CommentService>();
-            //services.AddScoped<ILikeService, LikeService>();
-            //services.AddScoped<ITownService, TownService>();
-            //services.AddScoped<ITokenService, TokenService>();
-            //services.AddDbContext<SocialNetworkDBContext>
-            //(
-            //     options => options
-            //               .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-            //);
-            //services.AddDefaultIdentity<User>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequiredUniqueChars = 0;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //})
-            //    .AddRoles<Role>()
-            //    .AddEntityFrameworkStores<SocialNetworkDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
