@@ -6,6 +6,6 @@ namespace SocialNetwork.Web.Models
     public class NewsFeedViewModel
     {
         //public ICollection<PostViewModel> Posts { get; set; } = new HashSet<PostViewModel>();
-        public ICollection<PostDTO> Posts { get; set; } = new HashSet<PostDTO>();
+        public ICollection<PostViewModel> Posts { get; set; } = new HashSet<PostViewModel>();
     }
 }

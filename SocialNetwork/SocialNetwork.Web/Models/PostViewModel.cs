@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SocialNetwork.Models.Common.Enums;
 
@@ -18,7 +19,7 @@ namespace SocialNetwork.Web.Models
         public string PhotoModelUrl { get; set; }
         public string VideoModelUrl { get; set; }
 
-        // public ICollection<LikeModel> Likes { get; set; } = new HashSet<LikeModel>();
+         public ICollection<LikeViewModel> Likes { get; set; } = new HashSet<LikeViewModel>();
         // public ICollection<CommentModel> Comments { get; set; } = new HashSet<CommentModel>();
     }
 }

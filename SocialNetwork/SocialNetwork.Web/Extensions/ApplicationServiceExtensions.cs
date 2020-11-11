@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.Database;
 using SocialNetwork.Services.Services;
 using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.AutoMapperConfigs;
+using System.Reflection;
 
 namespace SocialNetwork.Web.Extensions
 {
@@ -12,6 +15,7 @@ namespace SocialNetwork.Web.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             //services.AddAutoMapper(typeof(Profile).Assembly);
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserVMConfig)));
 
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserService, UserService>();

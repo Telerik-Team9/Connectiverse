@@ -27,7 +27,6 @@ namespace SocialNetwork.Web
             services.AddRazorPages();
             services.AddApplicationServices(this.configuration);
             services.AddIdentityServices(this.configuration);
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserConfig))); // Review
 
             //services.AddAutoMapper(Assembly.GetAssembly(typeof(UserModelConfig)));
             //services.AddScoped<ICountryService, CountryService>();
