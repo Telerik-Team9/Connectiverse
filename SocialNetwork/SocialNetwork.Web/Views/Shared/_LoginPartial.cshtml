@@ -19,7 +19,7 @@
 
         <div class="nav-item btn-group">
             <li class="nav-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a class="nav-link" asp-area="" asp-controller="NewsFeed" asp-action="Index">@User.Identity.Name.Split('@')[0] </a>
+                <a class="nav-link" asp-area="" asp-controller="NewsFeed" asp-action="Index">@User.Identity.Name </a>
             </li>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item nav-link text-black-50" asp-controller="Account" asp-action="Profile">Profile</a>
