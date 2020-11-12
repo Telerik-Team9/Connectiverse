@@ -1,4 +1,6 @@
-﻿using SocialNetwork.Services.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using SocialNetwork.Models;
+using SocialNetwork.Services.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ namespace SocialNetwork.Services.Services.Contracts
     public interface IUserService
     {
         // Create ?
+        public UserManager<User> UserManager { get; }
         Task<UserDTO> GetByIdAsync(Guid id);
         // Update ?
         // Delete ?

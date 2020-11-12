@@ -22,8 +22,8 @@ namespace SocialNetwork.Services.Services
         public UserManager<User> UserManager { get; }
 
         public UserService(SocialNetworkDBContext context,
-            IMapper mapper,
-            UserManager<User> userManager)
+                           IMapper mapper,
+                           UserManager<User> userManager)
         {
             this.context = context;
             this.mapper = mapper;

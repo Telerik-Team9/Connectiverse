@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Controllers
@@ -26,19 +25,17 @@ namespace SocialNetwork.Web.Controllers
         // GET: AccountController
         public async Task<ActionResult> Profile()
         {
-
             var loggedinUsr = await this.userManager.GetUserAsync(User);
-
-            var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);
-            var requestsRecs = await this.userService.GetAllFriendRequestsReceivedAsync(loggedinUsr.Id);
 
             var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
             var result = this.mapper.Map<UserViewModel>(user);
 
-            var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
-            var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
-
             return View(result);
+
+            //var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);
+            //var requestsRecs = await this.userService.GetAllFriendRequestsReceivedAsync(loggedinUsr.Id);
+            //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
+            //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
 
         // GET: AccountController/Details/5
