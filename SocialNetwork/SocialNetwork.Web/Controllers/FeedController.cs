@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
@@ -9,22 +10,24 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public class NewsFeedController : Controller
+    [Authorize]
+    public class FeedController : Controller
     {
         private readonly IUserService userService;
         private readonly IPostService postService;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
-        public NewsFeedController(IUserService userService, IPostService postService, UserManager<User> userManager, IMapper mapper)
+        public FeedController(IUserService userService, IPostService postService, UserManager<User> userManager, IMapper mapper)
         {
             this.userService = userService;
             this.postService = postService;
             this.userManager = userManager;
             this.mapper = mapper;
         }
-        // GET: NewsFeedController
-        public async Task<ActionResult> Index()
+
+        // GET: FeedController/NewsFeed
+        public async Task<ActionResult> NewsFeed()
         {
             var user = await this.userManager.GetUserAsync(User);
 
@@ -34,6 +37,13 @@ namespace SocialNetwork.Web.Controllers
 
             return View(result);
         }
+
+        // GET: FeedController/Search
+        public async Task<ActionResult> Search()
+        {
+            return View();
+        }
+
 
         // GET: NewsFeedController/Details/5
         //  public ActionResult Details(int id)
