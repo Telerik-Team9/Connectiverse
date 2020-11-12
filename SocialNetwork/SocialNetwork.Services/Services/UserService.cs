@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
@@ -108,15 +109,20 @@ namespace SocialNetwork.Services.Services
 
         public async Task<UserDTO> GetByIdAsync(Guid id)
         {
-            var user = await this.context.Users
-                           .Include(u => u.Town).ThenInclude(x => x.Country)
-                           .Include(u => u.Friends)
-                           .Include(u => u.FriendRequests)
-                           .Include(u => u.SocialMedias)
-                           .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
+            var user = await this.context.Users.Where(u => !u.IsDeleted && u.Id == id)
+                           .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                           .FirstOrDefaultAsync()
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-            return this.mapper.Map<UserDTO>(user);
+            // var user = await this.context.Users
+            //                .Include(u => u.Town).ThenInclude(x => x.Country)
+            //                .Include(u => u.Friends)
+            //                .Include(u => u.FriendRequests)
+            //                .Include(u => u.SocialMedias)
+            //                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
+            //          ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            return user; //this.mapper.Map<UserDTO>(user);
         }    //Ready
 
         public async Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId)

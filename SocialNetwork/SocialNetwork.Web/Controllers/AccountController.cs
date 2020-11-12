@@ -2,19 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.Models;
+using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.Models;
 
 namespace SocialNetwork.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        // GET: AccountController
-        public ActionResult Profile()
+        private readonly IUserService userService;
+        private readonly UserManager<User> userManager;
+        private readonly IMapper mapper;
+
+        public AccountController(IUserService userService, UserManager<User> userManager,IMapper mapper)
         {
-            return View();
+            this.userService = userService;
+            this.userManager = userManager;
+            this.mapper = mapper;
+        }
+        // GET: AccountController
+        public async Task<ActionResult> Profile()
+        {
+            var loggedinUsr = await this.userManager.GetUserAsync(User);
+            var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
+            var result = this.mapper.Map<UserViewModel>(user);
+
+            return View(result);
         }
 
         // GET: AccountController/Details/5

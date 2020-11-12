@@ -25,10 +25,10 @@ namespace SocialNetwork.Services.DTOs
         public ICollection<PostDTO> Posts { get; set; } = new HashSet<PostDTO>();
         public ICollection<FriendDTO> Friends { get; set; } = new HashSet<FriendDTO>();
         /*public ICollection<FriendDTO> FriendsOf { get; set; } = new HashSet<FriendDTO>();*/
-        public ICollection<FriendRequestDTO> FriendRequests { get; set; } = new HashSet<FriendRequestDTO>();
+        public ICollection<FriendRequestDTO> FriendRequests { get; set; }// = new HashSet<FriendRequestDTO>();
         //public ICollection<FriendRequestDTO> FriendRequestsOf { get; set; } = new HashSet<FriendRequestDTO>();
-        public ICollection<SocialMediaDTO> SocialMedias { get; set; } = new HashSet<SocialMediaDTO>();
-        public ICollection<LikeDTO> Likes { get; set; } = new HashSet<LikeDTO>();
-        public ICollection<CommentDTO> Comments { get; set; } = new HashSet<CommentDTO>();
+        public ICollection<SocialMediaDTO> SocialMedias { get; set; }//= new HashSet<SocialMediaDTO>();
+        public ICollection<LikeDTO> Likes { get; set; }// = new HashSet<LikeDTO>();
+        public ICollection<CommentDTO> Comments { get; set; }// = new HashSet<CommentDTO>();
     }
 }
