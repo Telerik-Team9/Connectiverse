@@ -42,8 +42,10 @@ namespace SocialNetwork.API.Controllers
         }
 
         [HttpPost]
+        [Route("api/users/createpost")]
         public async Task<IActionResult> CreatePost([FromBody] PostModel model)
         {
+            throw new NotImplementedException();
             if (!ModelState.IsValid)
             {
                 return this.BadRequest("Invalid post.");
@@ -94,8 +96,6 @@ namespace SocialNetwork.API.Controllers
         [HttpGet("getnewsfeed/{id}")]
         public async Task<IActionResult> GetNewsfeed(Guid id)
         {
-            //throw new NotImplementedException();
-
             var newsfeed = await this.postService.GetUserFriendsPostsAsync(id);
 
             if (!newsfeed.Any())
@@ -103,16 +103,13 @@ namespace SocialNetwork.API.Controllers
                 return this.NotFound();
             }
 
-            var friendsModels = newsfeed.Select(this.mapper.Map<PostModel>);
-
-            return this.Ok(friendsModels);
+            return this.Ok(newsfeed);
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginDTO model)
         {
-            //TODO: Optimize
             var signInResult = await signInManager
                    .PasswordSignInAsync(model.UserName, model.Password, true, lockoutOnFailure: false);
 
@@ -121,19 +118,14 @@ namespace SocialNetwork.API.Controllers
                 return this.BadRequest(new { message = "Username or password is incorrect" });
             }
 
-            //var user = await this.userManager.GetUserAsync(User);
-            //var user = await this.userManager.FindByNameAsync(model.UserName);
-            // model.Token = this.tokenService.CreateToken(user);
-
             var user = await this.userManager.Users
                 .Include(p => p.Town).ThenInclude(t => t.Country)
                 .Include(u => u.SocialMedias)
                 .SingleOrDefaultAsync(x => x.UserName == model.UserName.ToLower());
 
-            var userDTO = this.mapper.Map<UserDTO>(user);
-            userDTO.Token = this.tokenService.CreateToken(user);
+            model.Token = this.tokenService.CreateToken(user);
 
-            return this.Ok(userDTO);
+            return this.Ok(model);
         }
 
     }

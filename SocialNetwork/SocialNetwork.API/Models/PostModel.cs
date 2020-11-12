@@ -1,6 +1,5 @@
 ﻿using SocialNetwork.Models.Common.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.API.Models
@@ -10,7 +9,7 @@ namespace SocialNetwork.API.Models
         [Required]
         public string Content { get; set; }
         public Visibility Visibility { get; set; } = Visibility.Public;
-      
+
         public Guid UserId { get; set; }
         [Required]
         public string UserDisplayName { get; set; }
@@ -19,7 +18,7 @@ namespace SocialNetwork.API.Models
         public string PhotoModelUrl { get; set; }
         public string VideoModelUrl { get; set; }
 
-        public ICollection<LikeModel> Likes { get; set; } = new HashSet<LikeModel>();
-        public ICollection<CommentModel> Comments { get; set; } = new HashSet<CommentModel>();
+        // public ICollection<LikeDTO> Likes { get; set; }
+        // public ICollection<CommentDTO> Comments { get; set; }
     }
 }

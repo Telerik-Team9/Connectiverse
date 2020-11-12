@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SocialNetwork.API.Models;
 using SocialNetwork.Models;
 using SocialNetwork.Services.DTOs;
 
@@ -10,8 +9,6 @@ namespace SocialNetwork.Web.AutoMapperConfigurations
         public LikeModelConfig()
         {
             this.CreateMap<Like, LikeDTO>()
-                .ReverseMap();
-            this.CreateMap<LikeDTO, LikeModel>()
                 .ReverseMap();
         }
     }

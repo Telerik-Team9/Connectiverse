@@ -32,6 +32,7 @@ namespace SocialNetwork.Web.Controllers
             var user = await this.userManager.GetUserAsync(User);
 
             var feed = await this.postService.GetUserFriendsPostsAsync(user.Id);
+
             var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
             //var result = feed.Select(this.mapper.Map<PostViewModel>);
 

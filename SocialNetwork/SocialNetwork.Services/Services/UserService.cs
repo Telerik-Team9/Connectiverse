@@ -163,6 +163,7 @@ namespace SocialNetwork.Services.Services
         {
             var users = await this.context.Users
                                   .Where(u => !u.IsDeleted)
+                                  .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
                                   .ToListAsync();
 
             if (!users.Any())
@@ -170,28 +171,43 @@ namespace SocialNetwork.Services.Services
                 throw new ArgumentException(ExceptionMessages.EntitesNotFound);
             }
 
-            return users.Select(this.mapper.Map<UserDTO>);
+            return users; //users.Select(this.mapper.Map<UserDTO>);
         } // Ready
-
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {
-            var friendships = await this.context.Friends
-                .Where(f => !f.IsDeleted && f.UserId == id)
-                .ToListAsync();
+            var friends = await this.context.Friends
+                 .Where(f => !f.IsDeleted && f.UserId == id)
+                 .Select(f => f.UserFriend)
+                 .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                 .ToListAsync();
 
-            var friends = new List<User>();
-
-            foreach (var fs in friendships)
+            if (!friends.Any())
             {
-                var friend = await this.context.Users
-                                       .Include(u => u.Town).ThenInclude(t => t.Country)
-                                       .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == fs.UserFriendId);
-                friends.Add(friend);
+                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
             }
 
-            return friends.Select(this.mapper.Map<UserDTO>);
-        } //Ready
-
+            return friends;
+        }
+        // public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
+        // {
+        //     var friendships = await this.context.Friends
+        //         .Where(f => !f.IsDeleted && f.UserId == id)
+        //         .ProjectTo<FriendDTO>(mapper.ConfigurationProvider)
+        //         .ToListAsync();
+        //
+        //     var friends = new List<User>();
+        //
+        //     foreach (var fs in friendships)
+        //     {
+        //         var friend = await this.context.Users
+        //                                .Include(u => u.Town).ThenInclude(t => t.Country)
+        //                                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == fs.UserFriendId);
+        //         friends.Add(friend);
+        //     }
+        //
+        //     return friends.Select(this.mapper.Map<UserDTO>);
+        // } //Ready
+        //
         public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id)
         {
             var user = await this.context.Users
