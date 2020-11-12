@@ -60,7 +60,7 @@ header.masthead {
     padding-top: calc(7rem + 72px);
     padding-bottom: 7rem;
     /*background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);*/
-    background: linear-gradient(0deg, #ffdf0e 0%, #00c2cb 100%);
+    background: linear-gradient(0deg, #00c2cb 0%, #ffdf0e 100%);
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
@@ -84,6 +84,7 @@ header.masthead {
         z-index: 0;
         position: absolute;
         border-radius: 100%;
+        /*background: linear-gradient(0deg, #04d39c 0%, #26acc9 100%);*/
         background: linear-gradient(0deg, #04d39c 0%, #26acc9 100%);
     }
 
@@ -136,6 +137,7 @@ header.masthead {
 
 .btn-primary {
     background-color: #0e6270;
+    /*background-color: #ee0979;*/
     border-color: #0e6270;
 }
 
