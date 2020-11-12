@@ -45,14 +45,21 @@ namespace SocialNetwork.API.Controllers
         [Route("api/users/createpost")]
         public async Task<IActionResult> CreatePost([FromBody] PostModel model)
         {
-            throw new NotImplementedException();
             if (!ModelState.IsValid)
             {
                 return this.BadRequest("Invalid post.");
             }
-            //map user id later...
+
+            var user = await this.userService.GetByIdAsync(model.UserId);
+
+            if(user == null)
+            {
+                return this.BadRequest("Invalid credentials provided!");
+            }
+
             var postDTO = this.mapper.Map<PostDTO>(model);
-            //postDTO.UserId = usermanager.GetUserId();
+            postDTO.UserId = user.Id;
+
             var result = await this.postService.CreateAsync(postDTO);
 
             if (result == null)

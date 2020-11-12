@@ -13,12 +13,8 @@ namespace SocialNetwork.API.Models
         public Guid UserId { get; set; }
         [Required]
         public string UserDisplayName { get; set; }
-        public string UserProfilePictureUrl { get; set; }
-
         public string PhotoModelUrl { get; set; }
         public string VideoModelUrl { get; set; }
 
-        // public ICollection<LikeDTO> Likes { get; set; }
-        // public ICollection<CommentDTO> Comments { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
@@ -17,13 +18,18 @@ namespace SocialNetwork.Services.Services
     {
         private readonly SocialNetworkDBContext context;
         private readonly IMapper mapper;
-        //TODO: Inject USerManager
 
-        public UserService(SocialNetworkDBContext context, IMapper mapper)
+        public UserManager<User> UserManager { get; }
+
+        public UserService(SocialNetworkDBContext context,
+            IMapper mapper,
+            UserManager<User> userManager)
         {
             this.context = context;
             this.mapper = mapper;
+            UserManager = userManager;
         }
+        //SignInManager<User> signInManager,
 
         public async Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId)
         {
@@ -173,6 +179,7 @@ namespace SocialNetwork.Services.Services
 
             return users; //users.Select(this.mapper.Map<UserDTO>);
         } // Ready
+
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {
             var friends = await this.context.Friends
@@ -188,6 +195,7 @@ namespace SocialNetwork.Services.Services
 
             return friends;
         }
+
         // public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         // {
         //     var friendships = await this.context.Friends
@@ -211,27 +219,23 @@ namespace SocialNetwork.Services.Services
         public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id)
         {
             var user = await this.context.Users
-                .Include(u => u.FriendRequests).ThenInclude(u => u.Receiver)
-                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
-                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+                      .Where(u => !u.IsDeleted && u.Id == id)
+                      .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                      .FirstOrDefaultAsync()
+                    ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
-            return user.FriendRequests.Select(this.mapper.Map<FriendRequestDTO>);
-        }   // Ready
+            return user.FriendRequests;
+        }
 
         public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid id)
         {
             var friendRequests = await this.context.FriendRequests
-                .Where(f => !f.IsDeleted && f.ReceiverId == id)
-                .Include(f => f.Sender)
-                .Include(f => f.Receiver)
-                .ToListAsync();
+                                .Where(f => !f.IsDeleted && f.ReceiverId == id)
+                                .ProjectTo<FriendRequestDTO>(mapper.ConfigurationProvider)
+                                .ToListAsync()
+                               ?? throw new ArgumentException(ExceptionMessages.EntitesNotFound);
 
-            if (!friendRequests.Any())
-            {
-                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
-            }
-
-            return friendRequests.Select(this.mapper.Map<FriendRequestDTO>);
-        }   // Ready
+            return friendRequests;
+        }
     }
 }
