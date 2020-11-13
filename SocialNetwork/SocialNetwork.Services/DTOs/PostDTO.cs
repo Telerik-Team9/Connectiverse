@@ -11,6 +11,9 @@ namespace SocialNetwork.Services.DTOs
         public Visibility Visibility { get; set; }
         public string ImageUrl { get; set; }
 
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+
         public Guid UserId { get; set; }
         public string UserDisplayName { get; set; }
         public string UserProfilePictureUrl { get; set; }

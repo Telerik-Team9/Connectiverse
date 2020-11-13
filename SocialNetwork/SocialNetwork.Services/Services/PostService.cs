@@ -26,7 +26,7 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<PostDTO> CreateAsync(IFormFile file, PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
+        public async Task<PostDTO> CreatePostAsync(IFormFile file, PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
         {
             if (postDTO == null)
             {
@@ -54,6 +54,18 @@ namespace SocialNetwork.Services.Services
 
             return this.mapper.Map<PostDTO>(post); // TODO: QUestion
         }       //upload IFormFile
+
+        public async Task<CommentDTO> CreateCommentAsync(int postId, CommentDTO commentDTO)
+        {
+            throw new NotImplementedException();
+/*            if(postId == 0 || commentDTO == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
+            }
+
+            // Create the comment and add it to the post
+            var comment = this.mapper.Map<Comment>(commentDTO);*/
+        }
 
         public async Task<bool> DeleteAsync(int id)
         {
@@ -136,6 +148,7 @@ namespace SocialNetwork.Services.Services
 
             return posts.Select(this.mapper.Map<PostDTO>);
         }
+
 
         private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
         {

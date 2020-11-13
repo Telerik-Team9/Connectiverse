@@ -55,6 +55,7 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
+        // Remove/update/modify
         [HttpGet]
         public IActionResult Create()
         {
@@ -71,7 +72,7 @@ namespace SocialNetwork.Web.Controllers
                 var mapped = this.mapper.Map<PostDTO>(postViewModel);
                 mapped.UserId = user.Id;
 
-                var result = await this.postService.CreateAsync(postViewModel.file, mapped);
+                var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -80,6 +81,27 @@ namespace SocialNetwork.Web.Controllers
                 return this.BadRequest();
             }
         }
+
+        public async Task<IActionResult> Comment(CommentViewModel postViewModel)
+        {
+            throw new NotImplementedException();
+/*            try
+            {
+                var user = await this.userManager.GetUserAsync(User);
+
+                var mapped = this.mapper.Map<PostDTO>(postViewModel);
+                mapped.UserId = user.Id;
+
+                var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }*/
+        }
+
 
         // GET: NewsFeedController/Details/5
         //  public ActionResult Details(int id)

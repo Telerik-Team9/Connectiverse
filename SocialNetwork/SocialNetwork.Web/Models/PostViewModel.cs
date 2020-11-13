@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SocialNetwork.Models.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +12,9 @@ namespace SocialNetwork.Web.Models
         [Required]
         public string Content { get; set; }
         public Visibility Visibility { get; set; } = Visibility.Public;
+
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
 
         //public Guid UserId { get; set; }
         //[Required]
