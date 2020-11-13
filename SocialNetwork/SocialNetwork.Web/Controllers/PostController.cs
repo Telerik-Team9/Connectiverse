@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using SocialNetwork.Models;
+using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 using System;
@@ -49,9 +50,35 @@ namespace SocialNetwork.Web.Controllers
         }
 
         // GET: FeedController/Search
-        public async Task<ActionResult> Search()
+        public  ActionResult Search()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(PostViewModel postViewModel)
+        {
+            try
+            {
+                var user = await this.userManager.GetUserAsync(User);
+
+                var mapped = this.mapper.Map<PostDTO>(postViewModel);
+                mapped.UserId = user.Id;
+
+                var result = await this.postService.CreateAsync(postViewModel.file, mapped);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
         }
 
         // GET: NewsFeedController/Details/5

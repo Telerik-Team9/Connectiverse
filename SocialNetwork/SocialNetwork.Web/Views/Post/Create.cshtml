@@ -1,0 +1,69 @@
+﻿@model SocialNetwork.Web.Models.PostViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>PostViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Visibility" class="control-label"></label>
+                <input asp-for="Visibility" class="form-control" />
+                <span asp-validation-for="Visibility" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserDisplayName" class="control-label"></label>
+                <input asp-for="UserDisplayName" class="form-control" />
+                <span asp-validation-for="UserDisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfilePictureUrl" class="control-label"></label>
+                <input asp-for="UserProfilePictureUrl" class="form-control" />
+                <span asp-validation-for="UserProfilePictureUrl" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="PhotoUrl" class="control-label"></label>
+                <input asp-for="PhotoUrl" class="form-control" />
+                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="VideoModelUrl" class="control-label"></label>
+                <input asp-for="VideoModelUrl" class="form-control" />
+                <span asp-validation-for="VideoModelUrl" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <label> Upload photo </label>
+            <label asp-for="file" class="control-label"></label>
+            <input asp-for="file" class="form-control" />
+            @*<input class="form-control" name="files" multiple="multiple" type="file" />*@
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

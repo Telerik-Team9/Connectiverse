@@ -24,6 +24,7 @@ namespace SocialNetwork.Web.Extensions
             services.AddScoped<ILikeService, LikeService>();
             services.AddScoped<ITownService, TownService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IAzureBlobService, AzureBlobService>();
 
             services.AddDbContext<SocialNetworkDBContext>
             (

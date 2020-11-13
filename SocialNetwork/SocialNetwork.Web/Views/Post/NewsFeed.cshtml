@@ -28,6 +28,14 @@
             <tr>
                 <th>@item.Likes.Count</th>
             </tr>
+            @if (item.PhotoUrl != null)
+            {
+                <tr>
+                    <th>
+                        <img class="card-img" src="@item.PhotoUrl" alt="photo" height="250" width="250">
+                    </th>
+                </tr>
+            }
             <tr>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

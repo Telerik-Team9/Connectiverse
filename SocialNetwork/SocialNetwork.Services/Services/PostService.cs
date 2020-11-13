@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
@@ -15,15 +16,17 @@ namespace SocialNetwork.Services.Services
     public class PostService : IPostService
     {
         private readonly SocialNetworkDBContext context;
+        private readonly IAzureBlobService blobService;
         private readonly IMapper mapper;
 
-        public PostService(SocialNetworkDBContext context, IMapper mapper)
+        public PostService(SocialNetworkDBContext context, IAzureBlobService blobService, IMapper mapper)
         {
             this.context = context;
+            this.blobService = blobService;
             this.mapper = mapper;
         }
 
-        public async Task<PostDTO> CreateAsync(PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
+        public async Task<PostDTO> CreateAsync(IFormFile file, PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
         {
             if (postDTO == null)
             {
@@ -44,7 +47,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             // Create the media
-            AddMediaToPost(photoDTO, videoDTO, post);
+            await this.AddMediaToPost(file, photoDTO, videoDTO, post);
 
             // Save the changes
             await this.context.SaveChangesAsync();
@@ -134,9 +137,20 @@ namespace SocialNetwork.Services.Services
             return posts.Select(this.mapper.Map<PostDTO>);
         }
 
-        private void AddMediaToPost(PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
+        private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
         {
-            if (photoDTO != null)
+            if (file != null)
+            {
+                var url = await this.blobService.UploadToBlobStorageAsync(file);
+                photoDTO = new PhotoDTO { Url = url };
+
+                var photo = this.mapper.Map<Photo>(photoDTO);
+                photo.PostId = post.Id;
+
+                post.Photo = photo;
+                post.Video = null;
+            }
+            else if (photoDTO != null)
             {
                 var photo = this.mapper.Map<Photo>(photoDTO);
                 photo.PostId = post.Id;
@@ -157,7 +171,7 @@ namespace SocialNetwork.Services.Services
                 post.Photo = null;
                 post.Video = null;
             }
-        }   
+        }
 
         private string UploadMediaToAzureBlob(/*IFormFile file*/)
         {
@@ -168,104 +182,101 @@ namespace SocialNetwork.Services.Services
     }
 }
 
-
-
 // AzureBlob methods:
 
-/*
 
-        public async Task<ActionResult> UploadToBlobStorage(IFormFile files)
-        {
-            if (files == null)
-                return View();
 
-            string systemFileName = files.FileName;
-            string blobstorageconnection = configuration.GetValue<string>("blobstorage");
+//public async Task<ActionResult> UploadToBlobStorage(IFormFile files)
+//{
+//    if (files == null)
+//        return View();
 
-            // Retrieve storage account from connection string.
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-            // Create the blob client.
-            CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-            // Retrieve a reference to a container.
-            CloudBlobContainer container = blobClient.GetContainerReference("filescontainers");
-            // This also does not make a service call; it only creates a local object.
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(systemFileName);
+//    string systemFileName = files.FileName;
+//    string blobstorageconnection = configuration.GetValue<string>("blobstorage");
 
-            await using (var data = files.OpenReadStream())
-            {
-                await blockBlob.UploadFromStreamAsync(data);
-            }
+//    // Retrieve storage account from connection string.
+//    CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+//    // Create the blob client.
+//    CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+//    // Retrieve a reference to a container.
+//    CloudBlobContainer container = blobClient.GetContainerReference("filescontainers");
+//    // This also does not make a service call; it only creates a local object.
+//    CloudBlockBlob blockBlob = container.GetBlockBlobReference(systemFileName);
 
-            *//* 
-                        // Another way - UploadFromByteArrayAsync
+//    await using (var data = files.OpenReadStream())
+//    {
+//        await blockBlob.UploadFromStreamAsync(data);
+//    }
 
-                                   byte[] dataFiles;
-                                    BlobContainerPermissions permissions = new BlobContainerPermissions
-                                    {
-                                        PublicAccess = BlobContainerPublicAccessType.Blob
-                                    };
 
-                                    await container.SetPermissionsAsync(permissions);
-                                    await using (var target = new MemoryStream())
-                                    {
-                                        files.CopyTo(target);
-                                        dataFiles = target.ToArray();
-                                    }
+//                // Another way - UploadFromByteArrayAsync
 
-                                    await blockBlob.UploadFromByteArrayAsync(dataFiles, 0, dataFiles.Length);*//*
+//                           byte[] dataFiles;
+//                            BlobContainerPermissions permissions = new BlobContainerPermissions
+//                            {
+//                                PublicAccess = BlobContainerPublicAccessType.Blob
+//                            };
 
-            return View();
-        }
+//                            await container.SetPermissionsAsync(permissions);
+//                            await using (var target = new MemoryStream())
+//                            {
+//                                files.CopyTo(target);
+//                                dataFiles = target.ToArray();
+//                            }
 
-        public async Task<ActionResult> ListFilesFromBlobStorage(IFormFile files)
-        {
-            string blobstorageconnection = configuration.GetValue<string>("blobstorage");
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-            // Create the blob client.
-            CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("filescontainers");
-            CloudBlobDirectory dirb = container.GetDirectoryReference("filescontainers");
+//                            await blockBlob.UploadFromByteArrayAsync(dataFiles, 0, dataFiles.Length);*//*
 
-            BlobResultSegment resultSegment = await container.ListBlobsSegmentedAsync(string.Empty,
-                true, BlobListingDetails.Metadata, 100, null, null, null);
+//    return View();
+//}
 
-            List<FileData> fileList = new List<FileData>();
+//public async Task<ActionResult> ListFilesFromBlobStorage(IFormFile files)
+//{
+//    string blobstorageconnection = configuration.GetValue<string>("blobstorage");
+//    CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+//    // Create the blob client.
+//    CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+//    CloudBlobContainer container = blobClient.GetContainerReference("filescontainers");
+//    CloudBlobDirectory dirb = container.GetDirectoryReference("filescontainers");
 
-            foreach (var blobItem in resultSegment.Results)
-            {
-                // A flat listing operation returns only blobs, not virtual directories.
-                var blob = (CloudBlob)blobItem;
-                fileList.Add(new FileData()
-                {
-                    FileName = blob.Name,
-                    FileSize = Math.Round((blob.Properties.Length / 1024f) / 1024f, 2).ToString(),
-                    ModifiedOn = DateTime.Parse(blob.Properties.LastModified.ToString()).ToLocalTime().ToString()
-                });
-            }
+//    BlobResultSegment resultSegment = await container.ListBlobsSegmentedAsync(string.Empty,
+//        true, BlobListingDetails.Metadata, 100, null, null, null);
 
-            return View();
-        }
+//    List<FileData> fileList = new List<FileData>();
 
-        public async Task<ActionResult> DownloadOrGetUrlBlobStorage(IFormFile files)
-        {
-            string blobName = "110336295_185673349649304_1995275544731972721_o.jpg"; // Existing file in storage
-            //string blobName = files.FileName; // Existing file in storage
+//    foreach (var blobItem in resultSegment.Results)
+//    {
+//        // A flat listing operation returns only blobs, not virtual directories.
+//        var blob = (CloudBlob)blobItem;
+//        fileList.Add(new FileData()
+//        {
+//            FileName = blob.Name,
+//            FileSize = Math.Round((blob.Properties.Length / 1024f) / 1024f, 2).ToString(),
+//            ModifiedOn = DateTime.Parse(blob.Properties.LastModified.ToString()).ToLocalTime().ToString()
+//        });
+//    }
 
-            CloudBlockBlob blockBlob;
-            await using (MemoryStream memoryStream = new MemoryStream())
-            {
-                string blobstorageconnection = configuration.GetValue<string>("blobstorage");
-                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-                CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-                CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference("filescontainers");
-                blockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+//    return View();
+//}
 
-                //string imgUrl = blockBlob.SnapshotQualifiedUri.ToString();
-                await blockBlob.DownloadToStreamAsync(memoryStream);
-            }
+//public async Task<ActionResult> DownloadOrGetUrlBlobStorage(IFormFile files)
+//{
+//    string blobName = "110336295_185673349649304_1995275544731972721_o.jpg"; // Existing file in storage
+//    //string blobName = files.FileName; // Existing file in storage
 
-            Stream blobStream = blockBlob.OpenReadAsync().Result;
-            //return File(blobStream, blockBlob.Properties.ContentType, blockBlob.Name);
-            return View();
-        }
-    */
+//    CloudBlockBlob blockBlob;
+//    await using (MemoryStream memoryStream = new MemoryStream())
+//    {
+//        string blobstorageconnection = configuration.GetValue<string>("blobstorage");
+//        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+//        CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+//        CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference("filescontainers");
+//        blockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+
+//        //string imgUrl = blockBlob.SnapshotQualifiedUri.ToString();
+//        await blockBlob.DownloadToStreamAsync(memoryStream);
+//    }
+
+//    Stream blobStream = blockBlob.OpenReadAsync().Result;
+//    //return File(blobStream, blockBlob.Properties.ContentType, blockBlob.Name);
+//    return View();
+//}
