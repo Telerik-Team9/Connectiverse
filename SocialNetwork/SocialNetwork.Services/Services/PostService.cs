@@ -50,32 +50,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return this.mapper.Map<PostDTO>(post); // TODO: QUestion
-        }       //upload
-
-        private void AddMediaToPost(PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
-        {
-            if (photoDTO != null)
-            {
-                var photo = this.mapper.Map<Photo>(photoDTO);
-                photo.PostId = post.Id;
-
-                post.Photo = photo;
-                post.Video = null;
-            }
-            else if (videoDTO != null)
-            {
-                var video = this.mapper.Map<Video>(videoDTO);
-                video.PostId = post.Id;
-
-                post.Video = video;
-                post.Photo = null;
-            }
-            else
-            {
-                post.Photo = null;
-                post.Video = null;
-            }
-        }   
+        }       //upload IFormFile
 
         public async Task<bool> DeleteAsync(int id)
         {
@@ -159,7 +134,37 @@ namespace SocialNetwork.Services.Services
             return posts.Select(this.mapper.Map<PostDTO>);
         }
 
-        
+        private void AddMediaToPost(PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
+        {
+            if (photoDTO != null)
+            {
+                var photo = this.mapper.Map<Photo>(photoDTO);
+                photo.PostId = post.Id;
+
+                post.Photo = photo;
+                post.Video = null;
+            }
+            else if (videoDTO != null)
+            {
+                var video = this.mapper.Map<Video>(videoDTO);
+                video.PostId = post.Id;
+
+                post.Video = video;
+                post.Photo = null;
+            }
+            else
+            {
+                post.Photo = null;
+                post.Video = null;
+            }
+        }   
+
+        private string UploadMediaToAzureBlob(/*IFormFile file*/)
+        {
+
+
+            return "";
+        } // remove package from controllers
     }
 }
 
