@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+<img src="https://socialnetworkstorage.blob.core.windows.net/filescontainers/110336295_185673349649304_1995275544731972721_o.jpg" />
+<img src="https://socialnetworkstorage.blob.core.windows.net/filescontainers/favicon.jpg" />
+<img src="https://socialnetworkstorage.blob.core.windows.net/filescontainers/asd.jpg" />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="UploadToBlobStorage">
+            <div class="form-group">
+                <label> Select File </label>
+                <input class="form-control" name="files" multiple="multiple" type="file" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="DownloadBlobStorage">
+            <div class="form-group">
+                <label> Select File </label>
+                <input class="form-control" name="files" multiple="multiple" type="file" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>
