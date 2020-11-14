@@ -16,13 +16,11 @@ namespace SocialNetwork.Web.Extensions
         {
             //services.AddAutoMapper(typeof(Profile).Assembly);
             services.AddAutoMapper(Assembly.GetAssembly(typeof(UserVMConfig)));
-
-            services.AddScoped<ICountryService, CountryService>();
+                       
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikeService, LikeService>();
-            services.AddScoped<ITownService, TownService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAzureBlobService, AzureBlobService>();
 

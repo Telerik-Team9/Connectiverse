@@ -27,7 +27,7 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<PostDTO> CreatePostAsync(IFormFile file, PostDTO postDTO, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
+        public async Task<PostDTO> CreateAsync(PostDTO postDTO, IFormFile file = null, PhotoDTO photoDTO = null, VideoDTO videoDTO = null)
         {
             if (postDTO == null)
             {

@@ -76,7 +76,7 @@ namespace SocialNetwork.Web.Controllers
                 var mapped = this.mapper.Map<PostDTO>(postViewModel);
                 mapped.UserId = user.Id;
 
-                var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
+                var result = await this.postService.CreateAsync(postViewModel.file, mapped);
 
                 return RedirectToAction("Index", "Home");
             }

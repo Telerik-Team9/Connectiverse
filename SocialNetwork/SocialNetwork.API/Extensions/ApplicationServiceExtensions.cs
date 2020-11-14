@@ -14,12 +14,11 @@ namespace SocialNetwork.API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddAutoMapper(typeof(UserModelConfig));
-            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<IAzureBlobService, AzureBlobService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikeService, LikeService>();
-            services.AddScoped<ITownService, TownService>();
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddDbContext<SocialNetworkDBContext>

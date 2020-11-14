@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.Services.Contracts
 {
     public interface IPostService
     {
-        Task<PostDTO> CreatePostAsync(IFormFile file, PostDTO post, PhotoDTO photoDTO = null, VideoDTO videoDTO = null);
+        Task<PostDTO> CreateAsync(PostDTO post, IFormFile file = null, PhotoDTO photoDTO = null, VideoDTO videoDTO = null);
         Task<PostDTO> GetPostByIdAsync(int id);
         Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId);
         Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId);

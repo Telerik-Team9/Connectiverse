@@ -42,7 +42,7 @@ namespace SocialNetwork.API.Controllers
         }
 
         [HttpPost]
-        [Route("api/users/createpost")]
+        [Route("createpost")]
         public async Task<IActionResult> CreatePost([FromBody] PostModel model)
         {
             if (!ModelState.IsValid)
