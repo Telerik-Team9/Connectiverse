@@ -6,6 +6,7 @@ using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
@@ -33,8 +34,23 @@ namespace SocialNetwork.Services.Services
                 ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             var post = await this.context.Posts
+                //.Include(p => p.Likes)
                 .FirstOrDefaultAsync(p => p.Id == likeDTO.PostId)
                 ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+           // var present = post.Likes.FirstOrDefault(like => like.UserId == user.Id);   // if a like is present - it will remove it
+           //                                                                            // if a like is present - it will remove it
+           // if (present != null)                                                       // if a like is present - it will remove it
+           // {                                                                          // if a like is present - it will remove it
+           //     var dislike = await this.context.Likes                                 // if a like is present - it will remove it
+           //         .FirstOrDefaultAsync(like => like.Id == present.Id);               // if a like is present - it will remove it
+           //     dislike.IsDeleted = true;
+           //     dislike.DeletedOn = DateTime.UtcNow;                                                                      // if a like is present - it will remove it
+           //   //this.context.Likes.Remove(dislike);                                    // if a like is present - it will remove it
+           //     await this.context.SaveChangesAsync();                                 // if a like is present - it will remove it
+           //                                                                            // if a like is present - it will remove it
+           //     return likeDTO;                                                        // if a like is present - it will remove it
+           // }
 
             var newLike = this.mapper.Map<Like>(likeDTO);
             newLike.User = user;

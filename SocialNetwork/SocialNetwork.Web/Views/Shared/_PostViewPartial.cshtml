@@ -35,6 +35,11 @@
                                 </div>
                             </div>
                             <div class="card-block b-b-theme b-t-theme social-msg">
+                                @*<button type="button" class="like-button" title="Click to like this post!" asp-controller="Post" asp-action="Like">
+                                        <i class="fa fa-thumbs-up"></i> Like
+                                        |
+                                        <span class="like-count">@Model.Post.Likes.Count</span>
+                                    </button>*@
                                 <a href="#"> <i class="icofont icofont-heart-alt text-muted"></i><span class="b-r-muted">Like (@Model.Post.Likes.Count)</span> </a>
                                 <a href="#"> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
                                 @*<a href="#"> <i class="icofont icofont-share text-muted"></i> <span>Share (10)</span></a>*@
@@ -54,25 +59,28 @@
                                     </div>
                                 }
                                 <!-- Comment on a post -->
-                                <div class="media">
-                                    <a class="media-left" href="#">
-                                        <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">
-                                    </a>
-                                    <div class="media-body">
-                                        <form class="" method="post" asp-controller="Post" asp-action="Comment">
-                                            <div class="">
-                                                <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
-                                                <input style="display: none" asp-for="NewComment.PostId" value="@Model.Post.Id" />
-                                                <div class="form-group">
-                                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                @if (Model.Post.Visibility == SocialNetwork.Models.Common.Enums.Visibility.Public)
+                                {
+                                    <div class="media">
+                                        <a class="media-left" href="#">
+                                            <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">
+                                        </a>
+                                        <div class="media-body">
+                                            <form class="" method="post" asp-controller="Post" asp-action="Comment">
+                                                <div class="">
+                                                    <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                                    <input style="display: none" asp-for="NewComment.PostId" value="@Model.Post.Id" />
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                                    </div>
+                                                    @*<div class="text-right m-t-20">
+                                                            <input class="btn btn-primary waves-effect waves-light" type="submit" value="Post">
+                                                        </div>*@
                                                 </div>
-                                                @*<div class="text-right m-t-20">
-            <input class="btn btn-primary waves-effect waves-light" type="submit" value="Post">
-        </div>*@
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>

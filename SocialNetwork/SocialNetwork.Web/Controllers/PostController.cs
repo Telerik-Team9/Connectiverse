@@ -47,7 +47,7 @@ namespace SocialNetwork.Web.Controllers
 
             var feed = await this.postService.GetUserFriendsPostsAsync(user.Id);
 
-            var das = new List<PostCommentViewModel>();
+            var result = new List<PostCommentViewModel>();
 
             foreach (var item in feed)
             {
@@ -57,12 +57,13 @@ namespace SocialNetwork.Web.Controllers
                     Post = posViewModel,
                     NewComment = new CommentViewModel()
                 };
-                das.Add(postCommentModel);
+                result.Add(postCommentModel);
             }
             //var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
             //var result = feed.Select(this.mapper.Map<PostViewModel>);
 
-            return View(das);
+            result = result.OrderByDescending(x => x.Post.CreatedOn).ToList();
+            return View(result);
         }
 
         // GET: FeedController/Search
@@ -133,7 +134,12 @@ namespace SocialNetwork.Web.Controllers
                         }*/
         }
 
-
+        [HttpPost]
+        public async Task<IActionResult> Like(PostCommentViewModel postCommentViewModel)
+        {
+            var user = await this.userManager.GetUserAsync(User);
+            return View();
+        }
         // GET: NewsFeedController/Details/5
         //  public ActionResult Details(int id)
         //{

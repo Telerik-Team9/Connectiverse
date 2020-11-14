@@ -1,4 +1,7 @@
 ﻿@model UserViewModel
+@{ 
+    Model.Posts = Model.Posts.OrderByDescending(p => p.CreatedOn).ToList();
+}
 
 <div class="container">
     <div class="row">
