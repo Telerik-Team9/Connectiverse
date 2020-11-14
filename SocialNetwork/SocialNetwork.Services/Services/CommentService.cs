@@ -21,16 +21,24 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO, PostDTO postDTO, User user)
+        public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO)
         {
             if (commentDTO.PostId == 0 || commentDTO == null)
             {
                 throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
             }
 
+            var user = await this.context.Users
+                          .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == commentDTO.UserId)
+                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            var post = await this.context.Posts
+                        .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == commentDTO.PostId)
+                    ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
             // Create the comment and add it to the DB
             var comment = this.mapper.Map<Comment>(commentDTO);
-            comment.Post = this.mapper.Map<Post>(postDTO);
+            comment.Post = post;
             comment.User = user;
 
             await this.context.Comments.AddAsync(comment);
@@ -39,38 +47,38 @@ namespace SocialNetwork.Services.Services
             return commentDTO;
         }
 
-/*        public async Task<bool> DeleteAsync(int id)
-        {
-            try
-            {
-                var result = await this.context.Comments
-                                 .FirstOrDefaultAsync(c => c.Id == id);
+        /*        public async Task<bool> DeleteAsync(int id)
+                {
+                    try
+                    {
+                        var result = await this.context.Comments
+                                         .FirstOrDefaultAsync(c => c.Id == id);
 
-                result.IsDeleted = true;
-                result.DeletedOn = DateTime.UtcNow;
+                        result.IsDeleted = true;
+                        result.DeletedOn = DateTime.UtcNow;
 
-                await this.context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+                        await this.context.SaveChangesAsync();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
 
-        public async Task<CommentDTO> GetByIdAsync(int id)
-        {
-            //TODO: SEED USER DISPLAYNAMES
-            var comment = await this.context.Comments
-                                  .Include(c => c.Post)
-                                  .Include(c => c.User)
-                                  .FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == id)
-                        ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+                public async Task<CommentDTO> GetByIdAsync(int id)
+                {
+                    //TODO: SEED USER DISPLAYNAMES
+                    var comment = await this.context.Comments
+                                          .Include(c => c.Post)
+                                          .Include(c => c.User)
+                                          .FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == id)
+                                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
 
-            var dto = this.mapper.Map<CommentDTO>(comment);
-            return dto;
-        }*/
+                    var dto = this.mapper.Map<CommentDTO>(comment);
+                    return dto;
+                }*/
 
     }
 }

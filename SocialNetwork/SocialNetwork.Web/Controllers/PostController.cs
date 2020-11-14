@@ -27,10 +27,10 @@ namespace SocialNetwork.Web.Controllers
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
-        public PostController(IUserService userService, 
-            IPostService postService, 
-            ICommentService commentService, 
-            UserManager<User> userManager, 
+        public PostController(IUserService userService,
+            IPostService postService,
+            ICommentService commentService,
+            UserManager<User> userManager,
             IMapper mapper)
         {
             this.userService = userService;
@@ -47,10 +47,22 @@ namespace SocialNetwork.Web.Controllers
 
             var feed = await this.postService.GetUserFriendsPostsAsync(user.Id);
 
-            var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
+            var das = new List<PostCommentViewModel>();
+
+            foreach (var item in feed)
+            {
+                var posViewModel = this.mapper.Map<PostViewModel>(item);
+                var postCommentModel = new PostCommentViewModel()
+                {
+                    Post = posViewModel,
+                    NewComment = new CommentViewModel()
+                };
+                das.Add(postCommentModel);
+            }
+            //var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
             //var result = feed.Select(this.mapper.Map<PostViewModel>);
 
-            return View(result);
+            return View(das);
         }
 
         // GET: FeedController/Search
@@ -92,36 +104,33 @@ namespace SocialNetwork.Web.Controllers
             try
             {
                 var user = await this.userManager.GetUserAsync(User);
-                var post = this.mapper.Map<PostDTO>(postCommentViewModel.Post);
-                
+
                 var comment = this.mapper.Map<CommentDTO>(postCommentViewModel.NewComment);
-                
-                await this.commentService.CreateAsync(comment, post, user); // TODO: Do we need to get the new comment?
+                comment.UserId = user.Id;
+
+                await this.commentService.CreateAsync(comment); // TODO: Do we need to get the new comment?
 
                 return RedirectToAction("Profile", "Account");
             }
-            catch(Exception ex)
+            catch
             {
                 return RedirectToAction("Error", "Home");
             }
+            /*            try
+                        {
+                            var user = await this.userManager.GetUserAsync(User);
 
+                            var mapped = this.mapper.Map<PostDTO>(postViewModel);
+                            mapped.UserId = user.Id;
 
-            throw new NotImplementedException();
-/*            try
-            {
-                var user = await this.userManager.GetUserAsync(User);
+                            //var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
 
-                var mapped = this.mapper.Map<PostDTO>(postViewModel);
-                mapped.UserId = user.Id;
-
-                //var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
-
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception)
-            {
-                return this.BadRequest();
-            }*/
+                            return RedirectToAction("Index", "Home");
+                        }
+                        catch (Exception)
+                        {
+                            return this.BadRequest();
+                        }*/
         }
 
 
