@@ -42,7 +42,7 @@ namespace SocialNetwork.Services.Services
             }
 
             throw new ArgumentException(ExceptionMessages.SomethingWentWrong);
-        } // Ready
+        }
 
         public async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)
         {
@@ -83,7 +83,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return true;
-        } //Ready
+        }
 
         public async Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
         {
@@ -98,7 +98,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return model;
-        }   // Ready
+        }
 
         public async Task<bool> DeleteFriendRequestAsync(Guid senderId, Guid receiverId)
         {
@@ -111,7 +111,7 @@ namespace SocialNetwork.Services.Services
 
             await this.context.SaveChangesAsync();
             return true;
-        } //Ready
+        }
 
         public async Task<UserDTO> GetByIdAsync(Guid id)
         {
@@ -129,7 +129,7 @@ namespace SocialNetwork.Services.Services
             //          ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             return user; //this.mapper.Map<UserDTO>(user);
-        }    //Ready
+        } 
 
         public async Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId)
         {
@@ -149,7 +149,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return true;
-        }   //Ready
+        } 
 
         public async Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId) //check if person already sent us fr
         {
@@ -178,7 +178,7 @@ namespace SocialNetwork.Services.Services
             }
 
             return users; //users.Select(this.mapper.Map<UserDTO>);
-        } // Ready
+        } 
 
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {

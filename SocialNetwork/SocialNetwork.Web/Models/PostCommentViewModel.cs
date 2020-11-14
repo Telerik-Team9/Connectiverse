@@ -2,9 +2,9 @@
 
 namespace SocialNetwork.Web.Models
 {
-    public class AllPostsViewModel
+    public class PostCommentViewModel
     {
-        public ICollection<PostViewModel> Posts { get; set; }
+        public PostViewModel Post { get; set; }
         public CommentViewModel NewComment { get; set; }
     }
 }

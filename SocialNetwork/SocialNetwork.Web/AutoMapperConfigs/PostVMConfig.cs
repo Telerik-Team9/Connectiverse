@@ -2,6 +2,7 @@
 using SocialNetwork.Models;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Web.Models;
+using System.Linq;
 
 namespace SocialNetwork.Web.AutoMapperConfigs
 {
@@ -10,7 +11,12 @@ namespace SocialNetwork.Web.AutoMapperConfigs
         public PostVMConfig()
         {
             this.CreateMap<Post, PostDTO>()
-                .ReverseMap();
+                .ForMember(dest => dest.Comments, 
+                    opt => opt.MapFrom(src => src.Comments.OrderByDescending(c => c.CreatedOn)))
+                .ReverseMap()
+                .ForMember(dest => dest.Comments, 
+                    opt => opt.MapFrom(src => src.Comments.OrderByDescending(c => c.CreatedOn)));
+
             this.CreateMap<PostDTO, PostViewModel>()
                 .ReverseMap();
         }

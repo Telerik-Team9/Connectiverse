@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
@@ -54,20 +55,23 @@ namespace SocialNetwork.Services.Services
 
             return this.mapper.Map<PostDTO>(post); // TODO: QUestion
         }       //upload IFormFile
-
-        public async Task<CommentDTO> CreateCommentAsync(int postId, CommentDTO commentDTO)
+/*
+        public async Task<CommentDTO> CreateCommentAsync(CommentDTO commentDTO)
         {
-            throw new NotImplementedException();
-            /*            if(postId == 0 || commentDTO == null)
-                        {
-                            throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
-                        }
+            if (commentDTO.PostId == 0 || commentDTO == null)
+            {
+                throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
+            }
 
-                        // Create the comment and add it to the post
-                        var comment = this.mapper.Map<Comment>(commentDTO);*/
-        }
+            // Create the comment and add it to the DB
+            var comment = this.mapper.Map<Comment>(commentDTO);
+            await this.context.Comments.AddAsync(comment);
+            await this.context.SaveChangesAsync();
 
-        public async Task<bool> DeleteAsync(int id)
+            return commentDTO;
+        }*/
+
+        public async Task<bool> DeletePostAsync(int id) // Still not used
         {
             try
             {
@@ -86,16 +90,12 @@ namespace SocialNetwork.Services.Services
             }
         }   //delete
 
-        public async Task<PostDTO> GetByIdAsync(int id)
+        public async Task<PostDTO> GetPostByIdAsync(int id)
         {
-            var post = await this.context.Posts
-                            .Include(p => p.User)
-                            .Include(p => p.Photo)
-                            .Include(p => p.Video)
-                            .Include(p => p.Likes).ThenInclude(l => l.User)
-                            .Include(p => p.Comments).ThenInclude(c => c.User)
-                            .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id)
-                    ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+            var post = await this.context.Posts.Where(p => !p.IsDeleted && p.Id == id)
+                .ProjectTo<PostDTO>(mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync()
+                ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             return this.mapper.Map<PostDTO>(post);
         }
@@ -106,17 +106,13 @@ namespace SocialNetwork.Services.Services
                 .Where(f => f.UserId == userId)
                 .ToListAsync();
 
-            var friendsPosts = new List<Post>();
+            var friendsPosts = new List<PostDTO>();
 
             foreach (var fs in friendships)
             {
                 var currFriendsPosts = await this.context.Posts
                     .Where(p => !p.IsDeleted && p.UserId == fs.UserFriendId)
-                    .Include(p => p.User)
-                    .Include(p => p.Photo)
-                    .Include(p => p.Video)
-                    .Include(p => p.Likes).ThenInclude(l => l.User)
-                    .Include(p => p.Comments).ThenInclude(c => c.User)
+                    .ProjectTo<PostDTO>(mapper.ConfigurationProvider)
                     .ToListAsync();
 
                 friendsPosts.AddRange(currFriendsPosts);
@@ -127,28 +123,23 @@ namespace SocialNetwork.Services.Services
                 throw new ArgumentException(ExceptionMessages.EntitesNotFound);
             }
 
-            return friendsPosts.Select(this.mapper.Map<PostDTO>);
+            return friendsPosts;
         }
 
         public async Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId)
         {
             var posts = await this.context.Posts
-                          .Where(p => !p.IsDeleted && p.UserId == userId)
-                          .Include(p => p.User)
-                          .Include(p => p.Photo)
-                          .Include(p => p.Video)
-                          .Include(p => p.Likes).ThenInclude(l => l.User)
-                          .Include(p => p.Comments).ThenInclude(c => c.User)
-                          .ToListAsync();
+                .Where(p => !p.IsDeleted && p.UserId == userId)
+                .ProjectTo<PostDTO>(mapper.ConfigurationProvider)
+                .ToListAsync();
 
             if (!posts.Any())
             {
                 throw new ArgumentException(ExceptionMessages.EntitesNotFound);
             }
 
-            return posts.Select(this.mapper.Map<PostDTO>);
+            return posts;
         }
-
 
         private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
         {

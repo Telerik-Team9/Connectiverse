@@ -23,17 +23,21 @@ namespace SocialNetwork.Web.Controllers
     {
         private readonly IUserService userService;
         private readonly IPostService postService;
+        private readonly ICommentService commentService;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
-        private readonly IConfiguration configuration;
 
-        public PostController(IUserService userService, IPostService postService, UserManager<User> userManager, IMapper mapper, IConfiguration configuration)
+        public PostController(IUserService userService, 
+            IPostService postService, 
+            ICommentService commentService, 
+            UserManager<User> userManager, 
+            IMapper mapper)
         {
             this.userService = userService;
             this.postService = postService;
+            this.commentService = commentService;
             this.userManager = userManager;
             this.mapper = mapper;
-            this.configuration = configuration;
         }
 
         // GET: FeedController/NewsFeed
@@ -83,9 +87,27 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comment(AllPostsViewModel postViewModel)
+        public async Task<IActionResult> Comment(PostCommentViewModel postCommentViewModel)
         {
             try
+            {
+                var user = await this.userManager.GetUserAsync(User);
+                var post = this.mapper.Map<PostDTO>(postCommentViewModel.Post);
+                
+                var comment = this.mapper.Map<CommentDTO>(postCommentViewModel.NewComment);
+                
+                await this.commentService.CreateAsync(comment, post, user); // TODO: Do we need to get the new comment?
+
+                return RedirectToAction("Profile", "Account");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            throw new NotImplementedException();
+/*            try
             {
                 var user = await this.userManager.GetUserAsync(User);
 
@@ -99,7 +121,7 @@ namespace SocialNetwork.Web.Controllers
             catch (Exception)
             {
                 return this.BadRequest();
-            }
+            }*/
         }
 
 

@@ -10,7 +10,10 @@ namespace SocialNetwork.Web.AutoMapperConfigs
         public CommentVMConfig()
         {
             this.CreateMap<Comment, CommentDTO>()
+                .ForMember(dest => dest.UserDisplayName,
+                    opt => opt.MapFrom(src => src.Post.User.DisplayName))
                 .ReverseMap();
+
             this.CreateMap<CommentDTO, CommentViewModel>()
                 .ReverseMap();
         }
