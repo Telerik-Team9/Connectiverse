@@ -73,10 +73,10 @@ namespace SocialNetwork.Web.Controllers
             {
                 var user = await this.userManager.GetUserAsync(User);
 
-                var mapped = this.mapper.Map<PostDTO>(postViewModel);
-                mapped.UserId = user.Id;
+                var postDTO = this.mapper.Map<PostDTO>(postViewModel);
+                postDTO.UserId = user.Id;
 
-                var result = await this.postService.CreateAsync(postViewModel.file, mapped);
+                var result = await this.postService.CreateAsync(postDTO, postViewModel.file);
 
                 return RedirectToAction("Index", "Home");
             }
