@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Controllers
@@ -29,7 +30,9 @@ namespace SocialNetwork.Web.Controllers
 
             var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
             var result = this.mapper.Map<UserViewModel>(user);
-
+            result.Posts = result.Posts
+                .OrderByDescending(p => p.CreatedOn)
+                .ToList();
             return View(result);
 
             //var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);

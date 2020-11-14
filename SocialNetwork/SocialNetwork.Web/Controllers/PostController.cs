@@ -67,10 +67,60 @@ namespace SocialNetwork.Web.Controllers
         }
 
         // GET: FeedController/Search
+        [HttpGet]
         public ActionResult Search()
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string searchCriteria, string searchWord)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            if (searchCriteria.ToLower() == "users")
+            {
+                var result = await this.userService.GetByUserNameAsync(searchWord);
+
+                if (!result.Any())
+                {
+                    return this.NotFound();
+                }
+
+                var searchModel = new SearchViewModel 
+                {
+                    Users = result
+                           .Select(this.mapper.Map<UserProfileViewModel>)
+                           .ToList() 
+                };
+
+                return View(searchModel);
+            }
+            else if (searchCriteria.ToLower() == "posts")
+            {
+                var result = await this.postService.GetByContentAsync(searchWord);
+
+                if (!result.Any())
+                {
+                    return this.NotFound();
+                }
+
+                var searchModel = new SearchViewModel
+                {
+                    Posts = result
+                           .Select(this.mapper.Map<PostViewModel>)
+                           .ToList()
+                };
+
+                return View(searchModel);
+            }
+
+            return RedirectToAction("Search");
+        }
+
 
         // Remove/update/modify
         [HttpGet]

@@ -55,21 +55,21 @@ namespace SocialNetwork.Services.Services
 
             return this.mapper.Map<PostDTO>(post); // TODO: QUestion
         }       //upload IFormFile
-/*
-        public async Task<CommentDTO> CreateCommentAsync(CommentDTO commentDTO)
-        {
-            if (commentDTO.PostId == 0 || commentDTO == null)
-            {
-                throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
-            }
+        /*
+                public async Task<CommentDTO> CreateCommentAsync(CommentDTO commentDTO)
+                {
+                    if (commentDTO.PostId == 0 || commentDTO == null)
+                    {
+                        throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
+                    }
 
-            // Create the comment and add it to the DB
-            var comment = this.mapper.Map<Comment>(commentDTO);
-            await this.context.Comments.AddAsync(comment);
-            await this.context.SaveChangesAsync();
+                    // Create the comment and add it to the DB
+                    var comment = this.mapper.Map<Comment>(commentDTO);
+                    await this.context.Comments.AddAsync(comment);
+                    await this.context.SaveChangesAsync();
 
-            return commentDTO;
-        }*/
+                    return commentDTO;
+                }*/
 
         public async Task<bool> DeletePostAsync(int id) // Still not used
         {
@@ -120,7 +120,7 @@ namespace SocialNetwork.Services.Services
 
             if (!friendsPosts.Any())
             {
-                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+                throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
             }
 
             return friendsPosts;
@@ -135,10 +135,26 @@ namespace SocialNetwork.Services.Services
 
             if (!posts.Any())
             {
-                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+                throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
             }
 
             return posts;
+        }
+
+        public async Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "")
+        {
+            if (string.IsNullOrWhiteSpace(searchCriteria))
+            {
+                throw new ArgumentException(ExceptionMessages.InvalidCriteria);
+            }
+
+            var result = await this.context.Posts
+                            .Where(p => !p.IsDeleted && p.Content.Contains(searchCriteria))
+                            .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
+                            .ToListAsync()
+                        ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
+
+            return result;
         }
 
         private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)

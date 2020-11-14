@@ -129,7 +129,7 @@ namespace SocialNetwork.Services.Services
             //          ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             return user; //this.mapper.Map<UserDTO>(user);
-        } 
+        }
 
         public async Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId)
         {
@@ -149,7 +149,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return true;
-        } 
+        }
 
         public async Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId) //check if person already sent us fr
         {
@@ -174,11 +174,11 @@ namespace SocialNetwork.Services.Services
 
             if (!users.Any())
             {
-                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+                throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
             }
 
             return users; //users.Select(this.mapper.Map<UserDTO>);
-        } 
+        }
 
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
         {
@@ -190,7 +190,7 @@ namespace SocialNetwork.Services.Services
 
             if (!friends.Any())
             {
-                throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+                throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
             }
 
             return friends;
@@ -233,9 +233,25 @@ namespace SocialNetwork.Services.Services
                                 .Where(f => !f.IsDeleted && f.ReceiverId == id)
                                 .ProjectTo<FriendRequestDTO>(mapper.ConfigurationProvider)
                                 .ToListAsync()
-                               ?? throw new ArgumentException(ExceptionMessages.EntitesNotFound);
+                               ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
 
             return friendRequests;
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "")
+        {
+            if (string.IsNullOrWhiteSpace(searchCriteria))
+            {
+                throw new ArgumentException(ExceptionMessages.InvalidCriteria);
+            }
+
+            var result = await this.context.Users
+                            .Where(u => !u.IsDeleted && (u.DisplayName.Contains(searchCriteria) || u.UserName.Contains(searchCriteria)))
+                            .ProjectTo<UserDTO>(this.mapper.ConfigurationProvider)
+                            .ToListAsync()
+                       ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
+
+            return result;
         }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Models
 {
     public class UserProfileViewModel
     {
+        public Guid Id { get; set; }
+        public string DisplayName { get; set; }
+        public string Education { get; set; }
+        public bool IsFriendshipRequested { get; set; }
+        public bool IsFriend { get; set; }
+        public int? ProfilePictureId { get; set; }
+        public string ProfilePictureUrl { get; set; }
     }
 }
