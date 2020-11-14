@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Models
 {
@@ -9,7 +6,7 @@ namespace SocialNetwork.Web.Models
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public int PostId { get; set; }
         //  public Post Post { get; set; }

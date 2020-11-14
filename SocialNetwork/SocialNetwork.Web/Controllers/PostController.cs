@@ -50,7 +50,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         // GET: FeedController/Search
-        public  ActionResult Search()
+        public ActionResult Search()
         {
             return View();
         }
@@ -82,24 +82,24 @@ namespace SocialNetwork.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Comment(CommentViewModel postViewModel)
+        [HttpPost]
+        public async Task<IActionResult> Comment(AllPostsViewModel postViewModel)
         {
-            throw new NotImplementedException();
-/*            try
+            try
             {
                 var user = await this.userManager.GetUserAsync(User);
 
                 var mapped = this.mapper.Map<PostDTO>(postViewModel);
                 mapped.UserId = user.Id;
 
-                var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
+                //var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
 
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {
                 return this.BadRequest();
-            }*/
+            }
         }
 
 

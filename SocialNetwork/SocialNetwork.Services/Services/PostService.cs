@@ -58,13 +58,13 @@ namespace SocialNetwork.Services.Services
         public async Task<CommentDTO> CreateCommentAsync(int postId, CommentDTO commentDTO)
         {
             throw new NotImplementedException();
-/*            if(postId == 0 || commentDTO == null)
-            {
-                throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
-            }
+            /*            if(postId == 0 || commentDTO == null)
+                        {
+                            throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
+                        }
 
-            // Create the comment and add it to the post
-            var comment = this.mapper.Map<Comment>(commentDTO);*/
+                        // Create the comment and add it to the post
+                        var comment = this.mapper.Map<Comment>(commentDTO);*/
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -185,13 +185,6 @@ namespace SocialNetwork.Services.Services
                 post.Video = null;
             }
         }
-
-        private string UploadMediaToAzureBlob(/*IFormFile file*/)
-        {
-
-
-            return "";
-        } // remove package from controllers
     }
 }
 

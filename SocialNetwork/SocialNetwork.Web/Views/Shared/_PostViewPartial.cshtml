@@ -1,10 +1,10 @@
-﻿@model ICollection<PostViewModel>
+﻿@model AllPostsViewModel
 
 <div class="tab-pane active" id="timeline">
     <div class="row">
         <div class="col-md-12 timeline-dot">
 
-            @foreach (var post in Model)
+            @foreach (var post in Model.Posts)
             {
                 <div class="social-timelines p-relative">
                     <div class="row timeline-right p-t-35">
@@ -61,15 +61,19 @@
                                             <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">
                                         </a>
                                         <div class="media-body">
-                                            <form class="" method="post" asp-action="Comment">
+                                            <form class="" method="post" asp-controller="Post" asp-action="Comment">
                                                 <div class="">
-                                                    <textarea rows="5" cols="5" class="form-control" placeholder="Write Something here..."></textarea>
-                                                    <div class="text-right m-t-20"><a href="#" class="btn btn-primary waves-effect waves-light">Post</a></div>
+                                                    <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                                    </div>
+                                                    @*<div class="text-right m-t-20">
+                                                        <input class="btn btn-primary waves-effect waves-light" type="submit" value="Post">
+                                                    </div>*@
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

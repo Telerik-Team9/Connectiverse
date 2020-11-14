@@ -1,5 +1,11 @@
 ﻿@model UserViewModel
-
+@{
+    var allPostsVM = new AllPostsViewModel
+    {
+        Posts = Model.Posts,
+        NewComment = new CommentViewModel()
+    };
+}
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -167,7 +173,7 @@
 
                             <div class="tab-content">
                                 <!-- TIMELINE tab -->
-                                <partial name="_PostViewPartial" model="Model.Posts" />
+                                <partial name="_PostViewPartial" model="allPostsVM" />
 
                                 <!-- ABOUT tab -->
                                 <partial name="_ProfileInfoPartial" model="Model" />
