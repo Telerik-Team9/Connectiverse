@@ -27,6 +27,9 @@ body {
     margin-top: 100px;
 }
 
+#particles-js {
+    background-image: url("../img/bg-galaxy.jpg");
+}
 
 
 
