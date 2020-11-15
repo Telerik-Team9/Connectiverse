@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -70,55 +71,61 @@ namespace SocialNetwork.Web.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            return View();
+            return View(new SearchViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string searchCriteria, string searchWord)
+        public async Task<IActionResult> Search(SearchViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return this.BadRequest();
             }
-
-            if (searchCriteria.ToLower() == "users")
+            try
             {
-                var result = await this.userService.GetByUserNameAsync(searchWord);
-
-                if (!result.Any())
+                if (model.SearchCriteria.ToLower() == "users")
                 {
-                    return this.NotFound();
+                    var result = await this.userService.GetByUserNameAsync(model.SearchWord, model.SortOrder);
+
+                    if (!result.Any())
+                    {
+                        return this.NotFound();
+                    }
+
+                    var searchModel = new SearchViewModel
+                    {
+                        Users = result
+                               .Select(this.mapper.Map<UserProfileViewModel>)
+                               .ToList()
+                    };
+
+                    return View(searchModel);
                 }
-
-                var searchModel = new SearchViewModel 
+                else if (model.SearchCriteria.ToLower() == "posts")
                 {
-                    Users = result
-                           .Select(this.mapper.Map<UserProfileViewModel>)
-                           .ToList() 
-                };
+                    var result = await this.postService.GetByContentAsync(model.SearchWord, model.SortOrder);
 
-                return View(searchModel);
+                    if (!result.Any())
+                    {
+                        return this.NotFound();
+                    }
+
+                    var searchModel = new SearchViewModel
+                    {
+                        Posts = result
+                               .Select(this.mapper.Map<PostViewModel>)
+                               .ToList()
+                    };
+
+                    return View(searchModel);
+                }
             }
-            else if (searchCriteria.ToLower() == "posts")
+            catch
             {
-                var result = await this.postService.GetByContentAsync(searchWord);
-
-                if (!result.Any())
-                {
-                    return this.NotFound();
-                }
-
-                var searchModel = new SearchViewModel
-                {
-                    Posts = result
-                           .Select(this.mapper.Map<PostViewModel>)
-                           .ToList()
-                };
-
-                return View(searchModel);
+                return RedirectToAction("Search");
             }
-
-            return RedirectToAction("Search");
+            //Remove this.
+            return Ok();
         }
 
 

@@ -141,7 +141,7 @@ namespace SocialNetwork.Services.Services
             return posts;
         }
 
-        public async Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "")
+        public async Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "", string sortOrder = "mostRecent")
         {
             if (string.IsNullOrWhiteSpace(searchCriteria))
             {
@@ -154,7 +154,15 @@ namespace SocialNetwork.Services.Services
                             .ToListAsync()
                         ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
 
-            return result;
+            if (sortOrder == "nameAsc")
+            {
+                return result.OrderBy(p => p.Content);
+            }
+            else if (sortOrder == "nameDesc")
+            {
+                return result.OrderByDescending(p => p.Content);
+            }
+            return result.OrderByDescending(p => p.CreatedOn);
         }
 
         private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)

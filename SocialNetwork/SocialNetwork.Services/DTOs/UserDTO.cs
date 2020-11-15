@@ -13,7 +13,8 @@ namespace SocialNetwork.Services.DTOs
         public bool IsFriendshipRequested { get; set; }
         public bool IsFriend { get; set; }
         public string Token { get; set; }
-
+        public string Email { get; set; }
+        public string UserName { get; set; }
         public int? TownId { get; set; }
         public TownDTO Town { get; set; } //TODO: remove
 

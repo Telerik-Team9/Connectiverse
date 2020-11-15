@@ -13,7 +13,7 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<bool> DeletePostAsync(int id);
         Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId);
         Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId);
-        Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "");
+        Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "", string sortOrder = "mostRecent");
         /*Task<IEnumerable<PostDTO>> GetAllAsync();*/
     }
 }

@@ -21,7 +21,7 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<bool> DeleteFriendRequestAsync(Guid senderId, Guid receiverId);
         Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId);
 
-        Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "");
+        Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "", string sortOrder = "nameAsc");
         Task<IEnumerable<UserDTO>> GetAllAsync();
         Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id);
         Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id);

@@ -86,9 +86,6 @@
                     </div>
                 </div>
             </div>
-
-
-
             @*            <div class="media m-b-20">
                     <a class="media-left" href="#">
                         <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Generic placeholder image">
@@ -218,7 +215,27 @@
                         </div>
                     </div>
                 </div>*@
-
         </div>
     </div>
 </div>
+
+
+@section Scripts{
+    <script>
+        $('#addComment').click(function () {
+            var json = @Model.NewComment.Content;
+            console.log(json);
+            $.ajax({
+                        type: "POST",
+                        url: "https://localhost:5001/Post/Comment",
+                        data: JSON.stringify(json),
+                        contentType: "application/json; charset=utf-8",
+                        processData: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $().html(data)
+                        }
+                    })
+                })
+    </script>
+}

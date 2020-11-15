@@ -11,6 +11,7 @@ namespace SocialNetwork.Web.Models
         public string DisplayName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Education { get; set; }
+        public string Email { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool IsFriendshipRequested { get; set; }
         public bool IsFriend { get; set; }

@@ -238,7 +238,7 @@ namespace SocialNetwork.Services.Services
             return friendRequests;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "")
+        public async Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "", string sortOrder = "nameAsc")
         {
             if (string.IsNullOrWhiteSpace(searchCriteria))
             {
@@ -251,7 +251,16 @@ namespace SocialNetwork.Services.Services
                             .ToListAsync()
                        ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
 
-            return result;
+            if (sortOrder == "nameDesc")
+            {
+                return result.OrderByDescending(p => p.DisplayName);
+            }
+            else if (sortOrder == "mostRecent")
+            {
+                return result.OrderByDescending(p => p.CreatedOn);
+            }
+
+            return result.OrderBy(p => p.DisplayName);
         }
     }
 }
