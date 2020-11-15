@@ -14,12 +14,12 @@ namespace SocialNetwork.Web.Models
         public Visibility Visibility { get; set; } = Visibility.Public;
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
+        public bool IsLiked { get; set; }
 
         //public Guid UserId { get; set; }
         //[Required]
         public string UserDisplayName { get; set; }
-        //public string UserProfilePictureUrl { get; set; }
+        public string UserProfilePictureUrl { get; set; }
 
         public string PhotoUrl { get; set; }
         // public string VideoModelUrl { get; set; }

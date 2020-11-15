@@ -10,8 +10,8 @@ using SocialNetwork.Database;
 namespace SocialNetwork.Database.Migrations
 {
     [DbContext(typeof(SocialNetworkDBContext))]
-    [Migration("20201105223605_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201115174816_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,10 +70,12 @@ namespace SocialNetwork.Database.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -117,6 +119,41 @@ namespace SocialNetwork.Database.Migrations
                         {
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
+                        },
+                        new
+                        {
+                            UserId = new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"),
+                            RoleId = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff")
                         });
                 });
 
@@ -126,10 +163,12 @@ namespace SocialNetwork.Database.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -182,7 +221,7 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = 1,
                             Content = "This is Amazing!",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 246, DateTimeKind.Utc).AddTicks(8291),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 205, DateTimeKind.Utc).AddTicks(8329),
                             IsDeleted = false,
                             PostId = 1,
                             UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
@@ -191,7 +230,7 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = 2,
                             Content = "This is Awful!",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 247, DateTimeKind.Utc).AddTicks(835),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 206, DateTimeKind.Utc).AddTicks(1767),
                             IsDeleted = false,
                             PostId = 20,
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619")
@@ -305,7 +344,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(2079),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(3509),
                             IsDeleted = false,
                             UserFriendId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
                             UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
@@ -313,7 +352,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(4568),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6095),
                             IsDeleted = false,
                             UserFriendId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
                             UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
@@ -321,7 +360,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(4604),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6155),
                             IsDeleted = false,
                             UserFriendId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
@@ -329,7 +368,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(4608),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6166),
                             IsDeleted = false,
                             UserFriendId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619")
@@ -337,7 +376,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(4620),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6182),
                             IsDeleted = false,
                             UserFriendId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619")
@@ -345,10 +384,90 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(4623),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6190),
                             IsDeleted = false,
                             UserFriendId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             UserId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845")
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6197),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
+                            UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6204),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            UserId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845")
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6226),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6232),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            UserId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845")
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6237),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),
+                            UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6245),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
+                            UserId = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd")
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6251),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6257),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            UserId = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd")
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6263),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"),
+                            UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(6269),
+                            IsDeleted = false,
+                            UserFriendId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
+                            UserId = new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a")
                         });
                 });
 
@@ -389,7 +508,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(5500),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 207, DateTimeKind.Utc).AddTicks(7631),
                             IsDeleted = false,
                             ReceiverId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             SenderId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270")
@@ -397,7 +516,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(7310),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(25),
                             IsDeleted = false,
                             ReceiverId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             SenderId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
@@ -405,7 +524,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(7353),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(77),
                             IsDeleted = false,
                             ReceiverId = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
                             SenderId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5")
@@ -449,7 +568,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 249, DateTimeKind.Utc).AddTicks(9533),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 209, DateTimeKind.Utc).AddTicks(5266),
                             IsDeleted = false,
                             PostId = 1,
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619")
@@ -489,7 +608,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 249, DateTimeKind.Utc).AddTicks(4077),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(8256),
                             IsDeleted = false,
                             PostId = 10,
                             Url = "YEYEYYE"
@@ -549,7 +668,7 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = 1,
                             Content = "Does anyone know any great restaurants near by?",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 248, DateTimeKind.Utc).AddTicks(8641),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(1793),
                             IsDeleted = false,
                             UserId = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
                             Visibility = 0
@@ -558,7 +677,7 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = 10,
                             Content = "A photo of one of my favourite things:",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 249, DateTimeKind.Utc).AddTicks(1375),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(5043),
                             IsDeleted = false,
                             PhotoId = 1,
                             UserId = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
@@ -568,7 +687,7 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = 20,
                             Content = "Really funny video :)",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 249, DateTimeKind.Utc).AddTicks(2374),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 208, DateTimeKind.Utc).AddTicks(6039),
                             IsDeleted = false,
                             UserId = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             VideoId = 1,
@@ -607,14 +726,14 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = new Guid("943b692d-330e-405d-a019-c3d728442143"),
-                            ConcurrencyStamp = "633ae021-f10e-45da-a6bf-b35f360924e5",
+                            ConcurrencyStamp = "d957e734-0cb5-4926-a701-3aec4177bf09",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"),
-                            ConcurrencyStamp = "1d1a79ab-f676-4990-95c9-1cde12967383",
+                            ConcurrencyStamp = "59645b0e-498f-4844-aa30-2cfe1390da25",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -663,7 +782,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 250, DateTimeKind.Utc).AddTicks(2618),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 209, DateTimeKind.Utc).AddTicks(9101),
                             IconUrl = "",
                             IsDeleted = false,
                             Name = "Instagram",
@@ -811,8 +930,8 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "449c595d-1146-4a69-8704-315ed780d863",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 213, DateTimeKind.Utc).AddTicks(9335),
+                            ConcurrencyStamp = "e209f7c0-ae2e-4d61-8d5c-7eae4144431a",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 95, DateTimeKind.Utc).AddTicks(9127),
                             DateOfBirth = new DateTime(1997, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Magi Nikolova",
                             Education = "Sofia University",
@@ -822,11 +941,11 @@ namespace SocialNetwork.Database.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MAGI@MAIL.COM",
                             NormalizedUserName = "MAGI@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHSRtJffkGbVV7TxrmJw2dW+axi27J2seDAuMTq78SzUCnDJ/LpvgngwZToHV8IYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENNwzPNmZ2VJ7z9JGzi3dHLY8+0IdPibCHNmweGAHOvD0C1J+vO0YCfXIWueSG4xeg==",
                             PhoneNumberConfirmed = false,
                             ProfilePictureId = 1,
-                            ProfilePictureUrl = "ProfilePicUrl//",
-                            SecurityStamp = "dd1bd513-0cda-4f82-8f26-53886cefe5e7",
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg",
+                            SecurityStamp = "1c81a9c8-d2ba-4690-a287-69526aa9423d",
                             TownId = 1,
                             TwoFactorEnabled = false,
                             UserName = "magi@mail.com"
@@ -835,8 +954,8 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "784df678-d045-4205-9e55-d7b0067ee181",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 214, DateTimeKind.Utc).AddTicks(7438),
+                            ConcurrencyStamp = "b72f8f26-032b-406f-8985-3cc5b821f4fd",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(359),
                             DateOfBirth = new DateTime(1999, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Ali Marekov",
                             Education = "Technical University",
@@ -846,9 +965,10 @@ namespace SocialNetwork.Database.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ALI@MAIL.COM",
                             NormalizedUserName = "ALI@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOnOGF5bwbk1fM7WdpXHT4CcMwzmTasuXqa4NsTT2TVoE/zHpxntYBbK4Zb9dX4IQQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG6zF4ni92oT2r/DKl+zf5o2zN31Tps7kZD36dsvTgTHgA1Y50nGOc7hzeXi+0XLAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ab12ac65-d235-44aa-96ee-cc4a95eacb3a",
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg",
+                            SecurityStamp = "432c5a0b-f8b1-4dd4-aa0e-28c9b5cce5f3",
                             TownId = 1,
                             TwoFactorEnabled = false,
                             UserName = "ali@mail.com"
@@ -857,20 +977,21 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = new Guid("3753d26b-5a35-491f-ae82-5238d243b619"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e2abe06-8f87-4278-9b99-1edebf3c91e1",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 214, DateTimeKind.Utc).AddTicks(7580),
+                            ConcurrencyStamp = "c3d09a8e-a420-44ea-a427-6f67b30d5d54",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(503),
                             DateOfBirth = new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Telerik Academy",
-                            Education = "",
+                            Education = "Telerik Academy",
                             Email = "telerik@mail.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "TELERIK@MAIL.COM",
                             NormalizedUserName = "TELERIK@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDFSH9H9UcS06oP+9/VlhRtWSwzdtrORNuLWSfgArvaccu9JyUK+tGJT04/eE4WVWg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB3FHI+/6R4eEgiP0J5dYRfNF20hPntMWcGCxOtKLoJEiTKDnPgUvkGJa8XpAEPvsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7cf63f8a-f0c6-4b71-a331-35726b057486",
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg",
+                            SecurityStamp = "12953d56-10b7-430f-a18d-f1043667c246",
                             TownId = 1,
                             TwoFactorEnabled = false,
                             UserName = "telerik@mail.com"
@@ -879,21 +1000,185 @@ namespace SocialNetwork.Database.Migrations
                         {
                             Id = new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa195d54-d43c-464b-8a79-4bc1f266891b",
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 214, DateTimeKind.Utc).AddTicks(7596),
-                            DateOfBirth = new DateTime(2002, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DisplayName = "C Sharp",
-                            Education = "None",
-                            Email = "csharp@mail.com",
+                            ConcurrencyStamp = "67966e44-a214-42d0-9ac2-a9acca08e6fb",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(531),
+                            DateOfBirth = new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Viktor Ivanov",
+                            Education = "Technical University",
+                            Email = "lovecsharp@mail.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "CSHARP@MAIL.COM",
-                            NormalizedUserName = "CSHARP@MAIL.COM",
+                            NormalizedEmail = "LOVECSHARP@MAIL.COM",
+                            NormalizedUserName = "LOVECSHARP@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKSbyn4rpxDIm5JQYffyj0EuV3ZtCBisbPe+hoMwkncdVsSZbCEUvG6+kXsir0IvMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ea69128b-1144-4392-843b-7581da632a91",
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg",
+                            SecurityStamp = "a6117769-57e9-4821-8be0-3ebb548ce917",
+                            TownId = 1,
                             TwoFactorEnabled = false,
-                            UserName = "csharp@mail.com"
+                            UserName = "lovecsharp@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cb296d20-a36f-4972-b178-41e3aba29c39",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(548),
+                            DateOfBirth = new DateTime(2000, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Silvia Borisova",
+                            Education = "Sofia University",
+                            Email = "silvia@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SILVIA@MAIL.COM",
+                            NormalizedUserName = "SILVIA@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKzaZdjvT0YtL3+/ObDkjgUXQeXHNHBker642OlisNnkuF3rL2Q32myhmSLN4ZO8uw==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg",
+                            SecurityStamp = "33c780d1-42a6-4036-ae16-0ae352bf86d4",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "silvia@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "04e39946-1364-4f28-9274-52806c0e5929",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(571),
+                            DateOfBirth = new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Maria Petrova",
+                            Education = "Sofia University",
+                            Email = "maria@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MARIA@MAIL.COM",
+                            NormalizedUserName = "MARIA@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIRkRaHGE2DoNpCQHcyghVipHs6PC8453LcEDvRVlbx7TTXpUG/5szC/fYa9N8yWIA==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg",
+                            SecurityStamp = "d4c55be0-0bdc-4b45-aa96-797f43d79e53",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "maria@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9d962ddd-f3df-41fe-b9f1-8cca8824fe20",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(591),
+                            DateOfBirth = new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Pablo Georgiev",
+                            Education = "Technical University",
+                            Email = "pablo@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PABLO@MAIL.COM",
+                            NormalizedUserName = "PABLO@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK+3fI1SVG5Lp96m2/pTCLRUJKIcQyyLzFJc+5K9S6H0QbZ7nKeGyfCXeC0/Gu3l6g==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg",
+                            SecurityStamp = "aade0c33-e4b4-4724-a71e-fe7048719e10",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "pablo@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f3a44035-322b-4278-8ea9-9c6a6f068499",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(606),
+                            DateOfBirth = new DateTime(1976, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Georgi Georgiev",
+                            Education = "UNWE",
+                            Email = "georgi@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GEORGI@MAIL.COM",
+                            NormalizedUserName = "GEORGI@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDzgAqcYzu689chEhMxVDOqhP5Dc6OhFsNXE+THdfJwaEXQI5HCpvzspri/MObnOcg==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg",
+                            SecurityStamp = "8fbfe5de-ed92-452c-a2bf-25e0c7af15b9",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "georgi@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7ed9d8a7-dc64-4cc3-bd1b-6b174180bd34",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(620),
+                            DateOfBirth = new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Alexandra Kirova",
+                            Education = "Sofia University",
+                            Email = "alexandra@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ALEXANDRA@MAIL.COM",
+                            NormalizedUserName = "ALEXANDRA@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM7yXOxAquWt+Dk+VrhVRHZquDg5AKoysqjUIEI+FmgWuqPrNdoMT+ZnDP5eArdnmQ==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg",
+                            SecurityStamp = "03c6a78e-e35e-47e0-97cf-f48a4740cb22",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "alexandra@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4baa1b58-adfb-4105-8f81-0f8bab702047",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(636),
+                            DateOfBirth = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Stanislav Pulev",
+                            Education = "UNWE",
+                            Email = "stanisav@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "STANISLAV@MAIL.COM",
+                            NormalizedUserName = "STANISLAV@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOrI9+HACjgfsBHvEK5fwM35MAY+lKI7v6wH4C3YTDig9iZBk3D0SpJ0gsRNgikIWg==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg",
+                            SecurityStamp = "662c4af7-5c27-49ba-b08c-3b5c5bcc5a1b",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "Stanislav@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b8a69cb8-b490-4284-8089-e9715fd4c297",
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 97, DateTimeKind.Utc).AddTicks(670),
+                            DateOfBirth = new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Nikol Peeva",
+                            Education = "Sofia University",
+                            Email = "nikol@mail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NIKOL@MAIL.COM",
+                            NormalizedUserName = "NIKOL@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFcYXyWDS74ozZ8VQQw5WxJUMllsDxeRSVLnICW9N4VyFvwl1voK+Jick1/PTBDhxw==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg",
+                            SecurityStamp = "c7668cbb-bdd3-44f2-9c18-1a39fc17d2d2",
+                            TownId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "Nikol@mail.com"
                         });
                 });
 
@@ -931,7 +1216,7 @@ namespace SocialNetwork.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 11, 5, 22, 36, 5, 249, DateTimeKind.Utc).AddTicks(7044),
+                            CreatedOn = new DateTime(2020, 11, 15, 17, 48, 15, 209, DateTimeKind.Utc).AddTicks(1733),
                             IsDeleted = false,
                             PostId = 20,
                             Url = "NONONONO"

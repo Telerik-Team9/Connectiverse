@@ -1,4 +1,9 @@
-﻿@model PostCommentViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model PostCommentViewModel
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 <div class="tab-pane active" id="timeline">
     <div class="row">
@@ -8,7 +13,8 @@
                 <div class="row timeline-right p-t-35">
                     <div class="col-2 col-sm-2 col-xl-1">
                         <div class="social-timelines-left">
-                            <img class="img-radius timeline-icon" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                            <!--<img class="img-radius timeline-icon" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">-->
+                            <img class="img-radius timeline-icon" src="@Model.Post.UserProfilePictureUrl" alt="">
                         </div>
                     </div>
                     <div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
@@ -50,7 +56,7 @@
                                 {
                                     <div class="media m-b-20">
                                         <a class="media-left" href="#">
-                                            <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Generic placeholder image">
+                                            <img class="media-object img-radius m-r-20" src="@comment.UserProfilePictureUrl" width="10" height="10">
                                         </a>
                                         <div class="media-body b-b-muted social-client-description">
                                             <div class="chat-header">@comment.UserDisplayName<span class="text-muted">@comment.CreatedOn</span></div>
@@ -63,9 +69,21 @@
                                 {
                                     <div class="media">
                                         <a class="media-left" href="#">
-                                            <img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">
+                                            <!--<img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">-->
+                                            <img class="media-object img-radius m-r-20" src="@user.ProfilePictureUrl">
                                         </a>
                                         <div class="media-body">
+                                            @*<div class="">
+
+                                                <textarea rows="5" cols="5" class="content" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+
+                                                <input style="display: none" asp-for="NewComment.PostId" value="Model.Post.Id" />
+
+                                                <input style="display: none" class="postId" value="@Model.Post.Id" />
+
+                                                <button type="submit" value="Create" class="btn btn-primary" onclick="submitComment(this)" />
+
+                                            </div>*@
                                             <form class="" method="post" asp-controller="Post" asp-action="Comment">
                                                 <div class="">
                                                     <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
@@ -73,9 +91,6 @@
                                                     <div class="form-group">
                                                         <input type="submit" value="Create" class="btn btn-primary" />
                                                     </div>
-                                                    @*<div class="text-right m-t-20">
-                                                            <input class="btn btn-primary waves-effect waves-light" type="submit" value="Post">
-                                                        </div>*@
                                                 </div>
                                             </form>
                                         </div>
@@ -219,6 +234,38 @@
     </div>
 </div>
 
+<script>
+    function submitComment(button) {
+
+        console.log(button);
+
+        let commentContent = $(button).siblings('.content').val();
+        console.log(commentContent);
+
+        let postId = $(button).siblings('.postId').val();
+
+        let vm = {
+            viewModel: {
+                Post: {
+                    Id: postId
+                },
+                NewComment: {
+                    Content: commentContent
+                },
+                Test: "Ali"
+            }
+        };
+
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/Post/Comment",
+            data: JSON.stringify(vm),
+            dataType: "json",
+            contentType: "application/json",
+        });
+    }
+</script>
 
 @section Scripts{
     <script>

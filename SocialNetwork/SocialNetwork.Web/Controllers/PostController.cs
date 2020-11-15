@@ -25,18 +25,21 @@ namespace SocialNetwork.Web.Controllers
         private readonly IUserService userService;
         private readonly IPostService postService;
         private readonly ICommentService commentService;
+        private readonly ILikeService likeService;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
         public PostController(IUserService userService,
             IPostService postService,
             ICommentService commentService,
+            ILikeService likeService,
             UserManager<User> userManager,
             IMapper mapper)
         {
             this.userService = userService;
             this.postService = postService;
             this.commentService = commentService;
+            this.likeService = likeService;
             this.userManager = userManager;
             this.mapper = mapper;
         }
@@ -157,13 +160,13 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comment(PostCommentViewModel postCommentViewModel)
+        public async Task<IActionResult> Comment(PostCommentViewModel viewModel)
         {
             try
             {
                 var user = await this.userManager.GetUserAsync(User);
 
-                var comment = this.mapper.Map<CommentDTO>(postCommentViewModel.NewComment);
+                var comment = this.mapper.Map<CommentDTO>(viewModel.NewComment);
                 comment.UserId = user.Id;
 
                 await this.commentService.CreateAsync(comment); // TODO: Do we need to get the new comment?
@@ -174,29 +177,27 @@ namespace SocialNetwork.Web.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
-            /*            try
-                        {
-                            var user = await this.userManager.GetUserAsync(User);
-
-                            var mapped = this.mapper.Map<PostDTO>(postViewModel);
-                            mapped.UserId = user.Id;
-
-                            //var result = await this.postService.CreatePostAsync(postViewModel.file, mapped);
-
-                            return RedirectToAction("Index", "Home");
-                        }
-                        catch (Exception)
-                        {
-                            return this.BadRequest();
-                        }*/
         }
 
         [HttpPost]
-        public async Task<IActionResult> Like(PostCommentViewModel postCommentViewModel)
+        public async Task<IActionResult> Like(PostViewModel postViewModel)
         {
-            var user = await this.userManager.GetUserAsync(User);
-            return View();
+            try
+            {
+                var user = await this.userManager.GetUserAsync(User);
+                var postDTO = await this.postService.GetPostByIdAsync(postViewModel.Id);
+                postDTO.UserId = user.Id;
+
+                var like = this.likeService.Check(postDTO);
+                return RedirectToAction("Profile", "Account");
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
+
+
         // GET: NewsFeedController/Details/5
         //  public ActionResult Details(int id)
         //{
