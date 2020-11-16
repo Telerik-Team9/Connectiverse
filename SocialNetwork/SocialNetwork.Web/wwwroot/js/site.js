@@ -3,10 +3,6 @@
 
 // Write your JavaScript code.
 
-
-
-
-
 /* -----------------------------------------------
 /* How to use? : Check the GitHub README
 /* ----------------------------------------------- */
@@ -25,7 +21,7 @@ particlesJS('particles-js',
     {
         "particles": {
             "number": {
-                "value": 90,
+                "value": 120,
                 "density": {
                     "enable": true,
                     "value_area": 800
@@ -35,7 +31,7 @@ particlesJS('particles-js',
                 "value": "#ffffff"
             },
             "shape": {
-                "type": "image",
+                "type": "star",
                 "stroke": {
                     "width": 0,
                     "color": "#000000"
@@ -63,8 +59,8 @@ particlesJS('particles-js',
                 "value": 5,
                 "random": true,
                 "anim": {
-                    "enable": false,
-                    "speed": 40,
+                    "enable": true,
+                    "speed": 20,
                     "size_min": 0.1,
                     "sync": false
                 }
@@ -78,7 +74,7 @@ particlesJS('particles-js',
             },
             "move": {
                 "enable": true,
-                "speed": 6,
+                "speed": 2,
                 "direction": "none",
                 "random": false,
                 "straight": false,
@@ -95,7 +91,7 @@ particlesJS('particles-js',
             "events": {
                 "onhover": {
                     "enable": true,
-                    "mode": "bubble"
+                    "mode": "grab"
                 },
                 "onclick": {
                     "enable": true,
@@ -107,7 +103,7 @@ particlesJS('particles-js',
                 "grab": {
                     "distance": 400,
                     "line_linked": {
-                        "opacity": 1
+                        "opacity": 0.7
                     }
                 },
                 "bubble": {
@@ -133,7 +129,7 @@ particlesJS('particles-js',
             "hide_card": false,
             "background_color": "#b61924",
             "background_image": "",
-            "background_position": "50% 50%",
+            "background_position": "5% 50%",
             "background_repeat": "no-repeat",
             "background_size": "cover"
         }
