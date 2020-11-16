@@ -4,6 +4,7 @@
 @{
     var user = await UserManager.GetUserAsync(User);
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="tab-pane active" id="timeline">
     <div class="row">
@@ -46,11 +47,22 @@
                                         |
                                         <span class="like-count">@Model.Post.Likes.Count</span>
                                     </button>*@
-                                <a href="#" onclick="like(@Model.Post.Id)">
-                                    <i class="icofont icofont-heart-alt text-muted"></i>
+                                <a href="" onclick="like(@Model.Post.Id)">
+                                    @*<i class="icofont icofont-heart-alt text-muted"></i>*@
+                                    @if (Model.Post.Likes.Any(l => l.UserId == user.Id))
+                                    {
+                                        @*<i style="font-size:24px;color:blue" class="fa">&#xf087;</i>*@
+                                        @*<i style="font-size:24px;color:blue" class="fa">&#xf087;</i>*@
+                                        <i class="fa fa-thumbs-up" style="font-size:24px;color:blue"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-thumbs-up" style="font-size:24px;color:powderblue"></i>
+                                        @*<i style="font-size:24px;color:black" class="fa">&#xf087;</i>*@
+                                    }
                                     <span id="likesCount_@Model.PostId" class="b-r-muted">Likes (@Model.Post.Likes.Count)</span>
                                 </a>
-                                <a href="#"> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
+                                <a href=""> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
                                 @*<a href="#"> <i class="icofont icofont-share text-muted"></i> <span>Share (10)</span></a>*@
                             </div>
                             <div class="card-block user-box">
@@ -294,5 +306,5 @@
                 })
     </script>
 
- 
+
 }

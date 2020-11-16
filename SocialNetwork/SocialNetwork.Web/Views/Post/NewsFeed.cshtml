@@ -1,12 +1,16 @@
-﻿@model List<PostCommentViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@model List<PostCommentViewModel>
+
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <div class="container">
 
-    <h1>Have a great @DateTime.Today.DayOfWeek!</h1>
+    <h1>Have a great @DateTime.Today.DayOfWeek, @user.DisplayName.Split(' ')[0]!</h1>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
