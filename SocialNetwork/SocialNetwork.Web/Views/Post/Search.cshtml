@@ -1,4 +1,4 @@
-﻿    @model SearchViewModel
+﻿@model SearchViewModel
 
 <style>
     body {
@@ -244,9 +244,10 @@
         border-radius: 8px;
     }
 </style>
-
+<br/>
+<br/>
+<br/>
 <div class="container">
-
     <!-- Search Bar -->
     <div class="row">
         <div class="col-lg-12 card-margin">
@@ -378,7 +379,7 @@
                                                                     <div class="media bg-white d-flex">
                                                                         <div class="media-left media-middle">
                                                                             <a href="#">
-                                                                                <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                                                                                <img class="media-object" width="120" src="@user.ProfilePictureUrl" alt="">
                                                                             </a>
                                                                         </div>
                                                                         @if (!string.IsNullOrWhiteSpace(user.DisplayName))
@@ -453,25 +454,25 @@
                                                     }
 
                                                     <nav class="d-flex justify-content-center">
-                                                            <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
-                                                                <li class="page-item">
-                                                                    <a class="page-link no-border" href="#">
-                                                                        <span aria-hidden="true">«</span>
-                                                                        <span class="sr-only">Previous</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
-                                                                <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
-                                                                <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
-                                                                <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
-                                                                <li class="page-item">
-                                                                    <a class="page-link no-border" href="#">
-                                                                        <span aria-hidden="true">»</span>
-                                                                        <span class="sr-only">Next</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
+                                                        <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
+                                                            <li class="page-item">
+                                                                <a class="page-link no-border" href="#">
+                                                                    <span aria-hidden="true">«</span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
+                                                            <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
+                                                            <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
+                                                            <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link no-border" href="#">
+                                                                    <span aria-hidden="true">»</span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
                                                 </div>
                                             </tbody>
                                         </table>

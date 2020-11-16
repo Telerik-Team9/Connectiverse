@@ -88,16 +88,22 @@ namespace SocialNetwork.Web.Controllers
             {
                 if (model.SearchCriteria.ToLower() == "users")
                 {
-                    var result = await this.userService.GetByUserNameAsync(model.SearchWord, model.SortOrder);
+                    List<UserDTO> users = new List<UserDTO>();
 
-                    if (!result.Any())
+                    if (model.SearchWord == null)
                     {
-                        return this.NotFound();
+                        var allUsers = await this.userService.GetAllAsync();
+                        users = allUsers.OrderBy(u => u.DisplayName).ToList();
+                    }
+                    else
+                    {
+                        var foundUsers = await this.userService.GetByUserNameAsync(model.SearchWord, model.SortOrder);
+                        users = foundUsers.ToList();
                     }
 
                     var searchModel = new SearchViewModel
                     {
-                        Users = result
+                        Users = users
                                .Select(this.mapper.Map<UserProfileViewModel>)
                                .ToList()
                     };
