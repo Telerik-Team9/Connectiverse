@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="alimie-master\js\bootstrap.min.js" />
     <Content Include="alimie-master\style.css" />
   </ItemGroup>
 
@@ -83,6 +82,7 @@
     <None Include="wwwroot\img\core-img\logo2.png" />
     <None Include="wwwroot\js\active.js" />
     <None Include="wwwroot\js\alime.bundle.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\isotope.pkgd.min.js" />
     <None Include="wwwroot\js\jquery.min.js" />
   </ItemGroup>
@@ -107,7 +107,7 @@
   <ItemGroup>
     <Folder Include="alimie-master\css\default-assets\" />
     <Folder Include="alimie-master\img\" />
-    <Folder Include="alimie-master\js\default-assets\" />
+    <Folder Include="alimie-master\js\" />
   </ItemGroup>
 
 </Project>
