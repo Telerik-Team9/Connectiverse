@@ -46,7 +46,10 @@
                                         |
                                         <span class="like-count">@Model.Post.Likes.Count</span>
                                     </button>*@
-                                <a href="#"> <i class="icofont icofont-heart-alt text-muted"></i><span class="b-r-muted">Like (@Model.Post.Likes.Count)</span> </a>
+                                <a href="#" onclick="like(@Model.Post.Id)">
+                                    <i class="icofont icofont-heart-alt text-muted"></i>
+                                    <span id="likesCount_@Model.PostId" class="b-r-muted">Likes (@Model.Post.Likes.Count)</span>
+                                </a>
                                 <a href="#"> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
                                 @*<a href="#"> <i class="icofont icofont-share text-muted"></i> <span>Share (10)</span></a>*@
                             </div>
@@ -75,15 +78,15 @@
                                         <div class="media-body">
                                             @*<div class="">
 
-                                                <textarea rows="5" cols="5" class="content" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                                    <textarea rows="5" cols="5" class="content" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
 
-                                                <input style="display: none" asp-for="NewComment.PostId" value="Model.Post.Id" />
+                                                    <input style="display: none" asp-for="NewComment.PostId" value="Model.Post.Id" />
 
-                                                <input style="display: none" class="postId" value="@Model.Post.Id" />
+                                                    <input style="display: none" class="postId" value="@Model.Post.Id" />
 
-                                                <button type="submit" value="Create" class="btn btn-primary" onclick="submitComment(this)" />
+                                                    <button type="submit" value="Create" class="btn btn-primary" onclick="submitComment(this)" />
 
-                                            </div>*@
+                                                </div>*@
                                             <form class="" method="post" asp-controller="Post" asp-action="Comment">
                                                 <div class="">
                                                     <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
@@ -267,6 +270,11 @@
     }
 </script>
 
+
+
+
+
+
 @section Scripts{
     <script>
         $('#addComment').click(function () {
@@ -285,4 +293,6 @@
                     })
                 })
     </script>
+
+ 
 }

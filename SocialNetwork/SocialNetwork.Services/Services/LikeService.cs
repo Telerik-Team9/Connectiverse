@@ -29,16 +29,27 @@ namespace SocialNetwork.Services.Services
             if (postDTO == null)
             {
                 throw new ArgumentException(ExceptionMessages.EntityNotFound);
-            }                       
+            }
+            var sdas = this.context.Likes
+                .FirstOrDefault(x => x.PostId == postDTO.Id && x.UserId == postDTO.UserId);
 
-            if (postDTO.IsLiked)
+            if (sdas != null)
             {
                 postDTO.IsLiked = await this.DislikeAsync(postDTO);
+
             }
             else
             {
                 postDTO.IsLiked = await this.LikeAsync(postDTO);
             }
+            // if (postDTO.IsLiked)
+            // {
+            //     postDTO.IsLiked = await this.DislikeAsync(postDTO);
+            // }
+            // else
+            // {
+            //     postDTO.IsLiked = await this.LikeAsync(postDTO);
+            // }
             return postDTO;
         }
 
@@ -53,10 +64,11 @@ namespace SocialNetwork.Services.Services
                 {
                     UserId = postDTO.UserId,
                     PostId = postDTO.Id,
-                    CreatedOn = DateTime.UtcNow
+                    CreatedOn = DateTime.UtcNow,
                 };
 
                 await this.context.Likes.AddAsync(addLike);
+                await this.context.SaveChangesAsync();
                 return true;
             }
 
@@ -101,6 +113,7 @@ namespace SocialNetwork.Services.Services
             if (like != null)
             {
                 this.context.Likes.Remove(like);
+                await this.context.SaveChangesAsync();
                 return false;
             }
 

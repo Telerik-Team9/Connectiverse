@@ -171,7 +171,7 @@ namespace SocialNetwork.Web.Controllers
 
                 await this.commentService.CreateAsync(comment); // TODO: Do we need to get the new comment?
 
-                return RedirectToAction("Profile", "Account");
+                return this.Redirect("NewsFeed");
             }
             catch
             {
@@ -180,16 +180,16 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Like(PostViewModel postViewModel)
+        public async Task<IActionResult> Like([FromBody] PostCommentViewModel viewModel)
         {
             try
             {
                 var user = await this.userManager.GetUserAsync(User);
-                var postDTO = await this.postService.GetPostByIdAsync(postViewModel.Id);
+                var postDTO = await this.postService.GetPostByIdAsync(viewModel.PostId);
                 postDTO.UserId = user.Id;
 
-                var like = this.likeService.Check(postDTO);
-                return RedirectToAction("Profile", "Account");
+                var like = await this.likeService.Check(postDTO);
+                return this.Ok();
             }
             catch
             {

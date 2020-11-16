@@ -39,12 +39,12 @@
 
 
                         @*
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
-                </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Log In</a>
+                            </li>*@
                     </ul>
                 </div>
             </div>
@@ -93,12 +93,28 @@
         <div class="container">
             <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
         </div>-->
-        <!-- /.container -->
+    <!-- /.container -->
     <!--</footer>-->
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function like(postId) {
+            let json = { postId: postId };
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:5001/Post/Like",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                processData: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#likesCount_' + postId).html(data)
+                }
+            });
+        };
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
