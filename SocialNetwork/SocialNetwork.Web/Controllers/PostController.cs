@@ -1,19 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
 using SocialNetwork.Models;
+using SocialNetwork.Models.Common.Enums;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,7 +46,7 @@ namespace SocialNetwork.Web.Controllers
 
             var feed = await this.postService.GetUserFriendsPostsAsync(user.Id);
 
-            var result = new List<PostCommentViewModel>();
+            var posts = new List<PostCommentViewModel>();
 
             foreach (var item in feed)
             {
@@ -61,12 +56,14 @@ namespace SocialNetwork.Web.Controllers
                     Post = posViewModel,
                     NewComment = new CommentViewModel()
                 };
-                result.Add(postCommentModel);
+                posts.Add(postCommentModel);
             }
             //var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
             //var result = feed.Select(this.mapper.Map<PostViewModel>);
 
-            result = result.OrderByDescending(x => x.Post.CreatedOn).ToList();
+            var result = posts.Where(x => x.Post.Visibility != Visibility.OnlyMe)
+                              .OrderByDescending(x => x.Post.CreatedOn)
+                              .ToList();
             return View(result);
         }
 
