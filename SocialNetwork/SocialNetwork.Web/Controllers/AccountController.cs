@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace SocialNetwork.Web.Controllers
             this.mapper = mapper;
         }
         // GET: AccountController
+        [HttpGet]
         public async Task<ActionResult> Profile()
         {
             var loggedinUsr = await this.userManager.GetUserAsync(User);
@@ -40,6 +42,12 @@ namespace SocialNetwork.Web.Controllers
             //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
             //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
+        [HttpGet]
+        public async Task<ActionResult> Friend(Guid friendId)
+        {
+            return View();
+        }
+
 
         // GET: AccountController/Details/5
         /*        public ActionResult Details(int id)
