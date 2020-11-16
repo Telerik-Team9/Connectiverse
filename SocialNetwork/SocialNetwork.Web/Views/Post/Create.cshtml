@@ -1,5 +1,5 @@
 ﻿@model SocialNetwork.Web.Models.PostViewModel
-
+@using SocialNetwork.Models.Common.Enums
 @{
     ViewData["Title"] = "Create";
 }
@@ -19,40 +19,41 @@
             </div>
             <div class="form-group">
                 <label asp-for="Visibility" class="control-label"></label>
-                <input asp-for="Visibility" class="form-control" />
+                @Html.DropDownListFor(p => p.Visibility, new SelectList(Enum.GetValues(typeof(Visibility))))
                 <span asp-validation-for="Visibility" class="text-danger"></span>
+                @*<input asp-for="Visibility" class="form-control" />*@
             </div>
             @*<div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserDisplayName" class="control-label"></label>
-                <input asp-for="UserDisplayName" class="form-control" />
-                <span asp-validation-for="UserDisplayName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserProfilePictureUrl" class="control-label"></label>
-                <input asp-for="UserProfilePictureUrl" class="form-control" />
-                <span asp-validation-for="UserProfilePictureUrl" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="UserId" class="control-label"></label>
+                    <input asp-for="UserId" class="form-control" />
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserDisplayName" class="control-label"></label>
+                    <input asp-for="UserDisplayName" class="form-control" />
+                    <span asp-validation-for="UserDisplayName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserProfilePictureUrl" class="control-label"></label>
+                    <input asp-for="UserProfilePictureUrl" class="form-control" />
+                    <span asp-validation-for="UserProfilePictureUrl" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="PhotoUrl" class="control-label"></label>
                 <input asp-for="PhotoUrl" class="form-control" />
                 <span asp-validation-for="PhotoUrl" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="VideoModelUrl" class="control-label"></label>
-                <input asp-for="VideoModelUrl" class="form-control" />
-                <span asp-validation-for="VideoModelUrl" class="text-danger"></span>
-            </div>*@
-        <div class="form-group">
-            <label> Upload photo </label>
-            <label asp-for="file" class="control-label"></label>
-            <input asp-for="file" class="form-control" />
-            @*<input class="form-control" name="files" multiple="multiple" type="file" />*@
-        </div>
+                    <label asp-for="VideoModelUrl" class="control-label"></label>
+                    <input asp-for="VideoModelUrl" class="form-control" />
+                    <span asp-validation-for="VideoModelUrl" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label> Upload photo </label>
+                <label asp-for="file" class="control-label"></label>
+                <input asp-for="file" class="form-control" />
+                @*<input class="form-control" name="files" multiple="multiple" type="file" />*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
