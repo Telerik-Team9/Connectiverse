@@ -73,9 +73,6 @@
     <None Include="wwwroot\img\bg-img\7.jpg" />
     <None Include="wwwroot\img\bg-img\8.jpg" />
     <None Include="wwwroot\img\bg-img\9.jpg" />
-    <None Include="wwwroot\img\core-img\favicon.png" />
-    <None Include="wwwroot\img\core-img\logo.png" />
-    <None Include="wwwroot\img\core-img\logo2.png" />
     <None Include="wwwroot\js\active.js" />
     <None Include="wwwroot\js\alime.bundle.js" />
     <None Include="wwwroot\js\bootstrap.min.js" />
@@ -98,6 +95,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Services\SocialNetwork.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\core-img\" />
   </ItemGroup>
 
 </Project>
