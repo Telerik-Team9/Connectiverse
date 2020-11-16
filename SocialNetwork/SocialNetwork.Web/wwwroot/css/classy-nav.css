@@ -93,8 +93,6 @@
 /* Down Arrow Icon for Megamenu */
 @font-face {
   font-family: 'classyfonts';
-  src: url("../../fonts/classy-fonts.eot?fftrrv");
-  src: url("../../fonts/classy-fonts.eot?fftrrv#iefix") format("embedded-opentype"), url("../../fonts/classy-fonts.ttf?fftrrv") format("truetype"), url("../../fonts/classy-fonts.woff?fftrrv") format("woff"), url("../../fonts/classy-fonts.svg?fftrrv#classyfonts") format("svg");
   font-weight: normal;
   font-style: normal; }
 .icon-classy-nav-down-arrow {
