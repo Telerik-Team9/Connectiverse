@@ -42,7 +42,7 @@
                                 <li class="active"><a asp-controller="Post" asp-action="NewsFeed">NewsFeed</a></li>
                                 <li><a asp-controller="Profile" asp-action="FriendRequests">Friend Requests</a></li>
                                 <li>
-                                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
+                                    <a asp-area="Identity">@User.Identity.Name</a>
                                     <ul class="dropdown">
                                         <li><a asp-controller="Account" asp-action="Profile">Profile</a></li>
                                         <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a></li>

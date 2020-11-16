@@ -75,9 +75,6 @@
     <None Include="wwwroot\img\bg-img\9.jpg" />
     <None Include="wwwroot\js\active.js" />
     <None Include="wwwroot\js\alime.bundle.js" />
-    <None Include="wwwroot\js\bootstrap.min.js" />
-    <None Include="wwwroot\js\isotope.pkgd.min.js" />
-    <None Include="wwwroot\js\jquery.min.js" />
   </ItemGroup>
 
   <ItemGroup>
