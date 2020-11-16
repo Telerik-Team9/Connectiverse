@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="alimie-master\style.css" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\classy-nav.css" />
     <None Include="wwwroot\img\bg-img\1.jpg" />
     <None Include="wwwroot\img\bg-img\10.jpg" />
@@ -102,12 +98,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Services\SocialNetwork.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="alimie-master\css\default-assets\" />
-    <Folder Include="alimie-master\img\" />
-    <Folder Include="alimie-master\js\" />
   </ItemGroup>
 
 </Project>

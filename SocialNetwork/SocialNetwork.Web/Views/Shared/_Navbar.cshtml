@@ -12,7 +12,7 @@
                 <nav class="classy-navbar justify-content-between" id="alimeNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="./index.html"><img src="./img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" asp-controller="Home" asp-action="Index"><img src="" alt="">SOME NAME</a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -31,21 +31,27 @@
                             <ul id="nav">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                    <li class="active"><a asp-controller="Post" asp-action="NewsFeed">NewsFeed</a></li>
-                                    <li><a asp-controller="Profile" asp-action="FriendRequests">Friend Requests</a></li>
-                                    <li>
-                                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
-                                        <ul class="dropdown">
-                                            <li><a asp-controller="Account" asp-action="Profile">Profile</a></li>
-                                            <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a></li>
-                                            <li>
-                                                <form method="post">
-                                                    <button type="submit"><a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Logout</a></button>
-                                                </form>
-                                            </li>
-
-                                        </ul>
-                                    </li>
+                                <li>
+                                    <a class="nav-link" asp-controller="Post" asp-action="Search">
+                                        <svg width="1em" height="1em" viewBox="0 0 15 15" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="active"><a asp-controller="Post" asp-action="NewsFeed">NewsFeed</a></li>
+                                <li><a asp-controller="Profile" asp-action="FriendRequests">Friend Requests</a></li>
+                                <li>
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
+                                    <ul class="dropdown">
+                                        <li><a asp-controller="Account" asp-action="Profile">Profile</a></li>
+                                        <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a></li>
+                                        <li>
+                                            <form asp-area ="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button type="submit" style="background: transparent; border: none"><a>Logout</a></button>
+                                            </form>
+                                    </ul>
+                                </li>
                             }
                             else
                             {
