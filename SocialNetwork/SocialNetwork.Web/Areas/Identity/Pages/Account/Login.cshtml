@@ -1,10 +1,40 @@
 ﻿@page
 @model LoginModel
 
-@{
-    ViewData["Title"] = "Log in";
+@{ ViewData["Title"] = "Log in"; }
+
+
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <div class="card card-3">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">Log in</h2>
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="input-group">
+                        <input asp-for="Input.Email" class="input--style-3" type="email" placeholder="Email">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-group">
+                        <input asp-for="Input.Password" class="input--style-3" type="password" placeholder="Password">
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="p-t-10">
+                        <button class="btn btn--pill btn--green" type="submit">Log in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
 
+
+@*
 WE DID IT!!!!
 
 <h1>@ViewData["Title"]</h1>
@@ -52,8 +82,4 @@ WE DID IT!!!!
             <img src="~/img/login.png" />
         </section>
     </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</div>*@

@@ -6,6 +6,78 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\app.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\classy-nav.css" />
+    <None Include="wwwroot\img\bg-img\1.jpg" />
+    <None Include="wwwroot\img\bg-img\10.jpg" />
+    <None Include="wwwroot\img\bg-img\11.jpg" />
+    <None Include="wwwroot\img\bg-img\12.jpg" />
+    <None Include="wwwroot\img\bg-img\13.jpg" />
+    <None Include="wwwroot\img\bg-img\14.jpg" />
+    <None Include="wwwroot\img\bg-img\15.jpg" />
+    <None Include="wwwroot\img\bg-img\16.jpg" />
+    <None Include="wwwroot\img\bg-img\17.jpg" />
+    <None Include="wwwroot\img\bg-img\18.jpg" />
+    <None Include="wwwroot\img\bg-img\19.jpg" />
+    <None Include="wwwroot\img\bg-img\2.jpg" />
+    <None Include="wwwroot\img\bg-img\20.jpg" />
+    <None Include="wwwroot\img\bg-img\21.jpg" />
+    <None Include="wwwroot\img\bg-img\22.jpg" />
+    <None Include="wwwroot\img\bg-img\23.jpg" />
+    <None Include="wwwroot\img\bg-img\24.jpg" />
+    <None Include="wwwroot\img\bg-img\26.jpg" />
+    <None Include="wwwroot\img\bg-img\27.jpg" />
+    <None Include="wwwroot\img\bg-img\28.jpg" />
+    <None Include="wwwroot\img\bg-img\29.jpg" />
+    <None Include="wwwroot\img\bg-img\3.jpg" />
+    <None Include="wwwroot\img\bg-img\30.jpg" />
+    <None Include="wwwroot\img\bg-img\31.jpg" />
+    <None Include="wwwroot\img\bg-img\32.jpg" />
+    <None Include="wwwroot\img\bg-img\33.jpg" />
+    <None Include="wwwroot\img\bg-img\34.jpg" />
+    <None Include="wwwroot\img\bg-img\35.jpg" />
+    <None Include="wwwroot\img\bg-img\36.jpg" />
+    <None Include="wwwroot\img\bg-img\37.jpg" />
+    <None Include="wwwroot\img\bg-img\38.jpg" />
+    <None Include="wwwroot\img\bg-img\39.jpg" />
+    <None Include="wwwroot\img\bg-img\4.jpg" />
+    <None Include="wwwroot\img\bg-img\40.jpg" />
+    <None Include="wwwroot\img\bg-img\41.jpg" />
+    <None Include="wwwroot\img\bg-img\42.jpg" />
+    <None Include="wwwroot\img\bg-img\43.jpg" />
+    <None Include="wwwroot\img\bg-img\44.jpg" />
+    <None Include="wwwroot\img\bg-img\45.jpg" />
+    <None Include="wwwroot\img\bg-img\46.jpg" />
+    <None Include="wwwroot\img\bg-img\47.jpg" />
+    <None Include="wwwroot\img\bg-img\48.jpg" />
+    <None Include="wwwroot\img\bg-img\49.jpg" />
+    <None Include="wwwroot\img\bg-img\5.jpg" />
+    <None Include="wwwroot\img\bg-img\50.jpg" />
+    <None Include="wwwroot\img\bg-img\51.jpg" />
+    <None Include="wwwroot\img\bg-img\52.jpg" />
+    <None Include="wwwroot\img\bg-img\53.jpg" />
+    <None Include="wwwroot\img\bg-img\54.jpg" />
+    <None Include="wwwroot\img\bg-img\55.jpg" />
+    <None Include="wwwroot\img\bg-img\56.jpg" />
+    <None Include="wwwroot\img\bg-img\57.jpg" />
+    <None Include="wwwroot\img\bg-img\58.jpg" />
+    <None Include="wwwroot\img\bg-img\59.jpg" />
+    <None Include="wwwroot\img\bg-img\6.jpg" />
+    <None Include="wwwroot\img\bg-img\60.jpg" />
+    <None Include="wwwroot\img\bg-img\61.jpg" />
+    <None Include="wwwroot\img\bg-img\62.jpg" />
+    <None Include="wwwroot\img\bg-img\63.jpg" />
+    <None Include="wwwroot\img\bg-img\7.jpg" />
+    <None Include="wwwroot\img\bg-img\8.jpg" />
+    <None Include="wwwroot\img\bg-img\9.jpg" />
+    <None Include="wwwroot\js\active.js" />
+    <None Include="wwwroot\js\alime.bundle.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
@@ -20,6 +92,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Services\SocialNetwork.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\core-img\" />
   </ItemGroup>
 
 </Project>
