@@ -5,6 +5,7 @@ namespace SocialNetwork.Services.DTOs
     public class FriendRequestDTO
     {
         public int Id { get; set; }
+        public bool IsDeleted { get; set; }
 
         public Guid SenderId { get; set; }
         public string SenderDisplayName { get; set; }

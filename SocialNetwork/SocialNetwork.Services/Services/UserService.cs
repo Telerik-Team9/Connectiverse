@@ -29,7 +29,6 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
             UserManager = userManager;
         }
-        //SignInManager<User> signInManager,
 
         public async Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId)
         {
@@ -42,47 +41,6 @@ namespace SocialNetwork.Services.Services
             }
 
             throw new ArgumentException(ExceptionMessages.SomethingWentWrong);
-        }
-
-        public async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)
-        {
-            var friendship = await this.context.Friends
-                .FirstOrDefaultAsync(f => f.UserId == userId && f.UserFriendId == userFriendId);
-
-            if (friendship != null && friendship.IsDeleted == false)
-            {
-                return true;
-            }
-
-            if (friendship != null && friendship.IsDeleted == true)
-            {
-                var friendship2 = await this.context.Friends
-                    .FirstOrDefaultAsync(f => f.UserId == userFriendId && f.UserFriendId == userId);
-
-                friendship.IsDeleted = false;
-                friendship.DeletedOn = null;
-                friendship2.IsDeleted = false;
-                friendship2.DeletedOn = null;
-                await this.context.SaveChangesAsync();
-
-                return true;
-            }
-
-            var newFriendship = new Friend
-            {
-                UserId = userId,
-                UserFriendId = userFriendId
-            };
-            var newFriendship2 = new Friend
-            {
-                UserId = userFriendId,
-                UserFriendId = userId
-            };
-
-            await this.context.Friends.AddRangeAsync(newFriendship, newFriendship2);
-            await this.context.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model)
@@ -119,7 +77,7 @@ namespace SocialNetwork.Services.Services
                            .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
                            .FirstOrDefaultAsync()
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-         
+
             return user;
         }
 
@@ -188,26 +146,6 @@ namespace SocialNetwork.Services.Services
             return friends;
         }
 
-        // public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)
-        // {
-        //     var friendships = await this.context.Friends
-        //         .Where(f => !f.IsDeleted && f.UserId == id)
-        //         .ProjectTo<FriendDTO>(mapper.ConfigurationProvider)
-        //         .ToListAsync();
-        //
-        //     var friends = new List<User>();
-        //
-        //     foreach (var fs in friendships)
-        //     {
-        //         var friend = await this.context.Users
-        //                                .Include(u => u.Town).ThenInclude(t => t.Country)
-        //                                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == fs.UserFriendId);
-        //         friends.Add(friend);
-        //     }
-        //
-        //     return friends.Select(this.mapper.Map<UserDTO>);
-        // } //Ready
-        //
         public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id)
         {
             var user = await this.context.Users
@@ -253,6 +191,47 @@ namespace SocialNetwork.Services.Services
             }
 
             return result.OrderBy(p => p.DisplayName);
+        }
+
+        private async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)
+        {
+            var friendship = await this.context.Friends
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.UserFriendId == userFriendId);
+
+            if (friendship != null && friendship.IsDeleted == false)
+            {
+                return true;
+            }
+
+            if (friendship != null && friendship.IsDeleted == true)
+            {
+                var friendship2 = await this.context.Friends
+                    .FirstOrDefaultAsync(f => f.UserId == userFriendId && f.UserFriendId == userId);
+
+                friendship.IsDeleted = false;
+                friendship.DeletedOn = null;
+                friendship2.IsDeleted = false;
+                friendship2.DeletedOn = null;
+                await this.context.SaveChangesAsync();
+
+                return true;
+            }
+
+            var newFriendship = new Friend
+            {
+                UserId = userId,
+                UserFriendId = userFriendId
+            };
+            var newFriendship2 = new Friend
+            {
+                UserId = userFriendId,
+                UserFriendId = userId
+            };
+
+            await this.context.Friends.AddRangeAsync(newFriendship, newFriendship2);
+            await this.context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

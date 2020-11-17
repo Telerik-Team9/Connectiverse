@@ -59,17 +59,34 @@ namespace SocialNetwork.Web.Controllers
                 .ToList();
 
             result.IsFriendshipRequested = loggedUser.FriendRequests
-                .Any(r => r.SenderId == loggedUser.Id && r.ReceiverId == result.Id);
+                .Any(r => r.SenderId == loggedUser.Id && r.ReceiverId == result.Id && !r.IsDeleted);
 
             return View(result);
         }
 
-        
         public async Task<ActionResult> ChangeFriendshipStatus(Guid userId,
             Guid friendId, string type)
-        {        
-
-            return View();
+        {
+            try
+            {
+                if (type == "add") //Ready not tested
+                {
+                    await this.userService.SendFriendRequestAsync(userId, friendId);
+                }
+                else if (type == "accept") //Ready and tested
+                {
+                    await this.userService.AcceptFriendRequestAsync(friendId, userId);
+                }
+                else if (type == "remove") //Readey not tested
+                {
+                    await this.userService.RemoveFriendAsync(userId, friendId);
+                }
+                return this.Ok();
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: AccountController/Details/5

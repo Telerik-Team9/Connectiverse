@@ -163,7 +163,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comment([FromBody] PostCommentViewModel viewModel)
+        public async Task<IActionResult> Comment(PostCommentViewModel viewModel)
         {
             try
             {

@@ -5,6 +5,7 @@ namespace SocialNetwork.Web.Models
     public class FriendRequestViewModel
     {
         public int Id { get; set; }
+        public bool IsDeleted { get; set; }
 
         public Guid SenderId { get; set; }
         public string SenderDisplayName { get; set; }

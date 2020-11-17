@@ -3,9 +3,9 @@
 @{
     var user = await UserManager.GetUserAsync(User);
 
-    var isFriend = Model.Friends.Any(f => f.UserFriendId == user.Id);
+    var isFriend = Model.Friends.Any(f => f.UserFriendId == user.Id && !f.IsDeleted);
 
-    var isFriendRequestReceived = Model.FriendRequests.Any(r => r.SenderId == Model.Id && r.ReceiverId == user.Id);
+    var isFriendRequestReceived = Model.FriendRequests.Any(r => r.SenderId == Model.Id && r.ReceiverId == user.Id && !r.IsDeleted);
 
     var isFriendRequestSent = Model.IsFriendshipRequested;
 }
@@ -83,18 +83,18 @@
                                                 else if (isFriendRequestReceived)
                                                 {
                                                     <a type="button" class="btn btn-outline-primary waves-effect btn-block"
-                                                            asp-controller="Account"
-                                                            asp-action="ChangeFriendshipStatus"
-                                                            asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="request">
+                                                       asp-controller="Account"
+                                                       asp-action="ChangeFriendshipStatus"
+                                                       asp-route-userId="@user.Id" asp-route-friendId="@Model.Id" asp-route-type="accept">
                                                         <i class="icofont icofont-ui-user m-r-10"></i> Accept request
                                                     </a>
                                                 }
                                                 else
                                                 {
                                                     <a type="button" class="btn btn-outline-primary waves-effect btn-block"
-                                                            asp-controller="Account"
-                                                            asp-action="ChangeFriendshipStatus"
-                                                            asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="add">
+                                                       asp-controller="Account"
+                                                       asp-action="ChangeFriendshipStatus"
+                                                       asp-route-userId="@user.Id" asp-route-friendId="@Model.Id" asp-route-type="add">
                                                         <i class="icofont icofont-ui-user m-r-10"></i> Add friend
                                                     </a>
                                                 }

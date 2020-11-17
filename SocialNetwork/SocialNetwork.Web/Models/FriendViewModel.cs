@@ -5,6 +5,7 @@ namespace SocialNetwork.Web.Models
     public class FriendViewModel
     {
         public int Id { get; set; }
+        public bool IsDeleted { get; set; }
 
         public Guid UserId { get; set; }
         public string UserDisplayName { get; set; }
