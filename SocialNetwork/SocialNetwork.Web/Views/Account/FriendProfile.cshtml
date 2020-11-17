@@ -1,4 +1,8 @@
 ﻿@model UserViewModel
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 <div class="container">
     <div class="row">
@@ -62,7 +66,18 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" class="btn btn-outline-primary waves-effect btn-block"><i class="icofont icofont-ui-user m-r-10"></i> Add as Friend</button>
+                                            @if(!Model.Friends.Any(f => f.UserFriendId == user.Id))
+                                            {
+                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="addFriend(id)">
+                                                    <i class="icofont icofont-ui-user m-r-10"></i>Add Friend
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="">4
+                                                    <i class="icofont icofont-ui-user m-r-10"></i>Remove Friend
+                                                </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +86,7 @@
                         </div>
 
                         <!-- Profile Tabs-->
-                        <partial name="_ProfileTabsPartial" model="Model"/>
+                        <partial name="_ProfileTabsPartial" model="Model" />
                         @*CREATE POST SECTION!   https://www.bootdey.com/bootstrap-snippets?utf8=%E2%9C%93&q=search*@
 
                     </div>

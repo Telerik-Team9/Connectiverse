@@ -23,36 +23,6 @@ namespace SocialNetwork.Services.Services
             this.mapper = mapper;
         }
 
-
-        public async Task<PostDTO> Check(PostDTO postDTO)
-        {
-            if (postDTO == null)
-            {
-                throw new ArgumentException(ExceptionMessages.EntityNotFound);
-            }
-            var sdas = this.context.Likes
-                .FirstOrDefault(x => x.PostId == postDTO.Id && x.UserId == postDTO.UserId);
-
-            if (sdas != null)
-            {
-                postDTO.IsLiked = await this.DislikeAsync(postDTO);
-
-            }
-            else
-            {
-                postDTO.IsLiked = await this.LikeAsync(postDTO);
-            }
-            // if (postDTO.IsLiked)
-            // {
-            //     postDTO.IsLiked = await this.DislikeAsync(postDTO);
-            // }
-            // else
-            // {
-            //     postDTO.IsLiked = await this.LikeAsync(postDTO);
-            // }
-            return postDTO;
-        }
-
         public async Task<bool> LikeAsync(PostDTO postDTO)
         {
             var like = await this.context.Likes

@@ -163,7 +163,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comment(PostCommentViewModel viewModel)
+        public async Task<IActionResult> Comment([FromBody] PostCommentViewModel viewModel)
         {
             try
             {
@@ -191,7 +191,9 @@ namespace SocialNetwork.Web.Controllers
                 var postDTO = await this.postService.GetPostByIdAsync(viewModel.PostId);
                 postDTO.UserId = user.Id;
 
-                var like = await this.likeService.Check(postDTO);
+                var likeDislike = viewModel.isLiked ? await this.likeService.DislikeAsync(postDTO)
+                    : await this.likeService.LikeAsync(postDTO);
+
                 return this.Ok();
             }
             catch

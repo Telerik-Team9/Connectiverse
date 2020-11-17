@@ -5,7 +5,6 @@ namespace SocialNetwork.Services.Services.Contracts
 {
     public interface ILikeService
     {
-        Task<PostDTO> Check(PostDTO postDTO);
         Task<bool> LikeAsync(PostDTO likeDTO);
         Task<bool> DislikeAsync(PostDTO likeDTO);
         Task<LikeDTO> GetByIdAsync(int id);

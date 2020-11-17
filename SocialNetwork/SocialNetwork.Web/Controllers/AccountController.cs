@@ -42,6 +42,7 @@ namespace SocialNetwork.Web.Controllers
             //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
             //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
+
         [HttpGet("friendId")]
         public async Task<ActionResult> FriendProfile(Guid userId)
         {
@@ -54,6 +55,22 @@ namespace SocialNetwork.Web.Controllers
             return View(result);
         }
 
+        public async Task<ActionResult> AddFriend(Guid friendId)
+        {
+            var loggedinUsr = await this.userManager.GetUserAsync(User);
+    
+            var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
+            var result = this.mapper.Map<UserViewModel>(user);
+            result.Posts = result.Posts
+                .OrderByDescending(p => p.CreatedOn)
+                .ToList();
+            return View(result);
+
+            //var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);
+            //var requestsRecs = await this.userService.GetAllFriendRequestsReceivedAsync(loggedinUsr.Id);
+            //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
+            //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
+        }
 
         // GET: AccountController/Details/5
         /*        public ActionResult Details(int id)

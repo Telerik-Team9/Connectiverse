@@ -4,8 +4,10 @@
 // Write your JavaScript code.
 
 /*Like a post*/
-function like(postId) {
-    let json = { postId: postId };
+
+debugger;
+function likepost(postId, isLiked) {
+    let json = { postId: postId, isLiked: isLiked};
     $.ajax({
         type: "POST",
         url: "https://localhost:5001/Post/Like",
