@@ -18,8 +18,8 @@
                                                                 </div>*@
                             </div>
                             <div class="timeline-btn">
-                                <a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>
-                                <a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>
+                                @* <a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>
+                                    <a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>*@
                                 <a class="btn btn-primary waves-effect waves-light" asp-controller="Post" asp-action="Create">Create post</a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" class="btn btn-outline-primary waves-effect btn-block"><i class="icofont icofont-ui-user m-r-10"></i> Add as Friend</button>
+                                            <button type="button" class="btn btn-outline-primary waves-effect btn-block"><i class="icofont icofont-ui-user m-r-10"></i>Change Picture</button>
                                         </div>
                                     </div>
                                 </div>
@@ -150,12 +150,7 @@
                                 <!-- TIMELINE tab -->
                                 @foreach (var post in Model.Posts)
                                 {
-                                    var postCommentVM = new PostCommentViewModel
-                                    {
-                                        Post = post
-                                        @*NewComment = new CommentViewModel()*@
-                                    };
-
+                                    var postCommentVM = new PostCommentViewModel { Post = post };
                                     <partial name="_PostViewPartial" model="postCommentVM" />
                                 }
 
@@ -165,8 +160,15 @@
                                 <!-- PHOTOS tab -->
                                 <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
 
-                                <!-- FRIENDS tab -->  @*Create a partial!*@
-                                <partial name="_ProfileFriendsTabPartial" />
+                                <!-- FRIENDS tab -->
+                                <div class="tab-pane" id="friends">
+                                    <div class="row">
+                                        @foreach (var friend in Model.Friends)
+                                        {
+                                            <partial name="_ProfileFriendsTabPartial" model="friend" />
+                                        }
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

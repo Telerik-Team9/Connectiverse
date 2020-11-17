@@ -1,5 +1,113 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model UserViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="content social-timeline">
+                <div class="">
+
+                    <!-- Cover photo-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="social-wallpaper">
+                                @*                                <div class="profile-hvr">
+                                                                    <img class="img-fluid width-100" src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg"/>
+                                    src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg" alt=""
+                                                                    <i class="icofont icofont-ui-edit p-r-10"></i>
+                                                                    <i class="icofont icofont-ui-delete"></i>
+                                                                </div>*@
+                            </div>
+                            <div class="timeline-btn">
+                                @*<a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>*@
+                                <a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>
+                                @* <a class="btn btn-primary waves-effect waves-light" asp-controller="Post" asp-action="Create">Create post</a>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-xs-12">
+                            <!-- Left section -->
+                            <div class="social-timeline-left">
+                                <!-- Profile Card -->
+                                <div class="card">
+                                    <!-- Profile Photo -->
+                                    <div class="social-profile">
+                                        <img class="img-fluid width-100" src="@Model.ProfilePictureUrl" alt="">
+                                        <div class="profile-hvr m-t-15">
+                                            <i class="icofont icofont-ui-edit p-r-10"></i>
+                                            <i class="icofont icofont-ui-delete"></i>
+                                        </div>
+                                    </div>
+                                    <!-- Profile info -->
+                                    <div class="card-block social-follower">
+                                        <h4>@Model.DisplayName</h4>
+                                        <h5>@Model.Education</h5>
+                                        <div class="row follower-counter">
+                                            <!-- Profile Icons -->
+                                            <div class="col-4">
+                                                <button class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="485">
+                                                    <i class="fa fa-user"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="2k">
+                                                    <i class="fa fa-thumbs-o-up"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="90">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-outline-primary waves-effect btn-block"><i class="icofont icofont-ui-user m-r-10"></i> Add as Friend</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
+
+                            <!-- Social Tabs-->
+                            <partial name="_ProfileTabs" />
+
+
+                            @*CREATE POST SECTION!   https://www.bootdey.com/bootstrap-snippets?utf8=%E2%9C%93&q=search*@
+
+
+                            <div class="tab-content">
+                                <!-- TIMELINE tab -->
+                                @foreach (var post in Model.Posts)
+                                {
+                                    var postCommentVM = new PostCommentViewModel { Post = post };
+                                    <partial name="_PostViewPartial" model="postCommentVM" />
+                                }
+
+                                <!-- ABOUT tab -->
+                                <partial name="_ProfileInfoTabPartial" model="Model" />
+
+                                <!-- PHOTOS tab -->
+                                <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
+
+                                <!-- FRIENDS tab -->  @*Create a partial!*@
+                                <div class="tab-pane" id="friends">
+                                    <div class="row">
+                                        @foreach (var friend in Model.Friends)
+                                        {
+                                            <partial name="_ProfileFriendsTabPartial" model="friend" />
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

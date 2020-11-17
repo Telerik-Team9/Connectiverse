@@ -42,10 +42,16 @@ namespace SocialNetwork.Web.Controllers
             //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
             //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
-        [HttpGet]
-        public async Task<ActionResult> FriendProfile(Guid friendId)
+        [HttpGet("friendId")]
+        public async Task<ActionResult> FriendProfile(Guid userId)
         {
-            return View();
+            var user = await this.userService.GetByIdAsync(userId);
+            var result = this.mapper.Map<UserViewModel>(user);
+            result.Posts = result.Posts
+                .OrderByDescending(p => p.CreatedOn)
+                .ToList();
+
+            return View(result);
         }
 
 
