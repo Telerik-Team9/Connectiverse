@@ -15,13 +15,18 @@ namespace SocialNetwork.Web.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public AccountController(IUserService userService, UserManager<User> userManager, IMapper mapper)
+        public AccountController(IUserService userService,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IMapper mapper)
         {
             this.userService = userService;
             this.userManager = userManager;
+            this.signInManager = signInManager;
             this.mapper = mapper;
         }
         // GET: AccountController
@@ -36,40 +41,41 @@ namespace SocialNetwork.Web.Controllers
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
             return View(result);
-
-            //var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);
-            //var requestsRecs = await this.userService.GetAllFriendRequestsReceivedAsync(loggedinUsr.Id);
-            //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
-            //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
 
         [HttpGet("friendId")]
         public async Task<ActionResult> FriendProfile(Guid userId)
         {
+            var signedIn = await this.userManager.GetUserAsync(User);
+
             var user = await this.userService.GetByIdAsync(userId);
+
+            var loggedUser = await this.userService.GetByIdAsync(signedIn.Id);
+
             var result = this.mapper.Map<UserViewModel>(user);
+
             result.Posts = result.Posts
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
 
+            result.IsFriendshipRequested = loggedUser.FriendRequests
+                .Any(r => r.SenderId == loggedUser.Id && r.ReceiverId == result.Id);
+
             return View(result);
         }
 
+        [HttpPost]
         public async Task<ActionResult> AddFriend(Guid friendId)
         {
             var loggedinUsr = await this.userManager.GetUserAsync(User);
-    
+
             var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
             var result = this.mapper.Map<UserViewModel>(user);
             result.Posts = result.Posts
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
-            return View(result);
 
-            //var requestsSent = await this.userService.GetAllFriendRequestsSentAsync(loggedinUsr.Id);
-            //var requestsRecs = await this.userService.GetAllFriendRequestsReceivedAsync(loggedinUsr.Id);
-            //var rs = requestsSent.Select(this.mapper.Map<FriendRequestViewModel>);
-            //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
+            return View(result);
         }
 
         // GET: AccountController/Details/5

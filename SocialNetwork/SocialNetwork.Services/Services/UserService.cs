@@ -119,16 +119,8 @@ namespace SocialNetwork.Services.Services
                            .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
                            .FirstOrDefaultAsync()
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-
-            // var user = await this.context.Users
-            //                .Include(u => u.Town).ThenInclude(x => x.Country)
-            //                .Include(u => u.Friends)
-            //                .Include(u => u.FriendRequests)
-            //                .Include(u => u.SocialMedias)
-            //                .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id)
-            //          ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
-
-            return user; //this.mapper.Map<UserDTO>(user);
+         
+            return user;
         }
 
         public async Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId)

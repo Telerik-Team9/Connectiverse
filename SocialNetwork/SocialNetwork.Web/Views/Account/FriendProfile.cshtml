@@ -2,6 +2,12 @@
 @inject UserManager<User> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
+    
+    var isFriend = Model.Friends.Any(f => f.UserFriendId == user.Id);
+
+    var isFriendRequestReceived = Model.FriendRequests.Any(r => r.SenderId == Model.Id && r.ReceiverId == user.Id);
+
+    var isFriendRequestSent = Model.IsFriendshipRequested;
 }
 
 <div class="container">
@@ -66,22 +72,36 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            @if(!Model.Friends.Any(f => f.UserFriendId == user.Id))
+                                            @if (!isFriend)
                                             {
-                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="addFriend(id)">
-                                                    <i class="icofont icofont-ui-user m-r-10"></i>Add Friend
-                                                </button>
+                                                if (isFriendRequestSent)
+                                                {
+                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                        <i class="icofont icofont-ui-user m-r-10"></i> Request sent
+                                                    </button>
+                                                }
+                                                else if (isFriendRequestReceived)
+                                                {
+                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                        <i class="icofont icofont-ui-user m-r-10"></i> Accept request
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                        <i class="icofont icofont-ui-user m-r-10"></i> Add friend
+                                                    </button>
+                                                }
                                             }
                                             else
                                             {
-                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="">4
+                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
                                                     <i class="icofont icofont-ui-user m-r-10"></i>Remove Friend
                                                 </button>
                                             }
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
