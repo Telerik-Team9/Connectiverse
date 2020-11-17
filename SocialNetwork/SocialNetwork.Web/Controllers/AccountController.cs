@@ -43,7 +43,7 @@ namespace SocialNetwork.Web.Controllers
             //var rr = requestsRecs.Select(this.mapper.Map<FriendRequestViewModel>);
         }
         [HttpGet]
-        public async Task<ActionResult> Friend(Guid friendId)
+        public async Task<ActionResult> FriendProfile(Guid friendId)
         {
             return View();
         }

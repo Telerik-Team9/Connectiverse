@@ -10,12 +10,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="social-wallpaper">
-@*                                <div class="profile-hvr">
-                                    <img class="img-fluid width-100" src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg"/>
-    src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg" alt=""
-                                    <i class="icofont icofont-ui-edit p-r-10"></i>
-                                    <i class="icofont icofont-ui-delete"></i>
-                                </div>*@
+                                @*                                <div class="profile-hvr">
+                                                                    <img class="img-fluid width-100" src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg"/>
+                                    src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg" alt=""
+                                                                    <i class="icofont icofont-ui-edit p-r-10"></i>
+                                                                    <i class="icofont icofont-ui-delete"></i>
+                                                                </div>*@
                             </div>
                             <div class="timeline-btn">
                                 <a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>
@@ -138,40 +138,18 @@
                         </div>
 
                         <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
-                            <!-- Social Tabs-->
-                            <div class="card social-tabs">
-                                <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Timeline</a>
-                                        <div class="slide"></div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
-                                        <div class="slide"></div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#photos" role="tab">Photos</a>
-                                        <div class="slide"></div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#friends" role="tab">Friends</a>
-                                        <div class="slide"></div>
-                                    </li>
-                                </ul>
-                            </div>
 
+                            <!-- Social Tabs-->
+                            <partial name="_ProfileTabs" />
 
 
                             @*CREATE POST SECTION!   https://www.bootdey.com/bootstrap-snippets?utf8=%E2%9C%93&q=search*@
-
-
 
 
                             <div class="tab-content">
                                 <!-- TIMELINE tab -->
                                 @foreach (var post in Model.Posts)
                                 {
-
                                     var postCommentVM = new PostCommentViewModel
                                     {
                                         Post = post
@@ -182,112 +160,13 @@
                                 }
 
                                 <!-- ABOUT tab -->
-                                <partial name="_ProfileInfoPartial" model="Model" />
+                                <partial name="_ProfileInfoTabPartial" model="Model" />
 
                                 <!-- PHOTOS tab -->
-                                <partial name="_ProfileInfoPartial" />  @*Only Posts with images*@
+                                <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
 
                                 <!-- FRIENDS tab -->  @*Create a partial!*@
-                                <div class="tab-pane" id="friends">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-block post-timelines">
-                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                        <a class="dropdown-item" href="#">Remove tag</a>
-                                                        <a class="dropdown-item" href="#">Report Photo</a>
-                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                        <a class="dropdown-item" href="#">Blog User</a>
-                                                    </div>
-                                                    <div class="media bg-white d-flex">
-                                                        <div class="media-left media-middle">
-                                                            <a href="#">
-                                                                <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="media-body friend-elipsis">
-                                                            <div class="f-15 f-bold m-b-5">Josephin Doe</div>
-                                                            <div class="text-muted social-designation">Software Engineer</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-block post-timelines">
-                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                        <a class="dropdown-item" href="#">Remove tag</a>
-                                                        <a class="dropdown-item" href="#">Report Photo</a>
-                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                        <a class="dropdown-item" href="#">Blog User</a>
-                                                    </div>
-                                                    <div class="media bg-white d-flex">
-                                                        <div class="media-left media-middle">
-                                                            <a href="#">
-                                                                <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="media-body friend-elipsis">
-                                                            <div class="f-15 f-bold m-b-5">Josephin Doe</div>
-                                                            <div class="text-muted social-designation">Software Engineer</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-block post-timelines">
-                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                        <a class="dropdown-item" href="#">Remove tag</a>
-                                                        <a class="dropdown-item" href="#">Report Photo</a>
-                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                        <a class="dropdown-item" href="#">Blog User</a>
-                                                    </div>
-                                                    <div class="media bg-white d-flex">
-                                                        <div class="media-left media-middle">
-                                                            <a href="#">
-                                                                <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="media-body friend-elipsis">
-                                                            <div class="f-15 f-bold m-b-5">Josephin Doe</div>
-                                                            <div class="text-muted social-designation">Software Engineer</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-block post-timelines">
-                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                        <a class="dropdown-item" href="#">Remove tag</a>
-                                                        <a class="dropdown-item" href="#">Report Photo</a>
-                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                        <a class="dropdown-item" href="#">Blog User</a>
-                                                    </div>
-                                                    <div class="media bg-white d-flex">
-                                                        <div class="media-left media-middle">
-                                                            <a href="#">
-                                                                <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="media-body friend-elipsis">
-                                                            <div class="f-15 f-bold m-b-5">Josephin Doe</div>
-                                                            <div class="text-muted social-designation">Software Engineer</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <partial name="_ProfileFriendsTabPartial" />
 
                             </div>
                         </div>
