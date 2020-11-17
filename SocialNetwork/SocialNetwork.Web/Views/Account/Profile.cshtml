@@ -137,41 +137,10 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
+                        <!-- Profile Tabs-->
+                        <partial name="_ProfileTabsPartial" />
+                        @*CREATE POST SECTION!   https://www.bootdey.com/bootstrap-snippets?utf8=%E2%9C%93&q=search*@
 
-                            <!-- Social Tabs-->
-                            <partial name="_ProfileTabs" />
-
-
-                            @*CREATE POST SECTION!   https://www.bootdey.com/bootstrap-snippets?utf8=%E2%9C%93&q=search*@
-
-
-                            <div class="tab-content">
-                                <!-- TIMELINE tab -->
-                                @foreach (var post in Model.Posts)
-                                {
-                                    var postCommentVM = new PostCommentViewModel { Post = post };
-                                    <partial name="_PostViewPartial" model="postCommentVM" />
-                                }
-
-                                <!-- ABOUT tab -->
-                                <partial name="_ProfileInfoTabPartial" model="Model" />
-
-                                <!-- PHOTOS tab -->
-                                <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
-
-                                <!-- FRIENDS tab -->
-                                <div class="tab-pane" id="friends">
-                                    <div class="row">
-                                        @foreach (var friend in Model.Friends)
-                                        {
-                                            <partial name="_ProfileFriendsTabPartial" model="friend" />
-                                        }
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

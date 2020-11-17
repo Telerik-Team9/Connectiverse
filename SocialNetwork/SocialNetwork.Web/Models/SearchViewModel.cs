@@ -8,7 +8,7 @@ namespace SocialNetwork.Web.Models
         public string SearchWord { get; set; }
         public string SearchCriteria { get; set; }
         public string SortOrder { get; set; }
-        public ICollection<UserProfileViewModel> Users { get; set; } = new HashSet<UserProfileViewModel>();
+        public ICollection<UserSearchViewModel> Users { get; set; } = new HashSet<UserSearchViewModel>();
         public ICollection<PostViewModel> Posts { get; set; } = new HashSet<PostViewModel>();
     }
 }

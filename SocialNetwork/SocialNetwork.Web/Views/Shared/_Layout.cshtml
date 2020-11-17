@@ -49,7 +49,7 @@
 
 
     <script>
-        function like(postId) {
+@*        function like(postId) {
             let json = { postId: postId };
             $.ajax({
                 type: "POST",
@@ -62,8 +62,9 @@
                     $('#likesCount_' + postId).html(data)
                 }
             });
-        };
+        };*@
     </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

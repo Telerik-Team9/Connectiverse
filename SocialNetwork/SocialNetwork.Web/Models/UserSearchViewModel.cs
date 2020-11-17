@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Web.Models
 {
-    public class UserProfileViewModel
+    public class UserSearchViewModel
     {
         public Guid Id { get; set; }
         public string DisplayName { get; set; }

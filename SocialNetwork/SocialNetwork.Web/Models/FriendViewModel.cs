@@ -1,11 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Models
 {
     public class FriendViewModel
     {
+        public int Id { get; set; }
+
+        public Guid UserId { get; set; }
+        public string UserDisplayName { get; set; }
+        public string UserProfilePictureUrl { get; set; }
+
+        public Guid UserFriendId { get; set; }
+        public string UserFriendDisplayName { get; set; }
+        public string UserFriendProfilePictureUrl { get; set; }
     }
 }

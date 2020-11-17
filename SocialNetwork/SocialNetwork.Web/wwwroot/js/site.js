@@ -3,6 +3,32 @@
 
 // Write your JavaScript code.
 
+/*Like a post*/
+function like(postId) {
+    let json = { postId: postId };
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:5001/Post/Like",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        processData: "json",
+        success: function (data) {
+            console.log(data);
+            $('#likesCount_' + postId).html(data)
+        }
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
 /* -----------------------------------------------
 /* How to use? : Check the GitHub README
 /* ----------------------------------------------- */

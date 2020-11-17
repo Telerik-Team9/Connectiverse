@@ -101,7 +101,7 @@ namespace SocialNetwork.Web.Controllers
                     var searchModel = new SearchViewModel
                     {
                         Users = users
-                               .Select(this.mapper.Map<UserProfileViewModel>)
+                               .Select(this.mapper.Map<UserSearchViewModel>)
                                .ToList()
                     };
 

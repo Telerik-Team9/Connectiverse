@@ -1,0 +1,50 @@
+﻿@model UserViewModel
+
+    <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
+
+        <!-- Profile Tabs -->
+        <div class="card social-tabs">
+            <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Timeline</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#photos" role="tab">Photos</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#friends" role="tab">Friends</a>
+                    <div class="slide"></div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Profile Tabs Content -->
+        <div class="tab-content">
+            <!-- TIMELINE tab -->
+            @foreach (var post in Model.Posts)
+            {
+                var postCommentVM = new PostCommentViewModel { Post = post };
+                <partial name="_PostViewPartial" model="postCommentVM" />
+            }
+            <!-- ABOUT tab -->
+            <partial name="_ProfileInfoTabPartial" model="Model" />
+            <!-- PHOTOS tab -->
+            <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
+            <!-- FRIENDS tab -->
+            <div class="tab-pane" id="friends">
+                <div class="row">
+                    @foreach (var friend in Model.Friends)
+                    {
+                        <partial name="_ProfileFriendsTabPartial" model="friend" />
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>

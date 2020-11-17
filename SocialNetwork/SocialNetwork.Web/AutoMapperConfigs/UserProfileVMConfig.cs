@@ -11,7 +11,7 @@ namespace SocialNetwork.Web.AutoMapperConfigs
         {
             this.CreateMap<User, UserDTO>()
                 .ReverseMap();
-            this.CreateMap<UserDTO, UserProfileViewModel>()
+            this.CreateMap<UserDTO, UserSearchViewModel>()
                 .ReverseMap();
         }
     }
