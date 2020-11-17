@@ -64,18 +64,12 @@ namespace SocialNetwork.Web.Controllers
             return View(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddFriend(Guid friendId)
-        {
-            var loggedinUsr = await this.userManager.GetUserAsync(User);
+        
+        public async Task<ActionResult> ChangeFriendshipStatus(Guid userId,
+            Guid friendId, string type)
+        {        
 
-            var user = await this.userService.GetByIdAsync(loggedinUsr.Id);
-            var result = this.mapper.Map<UserViewModel>(user);
-            result.Posts = result.Posts
-                .OrderByDescending(p => p.CreatedOn)
-                .ToList();
-
-            return View(result);
+            return View();
         }
 
         // GET: AccountController/Details/5

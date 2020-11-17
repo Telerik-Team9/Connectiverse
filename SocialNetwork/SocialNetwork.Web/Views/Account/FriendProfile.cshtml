@@ -2,7 +2,7 @@
 @inject UserManager<User> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
-    
+
     var isFriend = Model.Friends.Any(f => f.UserFriendId == user.Id);
 
     var isFriendRequestReceived = Model.FriendRequests.Any(r => r.SenderId == Model.Id && r.ReceiverId == user.Id);
@@ -76,28 +76,37 @@
                                             {
                                                 if (isFriendRequestSent)
                                                 {
-                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                    <a type="button" class="btn btn-outline-primary waves-effect btn-block" disabled>
                                                         <i class="icofont icofont-ui-user m-r-10"></i> Request sent
-                                                    </button>
+                                                    </a>
                                                 }
                                                 else if (isFriendRequestReceived)
                                                 {
-                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                    <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                            asp-controller="Account"
+                                                            asp-action="ChangeFriendshipStatus"
+                                                            asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="request">
                                                         <i class="icofont icofont-ui-user m-r-10"></i> Accept request
-                                                    </button>
+                                                    </a>
                                                 }
                                                 else
                                                 {
-                                                    <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                    <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                            asp-controller="Account"
+                                                            asp-action="ChangeFriendshipStatus"
+                                                            asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="add">
                                                         <i class="icofont icofont-ui-user m-r-10"></i> Add friend
-                                                    </button>
+                                                    </a>
                                                 }
                                             }
                                             else
                                             {
-                                                <button type="button" class="btn btn-outline-primary waves-effect btn-block" onclick="changeFriendshipStatus(id)">
+                                                <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                   asp-controller="Account"
+                                                   asp-action="ChangeFriendshipStatus"
+                                                   asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="remove">
                                                     <i class="icofont icofont-ui-user m-r-10"></i>Remove Friend
-                                                </button>
+                                                </a>
                                             }
                                         </div>
                                     </div>
