@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SocialNetwork.Web.Models.FriendRequestViewModel>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderDisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderProfilePictureUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiverId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiverDisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiverProfilePictureUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderDisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderProfilePictureUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverDisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverProfilePictureUrl)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

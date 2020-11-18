@@ -103,6 +103,19 @@ namespace SocialNetwork.Services.Services
 
         public async Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId) //check if person already sent us fr
         {
+            var oldFriendRequest = await this.context.FriendRequests
+                .FirstOrDefaultAsync(f => f.SenderId == senderId && f.ReceiverId == receiverId);
+
+            if(oldFriendRequest != null && oldFriendRequest.IsDeleted)
+            {
+                oldFriendRequest.IsDeleted = false;
+                oldFriendRequest.DeletedOn = null;
+                oldFriendRequest.CreatedOn = DateTime.UtcNow;
+                await this.context.SaveChangesAsync();
+
+                return this.mapper.Map<FriendRequestDTO>(oldFriendRequest);
+            }
+
             var friendRequest = new FriendRequest
             {
                 SenderId = senderId,
@@ -162,6 +175,7 @@ namespace SocialNetwork.Services.Services
             var friendRequests = await this.context.FriendRequests
                                 .Where(f => !f.IsDeleted && f.ReceiverId == id)
                                 .ProjectTo<FriendRequestDTO>(mapper.ConfigurationProvider)
+                                .OrderByDescending(f => f.CreatedOn)
                                 .ToListAsync()
                                ?? throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
 

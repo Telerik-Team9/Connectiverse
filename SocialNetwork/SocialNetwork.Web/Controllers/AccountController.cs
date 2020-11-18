@@ -40,6 +40,7 @@ namespace SocialNetwork.Web.Controllers
             result.Posts = result.Posts
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
+
             return View(result);
         }
 
@@ -60,6 +61,17 @@ namespace SocialNetwork.Web.Controllers
 
             result.IsFriendshipRequested = loggedUser.FriendRequests
                 .Any(r => r.SenderId == loggedUser.Id && r.ReceiverId == result.Id && !r.IsDeleted);
+
+            return View(result);
+        }
+
+        public async Task<ActionResult> FriendRequests()
+        {
+            var user = await this.userManager.GetUserAsync(User);
+
+            var friendRequests = await this.userService.GetAllFriendRequestsReceivedAsync(user.Id);
+
+            var result = friendRequests.Select(this.mapper.Map<FriendRequestViewModel>);
 
             return View(result);
         }
