@@ -40,6 +40,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "magi@mail.com",
                     NormalizedEmail = "MAGI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "0886868686",
 
                     DisplayName = "Magi Nikolova",
                     DateOfBirth = new DateTime(1997,02,12),
@@ -56,6 +57,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "ali@mail.com",
                     NormalizedEmail = "ALI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "088686843",
 
                     DisplayName = "Ali Marekov",
                     DateOfBirth = new DateTime(1999, 09, 23),
@@ -71,6 +73,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "telerik@mail.com",
                     NormalizedEmail = "TELERIK@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "081111111",
 
                     DisplayName = "Telerik Academy",
                     DateOfBirth = new DateTime(2010, 11, 1),
@@ -86,6 +89,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "csharp@mail.com",
                     NormalizedEmail = "CSHARP@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "0833333333",
 
                     DisplayName = "C Sharp",
                     DateOfBirth = new DateTime(2010, 11, 1),
@@ -101,6 +105,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "viktor@mail.com",
                     NormalizedEmail = "VIKTOR@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "0884444444",
 
                     DisplayName = "Viktor Ivanov",
                     DateOfBirth = new DateTime(1996, 12, 12),
@@ -116,6 +121,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "silvia@mail.com",
                     NormalizedEmail = "SILVIA@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "088555555",
 
                     DisplayName = "Silvia Borisova",
                     DateOfBirth = new DateTime(2000, 10, 4),
@@ -131,6 +137,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "maria@mail.com",
                     NormalizedEmail = "MARIA@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "088666666",
 
                     DisplayName = "Maria Petrova",
                     DateOfBirth = new DateTime(1997, 10, 12),
@@ -146,6 +153,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "pablo@mail.com",
                     NormalizedEmail = "PABLO@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "087777777",
 
                     DisplayName = "Pablo Georgiev",
                     DateOfBirth = new DateTime(1996, 12, 12),
@@ -161,6 +169,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "georgi@mail.com",
                     NormalizedEmail = "GEORGI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "0888888888",
 
                     DisplayName = "Georgi Georgiev",
                     DateOfBirth = new DateTime(1976, 12, 12),
@@ -176,6 +185,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "alexandra@mail.com",
                     NormalizedEmail = "ALEXANDRA@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "088899989",
 
                     DisplayName = "Alexandra Kirova",
                     DateOfBirth = new DateTime(1999, 12, 12),
@@ -191,6 +201,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "stanisav@mail.com",
                     NormalizedEmail = "STANISLAV@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "088679446",
 
                     DisplayName = "Stanislav Pulev",
                     DateOfBirth = new DateTime(2000, 12, 12),
@@ -206,6 +217,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "nikol@mail.com",
                     NormalizedEmail = "NIKOL@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "08868324",
 
                     DisplayName = "Nikol Peeva",
                     DateOfBirth = new DateTime(1999, 12, 12),
@@ -221,6 +233,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "radko@mail.com",
                     NormalizedEmail = "RADKO@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "545453423",
 
                     DisplayName = "Radko Stanev",
                     DateOfBirth = new DateTime(1990, 12, 10),
@@ -236,6 +249,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "kiro@mail.com",
                     NormalizedEmail = "KIRO@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "5435345345",
 
                     DisplayName = "Kiro Stanoev",
                     DateOfBirth = new DateTime(1990, 1, 10),
@@ -243,7 +257,7 @@ namespace SocialNetwork.Database.Seeder
                     TownId = 1,
                     ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
-                                                new User()
+                new User()
                 {
                     Id = Guid.Parse("6405b148-f626-4142-a342-0ccd2c82c30f"),
                     UserName = "bobi@mail.com",
@@ -251,6 +265,7 @@ namespace SocialNetwork.Database.Seeder
                     Email = "bobi@mail.com",
                     NormalizedEmail = "BOBI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
+                    PhoneNumber = "653534564",
 
                     DisplayName = "Bobi Hadzhiev",
                     DateOfBirth = new DateTime(1990, 2, 06),
@@ -574,21 +589,124 @@ namespace SocialNetwork.Database.Seeder
             builder.Entity<Town>().HasData(towns);
 
             var posts = new HashSet<Post>()
-            {
+            {                
                 new Post
                 {
                     Id = 1,
-                    Content = "Does anyone know any great restaurants near by?",
-                    Visibility = Visibility.Public,
-                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
-                },
-                new Post
-                {
-                    Id = 10,
                     Content = "My new profile photo:",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
                     PhotoId = 1
+                },
+                new Post
+                {
+                    Id = 2,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                    PhotoId = 2
+                },
+                new Post
+                {
+                    Id = 3,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
+                    PhotoId = 3
+                },
+                new Post
+                {
+                    Id = 4,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),    // Victor
+                    PhotoId = 4
+                },
+                new Post
+                {
+                    Id = 5,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),    // silvia
+                    PhotoId = 5
+                },
+                new Post
+                {
+                    Id = 6,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"),    // Alexandra
+                    PhotoId = 6
+                },
+                new Post
+                {
+                    Id = 7,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("b87071f5-b71c-45e1-91e7-6e85637ed10a"),    // Maria,
+                    PhotoId = 7
+                },
+                new Post
+                {
+                    Id = 8,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"),    // Pablo,
+                    PhotoId = 8
+                },
+                new Post
+                {
+                    Id = 9,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"),    // Radko
+                    PhotoId = 9
+                },
+                new Post
+                {   Id = 10,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"),    // Kiro,
+                    PhotoId = 10
+                },
+                new Post
+                {   Id = 11,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("6405b148-f626-4142-a342-0ccd2c82c30f"),    // bobi,
+                    PhotoId = 11
+                },
+                new Post
+                {
+                    Id = 12,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("7f8793ff-03ab-458c-bc0e-ed4866a55b48"),    // Georgi,
+                    PhotoId = 12
+                },
+                new Post
+                {
+                    Id = 13,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("a9e49452-8ffd-460d-9998-8f662e36a2d6"),    // Stanislav,
+                    PhotoId = 13
+                },
+                new Post
+                {
+                    Id = 14,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("35547a2a-8779-416b-9fc8-7aab34e883bd"),    // Nikol,
+                    PhotoId = 14
+                },
+                new Post
+                {
+                    Id = 15,
+                    Content = "My new profile photo:",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("dc6788da-53ae-44e7-b53c-e53a2f77a1af"),    // C#,
+                    PhotoId = 15
                 },
                 new Post
                 {
@@ -606,8 +724,92 @@ namespace SocialNetwork.Database.Seeder
                 new Photo
                 {
                     Id = 1,
-                    PostId = 10,
+                    PostId = 1,
                     Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg"
+                },
+                new Photo
+                {
+                    Id = 2,
+                    PostId = 2,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg"
+                },
+                new Photo
+                {
+                    Id = 3,
+                    PostId = 3,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg"
+                },
+                new Photo
+                {
+                    Id = 4,
+                    PostId = 4,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg"
+                },
+                new Photo
+                {
+                    Id = 5,
+                    PostId = 5,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg"
+                },
+                new Photo
+                {
+                    Id = 6,
+                    PostId = 6,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 7,
+                   PostId = 7,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 8,
+                   PostId = 8,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 9,
+                   PostId = 9,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 10,
+                   PostId = 10,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 11,
+                   PostId = 11,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 12,
+                   PostId = 12,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 13,
+                   PostId = 13,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 14,
+                   PostId = 14,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                },
+                new Photo
+                {
+                   Id = 15,
+                   PostId = 15,
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
                 }
             };
             builder.Entity<Photo>().HasData(photos);
@@ -643,6 +845,22 @@ namespace SocialNetwork.Database.Seeder
                     IconUrl = "",
                     UserLink = "https://www.instagram.com/magisnikolova",
                     UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
+                },
+                new SocialMedia
+                {
+                    Id = 2,
+                    Name = "LinkedIn",
+                    IconUrl = "",
+                    UserLink = "https://www.linkedin.com/in/ali-marekov/",
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                },
+                new SocialMedia
+                {
+                    Id = 3,
+                    Name = "Official website",
+                    IconUrl = "",
+                    UserLink = "https://www.telerikacademy.com/",
+                    UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
                 }
             };
             builder.Entity<SocialMedia>().HasData(socialMedias);

@@ -12,6 +12,7 @@ namespace SocialNetwork.Web.Models
         public DateTime? DateOfBirth { get; set; }
         public string Education { get; set; }
         public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool IsFriendshipRequested { get; set; }
         public bool IsFriend { get; set; }
@@ -23,11 +24,11 @@ namespace SocialNetwork.Web.Models
         public ICollection<PostViewModel> Posts { get; set; }// = new HashSet<PostDTO>();
         public ICollection<FriendViewModel> Friends { get; set; }
         /*public ICollection<FriendDTO> FriendsOf { get; set; } = new HashSet<FriendDTO>();*/
-        public ICollection<FriendRequestViewModel> FriendRequests { get; set; } 
+        public ICollection<FriendRequestViewModel> FriendRequests { get; set; }
         //public ICollection<FriendRequestDTO> FriendRequestsOf { get; set; } = new HashSet<FriendRequestDTO>();
         public ICollection<SocialMediaViewModel> SocialMedias { get; set; }
-        public ICollection<LikeViewModel> Likes { get; set; } 
-        public ICollection<CommentViewModel> Comments { get; set; } 
+        public ICollection<LikeViewModel> Likes { get; set; }
+        public ICollection<CommentViewModel> Comments { get; set; }
 
     }
 }

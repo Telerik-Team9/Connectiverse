@@ -17,6 +17,7 @@ namespace SocialNetwork.Services.DTOs
         public string UserName { get; set; }
         public int? TownId { get; set; }
         public TownDTO Town { get; set; } //TODO: remove
+        public string PhoneNumber { get; set; }
 
         public int? ProfilePictureId { get; set; }
         public string ProfilePictureUrl { get; set; }

@@ -23,25 +23,25 @@
                                             <td class="social-user-name b-none p-t-0 text-muted">@Model.DisplayName</td>
                                         </tr>
                                         @*<tr>
-            <th class="social-label b-none">Gender</th>
-            <td class="social-user-name b-none text-muted">Female</td>
-        </tr>*@
+                                                <th class="social-label b-none">Gender</th>
+                                                <td class="social-user-name b-none text-muted">Female</td>
+                                            </tr>*@
                                         <tr>
                                             <th class="social-label b-none">Birth Date</th>
                                             <td class="social-user-name b-none text-muted">@Model.DateOfBirth.Value.Year/@Model.DateOfBirth.Value.Month/@Model.DateOfBirth.Value.Day</td>
                                         </tr>
                                         @*<tr>
-            <th class="social-label b-none">Martail Status</th>
-            <td class="social-user-name b-none text-muted">Single</td>
-        </tr>*@
+                                                <th class="social-label b-none">Martail Status</th>
+                                                <td class="social-user-name b-none text-muted">Single</td>
+                                            </tr>*@
                                         <tr>
                                             <th class="social-label b-none p-b-0">Education</th>
                                             <td class="social-user-name b-none p-b-0 text-muted">@Model.Education</td>
                                         </tr>
-                                        <tr>
-                                            <th class="social-label b-none">Email</th>
-                                            <td class="social-user-name b-none text-muted">@Model.Email</td>
-                                        </tr>
+                                        @*<tr>
+                                                <th class="social-label b-none">Email</th>
+                                                <td class="social-user-name b-none text-muted">@Model.Email</td>
+                                            </tr>*@
                                     </tbody>
                                 </table>
                             </form>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        @*<div class="col-sm-12">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-text">Contact Information</h5>
@@ -109,114 +109,126 @@
                             <table class="table table-responsive m-b-0">
                                 <tbody>
                                     <tr>
-                                            <th class="social-label b-none p-t-0">Mobile Number</th>
-                                            <td class="social-user-name b-none p-t-0 text-muted">eg. (0123) - 4567891</td>
-                                        </tr>
-                                    <tr>
-                                        <th class="social-label b-none">@Model.Email</th>
-                                        <td class="social-user-name b-none text-muted">test@gmail.com</td>
+                                        <th class="social-label b-none p-t-0">Email</th>
+                                        <td class="social-user-name b-none p-t-0 text-muted">@Model.Email</td>
                                     </tr>
                                     <tr>
-                                        <th class="social-label b-none">Twitter</th>
-                                        <td class="social-user-name b-none text-muted"></td>
+                                        <th class="social-label b-none">Phone</th>
+                                        <td class="social-user-name b-none text-muted">@Model.PhoneNumber</td>
                                     </tr>
                                     <tr>
-                                        <th class="social-label b-none p-b-0">Skype</th>
-                                        <td class="social-user-name b-none p-b-0 text-muted"> demo</td>
+                                        <th class="social-label b-none">Socials</th>
+                                        @if (Model.SocialMedias.Any())
+                                        {
+                                            foreach (var item in Model.SocialMedias)
+                                            {
+                                                <td class="social-user-name b-none text-muted">
+                                                    <a href="@item.UserLink" target="_blank">@item.UserLink</a>
+                                                </td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="social-user-name b-none text-muted">None provided</td>
+                                        }
                                     </tr>
+                                    @*<tr>
+                                            <th class="social-label b-none p-b-0">Skype</th>
+                                            <td class="social-user-name b-none p-b-0 text-muted"> demo</td>
+                                        </tr>*@
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div id="edit-contact-info" class="row" style="display: none;">
-                        <div class="col-lg-12 col-md-12">
-                            <form>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Mobile number">
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Email address">
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Twitter id">
-                                </div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Skype id">
-                                </div>
-                                <div class="text-center m-t-20">
-                                    <a href="javascript:;" id="contact-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
-                                    <a href="javascript:;" id="contact-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    @*<div id="edit-contact-info" class="row" style="display: none;">
+                            <div class="col-lg-12 col-md-12">
+                                <form>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Mobile number">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Email address">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Twitter id">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Skype id">
+                                    </div>
+                                    <div class="text-center m-t-20">
+                                        <a href="javascript:;" id="contact-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
+                                        <a href="javascript:;" id="contact-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-header-text">Work</h5>
-                    <button id="edit-work" type="button" class="btn btn-primary waves-effect waves-light f-right">
-                        <i class="icofont icofont-edit"></i>
-                    </button>
-                </div>
-                <div class="card-block">
-                    <div id="work-info" class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <table class="table table-responsive m-b-0">
-                                <tbody>
-                                    <tr>
-                                        <th class="social-label b-none p-t-0">
-                                            Occupation &nbsp; &nbsp; &nbsp;
-                                        </th>
-                                        <td class="social-user-name b-none p-t-0 text-muted">Developer</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="social-label b-none">Skills</th>
-                                        <td class="social-user-name b-none text-muted">C#, Javascript, Anguler</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="social-label b-none">Jobs</th>
-                                        <td class="social-user-name b-none p-b-0 text-muted">#</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+        @*<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-header-text">Work</h5>
+                        <button id="edit-work" type="button" class="btn btn-primary waves-effect waves-light f-right">
+                            <i class="icofont icofont-edit"></i>
+                        </button>
+                    </div>
+                    <div class="card-block">
+                        <div id="work-info" class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <table class="table table-responsive m-b-0">
+                                    <tbody>
+                                        <tr>
+                                            <th class="social-label b-none p-t-0">
+                                                Occupation &nbsp; &nbsp; &nbsp;
+                                            </th>
+                                            <td class="social-user-name b-none p-t-0 text-muted">Developer</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="social-label b-none">Skills</th>
+                                            <td class="social-user-name b-none text-muted">C#, Javascript, Anguler</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="social-label b-none">Jobs</th>
+                                            <td class="social-user-name b-none p-b-0 text-muted">#</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="edit-contact-work" class="row" style="display: none;">
+                            <div class="col-lg-12 col-md-12">
+                                <form>
+                                    <div class="input-group">
+                                        <select id="occupation" class="form-control">
+                                            <option value=""> Select occupation </option>
+                                            <option value="married">Developer</option>
+                                            <option value="unmarried">Web Design</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <select id="skill" class="form-control">
+                                            <option value=""> Select Skills </option>
+                                            <option value="married">C# &amp; .net</option>
+                                            <option value="unmarried">Angular</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <select id="job" class="form-control">
+                                            <option value=""> Select Job </option>
+                                            <option value="married">#</option>
+                                            <option value="unmarried">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="text-center m-t-20">
+                                        <a href="javascript:;" id="work-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
+                                        <a href="javascript:;" id="work-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div id="edit-contact-work" class="row" style="display: none;">
-                        <div class="col-lg-12 col-md-12">
-                            <form>
-                                <div class="input-group">
-                                    <select id="occupation" class="form-control">
-                                        <option value=""> Select occupation </option>
-                                        <option value="married">Developer</option>
-                                        <option value="unmarried">Web Design</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <select id="skill" class="form-control">
-                                        <option value=""> Select Skills </option>
-                                        <option value="married">C# &amp; .net</option>
-                                        <option value="unmarried">Angular</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <select id="job" class="form-control">
-                                        <option value=""> Select Job </option>
-                                        <option value="married">#</option>
-                                        <option value="unmarried">Other</option>
-                                    </select>
-                                </div>
-                                <div class="text-center m-t-20">
-                                    <a href="javascript:;" id="work-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
-                                    <a href="javascript:;" id="work-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
     </div>
 </div>
