@@ -106,7 +106,7 @@ namespace SocialNetwork.Services.Services
             var oldFriendRequest = await this.context.FriendRequests
                 .FirstOrDefaultAsync(f => f.SenderId == senderId && f.ReceiverId == receiverId);
 
-            if(oldFriendRequest != null && oldFriendRequest.IsDeleted)
+            if (oldFriendRequest != null && oldFriendRequest.IsDeleted)
             {
                 oldFriendRequest.IsDeleted = false;
                 oldFriendRequest.DeletedOn = null;
@@ -205,6 +205,14 @@ namespace SocialNetwork.Services.Services
             }
 
             return result.OrderBy(p => p.DisplayName);
+        }
+
+        public async Task<bool> AreFriendsAsync(Guid senderId, Guid receiverId)
+        {
+            return await this.context.Friends
+                .AnyAsync(f => !f.IsDeleted && 
+                               ((f.UserId == senderId && f.UserFriendId == receiverId) ||
+                               (f.UserId == receiverId && f.UserFriendId == senderId)));
         }
 
         private async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)

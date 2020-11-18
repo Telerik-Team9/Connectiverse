@@ -6,6 +6,7 @@ using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 using System;
+using SocialNetwork.Models.Common.Enums;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,9 +56,22 @@ namespace SocialNetwork.Web.Controllers
 
             var result = this.mapper.Map<UserViewModel>(user);
 
-            result.Posts = result.Posts
-                .OrderByDescending(p => p.CreatedOn)
-                .ToList();
+            var areFriends = await this.userService.AreFriendsAsync(loggedUser.Id, user.Id);
+
+            if (areFriends)
+            {
+                result.Posts = result.Posts
+                    .Where(p => p.Visibility != Visibility.OnlyMe)
+                    .OrderByDescending(p => p.CreatedOn)
+                    .ToList();
+            }
+            else
+            {
+                result.Posts = result.Posts
+                    .Where(p => p.Visibility == Visibility.Public)
+                    .OrderByDescending(p => p.CreatedOn)
+                    .ToList();
+            }
 
             result.IsFriendshipRequested = loggedUser.FriendRequests
                 .Any(r => r.SenderId == loggedUser.Id && r.ReceiverId == result.Id && !r.IsDeleted);

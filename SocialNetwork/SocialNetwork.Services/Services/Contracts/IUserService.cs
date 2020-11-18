@@ -20,6 +20,7 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<bool> RemoveFriendAsync(Guid userId, Guid userFriendId);
         Task<bool> DeleteFriendRequestAsync(Guid senderId, Guid receiverId);
         Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId);
+        Task<bool> AreFriendsAsync(Guid senderId, Guid receiverId);
 
         Task<IEnumerable<UserDTO>> GetByUserNameAsync(string searchCriteria = "", string sortOrder = "nameAsc");
         Task<IEnumerable<UserDTO>> GetAllAsync();
