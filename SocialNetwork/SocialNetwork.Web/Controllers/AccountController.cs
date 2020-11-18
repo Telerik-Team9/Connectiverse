@@ -50,6 +50,12 @@ namespace SocialNetwork.Web.Controllers
         {
             var signedIn = await this.userManager.GetUserAsync(User);
 
+            if(userId == signedIn.Id)
+            {
+                return this.Redirect("Profile");
+            }
+
+
             var user = await this.userService.GetByIdAsync(userId);
 
             var loggedUser = await this.userService.GetByIdAsync(signedIn.Id);

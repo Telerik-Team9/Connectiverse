@@ -12,8 +12,8 @@
             </div>
             <div class="media bg-white d-flex">
                 <div class="media-left media-middle">
-                    <a href="#">
-                        <img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@Model.UserFriendId">
+                        <img class="media-object" width="120" src="@Model.UserFriendProfilePictureUrl" alt="">
                     </a>
                 </div>
                 <div class="media-body friend-elipsis">
