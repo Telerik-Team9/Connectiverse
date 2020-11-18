@@ -11,10 +11,11 @@ namespace SocialNetwork.Web.AutoMapperConfigs
         public PostVMConfig()
         {
             this.CreateMap<Post, PostDTO>()
-                .ForMember(dest => dest.Comments, 
-                    opt => opt.MapFrom(src => src.Comments.OrderByDescending(c => c.CreatedOn)))
+                .ForMember(dest => dest.Comments,
+                    opt => opt.MapFrom(src => src.Comments.Where(c => !c.IsDeleted)
+                                                          .OrderByDescending(c => c.CreatedOn)))
                 .ReverseMap()
-                .ForMember(dest => dest.Comments, 
+                .ForMember(dest => dest.Comments,
                     opt => opt.MapFrom(src => src.Comments.OrderByDescending(c => c.CreatedOn)));
 
             this.CreateMap<PostDTO, PostViewModel>()

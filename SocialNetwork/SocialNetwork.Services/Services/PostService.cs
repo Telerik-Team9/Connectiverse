@@ -102,6 +102,7 @@ namespace SocialNetwork.Services.Services
 
         public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)   //TODO: Add algorythm, rename
         {
+            //Find way to escape including deleted comments - chac mapper
             var friendships = await this.context.Friends
                 .Where(f => f.UserId == userId && !f.IsDeleted)
                 .ToListAsync();
@@ -163,6 +164,27 @@ namespace SocialNetwork.Services.Services
                 return result.OrderByDescending(p => p.Content);
             }
             return result.OrderByDescending(p => p.CreatedOn);
+        }
+
+        public async Task<PostDTO> EditPost(int id, PostDTO postDTO)
+        {
+            var postToUpdate = await this.GetPostByIdAsync(id);
+
+            if (postToUpdate == null)
+            {
+                throw new ArgumentException(ExceptionMessages.EntityNotFound);
+            }
+
+            postToUpdate.Content = postDTO.Content;
+            postToUpdate.PhotoUrl = postDTO.PhotoUrl;
+            postToUpdate.VideoUrl = postDTO.VideoUrl;
+            postToUpdate.Visibility = postDTO.Visibility;
+            postToUpdate.ModifiedOn = DateTime.UtcNow;
+
+            var postModel = this.mapper.Map<Post>(postToUpdate);
+            await this.context.SaveChangesAsync();
+
+            return this.mapper.Map<PostDTO>(postModel);
         }
 
         private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
