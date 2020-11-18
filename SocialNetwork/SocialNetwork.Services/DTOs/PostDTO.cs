@@ -13,6 +13,7 @@ namespace SocialNetwork.Services.DTOs
 
         public bool IsLiked { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public DateTime? ModifiedOn { get; set; }
 
         public Guid UserId { get; set; }
         public string UserDisplayName { get; set; }

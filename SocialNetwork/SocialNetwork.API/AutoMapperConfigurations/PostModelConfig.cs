@@ -13,6 +13,7 @@ namespace SocialNetwork.Web.AutoMapperConfigurations
                 .ReverseMap();
             this.CreateMap<PostDTO, PostModel>()
                 .ReverseMap();
+            this.CreateMap<PostInputModel, PostDTO>();
         }
     }
 }

@@ -41,34 +41,6 @@ namespace SocialNetwork.API.Controllers
             this.mapper = mapper;
         }
 
-        [HttpPost]
-        [Route("createpost")]
-        public async Task<IActionResult> CreatePost([FromBody] PostModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return this.BadRequest("Invalid post.");
-            }
-
-            var user = await this.userService.GetByIdAsync(model.UserId);
-
-            if(user == null)
-            {
-                return this.BadRequest("Invalid credentials provided!");
-            }
-
-            var postDTO = this.mapper.Map<PostDTO>(model);
-            postDTO.UserId = user.Id;
-
-            var result = await this.postService.CreateAsync(postDTO);
-
-            if (result == null)
-            {
-                return this.BadRequest("Something went wrong.");
-            }
-
-            return this.Created("post", this.mapper.Map<PostModel>(result));
-        }
 
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetUsersProfileInfo(Guid id)
@@ -113,6 +85,48 @@ namespace SocialNetwork.API.Controllers
             return this.Ok(newsfeed);
         }
 
+        [HttpPost]
+        [Route("createpost")]
+        public async Task<IActionResult> CreatePost([FromBody] PostInputModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest("Invalid post.");
+            }
+
+            var user = await this.userService.GetByIdAsync(model.UserId);
+
+            if (user == null)
+            {
+                return this.BadRequest("Invalid credentials provided!");
+            }
+
+            var postDTO = this.mapper.Map<PostDTO>(model);
+            postDTO.UserId = user.Id;
+
+            var result = await this.postService.CreateAsync(postDTO);
+
+            if (result == null)
+            {
+                return this.BadRequest("Something went wrong.");
+            }
+
+            return this.Created("post", this.mapper.Map<PostModel>(result));
+        }
+
+        [HttpDelete("posts/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            var result = await this.postService.DeletePostAsync(id);
+
+            if (result)
+            {
+                return this.Ok();
+            }
+
+            return this.BadRequest();
+        }
+
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginDTO model)
@@ -134,6 +148,5 @@ namespace SocialNetwork.API.Controllers
 
             return this.Ok(model);
         }
-
     }
 }
