@@ -103,7 +103,7 @@ namespace SocialNetwork.Services.Services
         public async Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId)   //TODO: Add algorythm, rename
         {
             var friendships = await this.context.Friends
-                .Where(f => f.UserId == userId)
+                .Where(f => f.UserId == userId && !f.IsDeleted)
                 .ToListAsync();
 
             var friendsPosts = new List<PostDTO>();

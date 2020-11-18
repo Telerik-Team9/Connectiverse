@@ -58,8 +58,6 @@ namespace SocialNetwork.Web.Controllers
                 };
                 posts.Add(postCommentModel);
             }
-            //var result = new NewsFeedViewModel { Posts = feed.Select(this.mapper.Map<PostViewModel>).ToHashSet() };
-            //var result = feed.Select(this.mapper.Map<PostViewModel>);
 
             var result = posts.Where(x => x.Post.Visibility != Visibility.OnlyMe)
                               .OrderByDescending(x => x.Post.CreatedOn)
