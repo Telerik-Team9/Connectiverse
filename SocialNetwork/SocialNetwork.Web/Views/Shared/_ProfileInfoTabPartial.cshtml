@@ -1,4 +1,6 @@
-﻿<div class="tab-pane" id="about">
+﻿@model UserViewModel
+
+<div class="tab-pane" id="about">
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -18,78 +20,82 @@
                                             <th class="social-label b-none p-t-0">
                                                 Full Name
                                             </th>
-                                            <td class="social-user-name b-none p-t-0 text-muted">Josephine Villa</td>
+                                            <td class="social-user-name b-none p-t-0 text-muted">@Model.DisplayName</td>
                                         </tr>
-                                        <tr>
-                                            <th class="social-label b-none">Gender</th>
-                                            <td class="social-user-name b-none text-muted">Female</td>
-                                        </tr>
+                                        @*<tr>
+            <th class="social-label b-none">Gender</th>
+            <td class="social-user-name b-none text-muted">Female</td>
+        </tr>*@
                                         <tr>
                                             <th class="social-label b-none">Birth Date</th>
-                                            <td class="social-user-name b-none text-muted">October 25th, 1990</td>
+                                            <td class="social-user-name b-none text-muted">@Model.DateOfBirth.Value.Year/@Model.DateOfBirth.Value.Month/@Model.DateOfBirth.Value.Day</td>
+                                        </tr>
+                                        @*<tr>
+            <th class="social-label b-none">Martail Status</th>
+            <td class="social-user-name b-none text-muted">Single</td>
+        </tr>*@
+                                        <tr>
+                                            <th class="social-label b-none p-b-0">Education</th>
+                                            <td class="social-user-name b-none p-b-0 text-muted">@Model.Education</td>
                                         </tr>
                                         <tr>
-                                            <th class="social-label b-none">Martail Status</th>
-                                            <td class="social-user-name b-none text-muted">Single</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="social-label b-none p-b-0">Location</th>
-                                            <td class="social-user-name b-none p-b-0 text-muted">New York, USA</td>
+                                            <th class="social-label b-none">Email</th>
+                                            <td class="social-user-name b-none text-muted">@Model.Email</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </form>
                         </div>
                     </div>
-                    <div id="edit-info" class="row" style="display: none;">
-                        <div class="col-lg-12 col-md-12">
-                            <form>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Full Name">
-                                </div>
-                                <div class="input-group">
-                                    <div class="form-radio">
+                    @*<div id="edit-info" class="row" style="display: none;">
+                            <div class="col-lg-12 col-md-12">
+                                <form>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Full Name">
+                                    </div>
+                                    <div class="input-group">
                                         <div class="form-radio">
-                                            <label class="md-check p-0">Gender</label>
-                                            <div class="radio radio-inline">
-                                                <label>
-                                                    <input type="radio" name="radio" checked="checked">
-                                                    <i class="helper"></i>Male
-                                                </label>
-                                            </div>
-                                            <div class="radio radio-inline">
-                                                <label>
-                                                    <input type="radio" name="radio">
-                                                    <i class="helper"></i>Female
-                                                </label>
+                                            <div class="form-radio">
+                                                <label class="md-check p-0">Gender</label>
+                                                <div class="radio radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="radio" checked="checked">
+                                                        <i class="helper"></i>Male
+                                                    </label>
+                                                </div>
+                                                <div class="radio radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="radio">
+                                                        <i class="helper"></i>Female
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="input-group">
-                                    <input id="dropper-default" class="form-control" type="text" placeholder="Birth Date">
-                                </div>
-                                <div class="input-group">
-                                    <select id="hello-single" class="form-control">
-                                        <option value="">---- Marital Status ----</option>
-                                        <option value="married">Married</option>
-                                        <option value="unmarried">Unmarried</option>
-                                    </select>
-                                </div>
-                                <div class="md-group-add-on">
-                                    <textarea rows="5" cols="5" class="form-control" placeholder="Address..."></textarea>
-                                </div>
-                                <div class="text-center m-t-20">
-                                    <a href="javascript:;" id="edit-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
-                                    <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                                    <div class="input-group">
+                                        <input id="dropper-default" class="form-control" type="text" placeholder="Birth Date">
+                                    </div>
+                                    <div class="input-group">
+                                        <select id="hello-single" class="form-control">
+                                            <option value="">---- Marital Status ----</option>
+                                            <option value="married">Married</option>
+                                            <option value="unmarried">Unmarried</option>
+                                        </select>
+                                    </div>
+                                    <div class="md-group-add-on">
+                                        <textarea rows="5" cols="5" class="form-control" placeholder="Address..."></textarea>
+                                    </div>
+                                    <div class="text-center m-t-20">
+                                        <a href="javascript:;" id="edit-save" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
+                                        <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect waves-light">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
+        @*<div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-text">Contact Information</h5>
@@ -103,11 +109,11 @@
                             <table class="table table-responsive m-b-0">
                                 <tbody>
                                     <tr>
-                                        <th class="social-label b-none p-t-0">Mobile Number</th>
-                                        <td class="social-user-name b-none p-t-0 text-muted">eg. (0123) - 4567891</td>
-                                    </tr>
+                                            <th class="social-label b-none p-t-0">Mobile Number</th>
+                                            <td class="social-user-name b-none p-t-0 text-muted">eg. (0123) - 4567891</td>
+                                        </tr>
                                     <tr>
-                                        <th class="social-label b-none">Email Address</th>
+                                        <th class="social-label b-none">@Model.Email</th>
                                         <td class="social-user-name b-none text-muted">test@gmail.com</td>
                                     </tr>
                                     <tr>
@@ -211,6 +217,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
