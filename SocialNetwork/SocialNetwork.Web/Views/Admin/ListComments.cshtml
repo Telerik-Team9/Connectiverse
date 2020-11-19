@@ -54,9 +54,9 @@
                             @Html.DisplayFor(modelItem => item.UserId)
                         </td>*@
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
-                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                        @*@Html.ActionLink("Edit", "EditComment", new { id = item.Id })*@
                         <a asp-controller="Admin" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
+                        <a asp-controller="Admin" asp-action="EditComment" asp-route-id="@item.Id">Edit</a>
                     </td>
                 </tr>
             }

@@ -69,6 +69,23 @@ namespace SocialNetwork.Services.Services
             }
         }
 
+        public async Task<CommentDTO> EditAsync(CommentDTO commentDTO)
+        {
+            var commentModel = await this.context.Comments
+                                         .FirstOrDefaultAsync(c => c.Id == commentDTO.Id && !c.IsDeleted);
+
+            if (commentModel == null)
+            {
+                throw new ArgumentException(ExceptionMessages.EntityNotFound);
+            }
+
+            commentModel.Content = commentDTO.Content;
+            commentModel.ModifiedOn = DateTime.UtcNow;
+
+            await this.context.SaveChangesAsync();
+            return this.mapper.Map<CommentDTO>(commentModel);
+        }
+
         public async Task<IEnumerable<CommentDTO>> GetAllAsync()
         {
             return await this.context.Comments

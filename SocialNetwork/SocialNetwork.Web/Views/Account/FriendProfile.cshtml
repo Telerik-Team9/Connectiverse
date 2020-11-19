@@ -28,9 +28,9 @@
                                                                 </div>*@
                             </div>
                             <!--<div class="timeline-btn">-->
-                                @*<a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>*@
-                                <!--<a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>-->
-                                @* <a class="btn btn-primary waves-effect waves-light" asp-controller="Post" asp-action="Create">Create post</a>*@
+                            @*<a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>*@
+                            <!--<a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>-->
+                            @* <a class="btn btn-primary waves-effect waves-light" asp-controller="Post" asp-action="Create">Create post</a>*@
                             <!--</div>-->
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                                                 <a type="button" class="btn btn-outline-primary waves-effect btn-block"
                                                    asp-controller="Account"
                                                    asp-action="ChangeFriendshipStatus"
-                                                   asp-route-userId="@Model.Id" asp-route-friendId="@user.Id" asp-route-type="remove">
+                                                   asp-route-userId="@user.Id" asp-route-friendId="@Model.Id" asp-route-type="remove">
                                                     <i class="icofont icofont-ui-user m-r-10"></i>Remove Friend
                                                 </a>
                                             }

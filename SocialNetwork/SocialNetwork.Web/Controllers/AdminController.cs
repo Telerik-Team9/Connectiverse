@@ -34,7 +34,6 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
-        [HttpGet]
         public async Task<IActionResult> ListUsers()
         {
             var users = await this.userService.GetAllAsync();
@@ -43,8 +42,6 @@ namespace SocialNetwork.Web.Controllers
 
             return View(result);
         }
-
-        [HttpGet]
         public async Task<IActionResult> ListPosts()
         {
             var posts = await this.postService.GetAllAsync();
@@ -53,8 +50,6 @@ namespace SocialNetwork.Web.Controllers
 
             return View(result);
         }
-
-        [HttpGet]
         public async Task<IActionResult> ListComments()
         {
             var comments = await this.commentService.GetAllAsync();
@@ -65,18 +60,6 @@ namespace SocialNetwork.Web.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteComment(int id)
-        {
-            try
-            {
-                var delete = await this.commentService.DeleteAsync(id);
-                return RedirectToAction("ListComments", "Admin");
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
         public async Task<IActionResult> DeletePost(int id)
         {
             try
@@ -89,18 +72,31 @@ namespace SocialNetwork.Web.Controllers
                 return BadRequest();
             }
         }
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            try
+            {
+                var delete = await this.commentService.DeleteAsync(id);
+                return RedirectToAction("ListComments", "Admin");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         public IActionResult EditPost()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> EditPost(PostViewModel model)
         {
             try
             {
                 var postDTO = this.mapper.Map<PostDTO>(model);
-                var result = await this.postService.EditPostAsync(model.Id, postDTO);
+                var result = await this.postService.EditPostAsync(postDTO);
 
                 return RedirectToAction("ListPosts", "Admin");
             }
@@ -109,5 +105,28 @@ namespace SocialNetwork.Web.Controllers
                 return BadRequest();
             }
         }
+
+
+        public IActionResult EditComment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditComment(CommentViewModel model)
+        {
+            try
+            {
+                var commentDTO = this.mapper.Map<CommentDTO>(model);
+                var result = await this.commentService.EditAsync(commentDTO);
+
+                return RedirectToAction("ListComments", "Admin");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }

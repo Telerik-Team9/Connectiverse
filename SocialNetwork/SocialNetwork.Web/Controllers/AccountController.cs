@@ -114,7 +114,7 @@ namespace SocialNetwork.Web.Controllers
                 {
                     await this.userService.RemoveFriendAsync(userId, friendId);
                 }
-                return this.Ok();
+                return this.RedirectToAction("FriendProfile", new { userId = friendId });
             }
             catch (Exception)
             {

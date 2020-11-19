@@ -8,7 +8,7 @@ namespace SocialNetwork.Services.Services.Contracts
     {
         Task<CommentDTO> CreateAsync(CommentDTO comment);
         Task<bool> DeleteAsync(int id);
+        Task<CommentDTO> EditAsync(CommentDTO commentDTO);
         Task<IEnumerable<CommentDTO>> GetAllAsync();
-        // Task<CommentDTO> GetByIdAsync(int id);
     }
 }

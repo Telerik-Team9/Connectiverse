@@ -119,11 +119,6 @@ namespace SocialNetwork.Services.Services
                 friendsPosts.AddRange(currFriendsPosts);
             }
 
-            // if (!friendsPosts.Any())
-            // {
-            //     throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
-            // }
-            //
             return friendsPosts;
         }
 
@@ -166,12 +161,12 @@ namespace SocialNetwork.Services.Services
             return result.OrderByDescending(p => p.CreatedOn);
         }
 
-        public async Task<PostDTO> EditPostAsync(int id, PostDTO postDTO)
+        public async Task<PostDTO> EditPostAsync(PostDTO postDTO)
         {
             var postModel = await this.context.Posts
                 .Include(p => p.Photo)
                 .Include(p => p.Video)
-                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+                .FirstOrDefaultAsync(p => p.Id == postDTO.Id && !p.IsDeleted);
 
             if (postModel == null)
             {
