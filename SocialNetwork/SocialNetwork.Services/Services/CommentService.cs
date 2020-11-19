@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
@@ -6,6 +7,8 @@ using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services
@@ -64,6 +67,14 @@ namespace SocialNetwork.Services.Services
             {
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<CommentDTO>> GetAllAsync()
+        {
+            return await this.context.Comments
+                .Where(c => !c.IsDeleted)
+                .ProjectTo<CommentDTO>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
         }
     }
 }

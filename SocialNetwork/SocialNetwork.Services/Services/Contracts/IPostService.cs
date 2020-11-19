@@ -15,6 +15,6 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<IEnumerable<PostDTO>> GetUserPostsAsync(Guid userId);
         Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId);
         Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "", string sortOrder = "mostRecent");
-        /*Task<IEnumerable<PostDTO>> GetAllAsync();*/
+        Task<IEnumerable<PostDTO>> GetAllAsync();
     }
 }

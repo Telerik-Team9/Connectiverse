@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SocialNetwork.Web.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "ListUsers";
+}
+
+
+<div class="container">
+    <h1>ListUsers</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Picture
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>*@
+                <th>
+                    Name
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Education)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ProfilePictureUrl" width="50px" height="50px" />
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayName)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Education)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
+                        <!--@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |-->
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

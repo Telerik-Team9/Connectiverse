@@ -119,11 +119,11 @@ namespace SocialNetwork.Services.Services
                 friendsPosts.AddRange(currFriendsPosts);
             }
 
-          // if (!friendsPosts.Any())
-          // {
-          //     throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
-          // }
-          //
+            // if (!friendsPosts.Any())
+            // {
+            //     throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
+            // }
+            //
             return friendsPosts;
         }
 
@@ -221,6 +221,13 @@ namespace SocialNetwork.Services.Services
                 post.Photo = null;
                 post.Video = null;
             }
+        }
+
+        public async Task<IEnumerable<PostDTO>> GetAllAsync()
+        {
+            return await this.context.Posts.Where(p => !p.IsDeleted)
+                             .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
+                             .ToListAsync();
         }
     }
 }
