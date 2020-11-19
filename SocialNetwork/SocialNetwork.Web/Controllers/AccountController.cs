@@ -50,11 +50,10 @@ namespace SocialNetwork.Web.Controllers
         {
             var signedIn = await this.userManager.GetUserAsync(User);
 
-            if(userId == signedIn.Id)
+            if (userId == signedIn.Id)
             {
-                return this.Redirect("Profile");
+                return this.RedirectToAction("Profile", "Account");
             }
-
 
             var user = await this.userService.GetByIdAsync(userId);
 
@@ -62,7 +61,9 @@ namespace SocialNetwork.Web.Controllers
 
             var result = this.mapper.Map<UserViewModel>(user);
 
-            var areFriends = await this.userService.AreFriendsAsync(loggedUser.Id, user.Id);
+            var areFriends = loggedUser.Friends
+                .FirstOrDefault(f => f.UserFriendId == userId) == null
+                ? false : true;
 
             if (areFriends)
             {
