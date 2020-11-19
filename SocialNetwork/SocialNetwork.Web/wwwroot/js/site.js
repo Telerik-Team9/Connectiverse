@@ -58,7 +58,7 @@ particlesJS('particles-js',
                 "value": "#ffffff"
             },
             "shape": {
-                "type": "image",
+                "type": "star",
                 "stroke": {
                     "width": 0,
                     "color": "#000000"
@@ -118,7 +118,7 @@ particlesJS('particles-js',
             "events": {
                 "onhover": {
                     "enable": true,
-                    "mode": "bubble"
+                    "mode": "grab"
                 },
                 "onclick": {
                     "enable": true,
