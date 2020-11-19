@@ -76,5 +76,17 @@ namespace SocialNetwork.Web.Controllers
                 return BadRequest();
             }
         }
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            try
+            {
+                var delete = await this.postService.DeletePostAsync(id);
+                return RedirectToAction("ListPosts", "Admin");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }
