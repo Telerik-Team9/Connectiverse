@@ -62,5 +62,19 @@ namespace SocialNetwork.Web.Controllers
 
             return View(result);
         }
+
+
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            try
+            {
+                var delete = await this.commentService.DeleteAsync(id);
+                return RedirectToAction("ListComments", "Admin");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }

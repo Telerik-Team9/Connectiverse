@@ -26,8 +26,8 @@
                     @Html.DisplayNameFor(model => model.PostId)
                 </th>
                 @*<th>
-                    @Html.DisplayNameFor(model => model.UserId)
-                </th>*@
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>*@
                 <th></th>
             </tr>
         </thead>
@@ -51,12 +51,12 @@
                         @Html.DisplayFor(modelItem => item.PostId)
                     </td>
                     @*<td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>*@
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </td>*@
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) 
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
                         @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        <a asp-controller="Admin" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }
