@@ -6,18 +6,18 @@
     }
 
     .newsbar {
-        background: rgba(0, 0, 0, 0);
+        background: rgba(0, 0, 0, 0.1);
         @*border-right: 1px solid #e5e5e5;*@
         position: absolute;
         top: 0;
         bottom: 0;
-        height: 100%;
+        height: 100vh;
         left: 0;
         width: 30px;
         overflow: hidden;
-        -webkit-transition: width .05s linear;
-        transition: width .2s linear;
-        -webkit-transform: translateZ(0) scale(1,1);
+        @*-webkit-transition: width .05s linear;*@
+        transition: width .2s;
+        @*-webkit-transform: translateZ(0) scale(1,1);*@
         z-index: 1000;
     }
 
