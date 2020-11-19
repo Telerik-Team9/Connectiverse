@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 using System.Linq;
@@ -81,6 +82,26 @@ namespace SocialNetwork.Web.Controllers
             try
             {
                 var delete = await this.postService.DeletePostAsync(id);
+                return RedirectToAction("ListPosts", "Admin");
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        public IActionResult EditPost()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditPost(PostViewModel model)
+        {
+            try
+            {
+                var postDTO = this.mapper.Map<PostDTO>(model);
+                var result = await this.postService.EditPostAsync(model.Id, postDTO);
+
                 return RedirectToAction("ListPosts", "Admin");
             }
             catch

@@ -77,37 +77,35 @@
                                     </div>
                                 }
                                 <!-- Comment on a post -->
-                                @if (Model.Post.Visibility == SocialNetwork.Models.Common.Enums.Visibility.Public)
-                                {
-                                    <div class="media">
-                                        <a class="media-left" href="#">
-                                            <!--<img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">-->
-                                            <img class="media-object img-radius m-r-20" src="@user.ProfilePictureUrl">
-                                        </a>
-                                        <div class="media-body">
-                                            @*<div class="">
 
-                                                    <textarea rows="5" cols="5" class="content" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                <div class="media">
+                                    <a class="media-left" href="#">
+                                        <!--<img class="media-object img-radius m-r-20" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Generic placeholder image">-->
+                                        <img class="media-object img-radius m-r-20" src="@user.ProfilePictureUrl">
+                                    </a>
+                                    <div class="media-body">
+                                        @*<div class="">
 
-                                                    <input style="display: none" asp-for="NewComment.PostId" value="Model.Post.Id" />
+                                                <textarea rows="5" cols="5" class="content" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
 
-                                                    <input style="display: none" class="postId" value="@Model.Post.Id" />
+                                                <input style="display: none" asp-for="NewComment.PostId" value="Model.Post.Id" />
 
-                                                    <button type="submit" value="Create" class="btn btn-primary" onclick="submitComment(this)" />
+                                                <input style="display: none" class="postId" value="@Model.Post.Id" />
 
-                                                </div>*@
-                                            <form class="" method="post" asp-controller="Post" asp-action="Comment">
-                                                <div class="">
-                                                    <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
-                                                    <input style="display: none" asp-for="NewComment.PostId" value="@Model.Post.Id" />
-                                                    <div class="form-group">
-                                                        <input type="submit" value="Create" class="btn btn-primary" />
-                                                    </div>
+                                                <button type="submit" value="Create" class="btn btn-primary" onclick="submitComment(this)" />
+
+                                            </div>*@
+                                        <form class="" method="post" asp-controller="Post" asp-action="Comment">
+                                            <div class="">
+                                                <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                                <input style="display: none" asp-for="NewComment.PostId" value="@Model.Post.Id" />
+                                                <div class="form-group">
+                                                    <input type="submit" value="Create" class="btn btn-primary" />
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                }
+                                </div>
                             </div>
                         </div>
                     </div>

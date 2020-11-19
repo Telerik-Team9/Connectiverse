@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocialNetwork.Web.Models.PostViewModel>
-
+@using SocialNetwork.Models.Common.Enums
 @{
     ViewData["Title"] = "ListPosts";
 }
@@ -65,7 +65,7 @@
                         </td>
                     }
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) @*|
+                        @Html.ActionLink("Edit", "EditPost", new { id = item.Id }) @*|
                             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
                         @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                         <a asp-controller="Admin" asp-action="DeletePost" asp-route-id="@item.Id">Delete</a>

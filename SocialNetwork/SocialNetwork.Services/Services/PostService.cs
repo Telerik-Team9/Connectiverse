@@ -166,24 +166,23 @@ namespace SocialNetwork.Services.Services
             return result.OrderByDescending(p => p.CreatedOn);
         }
 
-        public async Task<PostDTO> EditPost(int id, PostDTO postDTO)
+        public async Task<PostDTO> EditPostAsync(int id, PostDTO postDTO)
         {
-            var postToUpdate = await this.GetPostByIdAsync(id);
+            var postModel = await this.context.Posts
+                .Include(p => p.Photo)
+                .Include(p => p.Video)
+                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (postToUpdate == null)
+            if (postModel == null)
             {
                 throw new ArgumentException(ExceptionMessages.EntityNotFound);
             }
 
-            postToUpdate.Content = postDTO.Content;
-            postToUpdate.PhotoUrl = postDTO.PhotoUrl;
-            postToUpdate.VideoUrl = postDTO.VideoUrl;
-            postToUpdate.Visibility = postDTO.Visibility;
-            postToUpdate.ModifiedOn = DateTime.UtcNow;
+            postModel.Content = postDTO.Content;
+            postModel.Visibility = postDTO.Visibility;
+            postModel.ModifiedOn = DateTime.UtcNow;
 
-            var postModel = this.mapper.Map<Post>(postToUpdate);
             await this.context.SaveChangesAsync();
-
             return this.mapper.Map<PostDTO>(postModel);
         }
 
