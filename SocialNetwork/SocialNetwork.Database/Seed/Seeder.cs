@@ -589,11 +589,11 @@ namespace SocialNetwork.Database.Seeder
             builder.Entity<Town>().HasData(towns);
 
             var posts = new HashSet<Post>()
-            {                
+            {
                 new Post
                 {
                     Id = 1,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Magi
                     PhotoId = 1
@@ -601,7 +601,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 2,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
                     PhotoId = 2
@@ -609,7 +609,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 3,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
                     PhotoId = 3
@@ -617,7 +617,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 4,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),    // Victor
                     PhotoId = 4
@@ -625,7 +625,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 5,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),    // silvia
                     PhotoId = 5
@@ -633,7 +633,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 6,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"),    // Alexandra
                     PhotoId = 6
@@ -641,7 +641,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 7,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("b87071f5-b71c-45e1-91e7-6e85637ed10a"),    // Maria,
                     PhotoId = 7
@@ -649,7 +649,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 8,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"),    // Pablo,
                     PhotoId = 8
@@ -657,21 +657,21 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 9,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"),    // Radko
                     PhotoId = 9
                 },
                 new Post
                 {   Id = 10,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"),    // Kiro,
                     PhotoId = 10
                 },
                 new Post
                 {   Id = 11,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("6405b148-f626-4142-a342-0ccd2c82c30f"),    // bobi,
                     PhotoId = 11
@@ -679,7 +679,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 12,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("7f8793ff-03ab-458c-bc0e-ed4866a55b48"),    // Georgi,
                     PhotoId = 12
@@ -687,7 +687,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 13,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("a9e49452-8ffd-460d-9998-8f662e36a2d6"),    // Stanislav,
                     PhotoId = 13
@@ -695,7 +695,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 14,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("35547a2a-8779-416b-9fc8-7aab34e883bd"),    // Nikol,
                     PhotoId = 14
@@ -703,7 +703,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 15,
-                    Content = "My new profile photo:",
+                    Content = "My new profile photo",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("dc6788da-53ae-44e7-b53c-e53a2f77a1af"),    // C#,
                     PhotoId = 15
@@ -773,43 +773,43 @@ namespace SocialNetwork.Database.Seeder
                 {
                    Id = 9,
                    PostId = 9,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 10,
                    PostId = 10,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 11,
                    PostId = 11,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 12,
                    PostId = 12,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 13,
                    PostId = 13,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 14,
                    PostId = 14,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 },
                 new Photo
                 {
                    Id = 15,
                    PostId = 15,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
                 }
             };
             builder.Entity<Photo>().HasData(photos);

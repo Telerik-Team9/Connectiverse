@@ -119,11 +119,11 @@ namespace SocialNetwork.Services.Services
                 friendsPosts.AddRange(currFriendsPosts);
             }
 
-            if (!friendsPosts.Any())
-            {
-                throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
-            }
-
+          // if (!friendsPosts.Any())
+          // {
+          //     throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
+          // }
+          //
             return friendsPosts;
         }
 
