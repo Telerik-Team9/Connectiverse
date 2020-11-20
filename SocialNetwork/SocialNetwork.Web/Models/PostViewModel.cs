@@ -16,7 +16,7 @@ namespace SocialNetwork.Web.Models
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         public bool IsLiked { get; set; }
 
-        //public Guid UserId { get; set; }
+        public Guid UserId { get; set; }
         //[Required]
         public string UserDisplayName { get; set; }
         public string UserProfilePictureUrl { get; set; }

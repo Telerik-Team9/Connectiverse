@@ -55,21 +55,6 @@ namespace SocialNetwork.Services.Services
 
             return this.mapper.Map<PostDTO>(post); // TODO: QUestion
         }       //upload IFormFile
-        /*
-                public async Task<CommentDTO> CreateCommentAsync(CommentDTO commentDTO)
-                {
-                    if (commentDTO.PostId == 0 || commentDTO == null)
-                    {
-                        throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
-                    }
-
-                    // Create the comment and add it to the DB
-                    var comment = this.mapper.Map<Comment>(commentDTO);
-                    await this.context.Comments.AddAsync(comment);
-                    await this.context.SaveChangesAsync();
-
-                    return commentDTO;
-                }*/
 
         public async Task<bool> DeletePostAsync(int id) // Still not used
         {
@@ -181,7 +166,33 @@ namespace SocialNetwork.Services.Services
             return this.mapper.Map<PostDTO>(postModel);
         }
 
-        private async Task AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
+        public async Task<IEnumerable<PostDTO>> GetAllAsync()
+        {
+            return await this.context.Posts.Where(p => !p.IsDeleted)
+                             .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
+                             .ToListAsync();
+        }
+
+        public async Task<PostDTO> ChangeProfilePicture(IFormFile file, Guid userId)
+        {
+            var user = await this.context.Users
+               .FirstOrDefaultAsync(u => u.Id == userId)
+               ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
+
+            var url = await this.blobService.UploadToBlobStorageAsync(file);
+
+            var postDTO = new PostDTO { UserId = user.Id, PhotoUrl = url };
+
+            var post = await this.CreateAsync(postDTO, file);
+
+            user.ProfilePictureUrl = url;
+
+            await this.context.SaveChangesAsync();
+
+            return postDTO;
+        }
+
+        private async Task<string> AddMediaToPost(IFormFile file, PhotoDTO photoDTO, VideoDTO videoDTO, Post post)
         {
             if (file != null)
             {
@@ -193,6 +204,8 @@ namespace SocialNetwork.Services.Services
 
                 post.Photo = photo;
                 post.Video = null;
+
+                return url;
             }
             else if (photoDTO != null)
             {
@@ -201,6 +214,8 @@ namespace SocialNetwork.Services.Services
 
                 post.Photo = photo;
                 post.Video = null;
+
+                return photo.Url;
             }
             else if (videoDTO != null)
             {
@@ -209,19 +224,16 @@ namespace SocialNetwork.Services.Services
 
                 post.Video = video;
                 post.Photo = null;
+
+                return video.Url;
             }
             else
             {
                 post.Photo = null;
                 post.Video = null;
-            }
-        }
 
-        public async Task<IEnumerable<PostDTO>> GetAllAsync()
-        {
-            return await this.context.Posts.Where(p => !p.IsDeleted)
-                             .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
-                             .ToListAsync();
+                return default;
+            }
         }
     }
 }

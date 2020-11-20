@@ -16,5 +16,6 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<IEnumerable<PostDTO>> GetUserFriendsPostsAsync(Guid userId);
         Task<IEnumerable<PostDTO>> GetByContentAsync(string searchCriteria = "", string sortOrder = "mostRecent");
         Task<IEnumerable<PostDTO>> GetAllAsync();
+        public Task<PostDTO> ChangeProfilePicture(IFormFile file, Guid userId);
     }
 }
