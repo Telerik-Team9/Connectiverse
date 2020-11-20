@@ -55,6 +55,7 @@ namespace SocialNetwork.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<NotificationHub>("/notification");
             });
         }
     }

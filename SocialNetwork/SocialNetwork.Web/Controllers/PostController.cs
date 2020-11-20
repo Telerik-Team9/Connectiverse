@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SocialNetwork.Models;
 using SocialNetwork.Models.Common.Enums;
 using SocialNetwork.Services.DTOs;
@@ -23,13 +24,15 @@ namespace SocialNetwork.Web.Controllers
         private readonly ILikeService likeService;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
+        private readonly IHubContext<NotificationHub> hubContext;
 
         public PostController(IUserService userService,
             IPostService postService,
             ICommentService commentService,
             ILikeService likeService,
             UserManager<User> userManager,
-            IMapper mapper)
+            IMapper mapper,
+            IHubContext<NotificationHub> hubContext)
         {
             this.userService = userService;
             this.postService = postService;
@@ -37,6 +40,7 @@ namespace SocialNetwork.Web.Controllers
             this.likeService = likeService;
             this.userManager = userManager;
             this.mapper = mapper;
+            this.hubContext = hubContext;
         }
 
         // GET: FeedController/NewsFeed
@@ -213,8 +217,12 @@ namespace SocialNetwork.Web.Controllers
                 var postDTO = await this.postService.GetPostByIdAsync(viewModel.PostId);
                 postDTO.UserId = user.Id;
 
-                var likeDislike = viewModel.isLiked ? await this.likeService.DislikeAsync(postDTO)
+                var likeDislike = viewModel.isLiked
+                    ? await this.likeService.DislikeAsync(postDTO)
                     : await this.likeService.LikeAsync(postDTO);
+
+
+                await this.hubContext.Clients.All.SendAsync("Test", postDTO.Id, postDTO.Likes.Count);
 
                 return this.Ok();
             }

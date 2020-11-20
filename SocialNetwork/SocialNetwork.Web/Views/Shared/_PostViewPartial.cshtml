@@ -45,15 +45,17 @@
                         </button>*@
                     @if (Model.isLiked)
                     {
-                        <a href="" onclick="likepost(@Model.Post.Id, true)" />
-                        <i class="fa fa-thumbs-up" style="font-size:24px;color:blue"></i>
+                        <button onclick="likepost(@Model.Post.Id, true)">
+                            <i class="fa fa-thumbs-up" style="font-size:24px;color:blue"></i>
+                        </button>
                     }
                     else
                     {
-                        <a href="" onclick="likepost(@Model.Post.Id, false)" />
-                        <i class="fa fa-thumbs-up" style="font-size:24px;color:powderblue"></i>
+                        <a href="" onclick="likepost(@Model.Post.Id, false)">
+                            <i class="fa fa-thumbs-up" style="font-size:24px;color:powderblue"></i>
+                        </a>
                     }
-                    <span id="likesCount_@Model.PostId" class="b-r-muted">Likes (@Model.Post.Likes.Count)</span>
+                    <span id="likesCount_@Model.Post.Id" class="b-r-muted">Likes (@Model.Post.Likes.Count)</span>
                     <a href=""> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
                     @*<a href="#"> <i class="icofont icofont-share text-muted"></i> <span>Share (10)</span></a>*@
                 </div>

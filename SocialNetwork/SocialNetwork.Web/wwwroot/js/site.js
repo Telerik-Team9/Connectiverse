@@ -4,31 +4,39 @@
 // Write your JavaScript code.
 
 /*Like a post*/
+"use strict"
+let connection = new signalR.HubConnectionBuilder().withUrl("/notification").build();
 
-debugger;
 function likepost(postId, isLiked) {
-    let json = { postId: postId, isLiked: isLiked};
+    let json = { postId: postId, isLiked: isLiked };
     $.ajax({
         type: "POST",
-        url: "https://localhost:5001/Post/Like",
+        url: "/Post/Like",
         data: JSON.stringify(json),
         contentType: "application/json; charset=utf-8",
         processData: "json",
         success: function (data) {
-            console.log(data);
-            $('#likesCount_' + postId).html(data)
+            //alert(data);
+            //$('#likesCount_' + postId).html(data)
         }
     });
 };
 
 
+connection.on("Test", function (id, data) {
+    console.log("sdasd");
+    let spanId = 'likesCount_' + id;
+    document.getElementById(spanId).innerHTML = data;
+    console.log(spanId);
+    console.log($(`#${spanId}`));
+    console.log(data);
+});
 
 
-
-
-
-
-
+connection.start().then(function () {
+}).catch(function (err) {
+    return console.error(err.toString());
+});
 
 
 /* -----------------------------------------------
@@ -37,8 +45,8 @@ function likepost(postId, isLiked) {
 
 /* To load a config file (particles.json) you need to host this demo (MAMP/WAMP/local)... */
 
-particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('particles.js loaded - callback');
+particlesJS.load('particles-js', 'particles.json', function () {
+    console.log('particles.js loaded - callback');
 });
 
 

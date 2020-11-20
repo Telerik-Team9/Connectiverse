@@ -37,6 +37,8 @@ namespace SocialNetwork.Services.Services
                     CreatedOn = DateTime.UtcNow,
                 };
 
+                postDTO.Likes.Add(this.mapper.Map<LikeDTO>(addLike));
+
                 await this.context.Likes.AddAsync(addLike);
                 await this.context.SaveChangesAsync();
                 return true;
@@ -82,6 +84,8 @@ namespace SocialNetwork.Services.Services
 
             if (like != null)
             {
+                postDTO.Likes.Remove(this.mapper.Map<LikeDTO>(like));
+
                 this.context.Likes.Remove(like);
                 await this.context.SaveChangesAsync();
                 return false;

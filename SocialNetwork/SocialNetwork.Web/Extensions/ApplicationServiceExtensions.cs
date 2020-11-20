@@ -22,7 +22,11 @@ namespace SocialNetwork.Web.Extensions
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikeService, LikeService>();
             services.AddScoped<ITokenService, TokenService>();
+
             services.AddScoped<IAzureBlobService, AzureBlobService>();
+
+            services.AddScoped<NotificationHub>();
+            services.AddSignalR();
 
             services.AddDbContext<SocialNetworkDBContext>
             (
