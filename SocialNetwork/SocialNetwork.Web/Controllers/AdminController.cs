@@ -131,10 +131,15 @@ namespace SocialNetwork.Web.Controllers
 
         public async Task<IActionResult> DeleteUser(Guid userId)
         {
+            var posts = await this.postService.GetUserPostsAsync(userId);
             bool isDeleted = await this.userService.DeleteAsync(userId);
 
             if (isDeleted)
             {
+                foreach (var post in posts)
+                {
+                    await this.postService.DeletePostAsync(post.Id);
+                }
                 return RedirectToAction("ListUsers");
             }
 
