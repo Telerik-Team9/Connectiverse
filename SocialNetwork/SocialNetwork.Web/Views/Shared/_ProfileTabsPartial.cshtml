@@ -1,53 +1,108 @@
 ﻿@model UserViewModel
+@inject UserManager<User> UserManager
 
-    <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
+@{
+    var user = await this.UserManager.GetUserAsync(User);
+    var isLoggedIn = user.Id == Model.Id ? true : false;
+}
 
-        <!-- Profile Tabs -->
-        <div class="card social-tabs">
-            <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Timeline</a>
-                    <div class="slide"></div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
-                    <div class="slide"></div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#photos" role="tab">Photos</a>
-                    <div class="slide"></div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#friends" role="tab">Friends</a>
-                    <div class="slide"></div>
-                </li>
-            </ul>
-        </div>
+<div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
 
-        <!-- Profile Tabs Content -->
-        <div class="tab-content">
-            <!-- TIMELINE tab -->
-            @foreach (var post in Model.Posts)
+    <!-- Profile Tabs -->
+    <div class="card social-tabs">
+        <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Timeline</a>
+                <div class="slide"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
+                <div class="slide"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#photos" role="tab">Photos</a>
+                <div class="slide"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#friends" role="tab">Friends</a>
+                <div class="slide"></div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Profile Tabs Content -->
+    <div class="tab-content">
+
+        <!-- TIMELINE tab -->
+        @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+
+        <div class="tab-pane active" id="timeline">
+
+            @if (isLoggedIn)
             {
-                var postCommentVM = new PostCommentViewModel { Post = post };
-                <partial name="_PostViewPartial" model="postCommentVM" />
+                <!-- Write a comment -->
+                <div class="social-timelines p-relative">
+                    <div class="row timeline-right p-t-35">
+                        <div class="col-2 col-sm-2 col-xl-1"></div>
+                        <div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Update status</h5>
+                                </div>
+                                <div class="card-block user-box">
+                                    <form class="" method="post" asp-controller="Post" asp-action="Comment">
+                                        <div class="">
+                                            <textarea rows="5" cols="5" class="form-control" placeholder="What's on your mind?"></textarea>
+                                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                                <select class="form-control">
+                                                    <option>Users</option>
+                                                    <option>Posts</option>
+                                                </select>
+                                            </div>
+                                            <input style="display: none" value="" />
+                                            <div class="card-header">
+                                                <button class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="2k">
+                                                    <i class="fa fa-image" style="font-size:larger"></i>
+                                                </button>
+                                                <input type="submit" value="Post" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-            <!-- ABOUT tab -->
-            <partial name="_ProfileInfoTabPartial" model="Model" />
 
-            <!-- PHOTOS tab -->
-            <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
 
-            <!-- FRIENDS tab -->
-            <div class="tab-pane" id="friends">
-                <div class="row">
-                    @foreach (var friend in Model.Friends.Where(f => !f.IsDeleted))
+            <div class="row">
+                <div class="col-md-12 timeline-dot">
+                    @foreach (var post in Model.Posts)
                     {
-                        <partial name="_ProfileFriendsTabPartial" model="friend" />
+                        var postCommentVM = new PostCommentViewModel { Post = post };
+                        <partial name="_PostViewPartial" model="postCommentVM" />
                     }
                 </div>
             </div>
+        </div>
 
+        <!-- ABOUT tab -->
+        <partial name="_ProfileInfoTabPartial" model="Model" />
+
+        <!-- PHOTOS tab -->
+        <partial name="_ProfileGalleryTabPartial" model="Model.Posts" />  @*Only Posts with images*@
+
+        <!-- FRIENDS tab -->
+        <div class="tab-pane" id="friends">
+            <div class="row">
+                @foreach (var friend in Model.Friends.Where(f => !f.IsDeleted))
+                {
+                    <partial name="_ProfileFriendsTabPartial" model="friend" />
+                }
+            </div>
         </div>
 
     </div>
+
+</div>
