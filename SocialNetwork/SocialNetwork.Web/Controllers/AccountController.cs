@@ -42,6 +42,8 @@ namespace SocialNetwork.Web.Controllers
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
 
+            ViewData["visibility"] = Enum.GetValues(typeof(Visibility));
+
             return View(result);
         }
 

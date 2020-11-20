@@ -1,9 +1,13 @@
 ﻿@model UserViewModel
 @inject UserManager<User> UserManager
-
 @{
     var user = await this.UserManager.GetUserAsync(User);
     var isLoggedIn = user.Id == Model.Id ? true : false;
+
+    var postViewModel = new PostViewModel
+    {
+        UserId = Model.Id
+    };
 }
 
 <div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
@@ -37,45 +41,13 @@
         @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
         <div class="tab-pane active" id="timeline">
-
-            @if (isLoggedIn)
+            <!-- Create a post -->
+            @if(isLoggedIn)
             {
-                <!-- Write a comment -->
-                <div class="social-timelines p-relative">
-                    <div class="row timeline-right p-t-35">
-                        <div class="col-2 col-sm-2 col-xl-1"></div>
-                        <div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-header-text">Update status</h5>
-                                </div>
-                                <div class="card-block user-box">
-                                    <form class="" method="post" asp-controller="Post" asp-action="Comment">
-                                        <div class="">
-                                            <textarea rows="5" cols="5" class="form-control" placeholder="What's on your mind?"></textarea>
-                                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                                <select class="form-control">
-                                                    <option>Users</option>
-                                                    <option>Posts</option>
-                                                </select>
-                                            </div>
-                                            <input style="display: none" value="" />
-                                            <div class="card-header">
-                                                <button class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="2k">
-                                                    <i class="fa fa-image" style="font-size:larger"></i>
-                                                </button>
-                                                <input type="submit" value="Post" class="btn btn-primary" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <partial name="_CreatePostPartial" model="postViewModel" />
             }
 
-
+            <!-- All posts -->
             <div class="row">
                 <div class="col-md-12 timeline-dot">
                     @foreach (var post in Model.Posts)

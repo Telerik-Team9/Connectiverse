@@ -6,7 +6,6 @@
 }
 
 
-
 <div class="social-timelines p-relative">
     <div class="row timeline-right p-t-35">
         <div class="col-2 col-sm-2 col-xl-1">
@@ -93,7 +92,7 @@
                                 </div>*@
                             <form class="" method="post" asp-controller="Post" asp-action="Comment">
                                 <div class="">
-                                    <textarea rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></textarea>
+                                    <input rows="5" cols="5" class="form-control" asp-for="NewComment.Content" placeholder="Write Something here..."></input>
                                     <input style="display: none" asp-for="NewComment.PostId" value="@Model.Post.Id" />
                                     <div class="form-group">
                                         <input type="submit" value="Create" class="btn btn-primary" />
