@@ -11,9 +11,9 @@ namespace SocialNetwork.Services.Services.Contracts
     {
         // Create ?
         UserManager<User> UserManager { get; }
+        Task<bool> DeleteAsync(Guid userId);
+        Task<bool> IsLegitAsync(string userEmail);
         Task<UserDTO> GetByIdAsync(Guid id);
-        // Update ?
-        // Delete ?
         Task<SocialMediaDTO> CreateSocialMediaAsync(SocialMediaDTO model);
         Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId);    // API
         //Task<bool> AddFriendAsync(Guid userId, Guid userFriendId);

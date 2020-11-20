@@ -210,9 +210,40 @@ namespace SocialNetwork.Services.Services
         public async Task<bool> AreFriendsAsync(Guid senderId, Guid receiverId)
         {
             return await this.context.Friends
-                .AnyAsync(f => !f.IsDeleted && 
+                .AnyAsync(f => !f.IsDeleted &&
                                ((f.UserId == senderId && f.UserFriendId == receiverId) ||
                                (f.UserId == receiverId && f.UserFriendId == senderId)));
+        }
+
+        public async Task<bool> DeleteAsync(Guid userId)
+        {
+            try
+            {
+                var user = await this.context.Users.FirstAsync(u => u.Id == userId);
+
+                user.IsDeleted = true;
+                user.DeletedOn = DateTime.UtcNow;
+
+                await this.context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> IsLegitAsync(string userEmail)
+        {
+            var user = await this.context.Users
+                                 .FirstOrDefaultAsync(u => u.Email == userEmail && !u.IsDeleted);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)

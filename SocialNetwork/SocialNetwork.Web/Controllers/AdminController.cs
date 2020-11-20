@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -126,6 +127,18 @@ namespace SocialNetwork.Web.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        public async Task<IActionResult> DeleteUser(Guid userId)
+        {
+            bool isDeleted = await this.userService.DeleteAsync(userId);
+
+            if (isDeleted)
+            {
+                return RedirectToAction("ListUsers");
+            }
+
+            return BadRequest();
         }
 
     }

@@ -152,7 +152,31 @@ namespace SocialNetwork.Web.Controllers
 
                 var result = await this.postService.CreateAsync(postDTO, postViewModel.file);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Profile", "Account");
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ChangeProfilePhoto()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProfilePhoto(PostViewModel postViewModel)
+        {
+            try
+            {
+                var user = await this.userManager.GetUserAsync(User);
+
+                var result = await this.postService.ChangeProfilePicture(postViewModel.file, user.Id);
+
+                return RedirectToAction("Profile", "Account");
             }
             catch (Exception)
             {
