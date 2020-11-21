@@ -29,7 +29,14 @@
                                             </tr>*@
                                         <tr>
                                             <th class="social-label b-none">Birth Date</th>
-                                            <td class="social-user-name b-none text-muted">@Model.DateOfBirth.Value.Year/@Model.DateOfBirth.Value.Month/@Model.DateOfBirth.Value.Day</td>
+                                            @if (Model.DateOfBirth != null)
+                                            {
+                                                <td class="social-user-name b-none text-muted">@Model.DateOfBirth.Value.Year/@Model.DateOfBirth.Value.Month/@Model.DateOfBirth.Value.Day</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="social-user-name b-none text-muted">None provided</td>
+                                            }
                                         </tr>
                                         @*<tr>
                                                 <th class="social-label b-none">Martail Status</th>
@@ -37,7 +44,14 @@
                                             </tr>*@
                                         <tr>
                                             <th class="social-label b-none p-b-0">Education</th>
-                                            <td class="social-user-name b-none p-b-0 text-muted">@Model.Education</td>
+                                            @if (!string.IsNullOrWhiteSpace(Model.Education))
+                                            {
+                                                <td class="social-user-name b-none p-b-0 text-muted">@Model.Education</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="social-user-name b-none text-muted">None provided</td>
+                                            }
                                         </tr>
                                         @*<tr>
                                                 <th class="social-label b-none">Email</th>
@@ -115,7 +129,14 @@
                                     </tr>
                                     <tr>
                                         <th class="social-label b-none">Phone</th>
-                                        <td class="social-user-name b-none text-muted">@Model.PhoneNumber</td>
+                                        @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                                        {
+                                            <td class="social-user-name b-none text-muted">@Model.PhoneNumber</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="social-user-name b-none text-muted">None provided</td>
+                                        }
                                     </tr>
                                     <tr>
                                         <th class="social-label b-none">Socials</th>

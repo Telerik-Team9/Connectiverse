@@ -42,7 +42,10 @@
                                     <!-- Profile info -->
                                     <div class="card-block social-follower">
                                         <h4>@Model.DisplayName</h4>
-                                        <h5>@Model.Education</h5>
+                                        @if (!string.IsNullOrWhiteSpace(Model.Education))
+                                        {
+                                            <h5>@Model.Education</h5>
+                                        }
                                         <div class="row follower-counter">
                                             <!-- Profile Icons -->
                                             <div class="col-4">
