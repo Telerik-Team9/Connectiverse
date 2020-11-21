@@ -36,6 +36,7 @@ namespace SocialNetwork.API
 
             app.UseRouting();
 
+            // Unnecessary in the current project; Use it with Angular
             app.UseCors(policies => policies.AllowAnyHeader()
                                             .AllowAnyMethod()
                                             .WithOrigins("http://localhost:4200"));
