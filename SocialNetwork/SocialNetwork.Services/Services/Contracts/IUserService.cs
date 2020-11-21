@@ -27,5 +27,6 @@ namespace SocialNetwork.Services.Services.Contracts
         Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id);
         Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsSentAsync(Guid id);
         Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid id);
+        Task<(int, int, int, int)> GetStatistics();
     }
 }

@@ -246,6 +246,18 @@ namespace SocialNetwork.Services.Services
             return true;
         }
 
+        public async Task<(int, int, int, int)> GetStatistics()
+        {
+            (int userCount, int connectionsCount, int postsCount, int commentsCount) statistics;
+
+            statistics.userCount = await this.context.Users.CountAsync(u => !u.IsDeleted);
+            statistics.connectionsCount = await this.context.Friends.CountAsync(u => !u.IsDeleted) / 2;
+            statistics.postsCount = await this.context.Posts.CountAsync(u => !u.IsDeleted);
+            statistics.commentsCount = await this.context.Comments.CountAsync(u => !u.IsDeleted);
+
+            return statistics;
+        }
+
         private async Task<bool> AddFriendAsync(Guid userId, Guid userFriendId)
         {
             var friendship = await this.context.Friends

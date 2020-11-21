@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 
 namespace SocialNetwork.Web.Controllers
@@ -12,15 +13,20 @@ namespace SocialNetwork.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserService userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService userService)
         {
             _logger = logger;
+            this.userService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var statistics = await this.userService.GetStatistics();
+            var indexView = new HomeIndexViewModel(statistics);
+
+            return View(indexView);
         }
 
         public IActionResult Privacy()
