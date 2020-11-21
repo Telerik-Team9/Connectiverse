@@ -95,7 +95,7 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(2010, 11, 1),
                     Education = "Alpha C# Track",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -141,7 +141,7 @@ namespace SocialNetwork.Database.Seeder
 
                     DisplayName = "Maria Petrova",
                     DateOfBirth = new DateTime(1997, 10, 12),
-                    Education = "Sofia University",
+                    Education = "",
                     TownId = 1,
                     ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg"
                 },
@@ -175,7 +175,7 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1976, 12, 12),
                     Education = "UNWE",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -207,7 +207,7 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(2000, 12, 12),
                     Education = "UNWE",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -221,9 +221,9 @@ namespace SocialNetwork.Database.Seeder
 
                     DisplayName = "Nikol Peeva",
                     DateOfBirth = new DateTime(1999, 12, 12),
-                    Education = "Sofia University",
+                    Education = "",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -239,7 +239,7 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1990, 12, 10),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -249,13 +249,13 @@ namespace SocialNetwork.Database.Seeder
                     Email = "kiro@mail.com",
                     NormalizedEmail = "KIRO@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    PhoneNumber = "5435345345",
+                    PhoneNumber = "",
 
-                    DisplayName = "Kiro Stanoev",
+                    DisplayName = "Kiril Stanoev",
                     DateOfBirth = new DateTime(1990, 1, 10),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 },
                 new User()
                 {
@@ -265,13 +265,13 @@ namespace SocialNetwork.Database.Seeder
                     Email = "bobi@mail.com",
                     NormalizedEmail = "BOBI@MAIL.COM",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    PhoneNumber = "653534564",
+                    PhoneNumber = "",
 
-                    DisplayName = "Bobi Hadzhiev",
+                    DisplayName = "Boyan Hadzhiev",
                     DateOfBirth = new DateTime(1990, 2, 06),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                    ProfilePictureUrl = "/img/noavatar.jpg"
                 }
             };
             var hasher = new PasswordHasher<User>();
