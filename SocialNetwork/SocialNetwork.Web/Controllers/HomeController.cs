@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NewsAPI;
+using NewsAPI.Constants;
+using NewsAPI.Models;
+using Newtonsoft.Json;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
 
@@ -39,5 +43,36 @@ namespace SocialNetwork.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+
+        public async Task<IActionResult> GetNewsAsync()
+        {
+            // init with your API key
+            var newsApiClient = new NewsApiClient("77114c2a46ee4aa781a1286afe5986a6");
+            var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
+            {
+                Q = "Covid",
+                SortBy = SortBys.Popularity,
+                Language = Languages.EN,
+                From = new DateTime(2020, 10, 25)
+            });
+
+            if (articlesResponse.Status == Statuses.Ok)
+            {
+                return Ok(articlesResponse);
+            }
+
+            return BadRequest();
+        }
+
+/*        // total results found
+        Console.WriteLine(articlesResponse.TotalResults);
+                // here's the first 20
+                foreach (var article in articlesResponse.Articles)
+                {
+                    // title
+                    Console.WriteLine(JsonConvert.SerializeObject(article));
+                    Console.WriteLine();
+                }*/
+
+}
 }

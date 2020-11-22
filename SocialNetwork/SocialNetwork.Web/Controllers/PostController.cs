@@ -132,7 +132,6 @@ namespace SocialNetwork.Web.Controllers
             return Ok();
         }
 
-
         // Remove/update/modify
         [HttpGet]
         public IActionResult Create()
@@ -165,7 +164,6 @@ namespace SocialNetwork.Web.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> ChangeProfilePhoto(PostViewModel postViewModel)
