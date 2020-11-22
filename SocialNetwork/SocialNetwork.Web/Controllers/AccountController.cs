@@ -9,6 +9,7 @@ using System;
 using SocialNetwork.Models.Common.Enums;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -41,6 +42,11 @@ namespace SocialNetwork.Web.Controllers
             result.Posts = result.Posts
                 .OrderByDescending(p => p.CreatedOn)
                 .ToList();
+
+            result.Posts.Add(new PostViewModel()
+            {
+                file = new FormFile(default, default, default, default, default)
+            });
 
             ViewData["visibility"] = Enum.GetValues(typeof(Visibility));
 

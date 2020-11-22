@@ -65,10 +65,43 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <a asp-controller="Post" asp-action="ChangeProfilePhoto" class="btn btn-outline-primary btn-block">
-                                                <i class="icofont icofont-ui-user m-r-10">
-                                                </i>Change Picture
-                                            </a>
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLongTitle">Choose photo</h3>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <form method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="ChangeProfilePhoto">
+                                                                        <div class="form-group">
+                                                                            <label> Upload photo </label>
+                                                                            <label asp-for="@Model.Posts.Last().file" class="control-label"></label>
+                                                                            <input asp-for="@Model.Posts.Last().file" class="form-control" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <input type="submit" value="Upload" class="btn btn-primary" />
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                Change Picture
+                                            </button>
+
+                                            @*<a asp-controller="Post" asp-action="ChangeProfilePhoto" class="btn btn-outline-primary btn-block">
+                                                    <i class="icofont icofont-ui-user m-r-10">
+                                                    </i>Change Picture
+                                                </a>*@
+
                                         </div>
                                     </div>
                                 </div>
