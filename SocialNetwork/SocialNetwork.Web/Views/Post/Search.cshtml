@@ -1,5 +1,21 @@
 ﻿@model SearchViewModel
 
+@{
+    var resultsCount = Model.Users.Count() == 0 ? Model.Posts.Count() : Model.Users.Count();
+    var userVMs = new List<FriendViewModel>();
+
+    foreach (var user in Model.Users)
+    {
+        userVMs.Add(new FriendViewModel
+        {
+            UserFriendId = user.Id,
+            UserFriendDisplayName = user.DisplayName,
+            UserFriendProfilePictureUrl = user.ProfilePictureUrl,
+            UserEducation = user.Education
+        });
+    }
+}
+
 <style>
     body {
         @*margin-top: 20px;*@
@@ -261,7 +277,14 @@
                                     <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                         <select class="form-control" id="exampleFormControlSelect1" asp-for="SearchCriteria">
                                             <option>Users</option>
-                                            <option>Posts</option>
+                                            @if (Model.Posts.Count() != 0)
+                                            {
+                                                <option selected="selected">Posts</option>
+                                            }
+                                            else
+                                            {
+                                                <option>Posts</option>
+                                            }
                                         </select>
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-sm-12 p-0">
@@ -304,7 +327,7 @@
                                 <div class="result-header">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <div class="records">Showing: <b>1-20</b> of <b>200</b> result</div>
+                                            <div class="records">Showing: <b>1-20</b> of <b>@resultsCount </b> result</div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="result-actions">
@@ -317,7 +340,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="result-views">
-                                                    <button type="button" class="btn btn-dark btn-soft-base btn-icon">
+                                                    <a class="btn btn-dark btn-soft-base btn-icon" href="#boxView">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                              width="24"
                                                              height="24"
@@ -335,8 +358,8 @@
                                                             <line x1="3" y1="12" x2="3" y2="12"></line>
                                                             <line x1="3" y1="18" x2="3" y2="18"></line>
                                                         </svg>
-                                                    </button>
-                                                    <button type="button" class="btn btn-dark btn-soft-base btn-icon">
+                                                    </a>
+                                                    <a class="btn btn-dark btn-soft-base btn-icon" href="#listView">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                              width="24"
                                                              height="24"
@@ -352,7 +375,7 @@
                                                             <rect x="14" y="14" width="7" height="7"></rect>
                                                             <rect x="3" y="14" width="7" height="7"></rect>
                                                         </svg>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -363,44 +386,46 @@
                                         <div class="row justify-content-sm-center">
 
                                             <!-- Card View -->
-                                            @foreach (var user in Model.Users)
+                                            @foreach (var userVM in userVMs)
                                             {
-                                                <div class="col-lg-11 col-xl-5">
-                                                    <div class="card">
-                                                        <div class="card-block post-timelines" style="background-color: floralwhite">
-                                                            <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                            <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                                <a class="dropdown-item" href="#">Remove tag</a>                        @*DROPDOWN DOESNT CURRENTLY WORK?*@
-                                                                <a class="dropdown-item" href="#">Report Photo</a>
-                                                                <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                                <a class="dropdown-item" href="#">Blog User</a>
-                                                            </div>
+                                                <partial name="_ProfileFriendsTabPartial" model="userVM" />
+                                                @*
+                                                    <div class="col-lg-11 col-xl-5">
+                                                            <div class="card">
+                                                                <div class="card-block post-timelines" style="background-color: floralwhite">
+                                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
+                                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
+                                                                        <a class="dropdown-item" href="#">Remove tag</a>                        DROPDOWN DOESNT CURRENTLY WORK?
+                                                                        <a class="dropdown-item" href="#">Report Photo</a>
+                                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
+                                                                        <a class="dropdown-item" href="#">Blog User</a>
+                                                                    </div>
 
-                                                            <div class="media bg-white d-flex">
-                                                                <div class="media-left media-middle">
-                                                                    <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@user.Id">
-                                                                        <img class="media-object" width="120" src="@user.ProfilePictureUrl" alt="">
-                                                                    </a>
+                                                                    <div class="media bg-white d-flex">
+                                                                        <div class="media-left media-middle">
+                                                                            <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@user.Id">
+                                                                                <img class="media-object" width="120" src="@user.ProfilePictureUrl" alt="">
+                                                                            </a>
+                                                                        </div>
+                                                                        @if (!string.IsNullOrWhiteSpace(user.DisplayName))
+                                                                        {
+                                                                            <div class="media-body friend-elipsis">
+                                                                                <div class="f-15 f-bold m-b-5">@user.DisplayName</div>
+                                                                                <div class="text-muted social-designation">@user.Email</div>
+                                                                                <div class="text-muted social-designation">@user.Education</div>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="media-body friend-elipsis">
+                                                                                <div class="f-15 f-bold m-b-5">@user.Email</div>
+                                                                                <div class="text-muted social-designation">@user.Education</div>
+                                                                            </div>
+                                                                        }
+                                                                    </div>
                                                                 </div>
-                                                                @if (!string.IsNullOrWhiteSpace(user.DisplayName))
-                                                                {
-                                                                    <div class="media-body friend-elipsis">
-                                                                        <div class="f-15 f-bold m-b-5">@user.DisplayName</div>
-                                                                        <div class="text-muted social-designation">@user.Email</div>
-                                                                        <div class="text-muted social-designation">@user.Education</div>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="media-body friend-elipsis">
-                                                                        <div class="f-15 f-bold m-b-5">@user.Email</div>
-                                                                        <div class="text-muted social-designation">@user.Education</div>
-                                                                    </div>
-                                                                }
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        </div>*@
                                             }
 
                                             <!-- List View -->
@@ -411,48 +436,48 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="widget-26-job-emp-img">
-                                                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Company" />
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="@user.ProfilePictureUrl" alt="Company" />
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="widget-26-job-title">
-                                                                    <a href="#">Senior Software Engineer / Developer</a>
-                                                                    <p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>
+                                                                    <a href="#">@user.DisplayName</a>
+                                                                    @*<p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>*@
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="widget-26-job-info">
-                                                                    <p class="type m-0">Full-Time</p>
-                                                                    <p class="text-muted m-0">in <span class="location">London, UK</span></p>
+                                                                    <p class="type m-0">@user.Education</p>
+                                                                    @*<p class="text-muted m-0">in <span class="location">London, UK</span></p>*@
                                                                 </div>
                                                             </td>
-                                                            <td>
-                                                                <div class="widget-26-job-salary">$ 50/hr</div>
-                                                            </td>
+                                                            @*<td>
+                                                                    <div class="widget-26-job-salary">$ 50/hr</div>
+                                                                </td>*@
                                                             <td>
                                                                 <div class="widget-26-job-category bg-soft-base">
                                                                     <i class="indicator bg-base"></i>
                                                                     <span>Software Development</span>
                                                                 </div>
                                                             </td>
-                                                            <td>
-                                                                <div class="widget-26-job-starred">
-                                                                    <a href="#">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             width="24"
-                                                                             height="24"
-                                                                             viewBox="0 0 24 24"
-                                                                             fill="none"
-                                                                             stroke="currentColor"
-                                                                             stroke-width="2"
-                                                                             stroke-linecap="round"
-                                                                             stroke-linejoin="round"
-                                                                             class="feather feather-star">
-                                                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
+                                                            @*<td>
+                                                                    <div class="widget-26-job-starred">
+                                                                        <a href="#">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                 width="24"
+                                                                                 height="24"
+                                                                                 viewBox="0 0 24 24"
+                                                                                 fill="none"
+                                                                                 stroke="currentColor"
+                                                                                 stroke-width="2"
+                                                                                 stroke-linecap="round"
+                                                                                 stroke-linejoin="round"
+                                                                                 class="feather feather-star">
+                                                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>*@
                                                         </tr>
                                                     }
                                                 </tbody>
@@ -530,7 +555,7 @@
                                                 </ul>
                                             </nav>
                                         </div>
-
+                                        <br />
                                     </div>
                                 </div>
                             </div>
