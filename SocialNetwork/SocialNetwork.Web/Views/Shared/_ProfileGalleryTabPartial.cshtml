@@ -1,34 +1,81 @@
 ﻿@model ICollection<PostViewModel>
+@*@{
+    var photos = new List<string>();
+
+    foreach (var item in Model)
+    {
+        photos.Add(item.PhotoUrl);
+    }
+
+    int count = 0;
+}*@
 
 <div class="tab-pane" id="photos">
     <div class="card">
-
         <div class="card-block">
             <div class="demo-gallery">
-                <ul id="profile-lightgallery" class="row">
-                    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
-                        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                <!--<ul id="profile-lightgallery" class="row">-->
+                @foreach (var item in Model)
+                {
+                    <!--<li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
+                    <a href="#" data-target="#myModal" data-toggle="modal">-->
+                    @*<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">*@
+                    <!--<img src="item.PhotoUrl" class="img-fluid">
                         </a>
-                    </li>
-                    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
-                        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                        </a>
-                    </li>
-                    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
-                        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
-                        </a>
-                    </li>
-                    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
-                        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="img-fluid" alt="">
-                        </a>
-                    </li>
-                </ul>
+                    </li>-->
+
+                    <img id="myImg01" src="@item.PhotoUrl" width="250" height="200">
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <!-- The Close Button -->
+                        @*<span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>*@
+                        <!-- Modal Content (The Image) -->
+                        <img class="modal-content" id="img01">
+                        <!-- Modal Caption (Image Text) -->
+                        <div id="caption"></div>
+                    </div>
+
+                    //count++;
+                }
+                <!--</ul>-->
             </div>
         </div>
 
     </div>
 </div>
+
+
+@*@for (int i = 0; i < photos.Count; i++)
+    {
+        <div class="container">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    Modal content
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img class="img-fluid" style="margin:0 auto;" src="@photos[i]" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+@*<li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
+        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+        </a>
+    </li>
+    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
+        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+        </a>
+    </li>
+    <li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
+        <a href="#" data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">
+            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="img-fluid" alt="">
+        </a>
+    </li>*@
