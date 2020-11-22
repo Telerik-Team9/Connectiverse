@@ -132,7 +132,7 @@ namespace SocialNetwork.Services.Services
         {
             var users = await this.context.Users
                                   .Where(u => !u.IsDeleted)
-                                  .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                                  .ProjectTo<UserDTO>(this.mapper.ConfigurationProvider)
                                   .ToListAsync();
 
             if (!users.Any())

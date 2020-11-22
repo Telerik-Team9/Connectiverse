@@ -41,8 +41,6 @@ namespace SocialNetwork.ServicesTests.UserServiceTests
             var config = Utils.GetMappingConfig();
             var mapper = config.CreateMapper();
 
-            var dto = Mock.Of<SocialMediaDTO>();
-
             //Act & Assert
             using (var actContext = new SocialNetworkDBContext(options))
             {
@@ -50,7 +48,6 @@ namespace SocialNetwork.ServicesTests.UserServiceTests
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>
                      (async () => await sut.CreateSocialMediaAsync(default));
-
             }
         }
     }

@@ -60,8 +60,7 @@ namespace SocialNetwork.Services.Services
         {
             try
             {
-                var post = await this.context.Posts
-                               .FirstOrDefaultAsync(p => p.Id == id);
+                var post = await this.context.Posts.FirstOrDefaultAsync(p => p.Id == id);
 
                 post.IsDeleted = true;
                 post.DeletedOn = DateTime.UtcNow;
@@ -168,7 +167,8 @@ namespace SocialNetwork.Services.Services
 
         public async Task<IEnumerable<PostDTO>> GetAllAsync()
         {
-            return await this.context.Posts.Where(p => !p.IsDeleted)
+            return await this.context.Posts
+                             .Where(p => !p.IsDeleted)
                              .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
                              .ToListAsync();
         }

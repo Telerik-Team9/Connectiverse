@@ -39,11 +39,10 @@ namespace SocialNetwork.ServicesTests.UserServiceTests
         public async Task ReturnFalseIfError()
         {
             //Arrange
-            var options = Utils.GetOptions(nameof(ReturnTrueIfDeleted));
+            var options = Utils.GetOptions(nameof(ReturnFalseIfError));
             var config = Utils.GetMappingConfig();
             var mapper = config.CreateMapper();
             
-
             //Act & Assert
             using (var actContext = new SocialNetworkDBContext(options))
             {

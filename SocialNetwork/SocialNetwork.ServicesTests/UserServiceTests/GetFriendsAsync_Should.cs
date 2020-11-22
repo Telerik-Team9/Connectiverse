@@ -63,10 +63,10 @@ namespace SocialNetwork.ServicesTests.UserServiceTests
         }
 
         [TestMethod]
-        public async Task ReturnCorrectCount()
+        public async Task ReturnCorrectFriendCount()
         {
             //Arrange
-            var options = Utils.GetOptions(nameof(ReturnCorrectCount));
+            var options = Utils.GetOptions(nameof(ReturnCorrectFriendCount));
             var user = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270");
 
             var users = Utils.GetUsers();

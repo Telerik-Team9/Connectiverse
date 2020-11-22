@@ -301,15 +301,16 @@ namespace SocialNetwork.ServicesTests
         {
             return new MapperConfiguration(opts =>
             {
-                opts.AddProfile(typeof(UserVMConfig));
-                opts.AddProfile(typeof(PostVMConfig));
                 opts.AddProfile(typeof(CommentVMConfig));
-                opts.AddProfile(typeof(PhotoVMConfig));
                 opts.AddProfile(typeof(FriendRequestVMConfig));
                 opts.AddProfile(typeof(FriendVMConfig));
-                opts.AddProfile(typeof(SocialMediaVMConfig));
                 opts.AddProfile(typeof(LikeVMConfig));
+                opts.AddProfile(typeof(PhotoVMConfig));
+                opts.AddProfile(typeof(VideoVMConfig));
+                opts.AddProfile(typeof(PostVMConfig));
+                opts.AddProfile(typeof(SocialMediaVMConfig));
                 opts.AddProfile(typeof(TownVMConfig));
+                opts.AddProfile(typeof(UserVMConfig));
             });
         }
     }

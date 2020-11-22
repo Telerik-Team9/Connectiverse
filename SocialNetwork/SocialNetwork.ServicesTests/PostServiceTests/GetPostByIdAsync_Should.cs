@@ -1,40 +1,42 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SocialNetwork.Database;
 using SocialNetwork.Services.Services;
+using SocialNetwork.Services.Services.Contracts;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SocialNetwork.ServicesTests.UserServiceTests
+namespace SocialNetwork.ServicesTests.PostServiceTests
 {
     [TestClass]
-    public class GetByIdAsync_Should
+    public class GetPostByIdAsync_Should
     {
         [TestMethod]
-        public async Task SuccessWhen_ValidParams()
+        public async Task ReturnCorrectPost()
         {
             //Arrange
-            var options = Utils.GetOptions(nameof(SuccessWhen_ValidParams));
-            var id = Utils.GetUsers().First().Id;
-
+            var options = Utils.GetOptions(nameof(ReturnCorrectPost));
             var config = Utils.GetMappingConfig();
             var mapper = config.CreateMapper();
+            var azureBlobService = Mock.Of<IAzureBlobService>();
+
+            var post = Utils.GetPosts().First();
 
             using (var arrangeContext = new SocialNetworkDBContext(options))
             {
-                var users = Utils.GetUsers();
-
-                await arrangeContext.Users.AddRangeAsync(users);
+                await arrangeContext.Posts.AddAsync(post);
                 await arrangeContext.SaveChangesAsync();
             }
-            
+
             //Act & Assert
             using (var actContext = new SocialNetworkDBContext(options))
             {
-                var sut = new UserService(actContext, mapper);
-                var result = await sut.GetByIdAsync(id);
+                var sut = new PostService(actContext, azureBlobService, mapper);
+                var result = await sut.GetPostByIdAsync(post.Id);
 
-                Assert.AreEqual(result.Id, id);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(post.Id, result.Id);
             }
         }
 
@@ -43,18 +45,17 @@ namespace SocialNetwork.ServicesTests.UserServiceTests
         {
             //Arrange
             var options = Utils.GetOptions(nameof(ThrowWhen_InvalidParams));
-            var id = Utils.GetUsers().First().Id;
-
             var config = Utils.GetMappingConfig();
             var mapper = config.CreateMapper();
+            var azureBlobService = Mock.Of<IAzureBlobService>();
 
             //Act & Assert
             using (var actContext = new SocialNetworkDBContext(options))
             {
-                var sut = new UserService(actContext, mapper);
+                var sut = new PostService(actContext, azureBlobService, mapper);
 
                 await Assert.ThrowsExceptionAsync<ArgumentException>
-                     (async () => await sut.GetByIdAsync(default));
+                    (async () => await sut.GetPostByIdAsync(1));
             }
         }
     }
