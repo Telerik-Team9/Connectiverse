@@ -11,6 +11,7 @@ namespace SocialNetwork.Services.DTOs
         public Guid SenderId { get; set; }
         public string SenderDisplayName { get; set; }
         public string SenderProfilePictureUrl { get; set; }
+        public string SenderEducation { get; set; }
 
         public Guid ReceiverId { get; set; }
         public string ReceiverDisplayName { get; set; }
