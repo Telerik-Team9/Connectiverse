@@ -5,7 +5,6 @@
 
 /*Like a post*/
 
-debugger;
 function likepost(postId, isLiked) {
     let json = { postId: postId, isLiked: isLiked};
     $.ajax({
@@ -16,7 +15,8 @@ function likepost(postId, isLiked) {
         processData: "json",
         success: function (data) {
             console.log(data);
-            $('#likesCount_' + postId).html(data)
+            $('#likesCount_' + postId).html(data);
+            location.reload();
         }
     });
 };

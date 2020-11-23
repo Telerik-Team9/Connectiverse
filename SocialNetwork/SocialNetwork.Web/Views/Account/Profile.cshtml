@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <div class="timeline-btn">
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="changeCoverPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -27,14 +27,14 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <form method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="ChangeCoverPhoto">
+                                                        <form method="post" enctype="multipart/form-data">
                                                             <div class="form-group">
                                                                 <label> Upload photo </label>
                                                                 <label asp-for="@Model.Posts.Last().file" class="control-label"></label>
                                                                 <input asp-for="@Model.Posts.Last().file" class="form-control" />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Upload" class="btn btn-primary" />
+                                                                <input type="submit" value="Upload" class="btn btn-primary" asp-controller="Post" asp-action="ChangeCoverPhoto" />
                                                             </div>
                                                         </form>
                                                     </div>
@@ -43,7 +43,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changeCoverPhoto">
                                     Change picture
                                 </button>
                                 @*<a class="btn alime-btn" asp-controller="Post" asp-action="ChangeCoverPhoto">Change cover photo</a>*@
@@ -74,7 +74,7 @@
                                         }
                                         <!--<div class="row follower-counter">
                                             <!-- Profile Icons -->
-                                            <!--@*<div class="col-4">
+                                        <!--@*<div class="col-4">
                                                 <button class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="485">
                                                     <i class="fa fa-user"></i>
                                                 </button>
@@ -91,7 +91,7 @@
                                             </div>*@
                                         </div>-->
                                         <div class="">
-                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal fade" id="changeProfilePhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -119,7 +119,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changeProfilePhoto">
                                                 Change Picture
                                             </button>
 
