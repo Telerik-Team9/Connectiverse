@@ -226,7 +226,7 @@ body {
     width: 3px;
     background: #cccccc;
     left: 4%;
-    z-index: 0;
+    z-index: -1;
     height: 100%;
     top: 0;
 }
@@ -318,7 +318,7 @@ body {
 .profile-hvr i {
     cursor: pointer;
 }
-
+/*
 .social-timelines:before {
     position: absolute;
     content: ' ';
@@ -328,7 +328,7 @@ body {
     z-index: 0;
     height: 100%;
     top: 0;
-}
+}*/
 
 .timeline-dot:after,
 .timeline-dot:before {

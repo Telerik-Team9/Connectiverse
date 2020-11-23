@@ -2,22 +2,29 @@
 @model List<PostCommentViewModel>
 
 @inject UserManager<User> UserManager
-@{
-    ViewData["Title"] = "Index";
+@{ ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var user = await UserManager.GetUserAsync(User);
-}
+    var user = await UserManager.GetUserAsync(User); }
+
+<style>
+    .social-timelines:before {
+        background: rgba(0, 0, 0, 0);
+    }
+</style>
+
+<br />
+<br />
+<br />
+<br />
+<br />
 
 <div class="container">
 
     <h1>Have a great @DateTime.Today.DayOfWeek, @user.DisplayName.Split(' ')[0]!</h1>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+
     @foreach (var item in Model)
     {
-        <partial name="_PostViewPartial" model="item" />
-    }
+<partial name="_PostViewPartial" model="item" />}
 </div>
 @*<table class="table">
         <thead>

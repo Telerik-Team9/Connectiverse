@@ -46,7 +46,7 @@
                                             <li><a asp-controller="Account" asp-action="Profile">Profile</a></li>
                                             @if (User.IsInRole("Admin"))
                                             {
-                                                <li><a asp-controller="Admin" asp-action="AdminPanel">Admin Panel</a></li>
+                                                <li><a asp-controller="Admin" asp-action="ListUsers">Admin Panel</a></li>
                                             }
                                             <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a></li>
                                             <li>

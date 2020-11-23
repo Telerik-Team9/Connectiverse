@@ -4,10 +4,19 @@
     ViewData["Title"] = "ListPosts";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<br />
+<br />
+<br />
+<br />
+<br />
 <div class="container">
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListUsers">Users</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListPosts">Posts</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListComments">Comments</a></li>
+    </ul>
+
     <h1>ListPosts</h1>
     <table class="table">
         <thead>

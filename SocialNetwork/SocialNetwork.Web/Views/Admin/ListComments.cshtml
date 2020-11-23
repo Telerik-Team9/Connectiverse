@@ -4,8 +4,19 @@
     ViewData["Title"] = "ListComments";
 }
 
-
+<br />
+<br />
+<br />
+<br />
+<br />
 <div class="container">
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListUsers">Users</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListPosts">Posts</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListComments">Comments</a></li>
+    </ul>
+
     <h1>ListComments</h1>
     <table class="table">
         <thead>
@@ -62,4 +73,5 @@
             }
         </tbody>
     </table>
+
 </div>

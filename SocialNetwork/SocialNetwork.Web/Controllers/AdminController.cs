@@ -29,12 +29,6 @@ namespace SocialNetwork.Web.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> ListUsers()
         {
             var users = await this.userService.GetAllAsync();
