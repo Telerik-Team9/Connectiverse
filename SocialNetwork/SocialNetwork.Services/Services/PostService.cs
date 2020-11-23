@@ -60,7 +60,8 @@ namespace SocialNetwork.Services.Services
         {
             try
             {
-                var post = await this.context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+                var post = await this.context.Posts
+                               .FirstOrDefaultAsync(p => p.Id == id);
 
                 post.IsDeleted = true;
                 post.DeletedOn = DateTime.UtcNow;
@@ -167,13 +168,12 @@ namespace SocialNetwork.Services.Services
 
         public async Task<IEnumerable<PostDTO>> GetAllAsync()
         {
-            return await this.context.Posts
-                             .Where(p => !p.IsDeleted)
+            return await this.context.Posts.Where(p => !p.IsDeleted)
                              .ProjectTo<PostDTO>(this.mapper.ConfigurationProvider)
                              .ToListAsync();
         }
 
-        public async Task<PostDTO> ChangeProfilePicture(IFormFile file, Guid userId)
+        public async Task<PostDTO> ChangeDisplayPicture(IFormFile file, Guid userId, string photoType)
         {
             var user = await this.context.Users
                .FirstOrDefaultAsync(u => u.Id == userId)
@@ -185,8 +185,14 @@ namespace SocialNetwork.Services.Services
 
             var post = await this.CreateAsync(postDTO, file);
 
-            user.ProfilePictureUrl = url;
-
+            if (photoType == "profile")
+            {
+                user.ProfilePictureUrl = url;
+            }
+            else if(photoType == "cover")
+            {
+                user.CoverPictureUrl = url;
+            }
             await this.context.SaveChangesAsync();
 
             return postDTO;

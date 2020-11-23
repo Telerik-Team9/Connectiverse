@@ -484,55 +484,19 @@
                                             </table>
 
                                             <!-- Card View -->
-                                            @foreach (var post in Model.Posts)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Company" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-title">
-                                                            <a href="#">@post.UserDisplayName</a>
-                                                            <!--<p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>-->
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-info">
-                                                            <p class="type m-0">@post.Content</p>
-                                                            <!--<p class="text-muted m-0">in <span class="location">London, UK</span></p>-->
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-salary">@post.CreatedOn</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-category bg-soft-base">
-                                                            <i class="indicator bg-base"></i>
-                                                            <span>@post.Likes.Count</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-starred">
-                                                            <a href="#">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     width="24"
-                                                                     height="24"
-                                                                     viewBox="0 0 24 24"
-                                                                     fill="none"
-                                                                     stroke="currentColor"
-                                                                     stroke-width="2"
-                                                                     stroke-linecap="round"
-                                                                     stroke-linejoin="round"
-                                                                     class="feather feather-star">
-                                                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            }
+
+                                            <div class="row">
+                                                <div class="col-md-12 timeline-dot">
+                                                    @foreach (var post in Model.Posts)
+                                                    {
+
+                                                        var postCommentModel = new PostCommentViewModel { PostId = post.Id, Post = post };
+
+                                                        <partial name="_PostViewPartial" model="postCommentModel" />
+
+                                                    }
+                                                </div>
+                                            </div>
 
                                             <nav class="d-flex justify-content-center">
                                                 <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
