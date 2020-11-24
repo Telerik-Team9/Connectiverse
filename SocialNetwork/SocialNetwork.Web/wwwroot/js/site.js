@@ -5,8 +5,40 @@
 
 /*Like a post*/
 
+//function likepost(postId, button) {
+
+//    let $button = $(button);
+//    let isLiked = $button.attr('isliked');
+//    let json = { postId: postId, isLiked: isLiked };
+//    let likesCount = $('#likesCount_' + postId);
+
+//    $.ajax({
+//        type: "POST",
+//        url: "https://localhost:5001/Post/Like",
+//        data: JSON.stringify(json),
+//        contentType: "application/json; charset=utf-8",
+//        processData: "json",
+
+//        success: function (data) {
+//            if (isLiked === 'true') {
+//                $button.css('color', 'powderblue');//.color = "blue";
+//                button.setAttribute('isliked', 'false');
+//                likesCount.text() = likes(likesCount + 1);
+//                //button.style.color = "powderblue";
+
+//            } else {
+//                $button.css('color', 'blue');
+//                button.setAttribute('isliked', 'true');
+//            }
+//            console.log(isLiked);
+
+//            $('#likesCount_' + postId).html(data);
+//        }
+//    });
+//};
+
 function likepost(postId, isLiked) {
-    let json = { postId: postId, isLiked: isLiked};
+    let json = { postId: postId, isLiked: isLiked };
     $.ajax({
         type: "POST",
         url: "https://localhost:5001/Post/Like",
@@ -23,12 +55,31 @@ function likepost(postId, isLiked) {
 
 
 
+function showComments(postId) {
 
+    let commentBlock = $('#comments_' + postId);
+    let comments = commentBlock.children();
 
+    let attr = commentBlock.attr('data-display');
 
+    if (typeof attr !== typeof undefined && attr !== false) {
 
-
-
+        for (var i = 0; i < comments.length; i++) {
+            comments[i].removeAttribute('hidden');
+        }
+        commentBlock.removeAttr('data-display');
+    }
+    else {
+        for (var i = 0; i < comments.length; i++) {
+            if (i > 2) {
+                if (i !== comments.length - 1) {
+                    comments[i].setAttribute('hidden', 'hidden');
+                }
+            }
+        }
+        commentBlock.attr('data-display', 'on');
+    }
+}
 
 
 /* -----------------------------------------------
@@ -37,8 +88,8 @@ function likepost(postId, isLiked) {
 
 /* To load a config file (particles.json) you need to host this demo (MAMP/WAMP/local)... */
 
-particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('particles.js loaded - callback');
+particlesJS.load('particles-js', 'particles.json', function () {
+    console.log('particles.js loaded - callback');
 });
 
 
