@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Change picture
+                                    Change Cover
                                 </button>
                                 @*<a class="btn alime-btn" asp-controller="Post" asp-action="ChangeCoverPhoto">Change cover photo</a>*@
                             </div>
@@ -74,7 +74,7 @@
                                         }
                                         <!--<div class="row follower-counter">
                                             <!-- Profile Icons -->
-                                            <!--@*<div class="col-4">
+                                        <!--@*<div class="col-4">
                                                 <button class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="485">
                                                     <i class="fa fa-user"></i>
                                                 </button>
@@ -182,23 +182,28 @@
                                     </div>*@
 
                                 <!-- Friends -->
-                                @*<div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-header-text d-inline-block">Friends</h5>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-header-text d-inline-block">Friends</h5>
 
-                                            <span class="label label-primary f-right"> See 12 More </span>
-                                        </div>
-                                        <div class="card-block friend-box">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
+                                        <span class="label label-primary f-right"> @Model.Friends.Count() </span>
+                                    </div>
+                                    <div class="card-block friend-box">
+                                        @foreach (var friend in Model.Friends.Take(6))
+                                        {
+                                            <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@friend.UserFriendId">
+                                                <img class="media-object img-radius" src="@friend.UserFriendProfilePictureUrl" data-toggle="tooltip" data-placement="top" data-original-title="user image">
+                                            </a>
+                                        }
+                                        @*<img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
                                             <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
                                             <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
                                             <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
                                             <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
                                             <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                        </div>
-                                    </div>*@
+                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">*@
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
