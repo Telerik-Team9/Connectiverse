@@ -27,14 +27,14 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <form method="post" enctype="multipart/form-data">
+                                                        <form method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="ChangeCoverPhoto">
                                                             <div class="form-group">
                                                                 <label> Upload photo </label>
                                                                 <label asp-for="@Model.Posts.Last().file" class="control-label"></label>
                                                                 <input asp-for="@Model.Posts.Last().file" class="form-control" />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Upload" class="btn btn-primary" asp-controller="Post" asp-action="ChangeCoverPhoto" />
+                                                                <input type="submit" value="Upload" class="btn btn-primary" />
                                                             </div>
                                                         </form>
                                                     </div>
@@ -43,7 +43,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changeCoverPhoto">
                                     Change Cover
                                 </button>
                                 @*<a class="btn alime-btn" asp-controller="Post" asp-action="ChangeCoverPhoto">Change cover photo</a>*@

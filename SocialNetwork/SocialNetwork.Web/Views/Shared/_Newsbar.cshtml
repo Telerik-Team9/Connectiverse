@@ -52,11 +52,9 @@
 <nav class="newsbar">
     <ul>
         <li>
-            <a href="http://justinfarrow.com">
-                <span class="newsbar-text" style="color:pink">
-                    
-                </span>
-            </a>
+            <span class="newsbar-text" style="color:pink">
+                @await Component.InvokeAsync("Newsbar");
+            </span>
         </li>
     </ul>
     <ul class="logout">
