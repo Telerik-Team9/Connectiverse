@@ -1,6 +1,12 @@
-﻿@model IEnumerable<SocialNetwork.Web.Models.FriendRequestViewModel>
+﻿@using Microsoft.AspNetCore.Identity;
+@using SocialNetwork.Models;
+@model IEnumerable<SocialNetwork.Web.Models.FriendRequestViewModel>
+@inject UserManager<User> userManager;
 
-@{ ViewData["Title"] = "View"; }
+@{
+    ViewData["Title"] = "View";
+    var loggedUser = await userManager.GetUserAsync(User);
+}
 
 <style>
     body {
@@ -271,60 +277,73 @@
                                             <tbody>
                                                 @foreach (var user in Model)
                                                 {
-                                    <tr>
-                                        <td>
-                                            <div class="widget-26-job-emp-img">
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="@user.SenderProfilePictureUrl" alt="Company" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="widget-26-job-title">
-                                                <a href="#">@user.SenderDisplayName</a>
-                                                @*<p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>*@
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="widget-26-job-info">
-                                                <p class="type m-0">@user.SenderEducation</p>
-                                                @*<p class="text-muted m-0">in <span class="location">London, UK</span></p>*@
-                                            </div>
-                                        </td>
-                                        @*<td>
-                                                <div class="widget-26-job-salary">$ 50/hr</div>
-                                            </td>*@
-                                        <td>
-                                            <div class="widget-26-job-category bg-soft-base">
-                                                @*FINISH LATER!*@
-                                                @*<a type="button" class="btn btn-outline-primary waves-effect btn-block"
-                                                   asp-controller="Account"
-                                                   asp-action="ChangeFriendshipStatus"
-                                                   asp-route-userId="@user.Id" asp-route-friendId="" asp-route-type="accept">
-                                                    <i class="icofont icofont-ui-user m-r-10"></i> Accept request
-                                                </a>*@
-                                                <i class="indicator bg-base"></i>
-                                                <span>Software Development</span>
-                                            </div>
-                                        </td>
-                                        @*<td>
-                                                <div class="widget-26-job-starred">
-                                                    <a href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                             width="24"
-                                                             height="24"
-                                                             viewBox="0 0 24 24"
-                                                             fill="none"
-                                                             stroke="currentColor"
-                                                             stroke-width="2"
-                                                             stroke-linecap="round"
-                                                             stroke-linejoin="round"
-                                                             class="feather feather-star">
-                                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </td>*@
-                                    </tr>
-}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="widget-26-job-emp-img">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="@user.SenderProfilePictureUrl" alt="Company" />
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="widget-26-job-title">
+                                                                <a href="#">@user.SenderDisplayName</a>
+                                                                @*<p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>*@
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="widget-26-job-info">
+                                                                <p class="type m-0">@user.SenderEducation</p>
+                                                                @*<p class="text-muted m-0">in <span class="location">London, UK</span></p>*@
+                                                            </div>
+                                                        </td>
+                                                        @*<td>
+                                                                <div class="widget-26-job-salary">$ 50/hr</div>
+                                                            </td>*@
+                                                        <td>
+                                                            <div class="widget-26-job-category bg-soft-base">
+                                                                @*FINISH LATER!*@
+                                                                <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                                   asp-controller="Account"
+                                                                   asp-action="ChangeFriendshipStatus"
+                                                                   asp-route-userId="@loggedUser.Id" asp-route-friendId="@user.SenderId" asp-route-type="accept">
+                                                                    <i class="icofont icofont-ui-user m-r-10"></i> Accept request
+                                                                </a>
+                                                                <i class="indicator bg-base"></i>
+                                                                @*<span>Software Development</span>*@
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="widget-26-job-category bg-soft-base">
+                                                                @*FINISH LATER!*@
+                                                                <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                                   asp-controller="Account"
+                                                                   asp-action="ChangeFriendshipStatus"
+                                                                   asp-route-userId="@loggedUser.Id" asp-route-friendId="@user.SenderId" asp-route-type="decline">
+                                                                    <i class="icofont icofont-ui-user m-r-10"></i> Decline request
+                                                                </a>
+                                                                <i class="indicator bg-base"></i>
+                                                                @*<span>Software Development</span>*@
+                                                            </div>
+                                                        </td>
+                                                        @*<td>
+                                                                <div class="widget-26-job-starred">
+                                                                    <a href="#">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             width="24"
+                                                                             height="24"
+                                                                             viewBox="0 0 24 24"
+                                                                             fill="none"
+                                                                             stroke="currentColor"
+                                                                             stroke-width="2"
+                                                                             stroke-linecap="round"
+                                                                             stroke-linejoin="round"
+                                                                             class="feather feather-star">
+                                                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            </td>*@
+                                                    </tr>
+                                                }
                                             </tbody>
                                         </table>
 
@@ -385,37 +404,37 @@
     <tbody>
         @foreach (var item in Model)
         {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsDeleted)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SenderId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SenderDisplayName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SenderProfilePictureUrl)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReceiverId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReceiverDisplayName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReceiverProfilePictureUrl)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>
-</tr>
-}
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderDisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderProfilePictureUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverDisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverProfilePictureUrl)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

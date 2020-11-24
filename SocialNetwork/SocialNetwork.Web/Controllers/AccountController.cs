@@ -122,6 +122,10 @@ namespace SocialNetwork.Web.Controllers
                 {
                     await this.userService.RemoveFriendAsync(userId, friendId);
                 }
+                else if (type == "decline")
+                {
+                    await this.userService.DeleteFriendRequestAsync(friendId, userId);
+                }
                 return this.RedirectToAction("FriendProfile", new { userId = friendId });
             }
             catch (Exception)
