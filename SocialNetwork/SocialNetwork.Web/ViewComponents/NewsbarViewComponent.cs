@@ -14,7 +14,7 @@ namespace SocialNetwork.Web.ViewComponents
             var newsApiClient = new NewsApiClient("77114c2a46ee4aa781a1286afe5986a6");
             var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
             {
-                Q = "Covid",
+                Q = "Jokes",
                 SortBy = SortBys.Popularity,
                 Language = Languages.EN,
                 From = new DateTime(2020, 10, 25)

@@ -15,7 +15,7 @@
     <partial name="_Navbar" />
 
     <!-- Newsbar -->
-    <partial name="_Newsbar" />
+    @await Component.InvokeAsync("Newsbar") 
 
     <div class="">
         <main role="main" class="pb-3">
