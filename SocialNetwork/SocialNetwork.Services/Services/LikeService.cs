@@ -63,7 +63,7 @@ namespace SocialNetwork.Services.Services
             {
                 return false;
             }
-        }
+        } //remove
 
         public async Task<LikeDTO> GetByIdAsync(int id)
         {
@@ -73,7 +73,7 @@ namespace SocialNetwork.Services.Services
                                  ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
             return this.mapper.Map<LikeDTO>(like);
-        }
+        } //remove
 
         public async Task<bool> DislikeAsync(PostDTO postDTO)
         {

@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
 using SocialNetwork.Models.Common.Enums;
@@ -306,11 +305,11 @@ namespace SocialNetwork.ServicesTests
                 opts.AddProfile(typeof(FriendVMConfig));
                 opts.AddProfile(typeof(LikeVMConfig));
                 opts.AddProfile(typeof(PhotoVMConfig));
-                opts.AddProfile(typeof(VideoVMConfig));
                 opts.AddProfile(typeof(PostVMConfig));
                 opts.AddProfile(typeof(SocialMediaVMConfig));
                 opts.AddProfile(typeof(TownVMConfig));
                 opts.AddProfile(typeof(UserVMConfig));
+                opts.AddProfile(typeof(VideoVMConfig));
             });
         }
     }

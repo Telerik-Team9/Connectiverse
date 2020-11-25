@@ -26,7 +26,7 @@ namespace SocialNetwork.Services.Services
 
         public async Task<CommentDTO> CreateAsync(CommentDTO commentDTO)
         {
-            if (commentDTO.PostId == 0 || commentDTO == null)
+            if (commentDTO == null || commentDTO.PostId == 0)
             {
                 throw new ArgumentNullException(ExceptionMessages.EntityNotFound);
             }
@@ -88,10 +88,12 @@ namespace SocialNetwork.Services.Services
 
         public async Task<IEnumerable<CommentDTO>> GetAllAsync()
         {
-            return await this.context.Comments
+           var result = await this.context.Comments
                 .Where(c => !c.IsDeleted)
                 .ProjectTo<CommentDTO>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            return result;
         }
     }
 }
