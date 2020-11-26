@@ -261,6 +261,45 @@
     }
 </style>
 
+<style>
+
+    .page {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .pagination li {
+        list-style-type: none;
+        float: left;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #FFF;
+        background-color: cadetblue;
+        color: #FFF;
+        text-align: center;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+        .pagination li:hover {
+            background-color: #fff;
+            border: 1px solid #000;
+            color: #000
+        }
+
+    .pagination ul {
+        border: 0;
+        padding: 0;
+    }
+
+    .active {
+        background-color: #fff !important;
+        border: 1px solid #000 !important;
+        color: #000 !important;
+    }
+</style>
+
 <br />
 <br />
 <br />
@@ -389,43 +428,6 @@
                                             @foreach (var userVM in userVMs)
                                             {
                                                 <partial name="_ProfileFriendsTabPartial" model="userVM" />
-                                                @*
-                                                    <div class="col-lg-11 col-xl-5">
-                                                            <div class="card">
-                                                                <div class="card-block post-timelines" style="background-color: floralwhite">
-                                                                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                                                                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                                                                        <a class="dropdown-item" href="#">Remove tag</a>                        DROPDOWN DOESNT CURRENTLY WORK?
-                                                                        <a class="dropdown-item" href="#">Report Photo</a>
-                                                                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                                                                        <a class="dropdown-item" href="#">Blog User</a>
-                                                                    </div>
-
-                                                                    <div class="media bg-white d-flex">
-                                                                        <div class="media-left media-middle">
-                                                                            <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@user.Id">
-                                                                                <img class="media-object" width="120" src="@user.ProfilePictureUrl" alt="">
-                                                                            </a>
-                                                                        </div>
-                                                                        @if (!string.IsNullOrWhiteSpace(user.DisplayName))
-                                                                        {
-                                                                            <div class="media-body friend-elipsis">
-                                                                                <div class="f-15 f-bold m-b-5">@user.DisplayName</div>
-                                                                                <div class="text-muted social-designation">@user.Email</div>
-                                                                                <div class="text-muted social-designation">@user.Education</div>
-                                                                            </div>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <div class="media-body friend-elipsis">
-                                                                                <div class="f-15 f-bold m-b-5">@user.Email</div>
-                                                                                <div class="text-muted social-designation">@user.Education</div>
-                                                                            </div>
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>*@
                                             }
 
                                             <!-- List View -->
@@ -484,40 +486,42 @@
                                             </table>
 
                                             <!-- Card View -->
-
                                             <div class="row">
                                                 <div class="col-md-12 timeline-dot">
                                                     @foreach (var post in Model.Posts)
                                                     {
-
                                                         var postCommentModel = new PostCommentViewModel { PostId = post.Id, Post = post };
 
-                                                        <partial name="_PostViewPartial" model="postCommentModel" />
-
+                                                        <div class="post">
+                                                            <partial name="_PostViewPartial" model="postCommentModel" />
+                                                        </div>
                                                     }
+                                                    <div class="pagination"></div>
                                                 </div>
                                             </div>
 
-                                            <nav class="d-flex justify-content-center">
-                                                <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
-                                                    <li class="page-item">
-                                                        <a class="page-link no-border" href="#">
-                                                            <span aria-hidden="true">«</span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link no-border" href="#">
-                                                            <span aria-hidden="true">»</span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
+
+
+                                            @*<nav class="d-flex justify-content-center">
+                                                    <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
+                                                        <li class="page-item">
+                                                            <a class="page-link no-border" href="#">
+                                                                <span aria-hidden="true">«</span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
+                                                        <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
+                                                        <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
+                                                        <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
+                                                        <li class="page-item">
+                                                            <a class="page-link no-border" href="#">
+                                                                <span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>*@
                                         </div>
                                         <br />
                                     </div>
@@ -530,9 +534,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 

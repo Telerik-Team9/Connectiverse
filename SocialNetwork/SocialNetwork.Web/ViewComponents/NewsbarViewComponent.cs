@@ -17,7 +17,7 @@ namespace SocialNetwork.Web.ViewComponents
                 Q = "Jokes",
                 SortBy = SortBys.Popularity,
                 Language = Languages.EN,
-                From = new DateTime(2020, 10, 25)
+                From = DateTime.UtcNow.AddDays(-3)
             });
 
             if (articlesResponse.Status == Statuses.Ok)
