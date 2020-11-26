@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialNetwork.Web.Extensions;
+using SocialNetwork.Web.Hubs;
 
 namespace SocialNetwork.Web
 {
@@ -47,7 +48,7 @@ namespace SocialNetwork.Web
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization(); 
 
             app.UseEndpoints(endpoints =>
             {
@@ -55,6 +56,7 @@ namespace SocialNetwork.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/Messenger");
             });
         }
     }

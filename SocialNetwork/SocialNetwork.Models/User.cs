@@ -32,5 +32,6 @@ namespace SocialNetwork.Models
         public ICollection<SocialMedia> SocialMedias { get; set; } = new HashSet<SocialMedia>();
         public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        public ICollection<Message> Messages { get; set; } = new HashSet<Message>();
     }
 }
