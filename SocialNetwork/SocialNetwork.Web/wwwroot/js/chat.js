@@ -22,19 +22,18 @@ const messagesQueue = [];
 //        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 //});
 
-function clearInputField() {
-    messagesQueue.push(textInput.value);
-    textInput.value = "";
-}
+//function clearInputField() {
+//    messagesQueue.push(textInput.value);
+//    textInput.value = "";
+//}
 
-function sendMessage() {
-    let text = messagesQueue.shift() || "";
-    if (text.trim() === "") return;
-    
-    let when = new Date();
-    let message = new Message(username, text);
-    sendMessageToHub(message);
-}
+//function sendMessage() {
+//    let text = messagesQueue.shift() || "";
+//    if (text.trim() === "") return;    
+//    let when = new Date();
+//    let message = new Message(username, text);
+//    sendMessageToHub(message);
+//}
 
 function addMessageToChat(message) {
 

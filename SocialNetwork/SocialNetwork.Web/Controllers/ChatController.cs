@@ -19,7 +19,7 @@ namespace SocialNetwork.Web.Controllers
         private readonly IChatService chatService;
         private readonly IHubContext<ChatHub> chatHub;
 
-        public ChatController(UserManager<User> userManager, IChatService chatService,  IHubContext<ChatHub> chatHub)
+        public ChatController(UserManager<User> userManager, IChatService chatService, IHubContext<ChatHub> chatHub)
         {
             this.userManager = userManager;
             this.chatService = chatService;
@@ -39,18 +39,16 @@ namespace SocialNetwork.Web.Controllers
         public async Task<IActionResult> Create(string input)
         {
             var user = await this.userManager.GetUserAsync(User);
-
-
             var message = new Message();
             message.Text = input;
 
             message.UserName = user.DisplayName;
             message.UserId = user.Id;
 
-           var result = await this.chatService.CreateMessageAsync(message);
-                   
+            var result = await this.chatService.CreateMessageAsync(message);
 
-            if(result == false)
+
+            if (result == false)
             {
                 return BadRequest();
             }

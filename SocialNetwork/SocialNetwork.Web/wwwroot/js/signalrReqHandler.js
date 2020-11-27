@@ -12,6 +12,6 @@
             console.error(error.message);
         });
 
-    function sendMessageToHub(message) {
-        connection.invoke('sendMessage', message);
-    }
+    //function sendMessageToHub(message) {
+    //    connection.invoke('sendMessage', message);
+    //}
