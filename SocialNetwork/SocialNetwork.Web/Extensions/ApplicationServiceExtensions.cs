@@ -6,6 +6,7 @@ using SocialNetwork.Database;
 using SocialNetwork.Services.Services;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.AutoMapperConfigs;
+using SocialNetwork.Web.Hubs;
 using System.Reflection;
 
 namespace SocialNetwork.Web.Extensions

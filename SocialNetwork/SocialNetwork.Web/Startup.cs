@@ -56,7 +56,7 @@ namespace SocialNetwork.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/Messenger");
+                endpoints.MapHub<ChatHub>("/ChatTest/Messenger");
             });
         }
     }

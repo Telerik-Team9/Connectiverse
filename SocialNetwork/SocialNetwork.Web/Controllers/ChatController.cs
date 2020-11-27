@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.Hubs;
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -15,11 +17,13 @@ namespace SocialNetwork.Web.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly IChatService chatService;
+        private readonly IHubContext<ChatHub> chatHub;
 
-        public ChatController(UserManager<User> userManager, IChatService chatService)
+        public ChatController(UserManager<User> userManager, IChatService chatService,  IHubContext<ChatHub> chatHub)
         {
             this.userManager = userManager;
             this.chatService = chatService;
+            this.chatHub = chatHub;
         }
 
         public async Task<IActionResult> Messenger()
@@ -43,6 +47,8 @@ namespace SocialNetwork.Web.Controllers
             {
                 return BadRequest();
             }
+
+            await this.chatHub.Clients.All.SendAsync("receiveMessage", message);
 
             return Ok();
         }

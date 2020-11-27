@@ -37,8 +37,9 @@ function sendMessage() {
 }
 
 function addMessageToChat(message) {
+    alert("ALERT 1");
     let isCurrentUserMessage = message.userName === username;
-
+    alert("ALERT 2");
     let container = document.createElement('div');
     container.className = isCurrentUserMessage ? "container darker" : "container";
 
