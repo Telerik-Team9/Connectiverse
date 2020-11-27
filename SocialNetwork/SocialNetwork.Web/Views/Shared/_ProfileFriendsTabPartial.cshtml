@@ -1,17 +1,5 @@
 ﻿@model FriendViewModel
 
-    <style>
-        img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .profilepic {
-            height: 120px;
-            width: 120px;
-        }
-    </style>
-
 <div class="col-lg-12 col-xl-6">
     <div class="card">
         <div class="card-block post-timelines">
@@ -26,8 +14,8 @@
                 <div class="media-left media-middle"    >
                     <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@Model.UserFriendId">
                     @*<img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">*@
-                        <div class="profilepic">
-                            <img class="media-object" src="@Model.UserFriendProfilePictureUrl" alt="">
+                        <div class="picture-frame-120">
+                            <img class="media-object picture-in-frame" src="@Model.UserFriendProfilePictureUrl" alt="">
                         </div>
                     </a>
                 </div>

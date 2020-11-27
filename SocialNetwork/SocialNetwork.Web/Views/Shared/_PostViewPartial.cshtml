@@ -18,21 +18,24 @@
         </div>
         <div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
             <div class="card">
-                <div class="card-block post-timelines">
-                    <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                    <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                        <a class="dropdown-item" href="#">Remove tag</a> @*Change visibility*@
-                        <a class="dropdown-item" href="#">Report Photo</a>
+                <!--<div class="card-block post-timelines">
+                <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
+                <div class="dropdown-menu dropdown-menu-right b-none services-list">
+                    <a class="dropdown-item" href="#">Remove tag</a>-->
+                @*Change visibility*@
+                <!--<a class="dropdown-item" href="#">Report Photo</a>
                         <a class="dropdown-item" href="#">Hide From Timeline</a>
                         <a class="dropdown-item" href="#">Blog User</a>
                     </div>
                     <div class="chat-header f-w-600"><strong>@Model.Post.UserDisplayName</strong></div>
                     <div class="social-time text-muted">Created on @Model.Post.CreatedOn</div>
-                </div>
+                </div>-->
                 @*<img src="https://via.placeholder.com/800x350/87CEFA/000000" class="img-fluid width-100" alt="">*@
                 @if (!string.IsNullOrEmpty(Model.Post.PhotoUrl))
                 {
-                    <img src="@Model.Post.PhotoUrl" class="img-fluid width-100" alt="">
+                    <div class="picture-frame-black">
+                        <img src="@Model.Post.PhotoUrl" class="img-fluid width-100 picture-in-frame">
+                    </div>
                 }
                 <div class="card-block">
                     <div class="timeline-details">
@@ -40,9 +43,9 @@
                     </div>
                 </div>
                 <div class="card-block b-b-theme b-t-theme social-msg">
-                 
+
                     @*<i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, this)" isliked="@(Model.isLiked ? "true" : "false")"
-                       style="@(Model.isLiked ? "blue" : "powderblue")font-size:24px;color:@(Model.isLiked ? "blue" : "powderblue"); cursor:pointer;"></i>*@
+                        style="@(Model.isLiked ? "blue" : "powderblue")font-size:24px;color:@(Model.isLiked ? "blue" : "powderblue"); cursor:pointer;"></i>*@
 
                     @if (Model.isLiked)
                     {
