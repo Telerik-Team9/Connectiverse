@@ -347,7 +347,7 @@
 .breakpoint-on .classy-navbar-toggler {
   display: block; }
 .breakpoint-on .classy-navbar .classy-menu {
-  background-color: #ffffff;
+  background-color: yellow;
   position: fixed;
   top: 0;
   left: -340px;
@@ -578,7 +578,9 @@ ul {
         }
 
 .classy-nav-container {
-    background-color: transparent;
+    /*background-color: rgba(92, 27, 243, 0.3);*/
+    background-color: rgba(45, 27, 243, 0.3);
+    /*background-color: rgba(27, 52, 243, 0.3);*/
     padding: 0;
 }
 
