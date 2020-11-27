@@ -30,25 +30,32 @@ namespace SocialNetwork.Web.Controllers
         {
             var user = await this.userManager.GetUserAsync(User);
             ViewBag.CurrentUserName = user.DisplayName;
+
             var messanges = await this.chatService.GetAllMessagesAsync();
 
-            return View();
+            return View(messanges);
         }
 
-        public async Task<IActionResult> Create(Message message)
+        public async Task<IActionResult> Create(string input)
         {
             var user = await this.userManager.GetUserAsync(User);
+
+
+            var message = new Message();
+            message.Text = input;
+
             message.UserName = user.DisplayName;
             message.UserId = user.Id;
 
-            var result = await this.chatService.CreateMessageAsync(message);
+           var result = await this.chatService.CreateMessageAsync(message);
+                   
 
             if(result == false)
             {
                 return BadRequest();
             }
 
-            await this.chatHub.Clients.All.SendAsync("receiveMessage", message);
+            await this.chatHub.Clients.All.SendAsync("receiveMessage", input);
 
             return Ok();
         }

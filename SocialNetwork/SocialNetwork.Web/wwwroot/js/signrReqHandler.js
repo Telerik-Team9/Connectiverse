@@ -1,14 +1,14 @@
-﻿var connection = new signalR.HubConnectionBuilder()
-    .withUrl('/Home/Index')
-    .build();
+﻿//var connection = new signalR.HubConnectionBuilder()
+//    .withUrl('/Chat/Messenger')
+//    .build();
 
-connection.on('receiveMessage', addMessageToChat);
+//connection.on('receiveMessage', addMessageToChat);
 
-connection.start()
-    .catch(error => {
-        console.error(error.message);
-    });
+//connection.start()
+//    .catch(error => {
+//        console.error(error.message);
+//    });
 
-function sendMessageToHub(message) {
-    connection.invoke('sendMessage', message)
-}
+//function sendMessageToHub(message) {
+//    connection.invoke('sendMessage', message)
+//}

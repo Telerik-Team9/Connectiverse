@@ -47,32 +47,39 @@
                 }
             }
         </div>
+        <div>
+            <input id="messageSend" />
+            <button type="button" id="sendMsg">send</button>
 
-        <div class="col-md-12">
-            <form asp-action="Create"
-                  data-ajax-begin="clearInputField"
-                  data-ajax-complete=""
-                  data-ajax-faliure="alert('Fail')"
-                  data-ajax-success="sendMessage"
-                  data-ajax="true"
-                  data-ajax-method="POST">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <input name="Text" class="form-control" id="messageText" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Send" id="submitButton" class="btn" @*???*@ />
-                </div>
-                <input type="hidden" value="@userName" name="username" />
-            </form>
         </div>
 
     </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
 
     <script>
         const userName = "@ViewBag.CurrentUserName";
     </script>
 
+    <script>
+        $('#sendMsg').on('click', () => {
+
+            var input = $('#messageSend').val();
+            console.log(input);
+
+            $.ajax({
+                type: "POST",
+                url: "/Chat/Create",
+                data: 
+                {
+                    'input': input
+                },
+                success: function (data) {
+
+                }
+            });
+
+        });
+    </script>
 
     THIS IS THE MESSEGER
 </div>

@@ -13,14 +13,14 @@ const whenInput = document.getElementById('when');
 const chat = document.getElementById('chat');
 const messagesQueue = [];
 
-document.getElementById('submitButton').addEventListener('click', () => {
-    var currentdate = new Date();
-    when.innerHTML =
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-});
+//document.getElementById('submitButton').addEventListener('click', () => {
+//    var currentdate = new Date();
+//    when.innerHTML =
+//        (currentdate.getMonth() + 1) + "/"
+//        + currentdate.getDate() + "/"
+//        + currentdate.getFullYear() + " "
+//        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+//});
 
 function clearInputField() {
     messagesQueue.push(textInput.value);
@@ -37,17 +37,16 @@ function sendMessage() {
 }
 
 function addMessageToChat(message) {
-    alert("ALERT 1");
-    let isCurrentUserMessage = message.userName === username;
-    alert("ALERT 2");
+
+    let isCurrentUserMessage = true;
     let container = document.createElement('div');
     container.className = isCurrentUserMessage ? "container darker" : "container";
 
     let sender = document.createElement('p');
     sender.className = "sender";
-    sender.innerHTML = message.userName;
+    sender.innerHTML = "Ali";
     let text = document.createElement('p');
-    text.innerHTML = message.text;
+    text.innerHTML = message;
 
     let when = document.createElement('span');
     when.className = isCurrentUserMessage ? "time-left" : "time-right";
