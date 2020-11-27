@@ -37,6 +37,20 @@
 //    });
 //};
 
+/*global console, document, $, jQuery */
+(function ($) {
+    'use strict';
+    $(function () {
+
+        // Appel du plugin
+        $('.pagination').pagination({
+            itemsToPaginate: ".post",
+            activeClass: 'active'
+        });
+    });
+}(jQuery));
+
+
 function likepost(postId, isLiked) {
     let json = { postId: postId, isLiked: isLiked };
     $.ajax({
@@ -52,8 +66,6 @@ function likepost(postId, isLiked) {
         }
     });
 };
-
-
 
 function showComments(postId) {
 
@@ -94,7 +106,6 @@ particlesJS.load('particles-js', 'particles.json', function () {
 
 
 /* Otherwise just put the config content (json): */
-
 particlesJS('particles-js',
     {
         "particles": {
