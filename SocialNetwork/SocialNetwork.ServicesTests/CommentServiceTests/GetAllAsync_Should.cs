@@ -17,24 +17,25 @@ namespace SocialNetwork.ServicesTests.CommentServiceTests
             var options = Utils.GetOptions(nameof(SuccessWhen_ValidParams14));
             var config = Utils.GetMappingConfig();
             var mapper = config.CreateMapper();
+
+            var post = Utils.GetPosts().First();
+            var user = Utils.GetUsers().First();
+
             var comments = new Comment[]
             {
-                    new Comment() { Content = "zero" },
+                    new Comment() { Content = "zero" ,UserId = user.Id, PostId = post.Id},
                     new Comment() { Content = "first" , IsDeleted = true},
-                    new Comment() { Content = "second" },
-                    new Comment() { Content = "third" },
+                    new Comment() { Content = "second" ,UserId = user.Id, PostId = post.Id},
+                    new Comment() { Content = "third" ,UserId = user.Id, PostId = post.Id},
                     new Comment() { Content = "fourth" , IsDeleted = true},
-                    new Comment() { Content = "fith" },
+                    new Comment() { Content = "fith" ,UserId = user.Id, PostId = post.Id},
             };
-
-            var posts = Utils.GetPosts();
-            var users = Utils.GetUsers();
 
             using (var arrangeContext = new SocialNetworkDBContext(options))
             {
                 await arrangeContext.Comments.AddRangeAsync(comments);
-                await arrangeContext.Posts.AddRangeAsync(posts);
-                await arrangeContext.Users.AddRangeAsync(users);
+                await arrangeContext.Posts.AddRangeAsync(post);
+                await arrangeContext.Users.AddRangeAsync(user);
                 await arrangeContext.SaveChangesAsync();
             }
 
