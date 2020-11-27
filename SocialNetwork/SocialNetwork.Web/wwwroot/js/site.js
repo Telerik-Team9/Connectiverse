@@ -47,10 +47,9 @@
             itemsToPaginate: ".post",
             activeClass: 'active'
         });
-
     });
-
 }(jQuery));
+
 
 function likepost(postId, isLiked) {
     let json = { postId: postId, isLiked: isLiked };
@@ -67,8 +66,6 @@ function likepost(postId, isLiked) {
         }
     });
 };
-
-
 
 function showComments(postId) {
 
@@ -109,7 +106,6 @@ particlesJS.load('particles-js', 'particles.json', function () {
 
 
 /* Otherwise just put the config content (json): */
-
 particlesJS('particles-js',
     {
         "particles": {
