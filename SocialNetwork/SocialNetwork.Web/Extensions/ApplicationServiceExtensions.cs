@@ -6,6 +6,7 @@ using SocialNetwork.Database;
 using SocialNetwork.Services.Services;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.AutoMapperConfigs;
+using SocialNetwork.Web.Hubs;
 using System.Reflection;
 
 namespace SocialNetwork.Web.Extensions
@@ -16,13 +17,16 @@ namespace SocialNetwork.Web.Extensions
         {
             //services.AddAutoMapper(typeof(Profile).Assembly);
             services.AddAutoMapper(Assembly.GetAssembly(typeof(UserVMConfig)));
-                       
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikeService, LikeService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAzureBlobService, AzureBlobService>();
+            services.AddScoped<IChatService, ChatService>();
+
+            services.AddSignalR();
 
             services.AddDbContext<SocialNetworkDBContext>
             (

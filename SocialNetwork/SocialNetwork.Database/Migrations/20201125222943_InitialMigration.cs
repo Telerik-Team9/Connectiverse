@@ -297,6 +297,28 @@ namespace SocialNetwork.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: false),
+                    Text = table.Column<string>(nullable: false),
+                    When = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -425,8 +447,8 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("943b692d-330e-405d-a019-c3d728442143"), "159af138-2f80-4bdd-876c-bb3be477a6c7", "Admin", "ADMIN" },
-                    { new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "aeef557e-fc26-4c6a-9763-de424f916f30", "User", "USER" }
+                    { new Guid("943b692d-330e-405d-a019-c3d728442143"), "bdd4ff3d-afc8-47c5-9022-b56b82f622be", "Admin", "ADMIN" },
+                    { new Guid("07cc27fe-9ca9-4953-9a79-2c79c1e32aff"), "873bd4f1-59a6-424f-b1f7-7a8923a83a13", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -449,27 +471,27 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "Url" },
                 values: new object[,]
                 {
-                    { 15, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3228), null, false, null, 15, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 14, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3226), null, false, null, 14, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 13, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3224), null, false, null, 13, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 12, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3222), null, false, null, 12, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 11, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3220), null, false, null, 11, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 10, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3219), null, false, null, 10, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
-                    { 5, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3150), null, false, null, 5, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg" },
-                    { 8, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3156), null, false, null, 8, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg" },
-                    { 7, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3154), null, false, null, 7, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg" },
-                    { 6, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3152), null, false, null, 6, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg" },
-                    { 4, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3142), null, false, null, 4, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg" },
-                    { 3, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3140), null, false, null, 3, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg" },
-                    { 2, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3108), null, false, null, 2, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg" },
-                    { 1, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(1356), null, false, null, 1, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg" },
-                    { 9, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(3216), null, false, null, 9, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" }
+                    { 15, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2184), null, false, null, 15, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 14, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2182), null, false, null, 14, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 13, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2180), null, false, null, 13, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 12, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2178), null, false, null, 12, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 11, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2176), null, false, null, 11, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 10, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2174), null, false, null, 10, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" },
+                    { 5, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2163), null, false, null, 5, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg" },
+                    { 8, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2168), null, false, null, 8, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg" },
+                    { 7, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2167), null, false, null, 7, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg" },
+                    { 6, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2165), null, false, null, 6, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg" },
+                    { 4, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2156), null, false, null, 4, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg" },
+                    { 3, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2153), null, false, null, 3, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg" },
+                    { 2, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2122), null, false, null, 2, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg" },
+                    { 1, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(323), null, false, null, 1, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg" },
+                    { 9, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(2172), null, false, null, 9, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Videos",
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "Url" },
-                values: new object[] { 1, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(5302), null, false, null, 20, "NONONONO" });
+                values: new object[] { 1, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(3265), null, false, null, 20, "NONONONO" });
 
             migrationBuilder.InsertData(
                 table: "Towns",
@@ -481,21 +503,21 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CoverPictureId", "CoverPictureUrl", "CreatedOn", "DateOfBirth", "DeletedOn", "DisplayName", "Education", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureId", "ProfilePictureUrl", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "588579b4-e483-4f7b-bdae-0cd90348c4d6", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 108, DateTimeKind.Utc).AddTicks(5326), new DateTime(1997, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Magi Nikolova", "Sofia University", "magi@mail.com", false, false, false, null, null, "MAGI@MAIL.COM", "MAGI@MAIL.COM", "AQAAAAEAACcQAAAAEJRTaoDcT4SiCuylO5MDLW+hIUiVMCYIL1XgmnrCOtQtRZkL4qG0+v82wkay0y7BHQ==", "0886868686", false, 1, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg", "0246ef72-8748-474b-bb81-9621d9f61f0b", 1, false, "magi@mail.com" },
-                    { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0, "1c4f9d40-ddeb-491a-aee9-29c1b2f96fa6", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4228), new DateTime(1999, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Ali Marekov", "Technical University", "ali@mail.com", false, false, false, null, null, "ALI@MAIL.COM", "ALI@MAIL.COM", "AQAAAAEAACcQAAAAEJ61kNaonDxiRE97dF25ntoOCHf5ZRrZOA7s+4lrT9NYX1tK8+Rh31iBCkiqef7IJQ==", "088686843", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg", "0f5c4e95-e299-447c-8968-d0545d029df3", 1, false, "ali@mail.com" },
-                    { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "0d2e53df-ee98-4dbf-9daf-68a985e14215", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4308), new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Telerik Academy", "Telerik Academy", "telerik@mail.com", false, false, false, null, null, "TELERIK@MAIL.COM", "TELERIK@MAIL.COM", "AQAAAAEAACcQAAAAENFjSE6iVD/DR4z/dvCEgSf1FtGtJ0mEuX5R8az/G4o5NMSI+olcSVDDKMpPLZRdnw==", "081111111", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg", "0e58c2f7-c2c7-483c-8f14-40b55cd76ddf", 1, false, "telerik@mail.com" },
-                    { new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), 0, "041cdb19-d75e-43d4-8e16-25675b4511ff", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4337), new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "C Sharp", "Alpha C# Track", "csharp@mail.com", false, false, false, null, null, "CSHARP@MAIL.COM", "CSHARP@MAIL.COM", "AQAAAAEAACcQAAAAEA7ys5EpD2KgfwZs0vfkrjngHYZ5FmhwXigR0kARwG/RboDX8LE9Vx92TBhISGcG8A==", "0833333333", false, null, "/img/noavatar.jpg", "6a522b16-3e98-40b7-af11-ccfb5ad8f6ae", 1, false, "csharp@mail.com" },
-                    { new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), 0, "3931a57f-3c64-4958-841a-49235a9046ec", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4354), new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Viktor Ivanov", "Technical University", "viktor@mail.com", false, false, false, null, null, "VIKTOR@MAIL.COM", "VIKTOR@MAIL.COM", "AQAAAAEAACcQAAAAEIGlWpkDIiiEjYhuJl74uwN9rA3UvyfKIKAuRcyVCN69xCL0hU06as2opxiR8HTJ2A==", "0884444444", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg", "8b433c1d-d5d8-4f21-ba02-df8577ef5b23", 1, false, "viktor@mail.com" },
-                    { new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), 0, "6c92a717-f54b-4e0e-b345-6c905439d8f3", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4373), new DateTime(2000, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Silvia Borisova", "Sofia University", "silvia@mail.com", false, false, false, null, null, "SILVIA@MAIL.COM", "SILVIA@MAIL.COM", "AQAAAAEAACcQAAAAEIe1TpdLM/vsKAhKZjABpmtQjiVCxH28+6Z7OttjkpkKsJz2vGqf4sMSEqZkwHrUAw==", "088555555", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg", "a95ee6c0-8e1b-49d9-adc8-2798d07c40a4", 1, false, "silvia@mail.com" },
-                    { new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), 0, "21cb0055-8ac5-4761-aab4-1bf623565043", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4389), new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Maria Petrova", "", "maria@mail.com", false, false, false, null, null, "MARIA@MAIL.COM", "MARIA@MAIL.COM", "AQAAAAEAACcQAAAAEMGaDVFXXSeZXBTi37HGW3IdP5IOCiBmHpea02HW/+3HHZq4Awy2lPI+oriGuEiHHQ==", "088666666", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg", "920911d6-1405-4283-8d5e-261debfb6e9a", 1, false, "maria@mail.com" },
-                    { new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"), 0, "e8c791dc-5c20-4b59-b5ce-9ad09106c524", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4464), new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Pablo Georgiev", "Technical University", "pablo@mail.com", false, false, false, null, null, "PABLO@MAIL.COM", "PABLO@MAIL.COM", "AQAAAAEAACcQAAAAEDTvzPG/vnN737Ld4T/GGk55lPp+/c0At0Y4rPirV7U5LkzAXdCWj3wFatW2eiKqGQ==", "087777777", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg", "fb3f2fd1-0dd6-4450-9403-e6f1152a6b76", 1, false, "pablo@mail.com" },
-                    { new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"), 0, "aef4849a-60eb-43f5-ad64-2f18725e62a1", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4483), new DateTime(1976, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Georgi Georgiev", "UNWE", "georgi@mail.com", false, false, false, null, null, "GEORGI@MAIL.COM", "GEORGI@MAIL.COM", "AQAAAAEAACcQAAAAEL6SWn6LGQFShq9p8WByU7o4eVl3u2YEfzuLQVUctMyFVfhGDMk+o6jm9KtgGbA6KA==", "0888888888", false, null, "/img/noavatar.jpg", "99bebeb8-4391-4aa5-98eb-6b829443e8ab", 1, false, "georgi@mail.com" },
-                    { new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"), 0, "acb777f0-169e-4961-b1da-0024a3a07d7a", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4499), new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Alexandra Kirova", "Sofia University", "alexandra@mail.com", false, false, false, null, null, "ALEXANDRA@MAIL.COM", "ALEXANDRA@MAIL.COM", "AQAAAAEAACcQAAAAEB2jzP3SIncEL8tpclpClRl5T9uEdgvAHoyy5DwOX1WeI3k9u07FURzUJcNvrwhAcA==", "088899989", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg", "aab8f4a9-6012-40d1-9b82-68d0db2a2199", 1, false, "alexandra@mail.com" },
-                    { new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"), 0, "bdf30ad1-a270-46ee-a662-32fe2b73851b", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4516), new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Stanislav Pulev", "UNWE", "stanisav@mail.com", false, false, false, null, null, "STANISLAV@MAIL.COM", "STANISLAV@MAIL.COM", "AQAAAAEAACcQAAAAENGRIZqHb1GrNJGXYA21nt/8BC5OzSVa/W9wENsGxAkZ3UIu/FKift3msOqonVP7OA==", "088679446", false, null, "/img/noavatar.jpg", "1f0e006b-6e64-49da-b1fb-575a9bf91104", 1, false, "stanislav@mail.com" },
-                    { new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), 0, "24f58e9d-d751-4b62-8a8d-f1ab21d10466", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4534), new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Nikol Peeva", "", "nikol@mail.com", false, false, false, null, null, "NIKOL@MAIL.COM", "NIKOL@MAIL.COM", "AQAAAAEAACcQAAAAEDb4NfMgecf1GR6lahfiEumP1c23gDk14ItRwy30QJP5l7mFWKhMq7PWPmknUOw1Nw==", "08868324", false, null, "/img/noavatar.jpg", "53f45749-1edc-4795-b02a-da99db4b1f0a", 1, false, "nikol@mail.com" },
-                    { new Guid("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"), 0, "3eecb194-bb0a-4313-a86c-1e9bf3e66834", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4549), new DateTime(1990, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Radko Stanev", "Telerik Academy", "radko@mail.com", false, false, false, null, null, "RADKO@MAIL.COM", "RADKO@MAIL.COM", "AQAAAAEAACcQAAAAED9Rpm3tQrP3yYdxcckYTJAywbvonDZy/BUEGD9nGUEcbA+20Kj7CB86T4lGbnpA0g==", "545453423", false, null, "/img/noavatar.jpg", "b3c87d84-2227-4475-9d9f-0ee81f8d7a26", 1, false, "radko@mail.com" },
-                    { new Guid("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"), 0, "baa9c014-0b24-4b7b-8530-a0f3219a2725", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4563), new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Kiril Stanoev", "Telerik Academy", "kiro@mail.com", false, false, false, null, null, "KIRO@MAIL.COM", "KIRO@MAIL.COM", "AQAAAAEAACcQAAAAEPmN/D9pGkJJn1NJoK4gZXpdlXi5vslb1MP0e3Wie2rfeat0lo9ljRruGuO0xByczw==", "", false, null, "/img/noavatar.jpg", "4285999f-2e39-4ccf-9aa8-90a2e2062556", 1, false, "kiro@mail.com" },
-                    { new Guid("6405b148-f626-4142-a342-0ccd2c82c30f"), 0, "3056bfd9-f1af-4ab5-b48e-9a3478b288bf", null, null, new DateTime(2020, 11, 21, 11, 2, 5, 109, DateTimeKind.Utc).AddTicks(4578), new DateTime(1990, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Boyan Hadzhiev", "Telerik Academy", "bobi@mail.com", false, false, false, null, null, "BOBI@MAIL.COM", "BOBI@MAIL.COM", "AQAAAAEAACcQAAAAEDnVVt4dMzVaD7Eze2dOxFc42y8JmCxX0dfmPmETif/utSbjmfkyK8O1R9ek9ZjGBw==", "", false, null, "/img/noavatar.jpg", "56eae242-382b-4870-a05c-25004cc4f656", 1, false, "bobi@mail.com" }
+                    { new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), 0, "c46867ae-4e0c-45fb-9b99-c8928c5211b8", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 862, DateTimeKind.Utc).AddTicks(7539), new DateTime(1997, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Magi Nikolova", "Sofia University", "magi@mail.com", false, false, false, null, null, "MAGI@MAIL.COM", "MAGI@MAIL.COM", "AQAAAAEAACcQAAAAEBzg79Jfa11LiFLtiv1IFIiAXaD257vgT6yFVLgKiIlA39BPOEztCsV9gy7sjLRJog==", "0886868686", false, 1, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg", "051e624a-fa96-422e-ae13-8c8604b316b3", 1, false, "magi@mail.com" },
+                    { new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), 0, "95f3f7e3-bd47-4b29-9ab7-38e3c09bbebe", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7383), new DateTime(1999, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Ali Marekov", "Technical University", "ali@mail.com", false, false, false, null, null, "ALI@MAIL.COM", "ALI@MAIL.COM", "AQAAAAEAACcQAAAAEOQ2MmuoOIMUu/Q3T1ndBkg5dRecwSvstL4xHN0s/4nw6W1SfJpXpo0SH0jh53pdFA==", "088686843", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg", "c5073369-abfd-46b1-b667-217440130478", 1, false, "ali@mail.com" },
+                    { new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 0, "29efbe1b-ea80-47f9-89fa-847b2ed90d04", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7507), new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Telerik Academy", "Telerik Academy", "telerik@mail.com", false, false, false, null, null, "TELERIK@MAIL.COM", "TELERIK@MAIL.COM", "AQAAAAEAACcQAAAAENPbGnSE6ewcXCx7hgP0Y3sL/uGa+bk4cOgi8NGfoQ8Ez8NxIiQaEldo5HsNbnc0sQ==", "081111111", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik_profile_pic.jpg", "f8557f08-ff62-4c4b-afe2-5d9afd1775c1", 1, false, "telerik@mail.com" },
+                    { new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), 0, "d2bb344b-6b25-47b9-8c83-be1c3e3c6fd4", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7524), new DateTime(2010, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "C Sharp", "Alpha C# Track", "csharp@mail.com", false, false, false, null, null, "CSHARP@MAIL.COM", "CSHARP@MAIL.COM", "AQAAAAEAACcQAAAAEJZNgVtiff+WfR9ivjEmJTjxGxqybz/jrODnbiVytuSN7wMLF0vA43msuM/7b2ox0A==", "0833333333", false, null, "/img/noavatar.jpg", "a6ba78e7-814d-47b5-ab6c-319a6884aff9", 1, false, "csharp@mail.com" },
+                    { new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), 0, "410a86d1-9255-49c9-a7a9-f6f81447fe85", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7551), new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Viktor Ivanov", "Technical University", "viktor@mail.com", false, false, false, null, null, "VIKTOR@MAIL.COM", "VIKTOR@MAIL.COM", "AQAAAAEAACcQAAAAEColqMDHDe07YguDacliuC5rxb6ZT3IsMVRMkxmNUvn/mieZxs6v9jGb/RNkzfbVNg==", "0884444444", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/viktor_profile_pic.jpg", "7a230c1c-a654-4411-8799-3ddc763a7d56", 1, false, "viktor@mail.com" },
+                    { new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), 0, "d61751fa-701f-4e00-a73a-45f9ab554ddc", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7570), new DateTime(2000, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Silvia Borisova", "Sofia University", "silvia@mail.com", false, false, false, null, null, "SILVIA@MAIL.COM", "SILVIA@MAIL.COM", "AQAAAAEAACcQAAAAEMfkorcnQ/ETMgDWjGud3JROocyv5sNEEPn7KpOQuXmVRukZ8LezCLpWlV+MNS7Z/A==", "088555555", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/silvia_profile_pic.jpg", "2c9f37ef-5c19-488c-b315-14a6dece576a", 1, false, "silvia@mail.com" },
+                    { new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), 0, "b20d72d3-485d-4bb5-af97-04d84c02b370", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7656), new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Maria Petrova", "", "maria@mail.com", false, false, false, null, null, "MARIA@MAIL.COM", "MARIA@MAIL.COM", "AQAAAAEAACcQAAAAEHHStQIPNQPH5Nby0+guqRIQHjo/MtLDtwcUmoBn4aEWODw6th2C1L4w7dO58IJudA==", "088666666", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/maria_profile_pic.jpg", "bcf2dbbe-53e5-462a-bdc5-13cec27c6b4a", 1, false, "maria@mail.com" },
+                    { new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"), 0, "8b8bfdce-2541-4338-a46c-4177dbba32a3", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7672), new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Pablo Georgiev", "Technical University", "pablo@mail.com", false, false, false, null, null, "PABLO@MAIL.COM", "PABLO@MAIL.COM", "AQAAAAEAACcQAAAAEIlRXBCX77wWDNSfwuN+RQQb3FesC9RKYYtaPqS/jl44ptvJ0bRmwoK8gkdMK+QvAg==", "087777777", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/pablo_profile_pic.jpg", "efa0c704-69d7-4bd6-b2a7-fbefc6439e69", 1, false, "pablo@mail.com" },
+                    { new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"), 0, "29ac0222-312c-4c03-be03-7a2b95ae4903", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7690), new DateTime(1976, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Georgi Georgiev", "UNWE", "georgi@mail.com", false, false, false, null, null, "GEORGI@MAIL.COM", "GEORGI@MAIL.COM", "AQAAAAEAACcQAAAAELwe3ggR/D9KsIsh5FOP1HvW9CAaTGFjMQZ4gvUCnsy0tJovtMA+YlmUFNCKENI4jA==", "0888888888", false, null, "/img/noavatar.jpg", "73e7d492-d963-43d4-a7fd-ef31fcd13d06", 1, false, "georgi@mail.com" },
+                    { new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"), 0, "00027d21-68be-4930-bf35-e96a0fcdf408", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7705), new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Alexandra Kirova", "Sofia University", "alexandra@mail.com", false, false, false, null, null, "ALEXANDRA@MAIL.COM", "ALEXANDRA@MAIL.COM", "AQAAAAEAACcQAAAAEGtJ/a4CzTsIv0lbl55PmLlCxSJK04GEItOBDIIzNu7THnSECQ06+6O4ZKX51uJ2CA==", "088899989", false, null, "https://socialnetworkstorage.blob.core.windows.net/filescontainers/alexandra_profile_pic.jpg", "37ca68e0-1d82-4568-8c49-b0ced312fc6c", 1, false, "alexandra@mail.com" },
+                    { new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"), 0, "6948f9d5-3229-4df6-834f-ebcbd5a87b6d", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7720), new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Stanislav Pulev", "UNWE", "stanisav@mail.com", false, false, false, null, null, "STANISLAV@MAIL.COM", "STANISLAV@MAIL.COM", "AQAAAAEAACcQAAAAECSKVFGd98yQIQwF4ljLEXQgK/ff75Q+Q9wj77PHySIYziDfsUlTN7u9V8haMNMaMQ==", "088679446", false, null, "/img/noavatar.jpg", "7d25b343-f7da-4439-b501-43701472d057", 1, false, "stanislav@mail.com" },
+                    { new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), 0, "0cd0a1d5-27f2-4ab9-b158-8fe69587b7a1", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7733), new DateTime(1999, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Nikol Peeva", "", "nikol@mail.com", false, false, false, null, null, "NIKOL@MAIL.COM", "NIKOL@MAIL.COM", "AQAAAAEAACcQAAAAEBskvGkekxDu9BXEmW1iKH88UfcW66Fn6lkPhQ0EUNCYQyvgFIqChlC8DjJ6KcC5Cg==", "08868324", false, null, "/img/noavatar.jpg", "1fb3d35e-e1ac-4915-8334-378638fdc816", 1, false, "nikol@mail.com" },
+                    { new Guid("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"), 0, "5449db4a-d3ca-4e20-a6de-587c7f8c64fd", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7750), new DateTime(1990, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Radko Stanev", "Telerik Academy", "radko@mail.com", false, false, false, null, null, "RADKO@MAIL.COM", "RADKO@MAIL.COM", "AQAAAAEAACcQAAAAEHsUkfBTwNA2PA8XUAmFxMFLpeoNIfHjzn4+VVm8Nzl9rS+r5toZ//l3pWSGHjJv9w==", "545453423", false, null, "/img/noavatar.jpg", "c75b5796-f820-4970-8554-09beda22c644", 1, false, "radko@mail.com" },
+                    { new Guid("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"), 0, "95dff916-38de-4b42-a979-7758617a6f2f", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7858), new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Kiril Stanoev", "Telerik Academy", "kiro@mail.com", false, false, false, null, null, "KIRO@MAIL.COM", "KIRO@MAIL.COM", "AQAAAAEAACcQAAAAECFdUO/gszsiUxcj1Lmk6QvTsZjLLBOlnsNnQGkKbVNSZEvrz9WDuiMmxSL1mIYS/w==", "", false, null, "/img/noavatar.jpg", "44ccb45a-b0a1-4ea2-9f96-a2223d44e931", 1, false, "kiro@mail.com" },
+                    { new Guid("6405b148-f626-4142-a342-0ccd2c82c30f"), 0, "796ef82d-6c1c-402d-84c9-677ec41c1ec2", null, null, new DateTime(2020, 11, 25, 22, 29, 42, 863, DateTimeKind.Utc).AddTicks(7875), new DateTime(1990, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Boyan Hadzhiev", "Telerik Academy", "bobi@mail.com", false, false, false, null, null, "BOBI@MAIL.COM", "BOBI@MAIL.COM", "AQAAAAEAACcQAAAAEC8u6XMQGYrurwzw6bX0923Lq3YDAJecjkrrWg3kRvjOToTpj65jPgfT+4vwJ/1P2w==", "", false, null, "/img/noavatar.jpg", "02f980d7-ac08-4d25-84f5-3390b8ba8611", 1, false, "bobi@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -520,13 +542,13 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "ReceiverId", "SenderId" },
                 values: new object[,]
                 {
-                    { 3, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7252), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196") },
-                    { 1, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(1192), null, false, null, new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 4, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7259), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6") },
-                    { 7, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7275), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196") },
-                    { 5, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7270), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
-                    { 2, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7069), null, false, null, new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 8, new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(7279), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6") }
+                    { 3, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(1171), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196") },
+                    { 1, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(8864), null, false, null, new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 4, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(1180), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6") },
+                    { 7, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(1199), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196") },
+                    { 5, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(1193), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
+                    { 2, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(984), null, false, null, new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 8, new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(1204), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6") }
                 });
 
             migrationBuilder.InsertData(
@@ -534,22 +556,22 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "UserFriendId", "UserId" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(6776), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
-                    { 10, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7337), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a") },
-                    { 9, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7332), null, false, null, new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 1, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(4486), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 14, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7375), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd") },
-                    { 13, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7370), null, false, null, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
-                    { 8, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7325), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd") },
-                    { 7, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7316), null, false, null, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 5, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7303), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 16, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7384), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
-                    { 15, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7379), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("3753d26b-5a35-491f-ae82-5238d243b619") },
-                    { 12, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7348), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
-                    { 11, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7342), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
-                    { 6, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7310), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
-                    { 3, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7111), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
-                    { 4, new DateTime(2020, 11, 21, 11, 2, 5, 249, DateTimeKind.Utc).AddTicks(7119), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("3753d26b-5a35-491f-ae82-5238d243b619") }
+                    { 2, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7156), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
+                    { 10, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7251), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a") },
+                    { 9, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7247), null, false, null, new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 1, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(4665), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 14, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7270), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd") },
+                    { 13, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7266), null, false, null, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
+                    { 8, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7241), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd") },
+                    { 7, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7235), null, false, null, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 5, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7224), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 16, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7278), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
+                    { 15, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7274), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("3753d26b-5a35-491f-ae82-5238d243b619") },
+                    { 12, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7260), null, false, null, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
+                    { 11, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7256), null, false, null, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") },
+                    { 6, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7230), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845") },
+                    { 3, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7203), null, false, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270") },
+                    { 4, new DateTime(2020, 11, 25, 22, 29, 43, 3, DateTimeKind.Utc).AddTicks(7210), null, false, null, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), new Guid("3753d26b-5a35-491f-ae82-5238d243b619") }
                 });
 
             migrationBuilder.InsertData(
@@ -557,22 +579,22 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PhotoId", "UserId", "VideoId", "Visibility" },
                 values: new object[,]
                 {
-                    { 13, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9608), null, false, null, 13, new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"), null, 0 },
-                    { 14, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9612), null, false, null, 14, new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), null, 0 },
-                    { 8, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9582), null, false, null, 8, new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"), null, 0 },
-                    { 9, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9589), null, false, null, 9, new Guid("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"), null, 0 },
-                    { 12, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9603), null, false, null, 12, new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"), null, 0 },
-                    { 6, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9572), null, false, null, 6, new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"), null, 0 },
-                    { 4, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9554), null, false, null, 4, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), null, 0 },
-                    { 5, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9566), null, false, null, 5, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), null, 0 },
-                    { 10, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9594), null, false, null, 10, new Guid("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"), null, 0 },
-                    { 15, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9617), null, false, null, 15, new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), null, 0 },
-                    { 20, "Really funny video :)", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9621), null, false, null, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 1, 0 },
-                    { 3, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9545), null, false, null, 3, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), null, 0 },
-                    { 2, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9483), null, false, null, 2, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), null, 0 },
-                    { 1, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(6427), null, false, null, 1, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), null, 0 },
-                    { 7, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9578), null, false, null, 7, new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), null, 0 },
-                    { 11, "My new profile photo", new DateTime(2020, 11, 21, 11, 2, 5, 252, DateTimeKind.Utc).AddTicks(9599), null, false, null, 11, new Guid("6405b148-f626-4142-a342-0ccd2c82c30f"), null, 0 }
+                    { 13, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8532), null, false, null, 13, new Guid("a9e49452-8ffd-460d-9998-8f662e36a2d6"), null, 0 },
+                    { 14, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8536), null, false, null, 14, new Guid("35547a2a-8779-416b-9fc8-7aab34e883bd"), null, 0 },
+                    { 8, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8502), null, false, null, 8, new Guid("5d7ccf05-3080-4a9e-90ca-a4fee33aa196"), null, 0 },
+                    { 9, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8509), null, false, null, 9, new Guid("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"), null, 0 },
+                    { 12, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8527), null, false, null, 12, new Guid("7f8793ff-03ab-458c-bc0e-ed4866a55b48"), null, 0 },
+                    { 6, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8491), null, false, null, 6, new Guid("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"), null, 0 },
+                    { 4, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8471), null, false, null, 4, new Guid("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"), null, 0 },
+                    { 5, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8483), null, false, null, 5, new Guid("0d852e3a-b977-438a-9c33-7679a6e7b4cd"), null, 0 },
+                    { 10, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8515), null, false, null, 10, new Guid("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"), null, 0 },
+                    { 15, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8540), null, false, null, 15, new Guid("dc6788da-53ae-44e7-b53c-e53a2f77a1af"), null, 0 },
+                    { 20, "Really funny video :)", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8545), null, false, null, null, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), 1, 0 },
+                    { 3, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8463), null, false, null, 3, new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), null, 0 },
+                    { 2, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8406), null, false, null, 2, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), null, 0 },
+                    { 1, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(5465), null, false, null, 1, new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), null, 0 },
+                    { 7, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8497), null, false, null, 7, new Guid("b87071f5-b71c-45e1-91e7-6e85637ed10a"), null, 0 },
+                    { 11, "My new profile photo", new DateTime(2020, 11, 25, 22, 29, 43, 5, DateTimeKind.Utc).AddTicks(8519), null, false, null, 11, new Guid("6405b148-f626-4142-a342-0ccd2c82c30f"), null, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -580,25 +602,25 @@ namespace SocialNetwork.Database.Migrations
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IconUrl", "IsDeleted", "ModifiedOn", "Name", "UserId", "UserLink" },
                 values: new object[,]
                 {
-                    { 3, new DateTime(2020, 11, 21, 11, 2, 5, 254, DateTimeKind.Utc).AddTicks(4512), null, "", false, null, "Official website", new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), "https://www.telerikacademy.com/" },
-                    { 2, new DateTime(2020, 11, 21, 11, 2, 5, 254, DateTimeKind.Utc).AddTicks(4460), null, "", false, null, "LinkedIn", new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), "https://www.linkedin.com/in/ali-marekov/" },
-                    { 1, new DateTime(2020, 11, 21, 11, 2, 5, 254, DateTimeKind.Utc).AddTicks(1398), null, "", false, null, "Instagram", new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), "https://www.instagram.com/magisnikolova" }
+                    { 3, new DateTime(2020, 11, 25, 22, 29, 43, 7, DateTimeKind.Utc).AddTicks(1528), null, "", false, null, "Official website", new Guid("3753d26b-5a35-491f-ae82-5238d243b619"), "https://www.telerikacademy.com/" },
+                    { 2, new DateTime(2020, 11, 25, 22, 29, 43, 7, DateTimeKind.Utc).AddTicks(1477), null, "", false, null, "LinkedIn", new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5"), "https://www.linkedin.com/in/ali-marekov/" },
+                    { 1, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(8733), null, "", false, null, "Instagram", new Guid("1d6e3bae-451f-4c01-8b43-cecc2d404270"), "https://www.instagram.com/magisnikolova" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
-                values: new object[] { 1, "This is Amazing!", new DateTime(2020, 11, 21, 11, 2, 5, 250, DateTimeKind.Utc).AddTicks(9850), null, false, null, 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") });
+                values: new object[] { 1, "This is Amazing!", new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(2447), null, false, null, 1, new Guid("3be6b2ff-021d-4da5-8639-31973b594cc5") });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "Content", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
-                values: new object[] { 2, "This is Awful!", new DateTime(2020, 11, 21, 11, 2, 5, 251, DateTimeKind.Utc).AddTicks(4989), null, false, null, 20, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
+                values: new object[] { 2, "This is Awful!", new DateTime(2020, 11, 25, 22, 29, 43, 4, DateTimeKind.Utc).AddTicks(5685), null, false, null, 20, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
 
             migrationBuilder.InsertData(
                 table: "Likes",
                 columns: new[] { "Id", "CreatedOn", "DeletedOn", "IsDeleted", "ModifiedOn", "PostId", "UserId" },
-                values: new object[] { 1, new DateTime(2020, 11, 21, 11, 2, 5, 253, DateTimeKind.Utc).AddTicks(8764), null, false, null, 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
+                values: new object[] { 1, new DateTime(2020, 11, 25, 22, 29, 43, 6, DateTimeKind.Utc).AddTicks(6130), null, false, null, 1, new Guid("3753d26b-5a35-491f-ae82-5238d243b619") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -685,6 +707,11 @@ namespace SocialNetwork.Database.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_UserId",
+                table: "Messages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_PhotoId",
                 table: "Posts",
                 column: "PhotoId",
@@ -742,6 +769,9 @@ namespace SocialNetwork.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Likes");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "SocialMedias");

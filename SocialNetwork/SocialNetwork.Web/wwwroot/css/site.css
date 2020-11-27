@@ -35,6 +35,21 @@ body {
     Vertically center the text there
 }
 
+.picture-in-frame {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.picture-frame-120 {
+    height: 120px;
+    width: 120px;
+}
+
+.picture-frame-black {
+    text-align: center;
+    background-color: black;
+}
+
 /* Button
 -------------------------------------------------- */
 /*.alime-btn {
@@ -51,9 +66,9 @@ body {
     text-transform: capitalize;
     background-color: rgba(0,123,255, 0.2);
     120, 150*@ background-color: rgb(0, 140, 255);*/
-    /*    @*background-color: rgb(0, 150, 255);
+/*    @*background-color: rgb(0, 150, 255);
     120, 150*@ background-color: rgb(0, 140, 255);*/
-    /*color: #ffffff;
+/*color: #ffffff;
     border: 2px solid rgb(0, 140, 255);
     border-radius: 60px;
     -webkit-transition-duration: 200ms;
@@ -72,7 +87,6 @@ body {
         background-color: rgb(0, 90, 255);
         color: #ffffff;
     }*/
-
 .alime-btn {
     position: relative;
     z-index: 1;

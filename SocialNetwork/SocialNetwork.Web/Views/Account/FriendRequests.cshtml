@@ -271,8 +271,6 @@
                                 <div class="table-responsive">
                                     <div class="row justify-content-sm-center">
 
-
-
                                         <table class="table widget-26">
                                             <tbody>
                                                 @foreach (var user in Model)
@@ -300,24 +298,22 @@
                                                             </td>*@
                                                         <td>
                                                             @*FINISH LATER!*@
-                                                            <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                            <a type="button" class="btn btn-outline-primary waves-effect"
                                                                asp-controller="Account"
                                                                asp-action="ChangeFriendshipStatus"
                                                                asp-route-userId="@loggedUser.Id" asp-route-friendId="@user.SenderId" asp-route-type="accept">
-                                                                <i class="icofont icofont-ui-user m-r-10"></i> Accept request
+                                                               <i class="icofont icofont-ui-user m-r-10"></i> Accept request
                                                             </a>
-                                                            <i class="indicator bg-base"></i>
                                                             @*<span>Software Development</span>*@
                                                         </td>
                                                         <td>
                                                             @*FINISH LATER!*@
-                                                            <a type="button" class="btn btn-outline-primary waves-effect btn-block"
+                                                            <a type="button" class="btn btn-outline-primary waves-effect"
                                                                asp-controller="Account"
                                                                asp-action="ChangeFriendshipStatus"
                                                                asp-route-userId="@loggedUser.Id" asp-route-friendId="@user.SenderId" asp-route-type="decline">
                                                                 <i class="icofont icofont-ui-user m-r-10"></i> Decline request
                                                             </a>
-                                                            <i class="indicator bg-base"></i>
                                                             @*<span>Software Development</span>*@
                                                         </td>
                                                     </tr>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Message>
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var userName = user.DisplayName;
+}
+
+<div class="jumbotron bg-light">
+    <h2 class="text-center text-primary">
+        <i class="fab fa-facebook-messenger"
+    </h2>
+
+    <div class="row">
+        <div class="col-md-12" id="chat">
+            @if (Model != null)
+            {
+                @foreach (var message in Model.OrderBy(m => m.When))
+                {
+                    string containerClass, timePosition, textAlign, contcolor, offset;
+                    if (userName == message.UserName)
+                    {
+                        containerClass = "container darker";
+                        timePosition = "time-right text-light";
+                        textAlign = "text-right text white";
+                        contcolor = "bg-primary";
+                        offset = "col-md-6 offset-md-6";
+                    }
+                    else
+                    {
+                        containerClass = "container";
+                        timePosition = "time-left";
+                        textAlign = "text-left";
+                        contcolor = "bg-light";
+                        offset = "";
+                    }
+
+                    <div class="row">
+                        <div class="@offset">
+                            <div class="@containerClass @contcolor">
+                                <p class="sender @textAlign">@message.UserName</p>
+                                <p class="@textAlign">@message.Text</p>
+                                <span class="@timePosition">@message.When.ToString()</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div>
+            <input id="messageSend" />
+            <button type="button" id="sendMsg">send</button>
+
+        </div>
+
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <script>
+        const userName = "@ViewBag.CurrentUserName";
+    </script>
+
+    <script>
+        $('#sendMsg').on('click', () => {
+
+            var input = $('#messageSend').val();
+            console.log(input);
+
+            $.ajax({
+                type: "POST",
+                url: "/Chat/Create",
+                data: 
+                {
+                    'input': input
+                },
+                success: function (data) {
+
+                }
+            });
+
+        });
+    </script>
+
+    THIS IS THE MESSEGER
+</div>
