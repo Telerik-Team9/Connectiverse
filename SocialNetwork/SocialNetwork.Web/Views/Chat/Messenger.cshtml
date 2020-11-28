@@ -85,7 +85,7 @@
         margin-left: 10px;
         border-radius: 25px;
         background-color: #82ccdd;
-        padding: 10px;
+        padding: 10px 50px 10px 50px;
         position: relative;
     }
 
@@ -206,15 +206,10 @@
 
             <!--Side search form-->
             <div class="card mb-sm-3 mb-md-0 contacts_card">
-                <div class="card-header">
-                    <div class="input-group">
-                        <input type="text" placeholder="Search..." name="" class="form-control search">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
 
+                <div class="card-footer">
+                    <h3 class="text-light">Participants</h3>
+                </div>
                 <div class="card-body contacts_body">
                     <ui class="contacts">
                         @foreach (var item in users)
@@ -222,8 +217,6 @@
                             <!--Side Chat bar-->
                             <li>
                                 <div class="d-flex bd-highlight">
-                                    @*<div class="img_cont">
-                                        </div>*@
                                     <div class="user_info">
                                         <img src="@item.ProfilePictureUrl" class="rounded-circle user_img" style="width: 30px; height: 30px" />
                                         <span>@item.DisplayName</span>
@@ -245,40 +238,40 @@
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
-                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                            <img src="@user.ProfilePictureUrl" class="rounded-circle user_img">
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info">
                             <span>Chat room</span>
-                            <p>1767 Messages</p>
                         </div>
                     </div>
                 </div>
 
 
                 <div class="card-body msg_card_body" id="chat">
-                    <div class="d-flex justify-content-start mb-4">
-                        <div class="img_cont_msg">
-                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    @foreach (var item in Model)
+                    {
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="@item.UserProfilePictureUrl" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                @item.Text
+                                <span class="msg_time">@item.When</span>
+                            </div>
                         </div>
-                        <div class="msg_cotainer">
-                            Hi, how are you samim?
-                            <span class="msg_time">8:40 AM, Today</span>
-                        </div>
-                    </div>
+                    }
                 </div>
-
-
-
 
                 <div class="card-footer">
                     <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-                        </div>
                         <textarea name="" id="messageSend" class="form-control type_msg" placeholder="Type your message..."></textarea>
                         <div class="input-group-append">
-                            <span class="input-group-text send_btn" id="sendMsg"><i class="fas fa-location-arrow"></i></span>
+                            <span class="input-group-text send_btn" id="sendMsg">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z" />
+                                </svg>
+                            </span>
                         </div>
                     </div>
                 </div>

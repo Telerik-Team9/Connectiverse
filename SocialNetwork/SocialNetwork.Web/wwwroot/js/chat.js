@@ -9,14 +9,12 @@
 // userName is declared in razor page.
 /*const username = userName;
 const userprofilepictureurl = userProfilePictureUrl;*/
-const textInput = document.getElementById('messageText');
-const whenInput = document.getElementById('when');
+//const textInput = document.getElementById('messageText');
+//const whenInput = document.getElementById('when');
 const chat = document.getElementById('chat');
-const messagesQueue = [];
+//const messagesQueue = [];
 
 function addMessageToChat(message, username, userprofilepictureurl) {
-
-    let isCurrentUserMessage = true;
 
     // Main container
     let container = document.createElement('div');
@@ -37,9 +35,9 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     msgcontainer.className = "msg_cotainer";
     msgcontainer.innerHTML = message;
 
-    let sender = document.createElement('p');
-    sender.className = "sender";
-    sender.innerHTML = username;
+    //let sender = document.createElement('p');
+    //sender.className = "sender";
+    //sender.innerHTML = username;
 
     let when = document.createElement('span');
     when.className = "msg_time";
@@ -50,12 +48,15 @@ function addMessageToChat(message, username, userprofilepictureurl) {
         + currentdate.getFullYear() + " "
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 
-    msgcontainer.appendChild(sender);
+    //msgcontainer.appendChild(sender);
     msgcontainer.appendChild(when);
 
     container.appendChild(imgcontainer);
     container.appendChild(msgcontainer);
     chat.appendChild(container);
+    chat.scrollTop = chat.scrollHeight;
+
+    document.getElementById('messageSend').value = '';
 }
 
 
@@ -109,7 +110,7 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     let when = document.createElement('span');
     when.className = isCurrentUserMessage ? "time-left" : "time-right";
     var currentdate = new Date();
-    when.innerHTML = 
+    when.innerHTML =
         (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "

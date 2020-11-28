@@ -38,6 +38,7 @@ namespace SocialNetwork.Web.Controllers
             return View(messanges);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Create(string input, string userId, string userName, string userProfilePictureUrl)
         {
             //var user = await this.userManager.GetUserAsync(User);
