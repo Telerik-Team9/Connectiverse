@@ -1,13 +1,14 @@
-﻿class Message {
+﻿/*class Message {
     constructor(username, text, when) {
         this.userName = username;
         this.text = text;
         this.when = when;
     }
-}
+}*/
 
 // userName is declared in razor page.
 const username = userName;
+const userprofilepictureurl = userProfilePictureUrl;
 const textInput = document.getElementById('messageText');
 const whenInput = document.getElementById('when');
 const chat = document.getElementById('chat');
@@ -22,6 +23,11 @@ function addMessageToChat(message) {
     let sender = document.createElement('p');
     sender.className = "sender";
     sender.innerHTML = username;
+
+    let senderpicture = document.createElement('p');
+    senderpicture.className = "";
+    senderpicture.innerHTML = userprofilepictureurl;
+
     let text = document.createElement('p');
     text.innerHTML = message;
 
@@ -35,6 +41,7 @@ function addMessageToChat(message) {
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 
     container.appendChild(sender);
+    container.appendChild(senderpicture);
     container.appendChild(text);
     container.appendChild(when);
     chat.appendChild(container);

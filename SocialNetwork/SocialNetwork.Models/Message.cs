@@ -11,6 +11,8 @@ namespace SocialNetwork.Models
         [Required]
         public string UserName { get; set; }
         [Required]
+        public string UserProfilePictureUrl { get; set; }
+        [Required]
         public string Text { get; set; }
         public DateTime When { get; set; } = DateTime.UtcNow;
 

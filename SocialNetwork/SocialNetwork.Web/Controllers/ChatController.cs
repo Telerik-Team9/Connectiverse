@@ -29,7 +29,8 @@ namespace SocialNetwork.Web.Controllers
         public async Task<IActionResult> Messenger()
         {
             var user = await this.userManager.GetUserAsync(User);
-            ViewBag.CurrentUserName = user.DisplayName;
+            ViewBag.CurrUserName = user.DisplayName;
+            ViewBag.CurrUserProfilePictureUrl = user.ProfilePictureUrl;
 
             var messanges = await this.chatService.GetAllMessagesAsync();
 
@@ -43,10 +44,10 @@ namespace SocialNetwork.Web.Controllers
             message.Text = input;
 
             message.UserName = user.DisplayName;
+            message.UserProfilePictureUrl = user.ProfilePictureUrl;
             message.UserId = user.Id;
 
             var result = await this.chatService.CreateMessageAsync(message);
-
 
             if (result == false)
             {
