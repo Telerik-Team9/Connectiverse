@@ -109,10 +109,10 @@ namespace SocialNetwork.Web.Controllers
                 {
                     var result = await this.postService.GetByContentAsync(model.SearchWord, model.SortOrder);
 
-                    if (!result.Any())
-                    {
-                        return this.NotFound();
-                    }
+                    //  if (!result.Any())
+                    //  {
+                    //      return this.NotFound();
+                    //  }
 
                     var searchModel = new SearchViewModel
                     {

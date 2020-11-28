@@ -91,7 +91,7 @@ namespace SocialNetwork.Web.Areas.Identity.Pages.Account
                 if (!isLegit)
                 {
                     _logger.LogInformation("Deleted user attempted to log in.");
-                    return NotFound("Your account been deleted");
+                    return RedirectToPage("./Lockout");
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
