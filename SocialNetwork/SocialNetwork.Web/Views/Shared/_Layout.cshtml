@@ -16,6 +16,9 @@
     <!-- Newsbar -->
     @*@await Component.InvokeAsync("Newsbar")*@
 
+    <!-- Chat -->
+    @await Component.InvokeAsync("Chat")
+
     <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -47,7 +50,7 @@
     <script src="~/js/site.js"></script>
     <script src="~/js/alime.bundle.js"></script>
     <script src="~/js/active.js"></script>
-
+    <script src="~/js/paginate.js"></script>
 
 
     <script>
