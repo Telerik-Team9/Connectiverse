@@ -6,6 +6,332 @@
     var userName = user.DisplayName;
 }
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+
+<style>
+
+
+    body, html {
+        height: 100%;
+        margin: 0;
+        background: #7F7FD5;
+        background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+    }
+
+    .card {
+        height: 500px;
+        border-radius: 15px !important;
+        background-color: rgba(0,0,0,0.4) !important;
+    }
+
+    .msg_card_body {
+        overflow-y: auto;
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0 !important;
+        border-bottom: 0 !important;
+    }
+
+    .msg_head {
+        position: relative;
+    }
+
+    user_img {
+        height: 70px;
+        width: 70px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .user_img_msg {
+        height: 40px;
+        width: 40px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .img_cont {
+        position: relative;
+        height: 70px;
+        width: 70px;
+    }
+
+    .img_cont_msg {
+        height: 40px;
+        width: 40px;
+    }
+
+    .user_info {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 15px;
+    }
+
+        .user_info span {
+            font-size: 20px;
+            color: white;
+        }
+
+        .user_info p {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+        }
+
+    .msg_cotainer {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
+        border-radius: 25px;
+        background-color: #82ccdd;
+        padding: 10px;
+        position: relative;
+    }
+
+    .msg_time {
+        position: absolute;
+        left: 0;
+        bottom: -15px;
+        color: rgba(255,255,255,0.5);
+        font-size: 10px;
+    }
+
+    .card-footer {
+        border-radius: 0 0 15px 15px !important;
+        border-top: 0 !important;
+    }
+
+    .type_msg {
+        background-color: rgba(0,0,0,0.3) !important;
+        border: 0 !important;
+        color: white !important;
+        height: 60px !important;
+        overflow-y: auto;
+    }
+
+        .type_msg:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+
+    .send_btn {
+        border-radius: 0 15px 15px 0 !important;
+        background-color: rgba(0,0,0,0.3) !important;
+        border: 0 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+
+    .search_btn {
+        border-radius: 0 15px 15px 0 !important;
+        background-color: rgba(0,0,0,0.3) !important;
+        border: 0 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+
+    .search {
+        border-radius: 15px 0 0 15px !important;
+        background-color: rgba(0,0,0,0.3) !important;
+        border: 0 !important;
+        color: white !important;
+    }
+
+        .search:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+
+    .attach_btn {
+        border-radius: 15px 0 0 15px !important;
+        background-color: rgba(0,0,0,0.3) !important;
+        border: 0 !important;
+        color: white !important;
+        cursor: pointer;
+    }
+
+    .online_icon {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        background-color: #4cd137;
+        border-radius: 50%;
+        bottom: 0.2em;
+        right: 0.4em;
+        border: 1.5px solid white;
+    }
+
+    .user_img {
+        height: 70px;
+        width: 70px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .user_img_msg {
+        height: 40px;
+        width: 40px;
+        border: 1.5px solid #f5f6fa;
+    }
+
+    .online_icon {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        background-color: #4cd137;
+        border-radius: 50%;
+        bottom: 0.2em;
+        right: 0.4em;
+        border: 1.5px solid white;
+    }
+
+    .offline {
+        background-color: #c23616 !important;
+    }    
+</style>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-4 col-xl-3 chat">
+
+            <!--Side search form-->
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
+                <div class="card-header">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search..." name="" class="form-control search">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--Side Chat bar-->
+                <div class="card-body contacts_body">
+                    <ui class="contacts">
+                        <li>
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    @*<span class="online_icon"></span>*@
+                                </div>
+                                <div class="user_info">
+                                    <span>Khalid</span>
+                                    <p>Kalid is online</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    @*<span class="online_icon"></span>*@
+                                </div>
+                                <div class="user_info">
+                                    <span>Khalid</span>
+                                    <p>Kalid is online</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ui>
+                </div>
+
+
+                <div class="card-footer"></div>
+            </div>
+        </div>
+
+
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                            <span>Chat room</span>
+                            <p>1767 Messages</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body msg_card_body">
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card-footer">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                        </div>
+                        <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="jumbotron bg-light">
     <h2 class="text-center text-primary">
         <i class="fab fa-facebook-messenger"
@@ -69,7 +395,7 @@
             $.ajax({
                 type: "POST",
                 url: "/Chat/Create",
-                data: 
+                data:
                 {
                     'input': input
                 },
