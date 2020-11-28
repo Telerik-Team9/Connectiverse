@@ -263,7 +263,8 @@
                 </div>
 
 
-                <div class="card-body msg_card_body">
+                <div class="card-body msg_card_body" id="chat">
+
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
@@ -273,15 +274,7 @@
                             <span class="msg_time">8:40 AM, Today</span>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-start mb-4">
-                        <div class="img_cont_msg">
-                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                        </div>
-                        <div class="msg_cotainer">
-                            Hi, how are you samim?
-                            <span class="msg_time">8:40 AM, Today</span>
-                        </div>
-                    </div>
+
                 </div>
 
 
@@ -338,7 +331,7 @@
     </h2>
 
     <div class="row">
-        <div class="col-md-12" id="chat">
+@*        <div class="col-md-12" id="chat">
             @if (Model != null)
             {
                 @foreach (var message in Model.OrderBy(m => m.When))
@@ -372,7 +365,7 @@
                     </div>
                 }
             }
-        </div>
+        </div>*@
         <div>
             <input id="messageSend" />
             <button type="button" id="sendMsg">send</button>
