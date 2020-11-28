@@ -376,8 +376,8 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
     <script>
-        const userName = "@ViewBag.CurrUserName";
-        const userProfilePictureUrl = "@ViewBag.CurrUserProfilePictureUrl";
+@*        const userName = "@ViewBag.CurrUserName";
+        const userProfilePictureUrl = "@ViewBag.CurrUserProfilePictureUrl";*@
     </script>
 
     <script>
@@ -391,7 +391,10 @@
                 url: "/Chat/Create",
                 data:
                 {
-                    'input': input
+                    'input': input,
+                    'userId': "@ViewBag.CurrUserId",
+                    'userName': "@ViewBag.CurrUserName",
+                    'userProfilePictureUrl': "@ViewBag.CurrUserProfilePictureUrl"
                 },
                 success: function (data) {
 

@@ -29,6 +29,7 @@ namespace SocialNetwork.Web.Controllers
         public async Task<IActionResult> Messenger()
         {
             var user = await this.userManager.GetUserAsync(User);
+            ViewBag.CurrUserId = user.Id;
             ViewBag.CurrUserName = user.DisplayName;
             ViewBag.CurrUserProfilePictureUrl = user.ProfilePictureUrl;
 
@@ -37,15 +38,15 @@ namespace SocialNetwork.Web.Controllers
             return View(messanges);
         }
 
-        public async Task<IActionResult> Create(string input)
+        public async Task<IActionResult> Create(string input, string userId, string userName, string userProfilePictureUrl)
         {
-            var user = await this.userManager.GetUserAsync(User);
+            //var user = await this.userManager.GetUserAsync(User);
             var message = new Message();
             message.Text = input;
 
-            message.UserName = user.DisplayName;
-            message.UserProfilePictureUrl = user.ProfilePictureUrl;
-            message.UserId = user.Id;
+            message.UserId = Guid.Parse(userId);
+            message.UserName = userName;
+            message.UserProfilePictureUrl = userProfilePictureUrl;
 
             var result = await this.chatService.CreateMessageAsync(message);
 
@@ -54,7 +55,10 @@ namespace SocialNetwork.Web.Controllers
                 return BadRequest();
             }
 
-            await this.chatHub.Clients.All.SendAsync("receiveMessage", input);
+            ViewBag.CurrUserName = message.UserName;
+            ViewBag.userProfilePictureUrl = message.UserProfilePictureUrl;
+
+            await this.chatHub.Clients.All.SendAsync("receiveMessage", input, userName, userProfilePictureUrl);
 
             return Ok();
         }
