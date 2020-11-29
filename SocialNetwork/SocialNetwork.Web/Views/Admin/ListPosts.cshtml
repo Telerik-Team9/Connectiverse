@@ -17,8 +17,8 @@
         <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListComments">Comments</a></li>
     </ul>
 
-    <h1>ListPosts</h1>
-    <table class="table">
+    <h1>Posts</h1>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>
@@ -65,7 +65,7 @@
                     @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
                     {
                         <td>
-                            <img src="@item.PhotoUrl" width="50px" height="50px" />
+                            <img src="@item.PhotoUrl" width="50" height="50" />
                         </td>
                     }
                     else
@@ -75,8 +75,8 @@
                         </td>
                     }
                     <td>
-                        <a asp-controller="Admin" asp-action="DeletePost" asp-route-id="@item.Id">Delete</a>
-                        <a asp-controller="Admin" asp-action="EditPost" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="DeletePost" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-warning" asp-controller="Admin" asp-action="EditPost" asp-route-id="@item.Id">Edit</a>
                     </td>
                 </tr>
             }

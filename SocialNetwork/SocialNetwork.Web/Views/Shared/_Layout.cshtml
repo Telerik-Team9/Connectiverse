@@ -17,7 +17,7 @@
     @*@await Component.InvokeAsync("Newsbar")*@
 
     <!-- Chat -->
-    @*@await Component.InvokeAsync("Chat")*@
+    @await Component.InvokeAsync("Chat")
 
     <div class="">
         <main role="main" class="pb-3">
@@ -25,50 +25,16 @@
         </main>
     </div>
 
-    @*    <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - SocialNetwork.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
-
-    <!-- Footer -->
-    <!--<footer class="py-5 footer bg-black">
-        <div class="container">
-            <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
-        </div>-->
-    <!-- /.container -->
-    <!--</footer>-->
-    @*<script src="~/js/jquery.min.js"></script>*@
-    @*<script src="~/js/bootstrap.min.js"></script>*@
-    <script src="~/js/particles.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/particles.js"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/chat.js"></script>
     <script src="~/js/signalrReqHandler.js"></script>
-    @*<script src="~/js/signrReqHandler.js"></script>*@
     <script src="~/js/site.js"></script>
     <script src="~/js/alime.bundle.js"></script>
     <script src="~/js/active.js"></script>
     <script src="~/js/paginate.js"></script>
-
-
-    <script>
-@*        function like(postId) {
-            let json = { postId: postId };
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:5001/Post/Like",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=utf-8",
-                processData: "json",
-                success: function (data) {
-                    console.log(data);
-                    $('#likesCount_' + postId).html(data)
-                }
-            });
-        };*@
-    </script>
 
     @RenderSection("Scripts", required: false)
 </body>
