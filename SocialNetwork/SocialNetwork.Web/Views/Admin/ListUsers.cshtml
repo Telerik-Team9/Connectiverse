@@ -17,8 +17,8 @@
         <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListComments">Comments</a></li>
     </ul>
 
-    <h1>ListUsers</h1>
-    <table class="table">
+    <h1>Users</h1>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>
@@ -47,7 +47,7 @@
             {
                 <tr>
                     <td>
-                        <img src="@item.ProfilePictureUrl" width="50px" height="50px" />
+                        <img src="@item.ProfilePictureUrl" width="50" height="50" />
                     </td>
                     <td>
                         <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@item.Id" />
@@ -66,7 +66,9 @@
                         @Html.DisplayFor(modelItem => item.CreatedOn)
                     </td>
                     <td>
-                        @Html.ActionLink("Ban", "DeleteUser", new { userId = item.Id })
+                        <a asp-controller="Admin" asp-action="DeleteUser" asp-route-userId="@item.Id" />
+
+                        @Html.ActionLink("Delete", "DeleteUser", new { userId = item.Id }, new { @class = "btn btn-danger"})
                     </td>
                 </tr>
             }

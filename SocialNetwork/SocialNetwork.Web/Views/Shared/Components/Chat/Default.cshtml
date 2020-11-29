@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Message>
+@inject UserManager<User> UserManager
 
 <style>
     ul li {
@@ -827,7 +828,7 @@
             <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
             <a id="fab_send" class="fab">
                 <i class="zmdi zmdi-mail-send">
-                    <input type="button" id="sendMsg"></input>
+                    <input type="button" id="sendMsg" style="border:dotted black">SEND</input>
                 </i>
             </a>
             <textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
@@ -843,24 +844,25 @@
 
 
 <script>
-    $('#sendMsg').on('click', () => {
+        $('#sendMsg').on('click', () => {
 
-        var input = $('#messageSend').val();
-        console.log(input);
+            var input = $('#messageSend').val();
+            console.log(input);
 
-        $.ajax({
-            type: "POST",
-            url: "/Chat/Create",
-            data:
-            {
-                'input': input
-            },
-            success: function (data) {
-
-            }
+            $.ajax({
+                type: "POST",
+                url: "/Chat/Create",
+                data:
+                {
+                    'input': input,
+                    'userId': "@ViewBag.CurrUserId",
+                    'userName': "@ViewBag.CurrUserName",
+                    'userProfilePictureUrl': "@ViewBag.CurrUserProfilePictureUrl"
+                },
+                success: function (data) {
+                }
+            });
         });
-
-    });
 </script>
 
 <script>

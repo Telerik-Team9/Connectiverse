@@ -17,8 +17,8 @@
         <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="ListComments">Comments</a></li>
     </ul>
 
-    <h1>ListComments</h1>
-    <table class="table">
+    <h1>Comments</h1>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>
@@ -67,8 +67,8 @@
                         </td>*@
                     <td>
                         @*@Html.ActionLink("Edit", "EditComment", new { id = item.Id })*@
-                        <a asp-controller="Admin" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
-                        <a asp-controller="Admin" asp-action="EditComment" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-warning" asp-controller="Admin" asp-action="EditComment" asp-route-id="@item.Id">Edit</a>
                     </td>
                 </tr>
             }
