@@ -53,7 +53,8 @@
     font-weight: 500;
     color: #232323;
     display: inline-block;
-    margin-right: 30px; }
+    margin: 0px 30px 0px 41px; 
+  }
     .classy-navbar .nav-brand:focus, .classy-navbar .nav-brand:hover {
       font-size: 26px;
       font-weight: 500; }

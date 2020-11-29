@@ -152,7 +152,7 @@ overflow: hidden;-->
         }
 
     .news-card {
-        margin: 0px 0px 0px 40px !important;
+        margin: 0px 0px 0px 50px !important;
         @*width: 300px;*@
         background-color: rgba(255, 255, 255, 0.2) !important;
         transition: width 5s;
@@ -180,10 +180,10 @@ overflow: hidden;-->
                 <div class="card news-card">
                     <div class="card-body">
                         <h5 class="card-title text-white">@Model.Articles[i].Title</h5>
-                        <h6 class="card-subtitle text-white mb-2 text-muted text-white">@Model.Articles[i].Author</h6>
+                        <h6 class="card-subtitle mb-2" style="color: lightgray">@Model.Articles[i].Author</h6>
                         <p class="text-white" style="font-size: 15px">@Model.Articles[i].Content</p>
-                        <a class="card-link">@Model.Articles[i].PublishedAt</a>
-                        <a href="@Model.Articles[i].Url" class="card-link">Read All</a>
+                        <a class="card-link" style="color: lightgray">@Model.Articles[i].PublishedAt</a>
+                        <a href="@Model.Articles[i].Url" class="card-link" style="color: lightgray">Read All</a>
                     </div>
                 </div>
             </li>
@@ -206,7 +206,7 @@ overflow: hidden;-->
     <ul class="logout">
         <li>
             <a href="#">
-                <i class="fa fa-power-off fa-2x"></i>
+                @*<i class="fa fa-power-off fa-2x"></i>*@
                 <span class="nav-text">
                     @*Logout*@
                 </span>
