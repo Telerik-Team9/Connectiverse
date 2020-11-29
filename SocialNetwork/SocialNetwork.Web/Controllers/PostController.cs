@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SocialNetwork.Models;
 using SocialNetwork.Models.Common.Enums;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
+using SocialNetwork.Web.Hubs;
 using SocialNetwork.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -23,13 +25,15 @@ namespace SocialNetwork.Web.Controllers
         private readonly ILikeService likeService;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
+        private readonly IHubContext<ChatHub> hubContext;
 
         public PostController(IUserService userService,
             IPostService postService,
             ICommentService commentService,
             ILikeService likeService,
             UserManager<User> userManager,
-            IMapper mapper)
+            IMapper mapper,
+            IHubContext<ChatHub> hubContext)
         {
             this.userService = userService;
             this.postService = postService;
@@ -37,6 +41,7 @@ namespace SocialNetwork.Web.Controllers
             this.likeService = likeService;
             this.userManager = userManager;
             this.mapper = mapper;
+            this.hubContext = hubContext;
         }
 
         // GET: FeedController/NewsFeed
@@ -220,17 +225,23 @@ namespace SocialNetwork.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Like([FromBody] PostCommentViewModel viewModel)
+        public async Task<IActionResult> Like(int postId, bool isLiked)
         {
             try
             {
                 var user = await this.userManager.GetUserAsync(User);
-                var postDTO = await this.postService.GetPostByIdAsync(viewModel.PostId);
+                var postDTO = await this.postService.GetPostByIdAsync(postId);
                 postDTO.UserId = user.Id;
 
-                var likeDislike = viewModel.isLiked ? await this.likeService.DislikeAsync(postDTO)
+                var likes = postDTO.Likes.Count;
+
+                var likeDislike = isLiked
+                    ? await this.likeService.DislikeAsync(postDTO)
                     : await this.likeService.LikeAsync(postDTO);
 
+                likes = isLiked ? likes - 1 : likes + 1;
+
+                await this.hubContext.Clients.All.SendAsync("Test", postDTO.Id, likes);
                 return this.Ok();
             }
             catch
@@ -238,75 +249,5 @@ namespace SocialNetwork.Web.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
-
-        // GET: NewsFeedController/Details/5
-        //  public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-        //
-        //  // GET: NewsFeedController/Create
-        //  public ActionResult Create()
-        //{
-        //    return View();
-        //}
-        //
-        //  // POST: NewsFeedController/Create
-        //  [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-        //
-        //  // GET: NewsFeedController/Edit/5
-        //  public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-        //
-        //  // POST: NewsFeedController/Edit/5
-        //  [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-        //
-        //  // GET: NewsFeedController/Delete/5
-        //  public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-        //
-        //  // POST: NewsFeedController/Delete/5
-        //  [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  public ActionResult Delete(int id, IFormCollection collection)
-        // {
-        //     try
-        //     {
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     catch
-        //     {
-        //         return View();
-        //     }
-        // }
     }
 }

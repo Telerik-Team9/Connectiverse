@@ -5,37 +5,31 @@
 
 /*Like a post*/
 
-//function likepost(postId, button) {
+function likepost(postId, button) {
 
-//    let $button = $(button);
-//    let isLiked = $button.attr('isliked');
-//    let json = { postId: postId, isLiked: isLiked };
-//    let likesCount = $('#likesCount_' + postId);
-
-//    $.ajax({
-//        type: "POST",
-//        url: "https://localhost:5001/Post/Like",
-//        data: JSON.stringify(json),
-//        contentType: "application/json; charset=utf-8",
-//        processData: "json",
-
-//        success: function (data) {
-//            if (isLiked === 'true') {
-//                $button.css('color', 'powderblue');//.color = "blue";
-//                button.setAttribute('isliked', 'false');
-//                likesCount.text() = likes(likesCount + 1);
-//                //button.style.color = "powderblue";
-
-//            } else {
-//                $button.css('color', 'blue');
-//                button.setAttribute('isliked', 'true');
-//            }
-//            console.log(isLiked);
-
-//            $('#likesCount_' + postId).html(data);
-//        }
-//    });
-//};
+    let $button = $(button);
+    let isLiked = $button.attr('isliked');
+    let json = { postId: postId, isLiked: isLiked };
+    let likesCount = $('#likesCount_' + postId);
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:5001/Post/Like",
+        data: {
+            'postId': postId,
+            'isLiked': isLiked
+        },
+        success: function (data) {
+            if (isLiked === 'true') {
+                $button.css('color', 'powderblue');//.color = "blue";
+                button.setAttribute('isliked', 'false');
+            } else {
+                $button.css('color', 'blue');
+                button.setAttribute('isliked', 'true');
+            }
+            console.log(isLiked);
+        }
+    });
+};
 
 /*global console, document, $, jQuery */
 (function ($) {
@@ -51,21 +45,21 @@
 }(jQuery));
 
 
-function likepost(postId, isLiked) {
-    let json = { postId: postId, isLiked: isLiked };
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:5001/Post/Like",
-        data: JSON.stringify(json),
-        contentType: "application/json; charset=utf-8",
-        processData: "json",
-        success: function (data) {
-            console.log(data);
-            $('#likesCount_' + postId).html(data);
-            location.reload();
-        }
-    });
-};
+//function likepost(postId, isLiked) {
+//    let json = { postId: postId, isLiked: isLiked };
+//    $.ajax({
+//        type: "POST",
+//        url: "https://localhost:5001/Post/Like",
+//        data: JSON.stringify(json),
+//        contentType: "application/json; charset=utf-8",
+//        processData: "json",
+//        success: function (data) {
+//            console.log(data);
+//            $('#likesCount_' + postId).html(data);
+//            location.reload();
+//        }
+//    });
+//};
 
 function showComments(postId) {
 

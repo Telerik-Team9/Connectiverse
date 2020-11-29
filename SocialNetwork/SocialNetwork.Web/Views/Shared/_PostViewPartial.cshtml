@@ -44,18 +44,19 @@
                 </div>
                 <div class="card-block b-b-theme b-t-theme social-msg">
 
-                    @*<i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, this)" isliked="@(Model.isLiked ? "true" : "false")"
-                        style="@(Model.isLiked ? "blue" : "powderblue")font-size:24px;color:@(Model.isLiked ? "blue" : "powderblue"); cursor:pointer;"></i>*@
+                    <i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, this)" isliked="@(Model.isLiked ? "true" : "false")"
+                       style="@(Model.isLiked ? "blue" : "powderblue")font-size:24px;color:@(Model.isLiked ? "blue" : "powderblue"); cursor:pointer;"></i>
 
-                    @if (Model.isLiked)
-                    {
-                        <i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, true)" style="font-size:24px;color:blue; cursor:pointer;"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, false)" style="font-size:24px;color:powderblue; cursor:pointer; "></i>
-                    }
-                    <span id="likesCount_@Model.PostId" class="b-r-muted" likesCount="@Model.Post.Likes.Count">Likes (@Model.Post.Likes.Count)</span>
+                    @*@if (Model.isLiked)
+                        {
+                            <i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, true)" style="font-size:24px;color:blue; cursor:pointer;"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-thumbs-up" onclick="likepost(@Model.Post.Id, false)" style="font-size:24px;color:powderblue; cursor:pointer; "></i>
+                        }*@
+                    @*<span id="likescount_@model.post.id" class="b-r-muted" likescount="@model.post.likes.count">likes (@model.post.likes.count)</span>*@
+                    <span id="likesCount_@Model.Post.Id" class="b-r-muted" likesCount="@Model.Post.Likes.Count">Likes (@Model.Post.Likes.Count)</span>
                     <a onclick="showComments(@Model.Post.Id)" style="cursor: pointer;"> <i class="icofont icofont-comment text-muted"></i> <span class="b-r-muted">Comments (@Model.Post.Comments.Count)</span></a>
                     @*<a href="#"> <i class="icofont icofont-share text-muted"></i> <span>Share (10)</span></a>*@
                 </div>

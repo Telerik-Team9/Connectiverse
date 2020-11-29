@@ -15,7 +15,6 @@ namespace SocialNetwork.Web.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            //services.AddAutoMapper(typeof(Profile).Assembly);
             services.AddAutoMapper(Assembly.GetAssembly(typeof(UserVMConfig)));
 
             services.AddScoped<IUserService, UserService>();
@@ -26,6 +25,7 @@ namespace SocialNetwork.Web.Extensions
             services.AddScoped<IAzureBlobService, AzureBlobService>();
             services.AddScoped<IChatService, ChatService>();
 
+            services.AddScoped<ChatHub>();
             services.AddSignalR();
 
             services.AddDbContext<SocialNetworkDBContext>
