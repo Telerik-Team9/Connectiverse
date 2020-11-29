@@ -50,6 +50,7 @@
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
+                        <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@item.UserId" />
                         @Html.DisplayFor(modelItem => item.UserDisplayName)
                     </td>
                     <td>
