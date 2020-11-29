@@ -16,13 +16,18 @@
     body, html {
         height: 100%;
         margin: 0;
-        background: #7F7FD5;
+        background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
+        background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
+        background: -moz-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
+        background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
+        background: linear-gradient(to top, #07031B 0%, #a18cd1 100%);
+        /*  background: #7F7FD5;
         background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);*/
     }
 
     .card {
-        height: 500px;
+        height: 650px;
         border-radius: 15px !important;
         background-color: rgba(0,0,0,0.4) !important;
     }
