@@ -12,6 +12,12 @@ body {
     background-color: #00b5ec;
 }
 
+.social-wallpaper-picture {
+    object-fit: cover !important;
+    width: 100%;
+    height: 100%;
+}
+
 .card.social-tabs {
     border-top: none;
 }
