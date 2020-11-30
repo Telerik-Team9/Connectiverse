@@ -6,6 +6,12 @@
     var user = await UserManager.GetUserAsync(User);
 }
 
+<!-- Chat -->
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Chat")
+}
+
 <!-- Header Area Start -->
 <header class="header-area">
     <!-- Main Header Start -->
