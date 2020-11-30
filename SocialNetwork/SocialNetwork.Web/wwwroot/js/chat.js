@@ -16,13 +16,20 @@ const chat = document.getElementById('popupchat');
 //const messagesQueue = [];
 
 function addMessageToChat(message, username, userprofilepictureurl) {
+    // Get current date
+    var currentdate = new Date();
+    var datestring = (currentdate.getMonth() + 1) + "/"
+        + currentdate.getDate() + "/"
+        + currentdate.getFullYear() + " "
+        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+
     // Main span container
     let container = document.createElement('span');
     container.className = "chat_msg_item chat_msg_item_admin";
-
-/*    // Img container
-    let imgcontainer = document.createElement('div');
-    imgcontainer.className = "img_cont_msg";*/
+    container.title = datestring;
+    /*    // Img container
+        let imgcontainer = document.createElement('div');
+        imgcontainer.className = "img_cont_msg";*/
     let imgcontainer = document.createElement('div');
     imgcontainer.className = "chat_avatar";
 
@@ -33,24 +40,17 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     imgcontainer.appendChild(senderpicture);
 
     // Msg container
-/*    let msgcontainer = document.createElement('div');
-    msgcontainer.className = "msg_cotainer";
-    msgcontainer.innerHTML = message;*/
+    /*    let msgcontainer = document.createElement('div');
+        msgcontainer.className = "msg_cotainer";
+        msgcontainer.innerHTML = message;*/
     container.textContent = message;
 
     //let sender = document.createElement('p');
     //sender.className = "sender";
     //sender.innerHTML = username;
 
-    let when = document.createElement('span');
-    when.className = "status2";
-    var currentdate = new Date();
-    when.innerHTML =
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-
+    // let when = document.createElement('span');
+    // when.className = "status2";
 
     //msgcontainer.appendChild(sender);
     //msgcontainer.appendChild(when);
@@ -61,7 +61,7 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     chat.scrollTop = chat.scrollHeight;
     //container.appendChild(msgcontainer);
 
-    document.getElementById('messageSent').value = '';
+    document.getElementById('messageSent').innerHTML = '';
 }
 
 
