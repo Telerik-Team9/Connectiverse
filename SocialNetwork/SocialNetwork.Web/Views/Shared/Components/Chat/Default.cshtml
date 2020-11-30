@@ -806,26 +806,39 @@
             </div>
         </div>
 
-        <div class="chat_converse">
+        <div class="chat_converse" id="popupchat">
             <span class="chat_msg_item chat_msg_item_admin">
                 <div class="chat_avatar"></div>
                 Hey! Would you like to talk sales, support, or anyone?
             </span>
-
-            <span class="chat_msg_item chat_msg_item_user">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            </span>
             <span class="status2">Just now. Not seen yet</span>
+
+
+
+            @*            <span class="chat_msg_item chat_msg_item_admin">
+            <div class="chat_avatar"></div>
+            Hey! Would you like to talk sales, support, or anyone?
+        </span>
+        <span class="status2">Just now. Not seen yet</span>*@
+
+            @*            <span class="chat_msg_item chat_msg_item_user">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </span>*@
         </div>
 
         <div class="fab_field">
             <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
             <a id="fab_send" class="fab">
-                <i class="zmdi zmdi-mail-send">
-                    <input type="button" id="sendMsg" style="border:dotted black">SEND</input>
-                </i>
+                <span class="input-group-text send_btn" id="sendMessage">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z" />
+                    </svg>
+                </span>
+                @*                <i class="zmdi zmdi-mail-send">
+            <input type="button" id="sendMessage" style="border:dotted black">SEND</input>
+        </i>*@
             </a>
-            <textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
+            <textarea id="messageSent" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
         </div>
     </div>
 
@@ -838,25 +851,45 @@
 
 
 <script>
-        $('#sendMsg').on('click', () => {
-
-            var input = $('#messageSend').val();
-            console.log(input);
-
+    debugger;
+    $('#sendMessage').on('click', () => {
             $.ajax({
+                type: "POST",
+                url: "/Chat/GetLoggedInUserInfo",
+                data:
+                {
+                    @*'input': input,
+                    'userId': "@ViewBag.CurrUserId",
+                    'userName': "@ViewBag.CurrUserName",
+                    'userProfilePictureUrl': "@ViewBag.CurrUserProfilePictureUrl"*@
+                },
+                success: function (data) {
+                    debugger;
+
+                    sendmessage(data)
+                }
+            });
+    });
+
+    function sendmessage(data) {
+        var input = $('#messageSent').val();
+        console.log(input);
+
+        $.ajax({
                 type: "POST",
                 url: "/Chat/Create",
                 data:
                 {
                     'input': input,
-@*                    'userId': "@ViewBag.CurrUserId",
-                    'userName': "@ViewBag.CurrUserName",
-                    'userProfilePictureUrl': "@ViewBag.CurrUserProfilePictureUrl"*@
+                    'userId': data.id,
+                    'userName': data.displayName,
+                    'userProfilePictureUrl': data.profilePictureUrl
                 },
-                success: function (data) {
-                }
+            success: function (data) {
+                debugger;
+            }
             });
-        });
+    };
 </script>
 
 <script>

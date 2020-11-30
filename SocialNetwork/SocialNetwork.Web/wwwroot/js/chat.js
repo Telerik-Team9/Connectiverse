@@ -11,18 +11,20 @@
 const userprofilepictureurl = userProfilePictureUrl;*/
 //const textInput = document.getElementById('messageText');
 //const whenInput = document.getElementById('when');
-const chat = document.getElementById('chat');
+const chat = document.getElementById('popupchat');
+/*const chat = document.getElementById('chat');*/
 //const messagesQueue = [];
 
 function addMessageToChat(message, username, userprofilepictureurl) {
+    // Main span container
+    let container = document.createElement('span');
+    container.className = "chat_msg_item chat_msg_item_admin";
 
-    // Main container
-    let container = document.createElement('div');
-    container.className = "d-flex justify-content-start mb-4";
-
-    // Img container
+/*    // Img container
     let imgcontainer = document.createElement('div');
-    imgcontainer.className = "img_cont_msg";
+    imgcontainer.className = "img_cont_msg";*/
+    let imgcontainer = document.createElement('div');
+    imgcontainer.className = "chat_avatar";
 
     let senderpicture = document.createElement('img');
     senderpicture.className = "rounded-circle user_img_msg";
@@ -31,15 +33,16 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     imgcontainer.appendChild(senderpicture);
 
     // Msg container
-    let msgcontainer = document.createElement('div');
+/*    let msgcontainer = document.createElement('div');
     msgcontainer.className = "msg_cotainer";
-    msgcontainer.innerHTML = message;
+    msgcontainer.innerHTML = message;*/
+    container.textContent = message;
 
     //let sender = document.createElement('p');
     //sender.className = "sender";
     //sender.innerHTML = username;
 
-    let when = document.createElement('span');
+    /*let when = document.createElement('span');
     when.className = "msg_time";
     var currentdate = new Date();
     when.innerHTML =
@@ -47,16 +50,16 @@ function addMessageToChat(message, username, userprofilepictureurl) {
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-
+*/
     //msgcontainer.appendChild(sender);
-    msgcontainer.appendChild(when);
+    //msgcontainer.appendChild(when);
 
     container.appendChild(imgcontainer);
-    container.appendChild(msgcontainer);
+    //container.appendChild(msgcontainer);
     chat.appendChild(container);
     chat.scrollTop = chat.scrollHeight;
 
-    document.getElementById('messageSend').value = '';
+    document.getElementById('messageSent').value = '';
 }
 
 

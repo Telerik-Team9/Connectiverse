@@ -63,5 +63,12 @@ namespace SocialNetwork.Web.Controllers
 
             return Ok();
         }
+
+        public async Task<IActionResult> GetLoggedInUserInfo()
+        {
+            var user = await this.userManager.GetUserAsync(User);
+
+            return Ok(new { user.Id, user.DisplayName, user.ProfilePictureUrl });
+        }
     }
 }

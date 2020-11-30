@@ -13,7 +13,7 @@ function likepost(postId, button) {
     let likesCount = $('#likesCount_' + postId);
     $.ajax({
         type: "POST",
-        url: "https://localhost:5001/Post/Like",
+        url: "/Post/Like",
         data: {
             'postId': postId,
             'isLiked': isLiked
