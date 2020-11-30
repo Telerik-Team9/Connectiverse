@@ -20,46 +20,13 @@
 
 <div class="container">
 
-    <h1>Have a great @DateTime.Today.DayOfWeek, @user.DisplayName.Split(' ')[0]!</h1>
+
+    <h1 style="text-align: center; margin-bottom: 30px">Newsfeed</h1>
+    <h3 style="text-align: center; margin-bottom: 30px">Have a great @DateTime.Today.DayOfWeek, @user.DisplayName.Split(' ')[0]!</h3>
 
     @foreach (var item in Model)
     {
         <partial name="_PostViewPartial" model="item" />
     }
+
 </div>
-@*<table class="table">
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Posts)
-            {
-                <tr>
-                    <th>@item.UserDisplayName</th>
-                </tr>
-                <tr>
-                    <th>@item.Content</th>
-                </tr>
-                <tr>
-                    <th>@item.Likes.Count</th>
-                </tr>
-                @if (item.PhotoUrl != null)
-                {
-                    <tr>
-                        <th>
-                            <img class="card-img" src="@item.PhotoUrl" alt="photo" height="250" width="250">
-                        </th>
-                    </tr>
-                }
-                <tr>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@

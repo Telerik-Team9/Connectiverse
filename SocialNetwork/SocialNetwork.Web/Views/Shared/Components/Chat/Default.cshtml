@@ -793,6 +793,32 @@
     }
 </style>
 
+<style>
+    .tooltip {
+        position: relative;
+        border-bottom: 1px dotted black;
+    }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            right: 105%;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+</style>
+
 <div class="fabs">
     <div class="chat">
         <div class="chat_header">
@@ -807,13 +833,17 @@
 
             @foreach (var msg in Model)
             {
-                <span class="chat_msg_item chat_msg_item_admin">
+                <span class="chat_msg_item chat_msg_item_admin" title="@msg.When">
                     <div class="chat_avatar">
-                        <img class="rounded-circle user_img_msg" src="@msg.UserProfilePictureUrl" />
+                        <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@msg.UserId">
+                            <img class="rounded-circle user_img_msg" src="@msg.UserProfilePictureUrl" />
+                        </a>
                     </div>
                     @msg.Text
                 </span>
-                <span class="status2">@msg.When</span>
+                @* <span class="tooltiptext">@msg.When</span>*@
+
+                @*<span class="status2">@msg.When</span>*@
             }
 
         </div>
