@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Message>
-@inject UserManager<User> UserManager
 
 <style>
     ul li {
@@ -98,7 +97,7 @@
         position: fixed;
         right: 85px;
         bottom: 20px;
-        width: 400px;
+        width: 330px !important;
         font-size: 12px;
         line-height: 22px;
         font-weight: 500;
@@ -125,7 +124,7 @@
         font-weight: 500;
         color: #f3f3f3;
         height: 55px;
-        background: #42a5f5;
+        background-color: rebeccapurple;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         padding-top: 8px;
@@ -172,7 +171,7 @@
         text-align: relative;
         margin-right: 10px;
         letter-spacing: 0.5px;
-        font-weight: 400
+        font-weight: 400;
     }
 
 
@@ -798,32 +797,25 @@
     <div class="chat">
         <div class="chat_header">
             <div class="chat_option">
-                <div class="header_img">
-                    <img src="" />
-                </div>
-                <span id="chat_head">Jane Doe</span> <br> <span class="agent">Agent</span> <span class="online">(Online)</span>
-                <span id="chat_fullscreen_loader" class="chat_fullscreen_loader"><i class="fullscreen zmdi zmdi-window-maximize"></i></span>
+                <span id="chat_head" style="margin-left: 20px">
+                    Chat<br /><span class="online" style="margin-left: 20px">(Online)</span>
+                    <span id="chat_fullscreen_loader" class="chat_fullscreen_loader"><i class="fullscreen zmdi zmdi-window-maximize"></i></span>
             </div>
         </div>
 
         <div class="chat_converse" id="popupchat">
-            <span class="chat_msg_item chat_msg_item_admin">
-                <div class="chat_avatar"></div>
-                Hey! Would you like to talk sales, support, or anyone?
-            </span>
-            <span class="status2">Just now. Not seen yet</span>
 
+            @foreach (var msg in Model)
+            {
+                <span class="chat_msg_item chat_msg_item_admin">
+                    <div class="chat_avatar">
+                        <img class="rounded-circle user_img_msg" src="@msg.UserProfilePictureUrl" />
+                    </div>
+                    @msg.Text
+                </span>
+                <span class="status2">@msg.When</span>
+            }
 
-
-            @*            <span class="chat_msg_item chat_msg_item_admin">
-            <div class="chat_avatar"></div>
-            Hey! Would you like to talk sales, support, or anyone?
-        </span>
-        <span class="status2">Just now. Not seen yet</span>*@
-
-            @*            <span class="chat_msg_item chat_msg_item_user">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        </span>*@
         </div>
 
         <div class="fab_field">
@@ -835,14 +827,20 @@
                     </svg>
                 </span>
                 @*                <i class="zmdi zmdi-mail-send">
-            <input type="button" id="sendMessage" style="border:dotted black">SEND</input>
-        </i>*@
+                        <input type="button" id="sendMessage" style="border:dotted black">SEND</input>
+                    </i>*@
             </a>
             <textarea id="messageSent" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
         </div>
     </div>
 
-    <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
+    <a id="prime" class="fab justify-content-center" style="background-color: rebeccapurple">
+        <div style="margin-top: 15px">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-dots-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+            </svg>
+        </div>
+    </a>
 </div>
 
 @*<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>*@

@@ -42,22 +42,24 @@ function addMessageToChat(message, username, userprofilepictureurl) {
     //sender.className = "sender";
     //sender.innerHTML = username;
 
-    /*let when = document.createElement('span');
-    when.className = "msg_time";
+    let when = document.createElement('span');
+    when.className = "status2";
     var currentdate = new Date();
     when.innerHTML =
         (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-*/
+
+
     //msgcontainer.appendChild(sender);
     //msgcontainer.appendChild(when);
 
     container.appendChild(imgcontainer);
-    //container.appendChild(msgcontainer);
     chat.appendChild(container);
+    chat.appendChild(when);
     chat.scrollTop = chat.scrollHeight;
+    //container.appendChild(msgcontainer);
 
     document.getElementById('messageSent').value = '';
 }
@@ -92,34 +94,6 @@ function addMessageToChat(message, username, userprofilepictureurl) {
 
     container.appendChild(sender);
     container.appendChild(senderpicture);
-    container.appendChild(text);
-    container.appendChild(when);
-    chat.appendChild(container);
-}*/
-
-
-/*function addMessageToChat(message) {
-
-    let isCurrentUserMessage = true;
-    let container = document.createElement('div');
-    container.className = isCurrentUserMessage ? "container darker" : "container";
-
-    let sender = document.createElement('p');
-    sender.className = "sender";
-    sender.innerHTML = "Ali";
-    let text = document.createElement('p');
-    text.innerHTML = message;
-
-    let when = document.createElement('span');
-    when.className = isCurrentUserMessage ? "time-left" : "time-right";
-    var currentdate = new Date();
-    when.innerHTML =
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-
-    container.appendChild(sender);
     container.appendChild(text);
     container.appendChild(when);
     chat.appendChild(container);
