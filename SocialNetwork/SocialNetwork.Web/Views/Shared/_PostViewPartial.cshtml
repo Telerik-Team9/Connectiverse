@@ -7,7 +7,6 @@
     int commentCounter = 0;
 }
 
-
 <div class="social-timelines p-relative">
     <div class="row timeline-right p-t-35">
         <div class="col-2 col-sm-2 col-xl-1">
@@ -20,19 +19,6 @@
         </div>
         <div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
             <div class="card">
-                <!--<div class="card-block post-timelines">
-                <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-                <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                    <a class="dropdown-item" href="#">Remove tag</a>-->
-                @*Change visibility*@
-                <!--<a class="dropdown-item" href="#">Report Photo</a>
-                        <a class="dropdown-item" href="#">Hide From Timeline</a>
-                        <a class="dropdown-item" href="#">Blog User</a>
-                    </div>
-                    <div class="chat-header f-w-600"><strong>@Model.Post.UserDisplayName</strong></div>
-                    <div class="social-time text-muted">Created on @Model.Post.CreatedOn</div>
-                </div>-->
-                @*<img src="https://via.placeholder.com/800x350/87CEFA/000000" class="img-fluid width-100" alt="">*@
                 @if (!string.IsNullOrEmpty(Model.Post.PhotoUrl))
                 {
                     <div class="picture-frame-black">
