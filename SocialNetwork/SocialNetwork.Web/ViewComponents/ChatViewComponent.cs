@@ -28,8 +28,8 @@ namespace SocialNetwork.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            ViewBag.CurrentUserName = user.DisplayName;
+/*            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            ViewBag.CurrentUserName = user.DisplayName;*/
 
             var messanges = await this.chatService.GetAllMessagesAsync();
 
