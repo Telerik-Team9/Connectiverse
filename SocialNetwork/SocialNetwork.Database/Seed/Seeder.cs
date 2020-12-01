@@ -47,7 +47,8 @@ namespace SocialNetwork.Database.Seeder
                     Education = "Sofia University",
                     TownId = 1,
                     ProfilePictureId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg"
+                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/magi_profile_pic.jpg",
+                    CoverPictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/110336295_185673349649304_1995275544731972721_o.jpg"
                 },
                 new User()  // Admin
                 {
@@ -63,7 +64,8 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1999, 09, 23),
                     Education = "Technical University",
                     TownId = 1,
-                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg"
+                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/ali_profile_pic.jpg",
+                    CoverPictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/102707388_3174421679288801_5604552790502121621_o.jpg"
                 },
                 new User()
                 {
@@ -239,7 +241,8 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1990, 12, 10),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "/img/noavatar.jpg"
+                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/Screenshot_506.png",
+                    CoverPictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
                 },
                 new User()
                 {
@@ -255,7 +258,8 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1990, 1, 10),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "/img/noavatar.jpg"
+                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/kiro.png",
+                    CoverPictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
                 },
                 new User()
                 {
@@ -271,7 +275,8 @@ namespace SocialNetwork.Database.Seeder
                     DateOfBirth = new DateTime(1990, 2, 06),
                     Education = "Telerik Academy",
                     TownId = 1,
-                    ProfilePictureUrl = "/img/noavatar.jpg"
+                    ProfilePictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/Screenshot_502.png",
+                    CoverPictureUrl = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
                 }
             };
             var hasher = new PasswordHasher<User>();
@@ -510,17 +515,38 @@ namespace SocialNetwork.Database.Seeder
                 new Comment
                 {
                     Id = 1,
-                    Content = "This is Amazing!",
+                    Content = "Cool!",
                     PostId = 1,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
                 },
                 new Comment
                 {
                     Id = 2,
-                    Content = "This is Awful!",
+                    Content = "Good luck learning javascript now!",
                     PostId = 20,
                     UserId= Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619")      // Telerik
-                }
+                },
+                new Comment
+                {
+                    Id = 111,
+                    Content = "Looks so nice!",
+                    PostId = 999,
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                },
+                 new Comment
+                {
+                    Id = 112,
+                    Content = "Wanna join next time?",
+                    PostId = 999,
+                    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Maggie
+                },
+                 new Comment
+                {
+                    Id = 113,
+                    Content = "Sure!",
+                    PostId = 999,
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                },
             };
             builder.Entity<Comment>().HasData(comments);
 
@@ -601,7 +627,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 2,
-                    Content = "My new profile photo",
+                    Content = "In the nature.",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
                     PhotoId = 2
@@ -609,7 +635,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 3,
-                    Content = "My new profile photo",
+                    Content = "Update profile photo.",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
                     PhotoId = 3
@@ -617,7 +643,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 4,
-                    Content = "My new profile photo",
+                    Content = "So cool!",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("71c88aa4-b6b6-45e8-9ea1-ba1912c1a845"),    // Victor
                     PhotoId = 4
@@ -625,7 +651,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 5,
-                    Content = "My new profile photo",
+                    Content = "I love grey",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("0d852e3a-b977-438a-9c33-7679a6e7b4cd"),    // silvia
                     PhotoId = 5
@@ -633,7 +659,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 6,
-                    Content = "My new profile photo",
+                    Content = "",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("d6f66ad9-58c9-43d6-adf8-4adbc3a97d36"),    // Alexandra
                     PhotoId = 6
@@ -641,7 +667,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 7,
-                    Content = "My new profile photo",
+                    Content = "Blue eyes.",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("b87071f5-b71c-45e1-91e7-6e85637ed10a"),    // Maria,
                     PhotoId = 7
@@ -657,21 +683,21 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 9,
-                    Content = "My new profile photo",
+                    Content = "My new profile photo.",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"),    // Radko
                     PhotoId = 9
                 },
                 new Post
                 {   Id = 10,
-                    Content = "My new profile photo",
+                    Content = "Hello.",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"),    // Kiro,
                     PhotoId = 10
                 },
                 new Post
                 {   Id = 11,
-                    Content = "My new profile photo",
+                    Content = "",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("6405b148-f626-4142-a342-0ccd2c82c30f"),    // bobi,
                     PhotoId = 11
@@ -679,7 +705,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 12,
-                    Content = "My new profile photo",
+                    Content = "",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("7f8793ff-03ab-458c-bc0e-ed4866a55b48"),    // Georgi,
                     PhotoId = 12
@@ -687,7 +713,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 13,
-                    Content = "My new profile photo",
+                    Content = ".",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("a9e49452-8ffd-460d-9998-8f662e36a2d6"),    // Stanislav,
                     PhotoId = 13
@@ -695,7 +721,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 14,
-                    Content = "My new profile photo",
+                    Content = "",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("35547a2a-8779-416b-9fc8-7aab34e883bd"),    // Nikol,
                     PhotoId = 14
@@ -703,7 +729,7 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 15,
-                    Content = "My new profile photo",
+                    Content = "",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("dc6788da-53ae-44e7-b53c-e53a2f77a1af"),    // C#,
                     PhotoId = 15
@@ -711,11 +737,51 @@ namespace SocialNetwork.Database.Seeder
                 new Post
                 {
                     Id = 20,
-                    Content = "Really funny video :)",
+                    Content = "Good job, A23! :)",
                     Visibility = Visibility.Public,
                     UserId = Guid.Parse("3753d26b-5a35-491f-ae82-5238d243b619"),    // Telerik
                     VideoId = 1
-                }
+                },
+                new Post
+                {
+                    Id = 999,
+                    Content = "Cover photo.",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("1d6e3bae-451f-4c01-8b43-cecc2d404270"),    // Maggie
+                    PhotoId = 999
+                },
+                new Post
+                {
+                    Id = 998,
+                    Content = "I love it!",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("3be6b2ff-021d-4da5-8639-31973b594cc5"),    // Ali
+                    PhotoId = 998
+                },
+                new Post
+                {
+                    Id = 500,
+                    Content = "",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("d93d2d61-e0ce-4a8d-9d61-93c8bc2849d7"),    // Radko
+                    PhotoId = 500
+                },
+                new Post
+                {
+                    Id = 501,
+                    Content = "",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("5acf2b77-ab0a-4a04-8a5a-9ec38ffab96b"),    // Kiro
+                    PhotoId = 501
+                },
+                new Post
+                {
+                    Id = 502,
+                    Content = "",
+                    Visibility = Visibility.Public,
+                    UserId = Guid.Parse("6405b148-f626-4142-a342-0ccd2c82c30f"),    // Bobi
+                    PhotoId = 502
+                },
             };
             builder.Entity<Post>().HasData(posts);
 
@@ -773,19 +839,19 @@ namespace SocialNetwork.Database.Seeder
                 {
                    Id = 9,
                    PostId = 9,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/Screenshot_506.png"
                 },
                 new Photo
                 {
                    Id = 10,
                    PostId = 10,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/kiro.png",
                 },
                 new Photo
                 {
                    Id = 11,
                    PostId = 11,
-                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                   Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/Screenshot_502.png"
                 },
                 new Photo
                 {
@@ -810,6 +876,36 @@ namespace SocialNetwork.Database.Seeder
                    Id = 15,
                    PostId = 15,
                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/no_avatar.jpg"
+                },
+                new Photo
+                {
+                    Id = 999,
+                    PostId = 999,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/110336295_185673349649304_1995275544731972721_o.jpg"
+                },
+                new Photo
+                {
+                    Id = 998,
+                    PostId = 998,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/102707388_3174421679288801_5604552790502121621_o.jpg"
+                },
+                new Photo
+                {
+                    Id = 500,
+                    PostId = 500,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
+                },
+                 new Photo
+                {
+                    Id = 501,
+                    PostId = 501,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
+                },
+                  new Photo
+                {
+                    Id = 502,
+                    PostId = 502,
+                    Url = "https://socialnetworkstorage.blob.core.windows.net/filescontainers/telerik.png"
                 }
             };
             builder.Entity<Photo>().HasData(photos);
