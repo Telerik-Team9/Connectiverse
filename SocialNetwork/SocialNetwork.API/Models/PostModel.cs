@@ -1,11 +1,10 @@
 ﻿using SocialNetwork.Models.Common.Enums;
-using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.API.Models
 {
     public class PostModel
     {
+        public int Id { get; set; }
         public string Content { get; set; }
         public Visibility Visibility { get; set; } = Visibility.Public;
 

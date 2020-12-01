@@ -110,15 +110,15 @@ namespace SocialNetwork.Web.Controllers
         {
             try
             {
-                if (type == "add") //Ready not tested
+                if (type == "add") 
                 {
                     await this.userService.SendFriendRequestAsync(userId, friendId);
                 }
-                else if (type == "accept") //Ready and tested
+                else if (type == "accept") 
                 {
                     await this.userService.AcceptFriendRequestAsync(friendId, userId);
                 }
-                else if (type == "remove") //Readey not tested
+                else if (type == "remove")
                 {
                     await this.userService.RemoveFriendAsync(userId, friendId);
                 }

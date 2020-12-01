@@ -11,8 +11,8 @@
                         <div class="col-md-12">
                             <div class="social-wallpaper">
                                 <img class="social-wallpaper-picture" src="@Model.CoverPictureUrl" @*src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg"*@ />
-@*                                <div class="profile">
-                                </div>*@
+                                @*                                <div class="profile">
+                                    </div>*@
                             </div>
                             <div class="timeline-btn">
                                 <div class="modal fade" id="changeCoverPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -72,24 +72,6 @@
                                         {
                                             <h5>@Model.Education</h5>
                                         }
-                                        <!--<div class="row follower-counter">
-                                            <!-- Profile Icons -->
-                                        <!--@*<div class="col-4">
-                                                <button class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="485">
-                                                    <i class="fa fa-user"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="2k">
-                                                    <i class="fa fa-thumbs-o-up"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="90">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </div>*@
-                                        </div>-->
                                         <div class="">
                                             <div class="modal fade" id="changeProfilePhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -122,64 +104,9 @@
                                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changeProfilePhoto">
                                                 Change Picture
                                             </button>
-
-                                            @*<a asp-controller="Post" asp-action="ChangeProfilePhoto" class="btn btn-outline-primary btn-block">
-                                                    <i class="icofont icofont-ui-user m-r-10">
-                                                    </i>Change Picture
-                                                </a>*@
-
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Who to follow -->
-                                @* <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-header-text">Who to follow</h5>
-                                        </div>
-                                        <div class="card-block user-box">
-                                            <div class="media m-b-10">
-                                                <a class="media-left" href="#!">
-                                                    <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Generic placeholder image" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                                    <div class="live-status bg-danger"></div>
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="chat-header">Josephin Doe</div>
-                                                    <div class="text-muted social-designation">Softwear Engineer</div>
-                                                </div>
-                                            </div>
-                                            <div class="media m-b-10">
-                                                <a class="media-left" href="#!">
-                                                    <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Generic placeholder image" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                                    <div class="live-status bg-success"></div>
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="chat-header">Josephin Doe</div>
-                                                    <div class="text-muted social-designation">Softwear Engineer</div>
-                                                </div>
-                                            </div>
-                                            <div class="media m-b-10">
-                                                <a class="media-left" href="#!">
-                                                    <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Generic placeholder image" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                                    <div class="live-status bg-danger"></div>
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="chat-header">Josephin Doe</div>
-                                                    <div class="text-muted social-designation">Softwear Engineer</div>
-                                                </div>
-                                            </div>
-                                            <div class="media m-b-10">
-                                                <a class="media-left" href="#!">
-                                                    <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Generic placeholder image" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                                    <div class="live-status bg-success"></div>
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="chat-header">Josephin Doe</div>
-                                                    <div class="text-muted social-designation">Softwear Engineer</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
 
                                 <!-- Friends -->
                                 <div class="card">
@@ -195,13 +122,6 @@
                                                 <img class="media-object img-radius" src="@friend.UserFriendProfilePictureUrl" data-toggle="tooltip" data-placement="top" data-original-title="user image">
                                             </a>
                                         }
-                                        @*<img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">*@
                                     </div>
                                 </div>
                             </div>

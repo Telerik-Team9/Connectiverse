@@ -78,6 +78,7 @@ namespace SocialNetwork.Services.Services
                            .FirstOrDefaultAsync()
                      ?? throw new ArgumentException(ExceptionMessages.EntityNotFound);
 
+            user.Friends = user.Friends.Where(f => !f.IsDeleted).ToList();
             return user;
         }
 
@@ -173,7 +174,7 @@ namespace SocialNetwork.Services.Services
         public async Task<IEnumerable<FriendRequestDTO>> GetAllFriendRequestsReceivedAsync(Guid id)
         {
             var friendRequests = await this.context.FriendRequests
-                                .Where(f => !f.IsDeleted && f.ReceiverId == id)
+                                .Where(f => !f.IsDeleted && f.ReceiverId == id && !f.Sender.IsDeleted)
                                 .ProjectTo<FriendRequestDTO>(mapper.ConfigurationProvider)
                                 .OrderByDescending(f => f.CreatedOn)
                                 .ToListAsync()
