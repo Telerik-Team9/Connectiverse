@@ -3,6 +3,7 @@
 <br/>
 Connectiverse is a social network application, enabling users to share media and communicate with their friends.
 <br/>
+<br/>
 
 ![Important](Images/HomePage.png)
 
