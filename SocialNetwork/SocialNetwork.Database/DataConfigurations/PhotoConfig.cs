@@ -7,10 +7,6 @@ namespace SocialNetwork.Database.DataConfigurations
     internal class PhotoConfig : IEntityTypeConfiguration<Photo>
     {
         public void Configure(EntityTypeBuilder<Photo> builder)
-        {
-    /*        builder.HasKey(p => p.Id);*/
-
-            // TODO: Make bytes required
-        }
+        { }
     }
 }

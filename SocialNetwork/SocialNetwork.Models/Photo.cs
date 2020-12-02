@@ -7,7 +7,6 @@ namespace SocialNetwork.Models
     {
         [Key]
         public int Id { get; set; }
-        // TODO: how to save image in sql database (byte[])
         public string Url { get; set; }
 
         public int PostId { get; set; }

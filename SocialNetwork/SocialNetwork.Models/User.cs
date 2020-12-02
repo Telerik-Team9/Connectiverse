@@ -26,7 +26,7 @@ namespace SocialNetwork.Models
 
         public ICollection<Friend> Friends { get; set; } = new HashSet<Friend>();
         public ICollection<Friend> FriendsOf { get; set; } = new HashSet<Friend>();
-        public ICollection<FriendRequest> FriendRequests { get; set; } = new HashSet<FriendRequest>();  // Requests Sent
+        public ICollection<FriendRequest> FriendRequests { get; set; } = new HashSet<FriendRequest>();
         public ICollection<FriendRequest> FriendRequestsOf { get; set; } = new HashSet<FriendRequest>();
         public ICollection<Post> Posts { get; set; } = new HashSet<Post>();
         public ICollection<SocialMedia> SocialMedias { get; set; } = new HashSet<SocialMedia>();

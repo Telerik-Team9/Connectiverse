@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NewsAPI;
-using NewsAPI.Constants;
-using NewsAPI.Models;
-using Newtonsoft.Json;
 using SocialNetwork.Services.Services.Contracts;
 using SocialNetwork.Web.Models;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -43,15 +36,5 @@ namespace SocialNetwork.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        /*        // total results found
-                Console.WriteLine(articlesResponse.TotalResults);
-                        // here's the first 20
-                        foreach (var article in articlesResponse.Articles)
-                        {
-                            // title
-                            Console.WriteLine(JsonConvert.SerializeObject(article));
-                            Console.WriteLine();
-                        }*/
     }
 }

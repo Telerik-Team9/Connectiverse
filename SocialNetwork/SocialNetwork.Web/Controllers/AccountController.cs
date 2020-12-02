@@ -31,7 +31,7 @@ namespace SocialNetwork.Web.Controllers
             this.signInManager = signInManager;
             this.mapper = mapper;
         }
-        // GET: AccountController
+
         [HttpGet]
         public async Task<ActionResult> Profile()
         {
@@ -105,16 +105,15 @@ namespace SocialNetwork.Web.Controllers
             return View(result);
         }
 
-        public async Task<ActionResult> ChangeFriendshipStatus(Guid userId,
-            Guid friendId, string type)
+        public async Task<ActionResult> ChangeFriendshipStatus(Guid userId, Guid friendId, string type)
         {
             try
             {
-                if (type == "add") 
+                if (type == "add")
                 {
                     await this.userService.SendFriendRequestAsync(userId, friendId);
                 }
-                else if (type == "accept") 
+                else if (type == "accept")
                 {
                     await this.userService.AcceptFriendRequestAsync(friendId, userId);
                 }

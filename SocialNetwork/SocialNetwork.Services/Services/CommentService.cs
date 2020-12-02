@@ -88,10 +88,10 @@ namespace SocialNetwork.Services.Services
 
         public async Task<IEnumerable<CommentDTO>> GetAllAsync()
         {
-           var result = await this.context.Comments
-                .Where(c => !c.IsDeleted)
-                .ProjectTo<CommentDTO>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
+            var result = await this.context.Comments
+                 .Where(c => !c.IsDeleted)
+                 .ProjectTo<CommentDTO>(this.mapper.ConfigurationProvider)
+                 .ToListAsync();
 
             return result;
         }

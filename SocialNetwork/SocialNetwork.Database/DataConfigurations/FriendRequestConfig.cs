@@ -8,8 +8,6 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<FriendRequest> builder)
         {
-         /*   builder.HasKey(f => f.Id);*/
-
             builder.HasOne(f => f.Sender)
                 .WithMany(u => u.FriendRequests)
                 .HasForeignKey(f => f.SenderId)

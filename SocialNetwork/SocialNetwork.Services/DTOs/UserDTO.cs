@@ -16,7 +16,7 @@ namespace SocialNetwork.Services.DTOs
         public string Email { get; set; }
         public string UserName { get; set; }
         public int? TownId { get; set; }
-        public TownDTO Town { get; set; } //TODO: remove
+        public TownDTO Town { get; set; }
         public string PhoneNumber { get; set; }
 
         public int? ProfilePictureId { get; set; }
@@ -26,11 +26,9 @@ namespace SocialNetwork.Services.DTOs
 
         public ICollection<PostDTO> Posts { get; set; } = new HashSet<PostDTO>();
         public ICollection<FriendDTO> Friends { get; set; } = new HashSet<FriendDTO>();
-        /*public ICollection<FriendDTO> FriendsOf { get; set; } = new HashSet<FriendDTO>();*/
-        public ICollection<FriendRequestDTO> FriendRequests { get; set; }// = new HashSet<FriendRequestDTO>();
-        //public ICollection<FriendRequestDTO> FriendRequestsOf { get; set; } = new HashSet<FriendRequestDTO>();
-        public ICollection<SocialMediaDTO> SocialMedias { get; set; }//= new HashSet<SocialMediaDTO>();
-        public ICollection<LikeDTO> Likes { get; set; }// = new HashSet<LikeDTO>();
-        public ICollection<CommentDTO> Comments { get; set; }// = new HashSet<CommentDTO>();
+        public ICollection<FriendRequestDTO> FriendRequests { get; set; }
+        public ICollection<SocialMediaDTO> SocialMedias { get; set; }
+        public ICollection<LikeDTO> Likes { get; set; }
+        public ICollection<CommentDTO> Comments { get; set; }
     }
 }

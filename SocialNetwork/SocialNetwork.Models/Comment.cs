@@ -9,7 +9,6 @@ namespace SocialNetwork.Models
         [Key]
         public int Id { get; set; }
         public string Content { get; set; }
-        //TODO: ADD emoji/sticker
 
         public int PostId { get; set; }
         public Post Post { get; set; }
