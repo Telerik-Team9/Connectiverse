@@ -47,7 +47,6 @@ The main features of the application are:
 - Moq
 
 <br/>
-<br/>
 
 # Areas
 
@@ -58,7 +57,6 @@ The main features of the application are:
 - Administrative - available for admins only
 - API
 
-<br/>
 <br/>
 
 # Public part
