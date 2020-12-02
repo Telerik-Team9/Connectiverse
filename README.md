@@ -1,7 +1,8 @@
 # Connectiverse
 
 <br/>
-Connectiverse is a social network applicatione, enabling users to share media and communicate with their friends.
+Connectiverse is a social network application, enabling users to share media and communicate with their friends.
+<br/>
 
 ![Important](Images/HomePage.png)
 
@@ -17,17 +18,17 @@ The main features of the application are:
 - remove a connection
 
 <br/>
-<br/>
 
 ## :handshake: Authors
 
 - [Magdalena Nikolova](https://gitlab.com/maginikolova)
 - [Ali Marekov](https://gitlab.com/marekov)
 <br/>
-<br/>
 
 
 # :construction_worker: Built with:
+
+<br/>
 
 - ASP .NET Core
 - ASP .NET Core Identity
@@ -48,6 +49,8 @@ The main features of the application are:
 <br/>
 
 # Areas
+
+<br/>
 
 - Public - users are only allowed to register or log in
 - Private - available after registration
