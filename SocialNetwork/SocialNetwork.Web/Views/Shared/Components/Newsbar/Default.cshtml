@@ -9,7 +9,6 @@
 
     .newsbar {
         @*background: #212121;*@
-        @*border-right: 1px solid #e5e5e5;*@
         background: rgba(0, 0, 0, 0);
         position: absolute;
         top: 0;
@@ -18,15 +17,9 @@
         left: 0;
         width: 40px;
         overflow: hidden;
-        @*-webkit-transition: width .05s;*@
         transition: width .05s;
-        @*-webkit-transform: translateZ(0) scale(1,1);*@
         z-index: 1000;
     }
-
-@*        .newsbar > ul {
-            margin: 7px 0;
-        }*@
 
         .newsbar li {
             position: relative;
@@ -43,8 +36,6 @@
                 font-family: arial;
                 font-size: 14px;
                 text-decoration: none;
-                @*-webkit-transform: translateZ(0) scale(1,1);
-                -webkit-transition: all .1s;*@
                 transition: all .1s;
             }
 
@@ -62,7 +53,6 @@
             position: relative;
             display: table-cell;
             vertical-align: middle;
-            @*width: 190px;*@
         }
 
         .newsbar > ul.logout {
@@ -88,7 +78,6 @@
 
     .news-card {
         margin: 0px 0px 0px 50px !important;
-        @*width: 300px;*@
         background-color: rgba(255, 255, 255, 0.2) !important;
         transition: width 5s;
         border-radius: 8px;
@@ -101,13 +90,7 @@
 
 <nav class="newsbar">
     <ul>
-@*        <li>
-            <a href="http://justinfarrow.com">
-                <i class="fa fa-2x"></i>
-                <span class="nav-text">
-                </span>
-            </a>
-        </li>*@
+
         @for (int i = 0; i < 3; i++)
         {
             <li>
@@ -124,18 +107,6 @@
             </li>
         }
 
-@*        <li>
-            <a href="http://justinfarrow.com">
-                <i class="fa fa-home fa-2x"></i>
-                <span class="nav-text">
-                    <h5 class="card-title text-white">@Model.Articles.First().Title</h5>
-                    <h6 class="card-subtitle text-white mb-2 text-muted text-white">@Model.Articles.First().Author</h6>
-                    <p class="card-text text-white">@Model.Articles.First().Content</p>
-                    <a class="card-link">@Model.Articles.First().PublishedAt</a>
-                    <a href="#" class="card-link">Read All</a>
-                </span>
-            </a>
-        </li>*@
     </ul>
 
     <ul class="logout">
@@ -149,25 +120,3 @@
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-@*<nav class="newsbar">
-        <ul>
-            <li>
-                <span class="newsbar-text" style="color:pink">
-                    @await Component.InvokeAsync("Newsbar");
-                </span>
-            </li>
-        </ul>
-        <ul class="logout">
-        </ul>
-    </nav>*@

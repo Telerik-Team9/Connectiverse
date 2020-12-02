@@ -25,7 +25,6 @@
                 <label asp-for="Visibility" class="control-label"></label>
                 @Html.DropDownListFor(p => p.Visibility, new SelectList(Enum.GetValues(typeof(Visibility))))
                 <span asp-validation-for="Visibility" class="text-danger"></span>
-                @*<input asp-for="Visibility" class="form-control" />*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

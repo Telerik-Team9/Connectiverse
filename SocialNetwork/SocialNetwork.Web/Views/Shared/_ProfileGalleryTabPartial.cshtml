@@ -1,14 +1,4 @@
 ﻿@model ICollection<PostViewModel>
-@*@{
-        var photos = new List<string>();
-
-        foreach (var item in Model)
-        {
-            photos.Add(item.PhotoUrl);
-        }
-
-        int count = 0;
-    }*@
 
 <style>
     .galleryImg {
@@ -115,17 +105,10 @@
                 <!--<ul id="profile-lightgallery" class="row">-->
                 @foreach (var item in Model)
                 {
-                    <!--<li class="col-md-4 col-lg-2 col-sm-6 col-xs-12">
-                    <a href="#" data-target="#myModal" data-toggle="modal">-->
-                    @*<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">*@
-                    <!--<img src="item.PhotoUrl" class="img-fluid">
-                        </a>
-                    </li>-->
                     <div>
                         <img class="galleryImg" id="@item.PhotoUrl" src="@item.PhotoUrl" onclick="openPicture(this.id)" width="250px" height="250px">
                         &nbsp;&nbsp;&nbsp;
                     </div>
-
 
                     <!-- The Modal -->
                     <div id="myModal" class="pictureModal">
@@ -158,10 +141,6 @@
             captionText.innerHTML = this.alt;
         }
     };
-
-    // Get the <span> element that closes the modal
-    @*var span = document.getElementsByClassName("close")[0];*@
-    @*var span = document.getElementById("close");*@
 
     // When the user clicks on <span> (x), close the modal
     function closeModal() {

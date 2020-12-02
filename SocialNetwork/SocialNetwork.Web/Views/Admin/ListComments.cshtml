@@ -36,9 +36,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PostId)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.UserId)
-                    </th>*@
                 <th></th>
             </tr>
         </thead>
@@ -62,9 +59,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.PostId)
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.UserId)
-                        </td>*@
                     <td>
                         @*@Html.ActionLink("Edit", "EditComment", new { id = item.Id })*@
                         <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>

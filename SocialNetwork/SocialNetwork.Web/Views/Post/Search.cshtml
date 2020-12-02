@@ -308,7 +308,6 @@
 
 <h1 style="text-align: center; margin-bottom: 30px">Search</h1>
 
-
 <div class="container">
     <!-- Search Bar -->
     <div class="row">
@@ -322,14 +321,6 @@
                                     <div class="col-lg-3 col-md-3 col-sm-12 p-0" style="display: none">
                                         <select class="form-control" id="exampleFormControlSelect1" asp-for="SearchCriteria">
                                             <option selected="selected">Users</option>
-                                            @*                                            @if (Model.Posts.Count() != 0)
-                                                {
-                                                    <option selected="selected">Posts</option>
-                                                }
-                                                else
-                                                {
-                                                    <option>Posts</option>
-                                                }*@
                                         </select>
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-sm-12 p-0">
@@ -337,7 +328,6 @@
                                     </div>
 
                                     <div class="col-lg-3 col-md-1 col-sm-3 p-0">
-                                        <!--<span>Sort By:</span>-->
                                         <select class="form-control border-0" asp-for="@Model.SortOrder">
                                             @*id="exampleOption"*@
                                             <option value="nameAsc">Name (A-Z)</option>
@@ -485,6 +475,7 @@
                                                     }
                                                 </tbody>
                                             </table>-->
+
                                             <!-- Card View Posts -->
                                             @*                                            <div class="row">
                                                     <div class="col-md-12 timeline-dot">

@@ -3,17 +3,10 @@
 <div class="col-lg-12 col-xl-6">
     <div class="card">
         <div class="card-block post-timelines">
-@*            <span class="dropdown-toggle addon-btn text-muted f-right service-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="tooltip"></span>
-            <div class="dropdown-menu dropdown-menu-right b-none services-list">
-                <a class="dropdown-item" href="#">Remove tag</a>
-                <a class="dropdown-item" href="#">Report Photo</a>
-                <a class="dropdown-item" href="#">Hide From Timeline</a>
-                <a class="dropdown-item" href="#">Blog User</a>
-            </div>*@
+
             <div class="media bg-white d-flex">
                 <div class="media-left media-middle"    >
                     <a asp-controller="Account" asp-action="FriendProfile" asp-route-userId="@Model.UserFriendId">
-                    @*<img class="media-object" width="120" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">*@
                         <div class="picture-frame-120">
                             <img class="media-object picture-in-frame" src="@Model.UserFriendProfilePictureUrl" alt="">
                         </div>
@@ -22,9 +15,9 @@
                 <div class="media-body friend-elipsis">
                     <div class="f-15 f-bold m-b-5">@Model.UserFriendDisplayName</div>
                     <div class="text-muted social-designation">@Model.UserEducation</div>
-                    @*<div class="text-muted social-designation">Software Engineer</div>*@
                 </div>
             </div>
+
         </div>
     </div>
 </div>

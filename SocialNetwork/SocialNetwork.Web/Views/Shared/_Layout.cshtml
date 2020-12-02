@@ -14,7 +14,7 @@
     <partial name="_Navbar" />
 
     <!-- Newsbar -->
-    @await Component.InvokeAsync("Newsbar")
+    @*@await Component.InvokeAsync("Newsbar")*@
 
     <div class="">
         <main role="main" class="pb-3">
@@ -34,5 +34,6 @@
     <script src="~/js/paginate.js"></script>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

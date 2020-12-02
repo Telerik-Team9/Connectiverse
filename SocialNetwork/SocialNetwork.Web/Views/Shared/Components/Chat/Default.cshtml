@@ -867,10 +867,7 @@
     </a>
 </div>
 
-@*<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>*@
-
 <script src="~/lib/jquery/dist/jquery.js"></script>
-
 
 <script>
     $('#sendMessage').on('click', () => {
@@ -879,10 +876,6 @@
                 url: "/Chat/GetLoggedInUserInfo",
                 data:
                 {
-                    @*'input': input,
-                    'userId': "@ViewBag.CurrUserId",
-                    'userName': "@ViewBag.CurrUserName",
-                    'userProfilePictureUrl': "@ViewBag.CurrUserProfilePictureUrl"*@
                 },
                 success: function (data) {
                     debugger;
@@ -961,11 +954,6 @@
         $('.chat_header').toggleClass('chat_header2');
         $('.fab_field').toggleClass('fab_field2');
         $('.chat_converse').toggleClass('chat_converse2');
-        //$('#chat_converse').css('display', 'none');
-        // $('#chat_body').css('display', 'none');
-        // $('#chat_form').css('display', 'none');
-        // $('.chat_login').css('display', 'none');
-        // $('#chat_fullscreen').css('display', 'block');
     });
 
     function hideChat(hide) {

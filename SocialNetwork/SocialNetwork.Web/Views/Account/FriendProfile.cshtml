@@ -22,11 +22,6 @@
                             <div class="social-wallpaper">
                                 <img class="social-wallpaper-picture" src="@Model.CoverPictureUrl" @*src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2017/08/nature-design.jpg"*@ />
                             </div>
-                            <!--<div class="timeline-btn">-->
-                            @*<a href="#" class="btn btn-primary waves-effect waves-light m-r-10">follows</a>*@
-                            <!--<a href="#" class="btn btn-primary waves-effect waves-light">Send Message</a>-->
-                            @* <a class="btn btn-primary waves-effect waves-light" asp-controller="Post" asp-action="Create">Create post</a>*@
-                            <!--</div>-->
                         </div>
                     </div>
 
@@ -48,24 +43,7 @@
                                     <div class="card-block social-follower">
                                         <h4>@Model.DisplayName</h4>
                                         <h5>@Model.Education</h5>
-                                        <!--<div class="row follower-counter">-->
-                                        <!-- Profile Icons -->
-                                        <!--<div class="col-4">
-                                                <button class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="485">
-                                                    <i class="fa fa-user"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="2k">
-                                                    <i class="fa fa-thumbs-o-up"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="90">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </div>
-                                        </div>-->
+
                                         <div class="">
                                             @if (!isFriend)
                                             {
@@ -121,20 +99,12 @@
                                                 <img class="media-object img-radius" src="@friend.UserFriendProfilePictureUrl" data-toggle="tooltip" data-placement="top" data-original-title="user image">
                                             </a>
                                         }
-                                        @*<img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">
-                                            <img class="media-object img-radius" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="user image">*@
+                                        
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-
-
 
                         <!-- Profile Tabs-->
                         <partial name="_ProfileTabsPartial" model="Model" />
