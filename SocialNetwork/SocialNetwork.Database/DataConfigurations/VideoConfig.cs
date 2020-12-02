@@ -8,11 +8,8 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<Video> builder)
         {
-        /*    builder.HasKey(v => v.Id);*/
-
             builder.Property(v => v.Url)
                 .HasMaxLength(300);
-            // TODO: Make videoUrl required
         }
     }
 }

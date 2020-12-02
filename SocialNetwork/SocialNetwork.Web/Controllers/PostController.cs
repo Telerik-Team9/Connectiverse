@@ -44,7 +44,6 @@ namespace SocialNetwork.Web.Controllers
             this.hubContext = hubContext;
         }
 
-        // GET: FeedController/NewsFeed
         public async Task<ActionResult> NewsFeed()
         {
             var user = await this.userManager.GetUserAsync(User);
@@ -70,7 +69,6 @@ namespace SocialNetwork.Web.Controllers
             return View(result);
         }
 
-        // GET: FeedController/Search
         [HttpGet]
         public ActionResult Search()
         {
@@ -137,7 +135,6 @@ namespace SocialNetwork.Web.Controllers
             return Ok();
         }
 
-        // Remove/update/modify
         [HttpGet]
         public IActionResult Create()
         {

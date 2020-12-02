@@ -19,18 +19,6 @@ namespace SocialNetwork.Web.Extensions
             .AddRoles<Role>()
             .AddEntityFrameworkStores<SocialNetworkDBContext>();
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
-            //            ValidateIssuer = false,
-            //            ValidateAudience = false,
-            //        };
-            //    });
-            //
             return services;
         }
     }

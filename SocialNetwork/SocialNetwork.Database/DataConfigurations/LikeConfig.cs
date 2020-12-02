@@ -8,8 +8,6 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<Like> builder)
         {
-/*            builder.HasKey(l => l.Id);*/
-
             builder.HasOne(l => l.Post)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(l => l.PostId);

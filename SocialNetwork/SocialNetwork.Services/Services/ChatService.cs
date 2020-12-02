@@ -4,7 +4,6 @@ using SocialNetwork.Models;
 using SocialNetwork.Services.Services.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services

@@ -8,14 +8,8 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<Town> builder)
         {
-         /*   builder.HasKey(t => t.Id);*/
-
             builder.Property(t => t.Name)
                 .HasMaxLength(50);
-/*
-            builder.HasOne(t => t.Country)
-                .WithMany(c => c.Towns)
-                .HasForeignKey(t => t.CountryId);*/
         }
     }
 }

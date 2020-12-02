@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Database;
 using SocialNetwork.Models;
@@ -7,7 +6,6 @@ using SocialNetwork.Services.Constants;
 using SocialNetwork.Services.DTOs;
 using SocialNetwork.Services.Services.Contracts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Services.Services

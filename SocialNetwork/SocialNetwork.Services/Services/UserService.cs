@@ -21,13 +21,10 @@ namespace SocialNetwork.Services.Services
 
         public UserManager<User> UserManager { get; }
 
-        public UserService(SocialNetworkDBContext context,
-                           IMapper mapper
-                          /* UserManager<User> userManager*/)
+        public UserService(SocialNetworkDBContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
-            //UserManager = userManager;
         }
 
         public async Task<bool> AcceptFriendRequestAsync(Guid senderId, Guid receiverId)
@@ -102,7 +99,7 @@ namespace SocialNetwork.Services.Services
             return true;
         }
 
-        public async Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId) //check if person already sent us fr
+        public async Task<FriendRequestDTO> SendFriendRequestAsync(Guid senderId, Guid receiverId)
         {
             var oldFriendRequest = await this.context.FriendRequests
                 .FirstOrDefaultAsync(f => f.SenderId == senderId && f.ReceiverId == receiverId);
@@ -127,7 +124,7 @@ namespace SocialNetwork.Services.Services
             await this.context.SaveChangesAsync();
 
             return this.mapper.Map<FriendRequestDTO>(friendRequest);
-        } // Ready
+        }
 
         public async Task<IEnumerable<UserDTO>> GetAllAsync()
         {
@@ -141,7 +138,7 @@ namespace SocialNetwork.Services.Services
                 throw new ArgumentException(ExceptionMessages.EntitiesNotFound);
             }
 
-            return users; //users.Select(this.mapper.Map<UserDTO>);
+            return users;
         }
 
         public async Task<IEnumerable<UserDTO>> GetFriendsAsync(Guid id)

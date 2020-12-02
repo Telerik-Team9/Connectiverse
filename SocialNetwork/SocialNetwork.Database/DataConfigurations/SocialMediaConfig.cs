@@ -8,8 +8,6 @@ namespace SocialNetwork.Database.DataConfigurations
     {
         public void Configure(EntityTypeBuilder<SocialMedia> builder)
         {
-           /* builder.HasKey(s => s.Id);*/
-
             builder.Property(s => s.Name)
                 .HasMaxLength(20);
 
@@ -18,10 +16,6 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.Property(s => s.IconUrl)
                 .HasMaxLength(100);
-
-         /*   builder.HasOne(s => s.User)
-                .WithMany(u => u.SocialMedias)
-                .HasForeignKey(s => s.UserId);*/
         }
     }
 }

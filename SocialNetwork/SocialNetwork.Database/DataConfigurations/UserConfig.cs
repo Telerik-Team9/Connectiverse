@@ -18,23 +18,6 @@ namespace SocialNetwork.Database.DataConfigurations
 
             builder.Property(u => u.Education)
                 .HasMaxLength(50);
-
-/*            builder.HasOne(u => u.ProfilePicture)
-                .WithOne(p => p.User)
-                .HasForeignKey<User>(u => u.ProfilePictureId);
-
-            builder.HasOne(u => u.CoverPicture)
-                .WithOne(p => p.User)
-                .HasForeignKey<User>(u => u.ProfilePictureId);*/
-
-/*            builder.HasOne(u => u.Town)
-                .WithMany(t => t.Users)
-                .HasForeignKey(u => u.TownId);
-
-            builder.HasOne(u => u.Role)
-                .WithMany(a => a.Users)
-                .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.NoAction);*/
         }
     }
 }
